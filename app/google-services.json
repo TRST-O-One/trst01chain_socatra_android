@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "252523855363",
+    "project_id": "trst01chain",
+    "storage_bucket": "trst01chain.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:252523855363:android:8b7163c7e6cfb074b9d836",
+        "android_client_info": {
+          "package_name": "com.socatra.excutivechain"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "252523855363-prp27or6d07egah1pas51bc1t69348gr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcaW_ycr3UgUujWQX-tMDW6EGD1zVDXrA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "252523855363-prp27or6d07egah1pas51bc1t69348gr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

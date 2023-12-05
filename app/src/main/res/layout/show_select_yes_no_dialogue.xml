@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@null"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20ssp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txt_title_dig"
+            android:layout_width="wrap_content"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:enabled="true"
+            android:gravity="center"
+            android:text="@string/are_you_sure_want_s_to_edit_your_address"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="@dimen/_15ssp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/txt_yes"
+                android:layout_width="@dimen/_60ssp"
+                android:layout_height="@dimen/_25ssp"
+                android:background="@color/Orange"
+                android:enabled="true"
+                android:layout_marginStart="@dimen/_50ssp"
+                android:layout_alignParentStart="true"
+                android:text="Yes"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/txt_No"
+                android:layout_width="@dimen/_60ssp"
+                android:layout_height="@dimen/_25ssp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/_50ssp"
+                android:layout_alignParentEnd="true"
+                android:background="@color/Orange"
+                android:enabled="true"
+                android:gravity="center"
+                android:text="No"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>

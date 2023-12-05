@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/Orange_shade"
+    tools:context=".activity.SyncActivity">
+
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/back"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgBack">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:padding="20dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="Farmer"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtFarmerSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="Plot"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtPlotSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="Bank"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="gone"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtBankSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="gone"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="Doc"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtDocSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="GPS"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtGpsSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="Labour Survey"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtSurvey"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:visibility="visible"
+                android:gravity="center"
+                android:text="Parent Survey"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtParentSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="0"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="Child Survey"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtChildSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="Risk Assessment"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtRiskSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="Processor Mapping"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtManufacturerSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="100">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:visibility="visible"
+                android:text="Dealer Mapping"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:visibility="visible"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/txtDealerSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_weight="50"
+                android:gravity="center"
+                android:text="0"
+                android:visibility="visible"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+
+                android:layout_weight="1"
+                android:id="@+id/txtMasterSync"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_ui_white_box"
+                android:gravity="center"
+                android:text="Master Data"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtSendData"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_ui_white_box"
+                android:gravity="center"
+                android:text="Send Data"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtGetData"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_ui_white_box"
+                android:gravity="center"
+                android:text="Get Data"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/txtUploadDb"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_ui_white_box"
+                android:gravity="center"
+                android:text="Upload Data"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:weightSum="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:layout_weight="1"
+                android:id="@+id/changeLanguageButton"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/bg_ui_white_box"
+                android:gravity="center"
+                android:text="@string/change_language"
+                android:layout_marginEnd="5dp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <!--            <TextView-->
+            <!--                android:layout_weight="1"-->
+            <!--                android:id="@+id/txtUploadDb"-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="46dp"-->
+            <!--                android:layout_marginStart="5dp"-->
+            <!--                android:layout_marginBottom="20dp"-->
+            <!--                android:background="@drawable/bg_ui_white_box"-->
+            <!--                android:gravity="center"-->
+            <!--                android:text="Upload Data"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textStyle="bold" />-->
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+    </ScrollView>
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerInParent="true"/>
+
+
+</RelativeLayout>

@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@null"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtAddFarmer"
+        android:layout_margin="8dp"
+        android:elevation="2dp"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_toLeftOf="@id/rightLayout"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/farmer_code1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="Farmer Code : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtFarmerCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="TS1826_160085000" />
+
+            <TextView
+                android:id="@+id/txtFarmerName1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Farmer Name : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtFarmerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="SunRisers Hyderabad " />
+
+            <TextView
+                android:id="@+id/primary1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Mobile No : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtMobileNo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="8331984353 " />
+
+            <TextView
+                android:id="@+id/fathername1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Father Name : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtFatherName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:text="Deccan Chargers " />
+
+            <TextView
+                android:id="@+id/village1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Village : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtState"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="Telangana "
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Date of Plantation : "
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtDateOfPlantation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:text="2023-06-23"
+                android:textSize="14sp"
+                android:textStyle="bold" />-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgFarmer"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/ic_baseline_agriculture_24" />
+
+            <!--<TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Plot Status:"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/txtPlotBoundStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:text="Boundaries " />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Logbook Status:"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtDateOfSowing"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Sowing Date " />
+
+            <TextView
+                android:id="@+id/txtPipeInstallation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                tools:text="Pipe Installation " />
+
+            <TextView
+                android:id="@+id/txtWaterCyclesStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:text="Water Cycles " />-->
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

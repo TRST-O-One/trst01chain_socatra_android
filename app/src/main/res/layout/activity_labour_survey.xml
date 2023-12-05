@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/Orange">
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="@dimen/_35ssp"
+            android:layout_height="@dimen/_35ssp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:background="@color/white"
+            android:padding="2dp"
+            android:src="@drawable/splashlogo"
+            tools:ignore="RtlCompat" />
+
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="50dp"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="20dp"
+            android:tintMode="@color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgBackAddLabSur"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/back"
+                app:tint="@color/Orange" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/laboursurvey1"
+                style="@style/CustomTextViewPadding5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="right"
+                android:text="@string/labour_survey_add"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:orientation="vertical">
+
+            <!--farmer code -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/farmer_code1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/farmer_code"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2.6dp"
+                    android:layout_marginStart="18.2dp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/grey"
+                    app:cardCornerRadius="3.9dp"
+                    app:cardElevation="2.6dp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFarmerCodeAddLabSur"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:enabled="false"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <!--plot Owner Ship-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/plotcode1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/plot_code"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <androidx.appcompat.widget.AppCompatSpinner
+                        android:id="@+id/spPlotLabSur"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/noofworkers1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/number_of_workers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNoOfFieldWorker"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingStart="7.8sp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textSize="14sp" />
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <!--land area-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/noofmale1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/male_workers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNoOfMaleWorker"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_26sdp"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <!--            address-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nooffemale1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/female_workers"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNoOfFemaleWorker"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nofofresident1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/residents"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNoOfResident"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/noofmigrants1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/migrants"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNoOfMigrant"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="number"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/childoccupation1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/children_occupation"
+                    android:textAllCaps="false"
+                    android:textColor="@color/black"
+                    android:textSize="14sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_14sdp"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="@dimen/_3sdp"
+                    app:cardElevation="@dimen/_2sdp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etChildrenOcc"
+                        style="@style/CustomEditTextPadding5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:backgroundTint="@android:color/transparent"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:inputType="text"
+                        android:paddingStart="@dimen/_6ssp"
+                        android:tag="@string/MANDATORY_TAG"
+                        android:textColor="@color/enabled_color"
+                        android:textCursorDrawable="@null"
+                        android:textSize="14sp" />
+
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/txtSaveLabour"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_bg_corner_orange"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="center"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="15dp"
+    android:gravity="center"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_20sdp"
+        android:text="Select Language"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/Orange"/>
+
+
+
+    <Button
+        android:id="@+id/englishButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:text="English"
+        android:padding="16dp"
+        android:backgroundTint="@color/Orange"
+        android:onClick="onLanguageButtonClick"/>
+
+    <Button
+        android:id="@+id/hindiButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hindi / हिन्दी"
+        android:padding="16dp"
+        android:backgroundTint="@color/Orange"
+        android:onClick="onLanguageButtonClick"/>
+
+    <Button
+        android:id="@+id/vietnamButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Vietnamese / Tiếng Việt"
+        android:backgroundTint="@color/Orange"
+        android:padding="16dp"
+        android:onClick="onLanguageButtonClick"/>
+    <Button
+        android:id="@+id/thaiButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thai / ไทย"
+        android:backgroundTint="@color/Orange"
+        android:padding="16dp"
+        android:onClick="onLanguageButtonClick"/>
+    <Button
+        android:id="@+id/MalayButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Malay / Melayu"
+        android:backgroundTint="@color/Orange"
+        android:padding="16dp"
+        android:onClick="onLanguageButtonClick"/>
+    <Button
+        android:id="@+id/IndonesianButtonDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Indonesian / Bahasa Indonesia"
+        android:padding="16dp"
+        android:backgroundTint="@color/Orange"
+        android:onClick="onLanguageButtonClick"/>
+
+</LinearLayout>

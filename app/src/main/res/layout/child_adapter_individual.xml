@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardChildSur"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TableLayout
+            android:id="@+id/childrenTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <!-- Header row -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/txtChildNameCadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Child Name"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtChildAgeCadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtChildGenderCadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtChildOccupCadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Occupation"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <!-- Rows for child details will be added programmatically -->
+        </TableLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

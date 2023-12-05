@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Shape drawable with rounded corners and stroke -->
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:color="@color/Orange"
+                android:width="1dp" />
+            <corners android:radius="1dp" />
+        </shape>
+    </item>
+
+    <!-- Image drawable to be overlaid on top of the shape -->
+    <item android:right="16dp" android:left="16dp" android:top="16dp" android:bottom="16dp">
+        <bitmap
+            android:src="@drawable/baseline_edit_24"
+        android:gravity="center" />
+    </item>
+</layer-list>
+
+
+

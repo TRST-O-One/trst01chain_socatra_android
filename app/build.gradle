@@ -1,0 +1,143 @@
+plugins {
+    id 'com.android.application'
+    //Map
+    id 'com.google.gms.google-services'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
+
+android {
+    namespace 'com.socatra.excutivechain'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.socatra.excutivechain"
+        minSdk 24
+        targetSdk 33
+        versionCode 3
+        versionName "1.0.6"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /*
+    packagingOptions {
+        exclude 'plugin.xml'
+        exclude 'about.ini'
+        exclude 'about.mappings'
+    }*/
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    //Map
+ //   implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
+    implementation files("D:\\SrikanthAndroid\\Trst01_Projects\\GajaRhakuProject\\DevCode\\areaviewlib-release.aar")
+
+
+//    implementation files("C://Users//traya//AndroidStudioProjects//12-08-2023//areaviewlib-release.aar")//Chandu
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.4'
+    /* GPS Location */
+    api 'com.google.android.gms:play-services-location:18.0.0'
+    api 'com.google.android.gms:play-services-auth:19.2.0'
+
+// Room components
+    implementation "androidx.room:room-runtime:2.4.0"
+    annotationProcessor "androidx.room:room-compiler:2.4.0"
+//    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
+
+    //    /* GLIDE */
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    // DAGGER 2
+//    implementation 'com.google.dagger:dagger-android:2.17'
+    implementation 'com.google.dagger:dagger-android-support:2.18'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.18'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.18'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // Retrofit & OkHttp
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //Circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.google.android.play:core:1.10.3'
+    implementation 'com.google.android.material:material:1.6.0'
+    //firebase
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
+
+    // implementation("com.google.firebase:firebase-analytics")
+    //  implementation(platform("com.google.firebase:firebase-bom:32.3.1"))
+    //sdp
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    //ssp
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
+    implementation 'org.jsoup:jsoup:1.14.3'
+
+    implementation "com.google.maps.android:maps-compose:2.7.2"
+    implementation "com.google.android.gms:play-services-maps:18.1.0"
+//    implementation 'cz.destil.settleup.gui.MultiSpinner';
+
+    // implementation 'com.github.puskal-khadka:MultiSelectSpinner:1.0.0'
+    //  implementation 'com.github.zeeshan5422:Material-MultiSelection-Spinner:Tag'
+//    api project(':sample')
+
+    //Shp file
+//    implementation group: 'org.geotools', name: 'gt-shapefile', version: '25.2'
+//    implementation group: 'org.geotools', name: 'gt-epsg-hsql', version: '25.2'
+
+//    implementation 'org.apache.commons:commons-io:2.11.0'
+//    implementation 'org.geotools:gt-shapefile:25.2'
+//    implementation 'org.locationtech.jts:jts-core:1.18.1'
+//    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.0'
+//    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.0'
+//    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.0'
+
+//    implementation 'org.locationtech.jts:jts-core:1.18.1'
+//    implementation 'com.javadocmd:simplelatlng:1.6.2'
+//    implementation 'com.javadocmd:simplelatlng:1.6.2'
+//    implementation 'com.javadocmd:shapefile-reader:0.4.2'
+//    implementation 'org.geojson:geojson-jackson:1.12'
+
+    //Sign-pad
+    implementation 'com.github.gcacace:signature-pad:1.3.1'
+
+
+
+}

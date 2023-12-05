@@ -1,0 +1,767 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@color/Orange"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="@dimen/_18sdp"
+            android:layout_height="@dimen/_18sdp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:src="@drawable/back"
+            android:tintMode="@color/white"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="6dp"
+            android:background="@color/white"
+            android:padding="2dp"
+            android:src="@drawable/splashlogo"
+            tools:ignore="NotSibling,RtlCompat" />
+
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/imgBackAddDoc"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginLeft="10dp"
+                android:src="@drawable/back"
+                app:tint="@color/Orange" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/adddoc1"
+                style="@style/CustomTextViewPadding5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:text="@string/add_document_details"
+
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15ssp"
+            android:layout_marginEnd="@dimen/_15ssp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/farmer_code1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Farmer Code "
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/et_farmer_code_AddDoc"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangular_box"
+                    android:backgroundTint="@color/grey"
+                    android:enabled="false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:tag="@string/MANDATORY_TAG"
+                    android:textColor="@color/enabled_color"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+            <!--Second Row-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/doctype1"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Doc Type"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_select_type_AddDoc"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangular_box"
+                    android:fontFamily="montserrat_regular"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/et_Id_type"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:tag="@string/MANDATORY_TAG"
+                    android:textColor="@color/enabled_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+            <!--First Row-->
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
+
+            <!--ID No-->
+            <LinearLayout
+                android:id="@+id/ll_id_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txtIdTypeName"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="ID Number"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_type_textID_AddDoc"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangular_box"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:tag="@string/MANDATORY_TAG"
+                    android:textColor="@color/enabled_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/txt_id_number_value"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_weight="1"
+                    android:enabled="false"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:tag="@string/MANDATORY_TAG"
+                    android:textColor="@color/enabled_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/uploadPdfLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:id="@+id/txt_head_pdf_upload"
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.4"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="@string/upload_pdf"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <TextView
+                    style="@style/CustomTextViewPadding5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text=":"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/txt_pdf_uri"
+                    style="@style/CustomEditTextPadding5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rectangular_box"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:drawableEnd="@drawable/baseline_file_upload"
+                    android:textColor="@color/enabled_color"
+                    android:textCursorDrawable="@null"
+                    android:textSize="@dimen/_12ssp"
+                    android:visibility="visible" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/ll_picture_iddoc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/docphoto1"
+                            style="@style/CustomTextViewPadding5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="@string/document_photo"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RadioGroup
+                            android:id="@+id/radio_group"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <RadioButton
+                                android:id="@+id/radio_image"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/document_photo" />
+
+                            <RadioButton
+                                android:id="@+id/radio_form"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/submit_form" />
+                        </RadioGroup>
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <ImageView
+                                android:id="@+id/img_IdentityImg_AddDoc"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginTop="10dp"
+                                android:background="@drawable/bg_dialog"
+                                android:elevation="3dp"
+                                android:padding="5dp"
+                                android:src="@drawable/identity" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/formLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:orientation="horizontal"
+                                android:visibility="visible"
+                                android:weightSum="2">
+
+                                <TextView
+                                    android:id="@+id/lang1"
+                                    style="@style/CustomTextViewPadding5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="@string/select_language"
+                                    android:textColor="@color/Orange"
+                                    android:textSize="@dimen/_12sdp" />
+
+                                <androidx.appcompat.widget.AppCompatSpinner
+                                    android:id="@+id/spSelectLanguageConsent"
+                                    style="@style/CustomEditTextPadding5dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_28sdp"
+                                    android:layout_marginEnd="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/rectangular_box_drop"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColor="@color/enabled_color"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/farmerInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/farmer_information"
+                                android:textColor="@color/Orange"
+                                android:textSize="@dimen/_14sdp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/farmerNameHd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:text="@string/farmer_name"
+                                        android:textColor="@color/colot_text_label"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <EditText
+                                        android:id="@+id/etNameConsent"
+                                        style="@style/CustomEditTextPadding5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:background="@drawable/rectangular_box"
+                                        android:editable="false"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:inputType="textPersonName"
+                                        android:letterSpacing="0.1"
+                                        android:padding="@dimen/_6ssp"
+                                        android:tag="@string/MANDATORY_TAG"
+                                        android:textColor="@color/enabled_color"
+                                        android:textColorHint="#222222"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/villageNameHd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:text="@string/village"
+                                        android:textColor="@color/colot_text_label"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <EditText
+                                        android:id="@+id/etVillageConsent"
+                                        style="@style/CustomEditTextPadding5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:background="@drawable/rectangular_box"
+                                        android:editable="false"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:inputType="text"
+                                        android:padding="@dimen/_6ssp"
+                                        android:tag="@string/MANDATORY_TAG"
+                                        android:textColor="@color/enabled_color"
+                                        android:textColorHint="#222222"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="@dimen/_12sdp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/_5sdp"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/districtHd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:text="@string/district"
+                                        android:textColor="@color/colot_text_label"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <EditText
+                                        android:id="@+id/etDistrictConsent"
+                                        style="@style/CustomEditTextPadding5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:background="@drawable/rectangular_box"
+                                        android:editable="false"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:inputType="textPersonName"
+                                        android:letterSpacing="0.1"
+                                        android:padding="@dimen/_6ssp"
+                                        android:tag="@string/MANDATORY_TAG"
+                                        android:textColor="@color/enabled_color"
+                                        android:textColorHint="#222222"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="@dimen/_12sdp"
+                                        android:visibility="visible" />
+
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:id="@+id/stateHd"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:text="@string/state_province"
+                                        android:textColor="@color/colot_text_label"
+                                        android:textSize="@dimen/_12ssp" />
+
+                                    <EditText
+                                        android:id="@+id/etProvinceConsent"
+                                        style="@style/CustomEditTextPadding5dp"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:background="@drawable/rectangular_box"
+                                        android:editable="false"
+                                        android:enabled="false"
+                                        android:fontFamily="@font/montserrat_regular"
+                                        android:inputType="text"
+                                        android:padding="@dimen/_6ssp"
+                                        android:tag="@string/MANDATORY_TAG"
+                                        android:textColor="@color/enabled_color"
+                                        android:textColorHint="#222222"
+                                        android:textCursorDrawable="@null"
+                                        android:textSize="@dimen/_12sdp" />
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/consentInfo"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/consent_information"
+                                android:textColor="@color/Orange"
+                                android:textSize="@dimen/_14sdp" />
+
+                            <TextView
+                                android:id="@+id/headingConsent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/_8sdp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="center"
+                                android:text="@string/consent_head"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <TextView
+                                android:id="@+id/bodyConsent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_marginTop="@dimen/_12sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/consent_body"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <TextView
+                                android:id="@+id/signConsent"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_marginTop="@dimen/_14sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:gravity="right"
+                                android:text="@string/consent_sign"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <!--<com.github.gcacace.signaturepad.views.SignaturePad
+                                android:id="@+id/signaturePad"
+                                android:layout_width="match_parent"
+                                android:layout_height="150dp"
+                                android:layout_marginLeft="@dimen/_8sdp"
+                                android:layout_marginRight="@dimen/_8sdp"
+                                android:background="#dfdfdfdf"
+                                android:visibility="visible"
+                                app:penColor="@android:color/black" />-->
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginBottom="10dp"
+                                android:orientation="horizontal"
+                                android:weightSum="2">
+
+                                <!-- <TextView
+                                     android:id="@+id/txtClearSign"
+                                     android:layout_width="match_parent"
+                                     android:layout_height="50dp"
+                                     android:layout_marginLeft="@dimen/_8sdp"
+                                     android:layout_marginRight="@dimen/_4sdp"
+                                     android:layout_weight="1"
+                                     android:background="@drawable/btn_bg_corner_orange"
+                                     android:fontFamily="@font/montserrat_medium"
+                                     android:gravity="center"
+                                     android:text="@string/clear"
+                                     android:textAllCaps="false"
+                                     android:textColor="#FFFFFF"
+                                     android:textSize="@dimen/_12ssp" />-->
+
+                                <TextView
+                                    android:id="@+id/txtSavePreview"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="50dp"
+                                    android:layout_marginLeft="@dimen/_4sdp"
+                                    android:layout_marginRight="@dimen/_8sdp"
+                                    android:layout_weight="1"
+                                    android:background="@drawable/btn_bg_corner_orange"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:gravity="center"
+                                    android:text="@string/sign_and_save"
+                                    android:textAllCaps="false"
+                                    android:textColor="#FFFFFF"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:visibility="visible" />
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_picture_two_feed_add"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            style="@style/CustomTextViewPadding5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:gravity="center_horizontal"
+                            android:text="Picture Two"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_10ssp" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/img_picture_second"
+                            android:layout_width="@dimen/_90sdp"
+                            android:layout_height="@dimen/_90sdp"
+                            android:layout_gravity="center" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- buttons -->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="28dp"
+                android:layout_marginBottom="30dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_save_iddoc"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/txt_save_AddDoc"
+                        android:layout_width="150dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_bg_corner_orange"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="center"
+                        android:text="Save"
+                        android:textAllCaps="false"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

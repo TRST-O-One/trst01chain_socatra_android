@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <TextView
+        android:id="@+id/headAddSignS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:visibility="visible"
+        android:text="@string/add_signature"
+        android:textColor="@color/Orange"
+        android:textSize="25sp" />
+
+    <com.github.gcacace.signaturepad.views.SignaturePad
+        android:id="@+id/signaturePad"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:layout_marginLeft="@dimen/_8sdp"
+        android:layout_marginRight="@dimen/_8sdp"
+        android:background="#dfdfdfdf"
+        android:visibility="visible"
+        app:penColor="@android:color/black" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/txtClearSignS"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg_corner_orange"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/clear"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_12ssp" />
+
+        <TextView
+            android:id="@+id/savePreviewDiaS"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg_corner_orange"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/preview_and_save"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_12ssp"
+            android:visibility="visible" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/txtBackSignS"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="@dimen/_8sdp"
+            android:layout_marginRight="@dimen/_4sdp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_bg_corner_orange"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/m_back"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_12ssp" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/txtSavePreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/btn_bg_corner_orange"
+        android:gravity="center"
+        android:text="@string/save" />
+
+
+
+</LinearLayout>

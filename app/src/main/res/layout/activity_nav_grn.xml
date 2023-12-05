@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/Green">
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="89dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+
+            android:padding="2dp"
+            android:src="@drawable/logotrack"
+            tools:ignore="RtlCompat" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="1dp"
+            android:gravity="left"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:src="@drawable/back"
+            app:tint="@color/Green" />
+
+
+
+        <androidx.appcompat.widget.SearchView
+
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:visibility="gone"
+
+            android:layout_marginEnd="@dimen/_20ssp"
+            android:layout_marginBottom="@dimen/_10ssp"
+            android:background="@drawable/bg_ui_white_box"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            app:queryHint="Search here"
+            app:searchIcon="@drawable/ic_baseline_search_24" />
+
+        <Button
+            android:id="@+id/add_grn_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_27sdp"
+            android:background="@drawable/rounded_button"
+            android:text="@string/add_grn"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end" />
+
+    </RelativeLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/svNavGrn"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_3sdp"
+            android:layout_marginEnd="@dimen/_3sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/bg_ui_white_box"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            app:queryHint="@string/search_by_grn_no"
+            app:searchIcon="@drawable/ic_baseline_search_24" />
+
+
+        <TextView
+            android:id="@+id/txtGrnListView"
+            style="@style/CustomTextViewPadding5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="right"
+            android:text="@string/grn_list"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    
+    
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/emptyListImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:gravity="center"
+           >
+
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="List is Empty"
+            android:textSize="@dimen/_25ssp"
+            android:textColor="@color/Green"
+            android:visibility="visible" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30ssp"
+                android:src="@drawable/emptylist_icon"/>
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_nav_Grn"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+
+</androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+
+
+
+
+</LinearLayout>

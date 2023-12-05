@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false">
+
+    <item
+        android:drawable="@drawable/logotrace"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/logotrace"
+        android:duration="100" />
+    <item
+        android:drawable="@drawable/logotrace"
+        android:duration="100" />
+
+    <item android:duration="100">
+
+        <rotate xmlns:android="http://schemas.android.com/apk/res/android"
+            android:drawable="@drawable/logotrace"
+            android:fromDegrees="0"
+            android:pivotX="100%"
+            android:pivotY="100%"
+            android:repeatCount="1"
+            android:toDegrees="360" />
+
+    </item>
+
+
+</animation-list>

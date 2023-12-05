@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_180sdp"
+    android:background="@null"
+    android:layout_gravity="center"
+    android:orientation="vertical">
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginEnd="@dimen/_15ssp"-->
+<!--      android:paddingTop="@dimen/_10ssp"-->
+<!--        android:src="@drawable/ic_delete" />-->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/submit_your_report"
+        android:textColor="@color/Green"
+        android:textSize="@dimen/_16ssp"
+        />
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:fontFamily="@font/montserrat_medium"-->
+<!--        android:gravity="center"-->
+<!--        android:text="Submit Your Report"-->
+<!--        android:textColor="@color/Green"-->
+<!--        android:textSize="@dimen/_16ssp"-->
+<!--        android:layout_below="@id/imageView" />-->
+
+    <RelativeLayout
+        android:id="@+id/save_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        android:layout_below="@id/textView"
+        android:paddingTop="@dimen/_50ssp">
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtYes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:layout_marginStart="@dimen/_40ssp"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtNo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_40ssp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/no"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+    </RelativeLayout>
+</RelativeLayout>

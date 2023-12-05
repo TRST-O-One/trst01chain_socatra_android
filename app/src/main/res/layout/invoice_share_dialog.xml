@@ -1,0 +1,891 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:background="@null"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/share_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:elevation="2dp"
+            android:padding="15dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_toLeftOf="@id/rightLayout"
+                android:orientation="vertical">
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/share_InvoiceReceipt"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/invoice_receipt"
+
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_100ssp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_alignParentStart="true"
+                        android:src="@drawable/logotrace" />
+
+
+                </RelativeLayout>
+
+
+
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/share_Sentby"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/sent_by"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_12ssp"
+                         />
+
+
+
+                    <TextView
+                        android:id="@+id/share_ShippedTo"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/montserrat_medium"
+
+                        android:text="@string/shipped_to"
+
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_12ssp"
+                       />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/txt_share_shipping_from"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:text="Dealer"
+                        android:textSize="@dimen/_10ssp"
+                         />
+
+
+
+
+
+                    <TextView
+                        android:id="@+id/txt_share_shipping_to"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_55sdp"
+                        android:text="Processor"
+                        android:gravity="end"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                       />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:layout_weight="2"
+                    android:orientation="horizontal">
+
+<!--                    android:drawableEnd="@drawable/baseline_remove_red_eye_24"-->
+
+                    <TextView
+                        android:id="@+id/txt_share_inv_from_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:gravity="start"
+                        android:text="Nellore"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_toStartOf="@+id/txt_mid"
+                        android:textColor="@color/black"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:textSize="@dimen/_10ssp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text=""
+                        android:id="@+id/txt_mid"
+                        android:layout_marginTop="@dimen/_10ssp"
+
+                        android:textColor="@color/black"
+                        android:layout_marginEnd="@dimen/_10ssp"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_share_inv_address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@+id/txt_mid"
+                        android:layout_alignParentEnd="true"
+                        android:gravity="end"
+                        android:layout_marginTop="@dimen/_10ssp"
+                        android:layout_marginStart="@dimen/_8ssp"
+                        android:text="Hyderabad"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        />
+
+                </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/rightLayout"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_marginBottom="@dimen/_5ssp"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_Invoice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/inovice_number"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_col1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/txt_share_inv_num"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_col1"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="INV0001" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_Createddate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/created_date"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_c"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/txt_inv_share_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_c"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="12:10:2023" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+                    <!--            <TextView-->
+                    <!--                android:id="@+id/dealerid"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginTop="5dp"-->
+                    <!--                android:ellipsize="end"-->
+                    <!--                android:text="Dealer id : "-->
+                    <!--                android:textSize="12sp" />-->
+
+                    <!--            <TextView-->
+                    <!--                android:id="@+id/txtDealerid"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:ellipsize="end"-->
+                    <!--                android:textSize="14sp"-->
+                    <!--                android:textStyle="bold"-->
+                    <!--                tools:text="8331984353 " />-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="Shipping To"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_col2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_col2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="Processor" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal"
+                        android:visibility="gone">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="Shipping Address"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_col3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_col3"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="Nellore" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_20ssp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="start"
+
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/share_InvoiceDetails"
+
+                            style="@style/CustomTextViewPadding5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/part_a_invoice_details"
+                            android:textColor="@color/Green"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_25sdp">
+
+
+                        <!-- Row 1 (Farmer Name) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_box_black">
+
+
+                            <TextView
+                                android:id="@+id/share_Product"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:background="@drawable/rectangular_box_black"
+                                android:gravity="start"
+
+                                android:padding="4dp"
+                                android:text="@string/product"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/txt_product_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="Natural ruber"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </TableRow>
+
+
+                        <!-- Row 2 (Telephone no) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table">
+
+
+                            <TextView
+                                android:id="@+id/share_Quantity"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rectangular_table"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="@string/qty"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/txt_share_qty"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="12"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+
+                        </TableRow>
+
+
+                        <!-- Row 3 (Fax No) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:visibility="gone">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="Fax No"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text=""
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_vessel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_1ssp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        android:gravity="start"
+                        android:orientation="horizontal"
+                        android:visibility="visible">
+
+                        <TextView
+                            android:id="@+id/share_VesselDetails"
+
+                            style="@style/CustomTextViewPadding5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="@string/part_b_vessel_details"
+                            android:textColor="@color/Green"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_25sdp">
+
+
+                        <!-- Row 1 (Farmer Name) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow19"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_box_black">
+
+
+                            <TextView
+                                android:id="@+id/share_Vessel"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+
+                                android:background="@drawable/rectangular_box_black"
+                                android:gravity="start"
+
+                                android:padding="4dp"
+                                android:text="@string/vessel"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/txt_vessel_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+                        </TableRow>
+
+
+                        <!-- Row 2 (Telephone no) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow21"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table">
+
+
+                            <TextView
+                                android:id="@+id/share_Port_of_loading"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rectangular_table"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="@string/port_of_loading"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_share_portofloading"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+
+                        </TableRow>
+
+
+                        <TableRow
+                            android:id="@+id/tremptyrow10"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table">
+
+
+                            <TextView
+                                android:id="@+id/share_Port_of_discharge"
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/rectangular_table"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="@string/port_of_discharge"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/txt_share_portofdischarge"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+
+                        </TableRow>
+
+
+                        <!-- Row 3 (Fax No) -->
+                        <TableRow
+                            android:id="@+id/tremptyrow8"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:visibility="gone">
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text="Fax No"
+                                android:textColor="@color/black"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:id="@+id/txt_share_Fax_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="start"
+                                android:padding="4dp"
+                                android:text=""
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+
+                        </TableRow>
+
+
+                    </TableLayout>
+
+                </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_word_copy_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_2ssp"
+                        android:layout_toStartOf="@+id/txt_cmp_name"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/this_certificate_is_auto_generated_by_trst01chain_system_on"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_7ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_cmp_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="TRST01 Chain"
+                        android:textColor="@color/Green"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/_8ssp"
+                        android:layout_marginStart="@dimen/_2ssp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txt_system_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/txt_date_and_time"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/system_on"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_7ssp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_4ssp"
+                        android:layout_toStartOf="@+id/txt_word_time_zone"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="end"
+                        android:id="@+id/txt_date_and_time"
+                        android:text="Nov 27, 2023, 4:41:56 PM"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_word_time_zone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_4ssp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Timezone"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_8ssp" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/rightLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:orientation="vertical" />
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <RelativeLayout
+        android:id="@+id/save_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30ssp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_40ssp"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/share"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+    </RelativeLayout>
+
+
+
+</LinearLayout>

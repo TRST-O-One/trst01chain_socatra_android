@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/ll_header_view"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rel_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/Green"
+        android:padding="@dimen/_10ssp">
+
+
+
+        <TextView
+            android:id="@+id/home_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/C_Logout"
+            android:layout_width="@dimen/_20ssp"
+            android:layout_height="@dimen/_20ssp"
+            android:layout_alignParentEnd="true"
+            android:background="@color/Green"
+            android:padding="16dp"
+            android:src="@drawable/logout_icon"
+            android:visibility="visible"/>
+
+
+    </RelativeLayout>
+
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent">-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/_8sdp"
+            android:layout_height="match_parent">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+
+
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/CustomerName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="20dp"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="@string/name"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txt_col"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:ellipsize="end"
+                                    android:text=":"
+                                    android:textSize="@dimen/_10ssp" />
+
+
+
+                                <TextView
+                                    android:id="@+id/txtCustomerName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="@dimen/_2sdp"
+                                    android:layout_toEndOf="@+id/txt_col"
+                                    android:ellipsize="end"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:textStyle="bold"
+                                    tools:text="Nandini" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toLeftOf="@id/rightLayout"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/CustomerRole"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="@string/role"
+                                    android:layout_marginStart="20dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txt_col1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:ellipsize="end"
+                                    android:text=":"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <TextView
+                                    android:id="@+id/txtCustomerRole"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="@dimen/_2sdp"
+                                    android:layout_toEndOf="@+id/txt_col1"
+                                    android:ellipsize="end"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:textStyle="bold"
+                                    tools:text="farmer9" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="5dp"
+                            android:layout_toLeftOf="@id/rightLayout"
+                            android:orientation="horizontal">
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/TraderFarmerCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:text="@string/farmer_count"
+                                    android:layout_marginStart="20dp"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_12ssp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                                <TextView
+                                    android:id="@+id/txt_col4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerHorizontal="true"
+                                    android:ellipsize="end"
+                                    android:text=":"
+                                    android:textSize="@dimen/_10ssp" />
+
+                                <TextView
+                                    android:id="@+id/txtFarmerCount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginStart="@dimen/_2sdp"
+                                    android:layout_toEndOf="@+id/txt_col4"
+                                    android:ellipsize="end"
+                                    android:textSize="@dimen/_10ssp"
+                                    android:textStyle="bold"
+                                    tools:text="10" />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+
+                    <LinearLayout
+                        android:id="@+id/ll_trader_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:visibility="visible">
+
+
+
+
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="7dp"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="-5dp"
+                                    android:weightSum="2">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_90sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/_8sdp"
+                                            app:cardCornerRadius="@dimen/_6sdp"
+                                            app:cardElevation="@dimen/_6ssp"
+                                            app:cardUseCompatPadding="false">
+
+                                            <LinearLayout
+                                                android:id="@+id/ll_Processor_trader"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_50sdp"
+
+                                                    android:layout_height="@dimen/_30sdp"
+                                                    android:layout_gravity="top"
+                                                    android:layout_marginTop="@dimen/_10ssp"
+                                                    android:src="@drawable/farmer_icon"
+                                                    />
+
+                                                <TextView
+                                                    android:id="@+id/txt_processorcount_trader"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/_40sdp"
+                                                    android:fontFamily="@font/montserrat_medium"
+                                                    android:gravity="center"
+                                                    android:layout_marginTop="@dimen/_10ssp"
+                                                    android:paddingBottom="@dimen/_8ssp"
+                                                    android:text="11"
+                                                    android:textSize="@dimen/_16ssp" />
+
+                                            </LinearLayout>
+                                            <TextView
+                                                android:id="@+id/et_farmer_trader"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="bottom|center"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:paddingBottom="@dimen/_8ssp"
+                                                android:text="@string/processor"
+                                                android:textSize="@dimen/_10ssp" />
+
+                                        </androidx.cardview.widget.CardView>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_90sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/_8sdp"
+                                            app:cardCornerRadius="@dimen/_6sdp"
+                                            app:cardElevation="@dimen/_6ssp"
+                                            app:cardUseCompatPadding="false">
+
+                                            <LinearLayout
+                                                android:id="@+id/ll_Dealers_trader"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_50sdp"
+
+                                                    android:layout_height="@dimen/_30sdp"
+                                                    android:layout_gravity="top"
+                                                    android:layout_marginTop="@dimen/_10ssp"
+                                                    android:src="@drawable/farmer_icon"
+                                                    />
+
+                                                <TextView
+                                                    android:id="@+id/txt_dealers_trader"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/_40sdp"
+                                                    android:fontFamily="@font/montserrat_medium"
+                                                    android:gravity="center"
+                                                    android:layout_marginTop="@dimen/_10ssp"
+                                                    android:paddingBottom="@dimen/_8ssp"
+                                                    android:text="11"
+                                                    android:textSize="@dimen/_16ssp" />
+
+                                            </LinearLayout>
+
+                                            <TextView
+
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="bottom|center"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:paddingBottom="@dimen/_8ssp"
+                                                android:text="@string/dealers"
+                                                android:textSize="@dimen/_10ssp" />
+
+                                        </androidx.cardview.widget.CardView>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="-4dp"
+                                android:weightSum="2">
+
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_90sdp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="@dimen/_8sdp"
+                                        app:cardCornerRadius="@dimen/_6sdp"
+                                        app:cardElevation="@dimen/_6ssp"
+                                        app:cardUseCompatPadding="false">
+
+                                        <LinearLayout
+                                            android:id="@+id/ll_Invoice_trader"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="@dimen/_50sdp"
+
+                                                android:layout_height="@dimen/_30sdp"
+                                                android:layout_gravity="top"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:src="@drawable/farmer_icon"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/txt_invoice_trader"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="@dimen/_40sdp"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:gravity="center"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:paddingBottom="@dimen/_8ssp"
+                                                android:text="11"
+                                                android:textSize="@dimen/_16ssp" />
+
+                                        </LinearLayout>
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="bottom|center"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="@string/invoice"
+                                            android:textSize="@dimen/_10ssp" />
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+
+
+
+
+                                <LinearLayout
+                                    android:id="@+id/ll_Customers"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <androidx.cardview.widget.CardView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_90sdp"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="@dimen/_8sdp"
+                                        app:cardCornerRadius="@dimen/_6sdp"
+                                        app:cardElevation="@dimen/_6ssp"
+                                        app:cardUseCompatPadding="false">
+
+                                        <LinearLayout
+                                            android:id="@+id/ll_customers"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="horizontal">
+
+                                            <ImageView
+                                                android:layout_width="@dimen/_50sdp"
+
+                                                android:layout_height="@dimen/_30sdp"
+                                                android:layout_gravity="top"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:src="@drawable/farmer_icon"
+                                                />
+
+                                            <TextView
+                                                android:id="@+id/txt_customers_processor"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="@dimen/_40sdp"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:gravity="center"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:paddingBottom="@dimen/_8ssp"
+                                                android:text="11"
+                                                android:textSize="@dimen/_16ssp" />
+
+                                        </LinearLayout>
+                                        <TextView
+                                            android:id="@+id/et_customers"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="bottom|center"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="@string/customers"
+                                            android:textSize="@dimen/_10ssp" />
+
+                                    </androidx.cardview.widget.CardView>
+
+
+                                </LinearLayout>
+
+
+
+
+                            </LinearLayout>
+
+
+                             <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_margin="@dimen/_8sdp"
+                            >
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_marginTop="7dp"
+                                android:weightSum="2">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="0dp"
+                                    android:weightSum="2">
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_90sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/_8sdp"
+                                            app:cardCornerRadius="@dimen/_6sdp"
+                                            app:cardElevation="@dimen/_6ssp"
+                                            app:cardUseCompatPadding="false">
+
+                                            <LinearLayout
+                                                android:id="@+id/ll_plots_trader"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="match_parent"
+                                                android:orientation="horizontal">
+
+                                                <ImageView
+                                                    android:layout_width="@dimen/_50sdp"
+
+                                                    android:layout_height="@dimen/_30sdp"
+                                                    android:layout_gravity="top"
+                                                    android:layout_marginTop="@dimen/_10ssp"
+                                                    android:src="@drawable/plot"
+                                                    />
+
+                                                <TextView
+                                                    android:id="@+id/txt_plots_trader"
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="@dimen/_40sdp"
+                                                    android:fontFamily="@font/montserrat_medium"
+                                                    android:gravity="center"
+                                                    android:layout_marginTop="@dimen/_1ssp"
+                                                    android:paddingBottom="@dimen/_6ssp"
+                                                    android:text="11"
+                                                    android:textSize="@dimen/_16ssp" />
+
+                                            </LinearLayout>
+
+                                            <TextView
+                                                android:id="@+id/et_plots_trader"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="bottom|center"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:paddingBottom="@dimen/_8ssp"
+                                                android:text="@string/plots"
+                                                android:textSize="@dimen/_10ssp" />
+
+                                        </androidx.cardview.widget.CardView>
+
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_Area_trader"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <androidx.cardview.widget.CardView
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_90sdp"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="@dimen/_8sdp"
+                                            app:cardCornerRadius="@dimen/_6sdp"
+                                            app:cardElevation="@dimen/_6ssp"
+                                            app:cardUseCompatPadding="false">
+                                            <LinearLayout
+
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:orientation="vertical">
+
+
+                                                <RelativeLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content">
+
+
+                                                    <ImageView
+                                                        android:layout_width="@dimen/_50sdp"
+                                                        android:layout_height="@dimen/_30sdp"
+                                                        android:layout_alignParentStart="true"
+                                                        android:layout_marginTop="@dimen/_10ssp"
+                                                        android:src="@drawable/plot_icon" />
+
+                                                    <TextView
+                                                        android:id="@+id/txt_totalarea_trader"
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:fontFamily="@font/montserrat_medium"
+                                                        android:layout_marginTop="@dimen/_10ssp"
+                                                        android:layout_alignParentEnd="true"
+                                                        android:layout_marginEnd="@dimen/_8ssp"
+                                                        android:text="58"
+                                                        android:textSize="@dimen/_14ssp" />
+                                                    <TextView
+                                                        android:layout_width="wrap_content"
+                                                        android:layout_height="wrap_content"
+                                                        android:layout_below="@+id/txt_totalarea_trader"
+                                                        android:fontFamily="@font/montserrat_medium"
+                                                        android:layout_alignParentEnd="true"
+                                                        android:text="@string/hectares"
+                                                        android:layout_marginEnd="@dimen/_5sdp"
+                                                        android:textSize="@dimen/_8ssp" />
+                                                </RelativeLayout>
+
+                                                <LinearLayout
+                                                    android:layout_width="match_parent"
+                                                    android:layout_height="wrap_content"
+                                                    android:orientation="vertical">
+
+
+                                                    <!--                                <TextView-->
+                                                    <!--                                    android:layout_width="117dp"-->
+                                                    <!--                                    android:layout_height="wrap_content"-->
+                                                    <!--                                    android:layout_gravity="bottom|center"-->
+                                                    <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                                    <!--                                    android:gravity="center"-->
+                                                    <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                                    <!--                                    android:text="Total Procurement"-->
+                                                    <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                                </LinearLayout>
+                                            </LinearLayout>
+
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="bottom|center"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:gravity="bottom|center"
+                                                android:paddingBottom="@dimen/_6ssp"
+                                                android:text="@string/total_area"
+                                                android:textSize="@dimen/_10ssp" />
+
+
+                                        </androidx.cardview.widget.CardView>
+
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
+
+
+
+
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+<!--    </ScrollView>-->
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+

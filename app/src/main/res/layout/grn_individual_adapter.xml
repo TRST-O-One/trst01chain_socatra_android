@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardgrndtldetails"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TableLayout
+            android:id="@+id/childrenTableLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="*">
+
+            <!-- Header row -->
+            <TableRow>
+                <TextView
+                    android:id="@+id/txtGrnNoNamegrnadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/grn_no"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txtActualQuantitygrnadpt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text = "@string/actual_quantity"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/btnDelete"
+                    android:layout_width="2dp"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Delete"
+                    android:src="@drawable/baseline_delete_forever_24" />
+            </TableRow>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/cardgrndtldetails"
+                android:background="@color/colot_text_label" />
+
+            <!-- Rows for child details will be added programmatically -->
+        </TableLayout>
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>

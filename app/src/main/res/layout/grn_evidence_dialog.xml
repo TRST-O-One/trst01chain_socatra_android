@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rightLayout"
+    android:layout_width="wrap_content"
+    android:orientation="vertical"
+    android:layout_height="@dimen/_350sdp"
+    android:layout_margin="@dimen/_15ssp"
+    android:background="@drawable/dialog_shape">
+
+
+    <ImageView
+        android:id="@+id/grndocument"
+        android:layout_width="wrap_content"
+        android:scaleType="fitXY"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logotrace" />
+
+
+</LinearLayout>
+
+

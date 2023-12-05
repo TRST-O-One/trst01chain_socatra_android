@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission
+        android:name="android.permission.MANAGE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_PRIVILEGED_PHONE_STATE"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.android.hardware.location.gps" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <application
+        android:name=".dagger.App"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/icon_new"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/icon_new"
+        android:supportsRtl="false"
+        android:theme="@style/Theme.CoreCarbon"
+        android:usesCleartextTraffic="true"
+        tools:targetApi="31">
+        <activity
+            android:name=".activity.Traderflow.TraderCustListAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.FarmerListbyInvoiceActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.RiskAssesmentActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity
+            android:name=".activity.Traderflow.TraderDetailsListAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity
+            android:name=".activity.Traderflow.DealerDetailsinTrader"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.FarmerDetailsbyDealerinTrader"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.TraderProcessorFarmerList"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.PlotListbyTraderId"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.TraderProcessorDetails"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.SubDealerDetailsinTrader"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.Traderflow.TraderDashboardActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.CustomerViewBatchListAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity
+            android:name=".activity.customerflow.CustomerDashboard"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.FullScreen" />
+        <activity
+            android:name=".activity.main_dash_board.BatchMapActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.DashBoardCustomerListAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.qualitycheck.AddQualityCheck"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.ShareDealerGRNReceipt"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.qualitycheck.QualityCheckList"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.NavGrnActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.ShareGRNActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.invoice.ShareInvoiceActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.drc.Drclist"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.invoice.InvoiceListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.SubDealerListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.TotalProcurementReportActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.TotalSupplyReportActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.DealerProcumentData"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.DashBoardDealerListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.FarmerRiskAssesmentPrintViewAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.FarmerGrnDetailsList"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.FarmerDetailsListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.GrnFarmerMapActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <!--
+android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:screenOrientation="portrait"
+        -->
+        <activity
+            android:name=".activity.main_dash_board.MainDashBoardActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.DashBoardProcessorListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.CustomerBatchFarmerListAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.customerflow.ViewFarmerRiskAssesMentData"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.ProcessorAddGRNActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.DealerAddGrnActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.drc.ProcessorAddDrcDataActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.invoice.InvoiceManufactureActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.invoice.InvoiceDealerActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.batchProcessing.DealerBatchCreationAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.batchProcessing.ProcessorBatchCreationAct"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.grnflow.AddGRNbyFarmer"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.PlotsMainActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.PlotsListActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.main_dash_board.MapActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <!--
+         <meta-data
+             android:name="com.google.android.geo.API_KEY"
+             android:value="@string/key" />
+        -->
+        <activity
+            android:name=".activity.SplashActivity"
+            android:configChanges="orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.LoginActivity"
+            android:configChanges="orientation|screenSize|screenLayout|keyboardHidden|locale"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBESyc3qsmfvBaErpDx2FSHKu4KNnVBo18" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.socatra.intellitarck.provider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths"
+                tools:replace="android:resource" />
+        </provider>
+    </application>
+
+</manifest>

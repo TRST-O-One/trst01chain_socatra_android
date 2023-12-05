@@ -1,0 +1,187 @@
+plugins {
+    id 'com.android.application'
+//    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
+
+
+android {
+    namespace 'com.socatra.intellitrack'
+    compileSdk 33
+
+    defaultConfig {
+        applicationId "com.socatra.intellitrack"
+        minSdk 24
+        targetSdk 33
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        useLibrary 'org.apache.http.legacy'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'AndroidManifest.xml'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+
+    }
+    packagingOptions {
+        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
+        exclude "lib/armeabi/**"
+    }
+
+    //release version 1 date 11/16/2022
+    signingConfigs {
+        release {
+            storeFile file('../app/keys/IntelliTrack_GajahRuk.jks')
+            storePassword 'android'
+            keyAlias 'IntelliTrack'
+            keyPassword 'android'
+        }
+    }
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:2.2.0'
+//    classpath 'com.google.gms:google-services:4.4.0' // Check for the latest version
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.9.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.4'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    configurations {
+        all*.exclude group: 'com.android.support', module: 'support-v13'
+    }
+
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.0.0'
+    // Material Design
+    implementation 'com.google.android.material:material:1.0.0'
+
+    fileTree(dir: 'libs', include: '**/*.aar')
+            .each { File file ->
+                dependencies.add("implementation", [name: file.name.lastIndexOf('.').with {
+                    it != -1 ? file.name[0..<it] : file.name
+                }, ext                                  : 'aar'])
+            }
+
+
+    implementation('com.crashlytics.sdk.android:crashlytics:2.9.3@aar') {
+        transitive = true;
+    }
+    /* GPS Location */
+    api 'com.google.android.gms:play-services-location:18.0.0'
+    api 'com.google.android.gms:play-services-auth:19.2.0'
+
+// Room components
+    implementation "androidx.room:room-runtime:2.4.0"
+    annotationProcessor "androidx.room:room-compiler:2.4.0"
+//    androidTestImplementation "androidx.room:room-testing:$rootProject.roomVersion"
+
+    // Lifecycle components
+    implementation "androidx.lifecycle:lifecycle-viewmodel:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-livedata:2.0.0"
+    implementation "androidx.lifecycle:lifecycle-common-java8:2.0.0"
+
+    //    /* GLIDE */
+    implementation 'com.github.bumptech.glide:glide:4.9.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    // DAGGER 2
+    implementation 'com.google.dagger:dagger-android:2.17'
+    implementation 'com.google.dagger:dagger:2.16'
+    implementation 'com.google.dagger:dagger-android-support:2.18'
+    annotationProcessor 'com.google.dagger:dagger-android-processor:2.18'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.18'
+
+    // GSON
+    implementation 'com.google.code.gson:gson:2.8.2'
+
+    // Retrofit & OkHttp
+    api 'com.squareup.retrofit2:retrofit:2.4.0'
+    api 'com.squareup.retrofit2:converter-gson:2.4.0'
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    //Circle image
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    //sdp
+    implementation 'com.intuit.sdp:sdp-android:1.1.0'
+    //ssp
+    implementation 'com.intuit.ssp:ssp-android:1.1.0'
+
+   // api 'com.chaos.view:pinview:1.4.3'
+    implementation 'org.codehaus.jackson:jackson-mapper-asl:1.9.12'
+    implementation 'com.googlecode.android-query:android-query:0.25.9'
+    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'com.google.android.play:core:1.8.3'
+
+    // ViewModel and LiveData
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    // alternatively, just ViewModel
+    implementation 'android.arch.lifecycle:viewmodel:1.1.1'
+    // alternatively, just LiveData
+    implementation 'android.arch.lifecycle:livedata:1.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:1.1.1"
+    // Room (use 1.1.0-alpha2 for latest alpha)
+    implementation 'android.arch.persistence.room:runtime:1.1.1'
+    annotationProcessor "android.arch.persistence.room:compiler:1.1.1"
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
+
+    implementation 'org.apache.commons:commons-lang3:3.5'
+
+    //swipe library
+    implementation "com.daimajia.swipelayout:library:1.2.0@aar"
+
+//Pdf
+    implementation 'com.itextpdf:itextg:5.5.10'
+
+
+}
+//apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--    header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/Green">
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="89dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+
+            android:padding="2dp"
+            android:src="@drawable/logotrack"
+            tools:ignore="RtlCompat" />
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_cancel"
+            android:layout_width="55dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:src="@drawable/back"
+            app:tint="@color/Green" />
+
+
+        <TextView
+            style="@style/CustomTextViewPadding5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.7"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:id="@+id/txt_word_map_view"
+            android:text="@string/map_view"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/farmer_code"
+            android:id="@+id/txt_word_farmer_cd"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=":"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+
+            android:textSize="@dimen/_11ssp"
+            android:id="@+id/txt_first_col"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_farmer_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:layout_toEndOf="@+id/txt_first_col"
+            android:text="code"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/number_of_plots"
+            android:id="@+id/txt_word_number_plots"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=":"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+
+            android:textSize="@dimen/_11ssp"
+            android:id="@+id/txt_first_1"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_plots_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:layout_toEndOf="@+id/txt_first_1"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txt_word_plot_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/plot_code"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_first_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=":"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/txt_first_two"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:layout_marginEnd="@dimen/_8ssp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_3sdp"
+            app:cardElevation="@dimen/_2sdp">
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/border" />
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_select_plotcode"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_25ssp"
+                android:fontFamily="montserrat_regular"
+                android:visibility="visible" />
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/geo_boundaries_area"
+            android:id="@+id/txt_word_geo_boundaries"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=":"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+
+            android:textSize="@dimen/_11ssp"
+            android:id="@+id/txt_first_3"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtGeoboundariesArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:layout_toEndOf="@+id/txt_first_3"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginStart="@dimen/_15ssp"
+        android:background="@color/white"
+        android:gravity="start"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/area_in_hec"
+            android:id="@+id/txt_word_area_hec"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_11ssp"
+            android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:text=":"
+            android:layout_centerInParent="true"
+            android:textColor="@color/black"
+
+            android:textSize="@dimen/_11ssp"
+            android:id="@+id/txt_first_4"
+            android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txtArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="start"
+            android:layout_toEndOf="@+id/txt_first_4"
+            android:layout_marginStart="@dimen/_8ssp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="@dimen/_15ssp"
+        android:orientation="vertical">
+
+        <fragment
+            android:id="@+id/mapview"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".KMLMapActivity"
+            tools:layout="@layout/placeholder_fragment_layout" />
+
+    </LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rec_plot_lat_lang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp">
+
+    </androidx.recyclerview.widget.RecyclerView>
+</LinearLayout>

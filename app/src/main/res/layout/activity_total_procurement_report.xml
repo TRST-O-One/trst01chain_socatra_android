@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/ll_header_view"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/Green">
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="89dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+
+            android:padding="2dp"
+            android:src="@drawable/logotrack"
+            tools:ignore="RtlCompat" />
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/txt_totalprocurementview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/total_procurement_report"
+        android:textSize="@dimen/_14ssp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/Green"/>
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dp"
+        android:weightSum="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6ssp"
+                    app:cardUseCompatPadding="false">
+
+                    <LinearLayout
+                        android:id="@+id/ll_yearly"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_yearly_procurement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:layout_marginTop="@dimen/_10ssp"
+                            android:gravity="center"
+                            android:layout_gravity="center"
+                            android:text="0"
+                            android:textSize="@dimen/_20ssp" />
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_yearly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/yearly"
+                        android:paddingBottom="@dimen/_6ssp"
+
+                        android:textSize="@dimen/_12ssp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6ssp"
+                    app:cardUseCompatPadding="false">
+
+                    <LinearLayout
+                        android:id="@+id/ll_monthly"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/txt_montly_procurement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/_10ssp"
+                            android:text="0"
+                            android:textSize="@dimen/_20ssp" />
+
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_Montly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:paddingBottom="@dimen/_8ssp"
+                        android:text="@string/monthly"
+                        android:textSize="@dimen/_12ssp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_8sdp"
+                    app:cardCornerRadius="@dimen/_6sdp"
+                    app:cardElevation="@dimen/_6ssp"
+                    app:cardUseCompatPadding="false">
+
+                    <LinearLayout
+                        android:id="@+id/ll_weekly"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+
+
+                        <TextView
+                            android:id="@+id/txt_weekly_procurement"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:gravity="center"
+                            android:layout_marginTop="@dimen/_10ssp"
+                            android:text="0"
+                            android:textSize="@dimen/_20ssp" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/txt_Weekly"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:paddingBottom="@dimen/_8ssp"
+                        android:text="@string/weekly"
+                        android:textSize="@dimen/_12ssp" />
+
+                </androidx.cardview.widget.CardView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    <View-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="5dp"-->
+    <!--        android:background="@drawable/divider_line" />-->
+
+
+
+
+
+
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/containerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+    <RelativeLayout
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+
+    </RelativeLayout>
+
+</LinearLayout>

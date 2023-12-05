@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <!-- Clock Circle -->
+    <path
+        android:fillColor="@color/Green"
+        android:pathData="M12,2c-5.52,0 -10,4.48 -10,10s4.48,10 10,10s10,-4.48 10,-10s-4.48,-10 -10,-10zM12,20c-4.42,0 -8,-3.58 -8,-8s3.58,-8 8,-8s8,3.58 8,8s-3.58,8 -8,8zM12,12"/>
+
+    <!-- Hour Hand -->
+    <path
+        android:strokeWidth="2"
+        android:strokeColor="@color/Green"
+        android:pathData="M12,12 L12,5" />
+
+    <!-- Minute Hand -->
+    <path
+        android:strokeWidth="1"
+        android:strokeColor="@color/Green"
+        android:pathData="M12,12 L19,5" />
+
+</vector>
+
+
+

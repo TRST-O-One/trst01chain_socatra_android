@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_350sdp"
+    android:layout_margin="@dimen/_10ssp"
+    android:background="@null"
+    android:orientation="vertical"
+    app:cardCornerRadius="@dimen/_8ssp"
+    app:cardElevation="@dimen/_4ssp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <!--    header-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:visibility="gone"
+        android:background="@color/Green">
+
+        <ImageView
+            android:id="@+id/ccx_logo_white"
+            android:layout_width="89dp"
+            android:layout_height="32dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+
+            android:padding="2dp"
+            android:src="@drawable/logotrack"
+            tools:ignore="RtlCompat" />
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/CustomTextViewPadding5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_regular"
+            android:gravity="start"
+            android:text="@string/language_list"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/_10ssp"
+            android:textSize="@dimen/_12ssp"
+            android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/img_cross_dig_lang"
+            android:layout_width="@dimen/_25ssp"
+            android:layout_height="@dimen/_18ssp"
+            android:gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:src="@drawable/back"
+            android:rotation="180"
+            app:tint="@color/Green" />
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/emptyListImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone"
+            android:gravity="center">
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="List is Empty"
+                android:textSize="@dimen/_25ssp"
+                android:textColor="@color/Green"
+                android:visibility="visible" />
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30ssp"
+                android:src="@drawable/emptylist_icon"/>
+
+
+
+
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rec_dialog_language"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:layout_marginStart="@dimen/_5ssp"
+            android:layout_marginTop="@dimen/_5ssp"
+            android:layout_marginEnd="@dimen/_5ssp"
+            android:layout_marginBottom="@dimen/_5ssp">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+    </RelativeLayout>
+</LinearLayout>
+</androidx.cardview.widget.CardView>

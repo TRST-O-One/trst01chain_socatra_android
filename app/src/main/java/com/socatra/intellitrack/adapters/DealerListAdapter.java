@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.JsonElement;
 import com.socatra.intellitrack.R;
-import com.socatra.intellitrack.activity.main_dash_board.DealerAgainstProcurementListActivity;
+import com.socatra.intellitrack.activity.main_dash_board.DealerProcumentData;
 import com.socatra.intellitrack.api.AppAPI;
 import com.socatra.intellitrack.api.webservice.Retrofit_funtion_class;
 import com.socatra.intellitrack.helper.AppHelper;
@@ -95,7 +95,7 @@ public class DealerListAdapter extends RecyclerView.Adapter<DealerListAdapter.Vi
             @Override
             public void onClick(View view) {
                String DealerId = String.valueOf(item.getId());
-                Intent intent = new Intent(view.getContext(), DealerAgainstProcurementListActivity.class);
+                Intent intent = new Intent(view.getContext(), DealerProcumentData.class);
                 intent.putExtra("DealerId", DealerId);
                 Log.d("DealerId","Id: " +DealerId);
                 view.getContext().startActivity(intent);

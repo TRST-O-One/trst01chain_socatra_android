@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@null"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="2dp"
+        android:padding="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="5dp"
+            android:layout_toLeftOf="@id/rightLayout"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_toLeftOf="@id/rightLayout"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/SumofTotalProcurement"
+                    android:layout_width="231dp"
+                    android:layout_height="19dp"
+                    android:ellipsize="end"
+                    android:text="@string/sum_of_total_procurement"
+                    android:textSize="12sp" />
+
+
+                <TextView
+                    android:id="@+id/txt_col"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:text=":"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/txtSumofTotalProcurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/txt_col"
+                    android:ellipsize="end"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:text="Sum" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_toLeftOf="@id/rightLayout"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/NumberofTOtalProcurement"
+                    android:layout_width="233dp"
+                    android:layout_height="19dp"
+                    android:ellipsize="end"
+                    android:text="@string/number_of_total_procurement"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txt_col1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:ellipsize="end"
+                    android:text=":"
+                    android:textSize="@dimen/_10ssp" />
+
+                <TextView
+                    android:id="@+id/txtNumberofTOtalProcurement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginStart="@dimen/_2sdp"
+                    android:layout_toEndOf="@+id/txt_col"
+                    android:ellipsize="end"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="bold"
+                    tools:text="Total" />
+            </LinearLayout>
+
+
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/rightLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:orientation="vertical"/>
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

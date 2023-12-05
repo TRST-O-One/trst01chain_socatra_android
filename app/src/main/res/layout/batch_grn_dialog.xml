@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@null"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="5dp">
+
+
+    <TextView
+        android:id="@+id/txt_dialog_grn_details"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_medium"
+        android:gravity="center"
+        android:text="@string/add_grn_details"
+        android:textColor="@color/Green"
+        android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13sp"
+        android:layout_marginEnd="13sp"
+        android:orientation="vertical">
+
+        <!-- GRN No -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_dialog_grn_no"
+                style="@style/CustomTextViewPadding5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.4"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/grn_no"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+            <!-- CardView for GRN No -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="@dimen/_3sdp"
+                app:cardElevation="@dimen/_2sdp">
+
+                <!-- FrameLayout for GRN No -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border">
+                </FrameLayout>
+
+                <!-- Spinner for GRN No -->
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_grn_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25ssp"
+                    android:fontFamily="montserrat_regular"
+                    android:visibility="visible" />
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/sp_process_no"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25ssp"
+                    android:fontFamily="montserrat_regular"
+                    android:visibility="gone" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <!-- Actual Quantity -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/txt_dialog_quantity"
+                style="@style/CustomTextViewPadding5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1.4"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="@string/actual_quantity"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_10ssp" />
+
+            <!-- CardView for GRN No -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_2sdp"
+                android:layout_weight="1"
+                app:cardBackgroundColor="@color/grey"                app:cardCornerRadius="@dimen/_3sdp"
+                app:cardElevation="@dimen/_2sdp">
+
+                <!-- FrameLayout for GRN No -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/border">
+                </FrameLayout>
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_actual_quantity"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_25ssp"
+                    android:background="@null"
+                    android:enabled="false"
+                    android:backgroundTint="@android:color/transparent"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:paddingStart="@dimen/_6ssp"
+                    android:textColor="@color/enabled_color"
+                    android:textCursorDrawable="@null"
+                    android:inputType="number"
+                    android:textSize="@dimen/_10ssp" />
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <!-- Consumed Quantity -->
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_weight="1"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:orientation="horizontal">-->
+
+<!--            <TextView-->
+<!--                android:id="@+id/txt_consumed_quantity"-->
+<!--                style="@style/CustomTextViewPadding5dp"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_weight="1.4"-->
+<!--                android:fontFamily="@font/montserrat_regular"-->
+<!--                android:text="Consumed Quantity"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:textSize="@dimen/_10ssp" />-->
+
+<!--            &lt;!&ndash; CardView for GRN No &ndash;&gt;-->
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="@dimen/_2sdp"-->
+<!--                android:layout_weight="1"-->
+<!--                app:cardBackgroundColor="@color/white"-->
+<!--                app:cardCornerRadius="@dimen/_3sdp"-->
+<!--                app:cardElevation="@dimen/_2sdp">-->
+
+<!--                &lt;!&ndash; FrameLayout for GRN No &ndash;&gt;-->
+<!--                <FrameLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="match_parent"-->
+<!--                    android:background="@drawable/border">-->
+<!--                </FrameLayout>-->
+
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:id="@+id/et_consumed_quantity"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_25ssp"-->
+<!--                    android:background="@null"-->
+<!--                    android:backgroundTint="@android:color/transparent"-->
+<!--                    android:fontFamily="@font/montserrat_regular"-->
+<!--                    android:paddingStart="@dimen/_6ssp"-->
+<!--                    android:textColor="@color/enabled_color"-->
+<!--                    android:textCursorDrawable="@null"-->
+<!--                    android:inputType="number"-->
+<!--                    android:textSize="@dimen/_10ssp" />-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+<!--        </LinearLayout>-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="5dp">
+
+
+        <TextView
+            android:id="@+id/txtgrncancel"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginRight="6dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/back"
+
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtgrnsave"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="1dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="@string/save"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</LinearLayout>

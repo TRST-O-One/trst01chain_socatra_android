@@ -13,7 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.socatra.intellitrack.R;
-import com.socatra.intellitrack.activity.customerflow.ViewFarmerRiskAssesmentSurveyDataActivity;
+import com.socatra.intellitrack.activity.customerflow.ViewFarmerRiskAssesMentData;
 import com.socatra.intellitrack.helper.AppHelper;
 import com.socatra.intellitrack.models.get.GetDealerDetailsbyProcessorId;
 import com.socatra.intellitrack.models.get.GetFarmerDetailsByInvoiceId;
@@ -72,7 +72,7 @@ public class FarmerInvoiceAdapter extends RecyclerView.Adapter<FarmerInvoiceAdap
             @Override
             public void onClick(View view) {
                 String FarmerCode = String.valueOf(item.getFarmerCode());
-                Intent intent = new Intent(view.getContext(), ViewFarmerRiskAssesmentSurveyDataActivity.class);
+                Intent intent = new Intent(view.getContext(), ViewFarmerRiskAssesMentData.class);
                 intent.putExtra("FarmerCode", FarmerCode);
                 Log.d("FarmerCode","FarmerCode : " +FarmerCode);
                 view.getContext().startActivity(intent);

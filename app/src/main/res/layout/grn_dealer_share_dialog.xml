@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp"
+    android:background="@null"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@color/white"
+        android:orientation="horizontal">
+
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/share_card_dealer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:elevation="5dp"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="5dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:elevation="2dp"
+            android:padding="15dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_toLeftOf="@id/rightLayout"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_GRNReceipt"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/goods_receipt_note_grn"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_12ssp"
+                        android:textStyle="bold" />
+
+
+                    <ImageView
+                        android:layout_width="@dimen/_45ssp"
+                        android:layout_height="@dimen/_50sdp"
+                        android:layout_alignParentEnd="true"
+                        android:paddingStart="@dimen/_30sdp"
+                        android:src="@mipmap/icon_new" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10ssp"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/txt_Sentby"
+
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/sent_by"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_12ssp" />
+
+
+                    <TextView
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Shipped To"
+
+                        android:textColor="@color/Green"
+
+                        android:textSize="@dimen/_12ssp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/txt_share_shipping_from"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Dealer"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:ellipsize="end"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp" />
+
+
+                    <TextView
+                        android:id="@+id/txt_share_shipping_to"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_55sdp"
+                        android:layout_toEndOf="@+id/txt_1"
+                        android:text="Processor"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/txt_share_inv_from_address"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:text="Nellore"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:ellipsize="end"
+                        android:text=""
+                        android:textSize="@dimen/_10ssp" />
+
+
+                    <TextView
+                        android:id="@+id/txt_share_inv_address"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_55sdp"
+
+                        android:layout_toEndOf="@+id/txt_2"
+                        android:text="Hyderabad"
+
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10ssp"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_toLeftOf="@id/rightLayout"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10sp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_grn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/grn_no"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_col1"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/txt_share_grn_no"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_col1"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="GRN00009" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                    <!--            <TextView-->
+                    <!--                android:id="@+id/dealerid"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:layout_marginTop="5dp"-->
+                    <!--                android:ellipsize="end"-->
+                    <!--                android:text="Dealer id : "-->
+                    <!--                android:textSize="12sp" />-->
+
+                    <!--            <TextView-->
+                    <!--                android:id="@+id/txtDealerid"-->
+                    <!--                android:layout_width="match_parent"-->
+                    <!--                android:layout_height="wrap_content"-->
+                    <!--                android:ellipsize="end"-->
+                    <!--                android:textSize="14sp"-->
+                    <!--                android:textStyle="bold"-->
+                    <!--                tools:text="8331984353 " />-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:layout_toLeftOf="@id/rightLayout"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/share_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:ellipsize="end"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/date_of_receipt"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txt_col2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:ellipsize="end"
+                                android:text=":"
+                                android:textSize="@dimen/_10ssp" />
+
+                            <TextView
+                                android:id="@+id/txt_share_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="@dimen/_2sdp"
+                                android:layout_toEndOf="@+id/txt_col2"
+                                android:ellipsize="end"
+                                android:textSize="@dimen/_10ssp"
+                                android:textStyle="bold"
+                                tools:text="25-09-2023" />
+
+                        </RelativeLayout>
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/share_dealer_details"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/part_a_dealer_details"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <!-- Row 1 (Farmer Name) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_box_black">
+
+
+                        <TextView
+                            android:id="@+id/share_dealer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_box_black"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="@string/dealer_name"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txt_share_dealer_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+
+
+                            android:padding="4dp"
+                            android:text="Dealer9"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <!-- Row 2 (Telephone no) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_table"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="Telephone no"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_share_Contact_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="9876544333"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+                    <!-- Row 3 (Fax No) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_table">
+
+                        <TextView
+                            android:id="@+id/share_faxno"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="@string/fax_no"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_share_Fax_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text=""
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </TableRow>
+                </TableLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/share_procurement_details"
+                        style="@style/CustomTextViewPadding5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/part_b_procurement_details"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+
+                    <!-- Row 1 (Farmer Name) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_box_black">
+
+
+                        <TextView
+                            android:id="@+id/share_grn_1"
+                            android:layout_width="74dp"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/rectangular_box_black"
+                            android:gravity="start"
+
+                            android:padding="4dp"
+                            android:text="@string/grn_no"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txt_share_procurement_grn_no"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="GRN0000009"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+                    </TableRow>
+
+
+                    <!-- Row 2 (Telephone no) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_table"
+                        android:visibility="gone">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:gravity="start"
+
+                            android:padding="4dp"
+                            android:text="No Of Bags"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txt_share_quantity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:padding="4dp"
+                            android:text="60"
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+
+                    </TableRow>
+
+
+                    <!-- Row 3 (Fax No) -->
+                    <TableRow
+                        android:id="@+id/tremptyrow6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/rectangular_table">
+
+
+                        <TextView
+                            android:id="@+id/share_net_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/rectangular_table"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text="@string/net_weight"
+                            android:textColor="@color/black"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txt_net_weight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="start"
+                            android:padding="4dp"
+                            android:text=""
+                            android:textSize="@dimen/_10ssp"
+                            android:textStyle="bold" />
+
+
+                    </TableRow>
+
+
+                </TableLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/txt_word_copy_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/_2ssp"
+                        android:layout_toStartOf="@+id/txt_cmp_name"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/this_certificate_is_auto_generated_by_trst01chain_system_on"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_7ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_cmp_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="TRST01 Chain"
+                        android:textColor="@color/Green"
+                        android:gravity="center"
+                        android:layout_alignParentEnd="true"
+                        android:textSize="@dimen/_8ssp"
+                        android:layout_marginStart="@dimen/_2ssp"
+                        android:textStyle="bold" />
+
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/white"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/txt_system_on"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/txt_date_and_time"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="@string/system_on"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_7ssp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/_4ssp"
+                        android:layout_toStartOf="@+id/txt_word_time_zone"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:gravity="end"
+                        android:id="@+id/txt_date_and_time"
+                        android:text="Nov 27, 2023, 4:41:56 PM"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_8ssp" />
+
+                    <TextView
+                        android:id="@+id/txt_word_time_zone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="@dimen/_4ssp"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:text="Timezone"
+                        android:textColor="@color/Green"
+                        android:textSize="@dimen/_8ssp" />
+
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+
+        <!-- Share Button - placed below the CardView -->
+        <Button
+            android:id="@+id/txtShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/share"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <Button
+            android:id="@+id/grn_preview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/rounded_button"
+            android:fontFamily="@font/montserrat_medium"
+            android:text="@string/evidence"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/Category_card"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        android:layout_margin="8dp">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/Category_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/category_name"
+                android:textSize="@dimen/_20ssp"
+                android:textColor="@android:color/black"/>
+
+
+        <RelativeLayout
+            android:id="@+id/expandablelayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/Category_name"
+
+            >
+
+
+            <TextView
+                android:id="@+id/Question"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/question"
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@android:color/black"/>
+
+
+            <TextView
+                android:id="@+id/Answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/answer"
+                android:textSize="@dimen/_15ssp"
+                android:textColor="@android:color/black"
+                android:layout_below="@id/Question"/>
+
+
+        </RelativeLayout>
+
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+
+
+
+
+
+
+
+
+
+
+
+

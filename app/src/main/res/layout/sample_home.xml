@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/ll_header_view"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rel_header"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/Green"
+        android:padding="@dimen/_10ssp">
+
+
+        <LinearLayout
+            android:layout_width="@dimen/_50ssp"
+            android:layout_height="@dimen/_50ssp"
+            android:id="@+id/ll_nav_bar"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/SnavButton"
+                android:layout_width="@dimen/_20ssp"
+                android:layout_height="@dimen/_17ssp"
+                android:layout_alignParentStart="true"
+                android:background="@color/Green"
+                android:padding="18dp"
+                android:src="@mipmap/white_menu"
+                android:visibility="visible"/>
+           </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/home_header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/app_name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="bold" />
+
+
+
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:id="@+id/ll_Dealer_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_8sdp"
+                android:visibility="visible">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/procurement_details"
+                    android:textSize="@dimen/_12ssp"
+                    android:id="@+id/txt_procument_dealer_dash"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="-5dp"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_farmer_dealer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_farmercount_dealer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+                                    <TextView
+                                        android:id="@+id/txt_word_farmer_dash_dealer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/farmers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_Sub_Dealers"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_sub_dealers_dealer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txt_word_sub_dealer_dash"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/sub_dealers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-4dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_plots_dealer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_50sdp"
+
+                                        android:layout_height="@dimen/_30sdp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/plot"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/txt_plots_dealer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_40sdp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_1ssp"
+                                        android:paddingBottom="@dimen/_6ssp"
+                                        android:text="11"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txt_word_plots_dash_dealer"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_8ssp"
+                                    android:text="@string/plots"
+                                    android:textSize="@dimen/_10ssp" />
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_total_procurement_dealer"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+                                <LinearLayout
+
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/supply" />
+
+                                        <TextView
+                                            android:id="@+id/txt_procurement_count_dealer"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginEnd="@dimen/_8ssp"
+                                            android:text="58"
+                                            android:textSize="@dimen/_14ssp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt_procurement_count_dealer"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_alignParentEnd="true"
+                                            android:text="@string/tons"
+                                            android:id="@+id/txt_word_tons_dash_dealer"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            android:textSize="@dimen/_8ssp" />
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <!--                                <TextView-->
+                                        <!--                                    android:layout_width="117dp"-->
+                                        <!--                                    android:layout_height="wrap_content"-->
+                                        <!--                                    android:layout_gravity="bottom|center"-->
+                                        <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                        <!--                                    android:gravity="center"-->
+                                        <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                        <!--                                    android:text="Total Procurement"-->
+                                        <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_6ssp"
+                                    android:id="@+id/txt_word_tproc_dealer_dash"
+                                    android:text="@string/total_procurement"
+                                    android:textSize="@dimen/_10ssp" />
+
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-2dp"
+                        android:weightSum="2">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_80sdp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_8sdp"
+                            app:cardCornerRadius="@dimen/_6sdp"
+                            app:cardElevation="@dimen/_6ssp"
+                            app:cardUseCompatPadding="false">
+
+                            <LinearLayout
+                                android:id="@+id/ll_total_area_dealer"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:layout_width="112dp"
+                                        android:layout_height="47dp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_4ssp"
+                                        android:src="@drawable/plot_icon" />
+
+                                    <TextView
+                                        android:id="@+id/txt_area_dealer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_marginEnd="@dimen/_8ssp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="58"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txt_area_dealer"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_alignParentEnd="true"
+                                        android:text="@string/hectares"
+                                        android:id="@+id/txt_word_hect_dash_dealer"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:textSize="@dimen/_8ssp" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                            <TextView
+                                android:id="@+id/txt_word_total_area_dealer_dash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom|center"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:paddingBottom="@dimen/_8ssp"
+                                android:text="@string/total_area"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <!--    <View-->
+                <!--        android:layout_width="match_parent"-->
+                <!--        android:layout_height="5dp"-->
+                <!--        android:background="@drawable/divider_line" />-->
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/supply_details"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:id="@+id/txt_word_supply_dtl_dealer_dash"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="-2dp"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_MainDealer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_maindealercount_dealer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+                                    <TextView
+                                        android:id="@+id/txt_wrd_main_dealer_dash"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/main_dealers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_processor_dealer"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_Processor"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_processor_dealer"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txt_wrd_prc_count_dealer_dash"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/processor"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="0dp"
+                        android:weightSum="2">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_80ssp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_8sdp"
+                            app:cardCornerRadius="@dimen/_6sdp"
+                            app:cardElevation="@dimen/_6ssp"
+                            app:cardUseCompatPadding="false">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/ll_total_supply_dealer"
+                                android:orientation="vertical">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <ImageView
+                                        android:layout_width="100dp"
+                                        android:layout_height="52dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/supply" />
+
+                                    <TextView
+                                        android:id="@+id/txt_supply_count_dealer"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginEnd="@dimen/_8ssp"
+                                        android:text="58"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txt_supply_count_dealer"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_alignParentEnd="true"
+                                        android:text="@string/tons"
+                                        android:id="@+id/txt_wrd_supply_tons_dealer"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:textSize="@dimen/_8ssp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <!--                                <TextView-->
+                                    <!--                                    android:layout_width="117dp"-->
+                                    <!--                                    android:layout_height="wrap_content"-->
+                                    <!--                                    android:layout_gravity="bottom|center"-->
+                                    <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                    <!--                                    android:gravity="center"-->
+                                    <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                    <!--                                    android:text="Total Procurement"-->
+                                    <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txt_supply_count_dealer_dash"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|bottom"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="@string/total_supply"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_Processor_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_8sdp"
+                android:visibility="gone">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/procurement_details"
+                    android:textSize="@dimen/_12ssp"
+                    android:id="@+id/txt_word_prc_procument_header"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="-5dp"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_dealer"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_dealer_count_processor"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txt_dealer_word_processor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/dealers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_farmer_processor"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_farmer_processor"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_14ssp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txt_farmer_word_processor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/farmers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-4dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_plots_processor"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_50sdp"
+                                        android:layout_height="@dimen/_30sdp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/plot"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/txt_plots_processor"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_40sdp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="11"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txt_plots_word_processor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_8ssp"
+                                    android:text="@string/plots"
+                                    android:textSize="@dimen/_10ssp" />
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_total_procurement_processor"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/supply" />
+
+                                        <TextView
+                                            android:id="@+id/txt_procurementcount_processor"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginEnd="@dimen/_8ssp"
+                                            android:text="58"
+                                            android:textSize="@dimen/_14ssp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt_procurementcount_processor"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_alignParentEnd="true"
+                                            android:text="@string/tons"
+                                            android:id="@+id/txt_wrd_tons_dash_prc"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            android:textSize="@dimen/_8ssp" />
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+                                        <!--                                        <TextView-->
+                                        <!--                                            android:layout_width="wrap_content"-->
+                                        <!--                                            android:layout_height="wrap_content"-->
+                                        <!--                                            android:layout_gravity="bottom|center"-->
+                                        <!--                                            android:fontFamily="@font/montserrat_medium"-->
+                                        <!--                                            android:text="Tons"-->
+                                        <!--                                            android:textSize="@dimen/_10ssp" />-->
+                                        <!--                                <TextView-->
+                                        <!--                                    android:layout_width="117dp"-->
+                                        <!--                                    android:layout_height="wrap_content"-->
+                                        <!--                                    android:layout_gravity="bottom|center"-->
+                                        <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                        <!--                                    android:gravity="center"-->
+                                        <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                        <!--                                    android:text="Total Procurement"-->
+                                        <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/txt_total_procurement_word_processor"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:gravity="bottom|center"
+                                    android:paddingBottom="@dimen/_6ssp"
+                                    android:text="@string/total_procurement"
+                                    android:textSize="@dimen/_10ssp" />
+                            </androidx.cardview.widget.CardView>
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-2dp"
+                        android:weightSum="2">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_90sdp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_8sdp"
+                            app:cardCornerRadius="@dimen/_6sdp"
+                            app:cardElevation="@dimen/_6ssp"
+                            app:cardUseCompatPadding="false">
+
+                            <LinearLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal">
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+                                    <ImageView
+                                        android:layout_width="148dp"
+                                        android:layout_height="58dp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/plot_icon" />
+
+                                    <TextView
+                                        android:id="@+id/txt_area_processor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_marginEnd="@dimen/_8ssp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:text="58"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txt_area_processor"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_alignParentEnd="true"
+                                        android:id="@+id/txt_wrd_heactares_prc_dash"
+                                        android:text="@string/hectares"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:textSize="@dimen/_8ssp" />
+                                </RelativeLayout>
+                            </LinearLayout>
+
+
+
+                            <TextView
+                                android:id="@+id/txt_total_area_word_processor"
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_30ssp"
+                                android:layout_gravity="bottom|center"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:paddingBottom="@dimen/_8ssp"
+                                android:text="@string/total_area"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <!--    <View-->
+                <!--        android:layout_width="match_parent"-->
+                <!--        android:layout_height="5dp"-->
+                <!--        android:background="@drawable/divider_line" />-->
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/supply_details"
+                    android:textSize="@dimen/_12ssp"
+                    android:id="@+id/txt_word_dash_prc_supply"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="0dp"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:id="@+id/ll_Customers"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_customers"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_customers_processor"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+                                    <TextView
+                                        android:id="@+id/txt_customers_word_processor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="@string/customers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_total_supply_processor"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+                                    <LinearLayout
+
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <RelativeLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content">
+
+
+                                            <ImageView
+                                                android:layout_width="@dimen/_50sdp"
+                                                android:layout_height="@dimen/_30sdp"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:src="@drawable/supply" />
+
+                                            <TextView
+                                                android:id="@+id/txt_totalSupply_processor"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:layout_marginTop="@dimen/_10ssp"
+                                                android:layout_alignParentEnd="true"
+                                                android:layout_marginEnd="@dimen/_8ssp"
+                                                android:text="58"
+                                                android:textSize="@dimen/_14ssp" />
+                                            <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/txt_totalSupply_processor"
+                                                android:fontFamily="@font/montserrat_medium"
+                                                android:layout_alignParentEnd="true"
+                                                android:text="@string/tons"
+                                                android:id="@+id/txt_supply_tons_word_prc"
+                                                android:layout_marginEnd="@dimen/_5sdp"
+                                                android:textSize="@dimen/_8ssp" />
+                                        </RelativeLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="vertical">
+
+
+                                            <!--                                <TextView-->
+                                            <!--                                    android:layout_width="117dp"-->
+                                            <!--                                    android:layout_height="wrap_content"-->
+                                            <!--                                    android:layout_gravity="bottom|center"-->
+                                            <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                            <!--                                    android:gravity="center"-->
+                                            <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                            <!--                                    android:text="Total Procurement"-->
+                                            <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                        </LinearLayout>
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/txt_total_supply_word_processor"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="bottom|center"
+                                        android:paddingBottom="@dimen/_6ssp"
+                                        android:text="@string/total_supply"
+                                        android:textSize="@dimen/_10ssp" />
+
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_trader_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="@dimen/_8sdp"
+                android:visibility="gone">
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Procurement Details"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp">
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="7dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="-5dp"
+                            android:weightSum="2">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_farmer_trader"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_processorcount_trader"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+                                    <TextView
+                                        android:id="@+id/et_farmer_trader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="Processors"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <androidx.cardview.widget.CardView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_90sdp"
+                                    android:layout_gravity="center"
+                                    android:layout_margin="@dimen/_8sdp"
+                                    app:cardCornerRadius="@dimen/_6sdp"
+                                    app:cardElevation="@dimen/_6ssp"
+                                    app:cardUseCompatPadding="false">
+
+                                    <LinearLayout
+                                        android:id="@+id/ll_Sub_Dealers_trader"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_gravity="top"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/farmer_icon"
+                                            />
+
+                                        <TextView
+                                            android:id="@+id/txt_dealers_trader"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="@dimen/_40sdp"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:gravity="center"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:paddingBottom="@dimen/_8ssp"
+                                            android:text="11"
+                                            android:textSize="@dimen/_16ssp" />
+
+                                    </LinearLayout>
+
+                                    <TextView
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom|center"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="Dealers"
+                                        android:textSize="@dimen/_10ssp" />
+
+                                </androidx.cardview.widget.CardView>
+
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-4dp"
+                        android:weightSum="2">
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_Dealer"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_50sdp"
+
+                                        android:layout_height="@dimen/_30sdp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/farmer_icon"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/txt_farmercount_trader"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_40sdp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:paddingBottom="@dimen/_8ssp"
+                                        android:text="11"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                </LinearLayout>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_8ssp"
+                                    android:text="Farmers"
+                                    android:textSize="@dimen/_10ssp" />
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+
+                                <LinearLayout
+                                    android:id="@+id/ll_plots_trader"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="@dimen/_50sdp"
+
+                                        android:layout_height="@dimen/_30sdp"
+                                        android:layout_gravity="top"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/plot"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/txt_plots_trader"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_40sdp"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:gravity="center"
+                                        android:layout_marginTop="@dimen/_1ssp"
+                                        android:paddingBottom="@dimen/_6ssp"
+                                        android:text="11"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/et_plots_trader"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_8ssp"
+                                    android:text="Plots"
+                                    android:textSize="@dimen/_10ssp" />
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-4dp"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/ll_total_Area_trader"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+                                <LinearLayout
+
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/plot_icon" />
+
+                                        <TextView
+                                            android:id="@+id/txt_area_count_trader"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginEnd="@dimen/_8ssp"
+                                            android:text="58"
+                                            android:textSize="@dimen/_14ssp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt_area_count_trader"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_alignParentEnd="true"
+                                            android:text="Hectares"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            android:textSize="@dimen/_8ssp" />
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <!--                                <TextView-->
+                                        <!--                                    android:layout_width="117dp"-->
+                                        <!--                                    android:layout_height="wrap_content"-->
+                                        <!--                                    android:layout_gravity="bottom|center"-->
+                                        <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                        <!--                                    android:gravity="center"-->
+                                        <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                        <!--                                    android:text="Total Procurement"-->
+                                        <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_6ssp"
+                                    android:text="Total Area"
+                                    android:textSize="@dimen/_10ssp" />
+
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+
+
+
+
+                        <LinearLayout
+                            android:id="@+id/ll_total_procurement_trader"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_90sdp"
+                                android:layout_gravity="center"
+                                android:layout_margin="@dimen/_8sdp"
+                                app:cardCornerRadius="@dimen/_6sdp"
+                                app:cardElevation="@dimen/_6ssp"
+                                app:cardUseCompatPadding="false">
+                                <LinearLayout
+
+
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <RelativeLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content">
+
+
+                                        <ImageView
+                                            android:layout_width="@dimen/_50sdp"
+                                            android:layout_height="@dimen/_30sdp"
+                                            android:layout_alignParentStart="true"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:src="@drawable/supply" />
+
+                                        <TextView
+                                            android:id="@+id/txt_procurement_count_trader"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_marginTop="@dimen/_10ssp"
+                                            android:layout_alignParentEnd="true"
+                                            android:layout_marginEnd="@dimen/_8ssp"
+                                            android:text="58"
+                                            android:textSize="@dimen/_14ssp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/txt_procurement_count_trader"
+                                            android:fontFamily="@font/montserrat_medium"
+                                            android:layout_alignParentEnd="true"
+                                            android:text="Tons"
+                                            android:layout_marginEnd="@dimen/_5sdp"
+                                            android:textSize="@dimen/_8ssp" />
+                                    </RelativeLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical">
+
+
+                                        <!--                                <TextView-->
+                                        <!--                                    android:layout_width="117dp"-->
+                                        <!--                                    android:layout_height="wrap_content"-->
+                                        <!--                                    android:layout_gravity="bottom|center"-->
+                                        <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                        <!--                                    android:gravity="center"-->
+                                        <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                        <!--                                    android:text="Total Procurement"-->
+                                        <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom|center"
+                                    android:fontFamily="@font/montserrat_medium"
+                                    android:paddingBottom="@dimen/_6ssp"
+                                    android:text="Total Procurement"
+                                    android:textSize="@dimen/_10ssp" />
+
+
+                            </androidx.cardview.widget.CardView>
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+
+
+
+
+
+
+
+                <!--    <View-->
+                <!--        android:layout_width="match_parent"-->
+                <!--        android:layout_height="5dp"-->
+                <!--        android:background="@drawable/divider_line" />-->
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Supply Details"
+                    android:textSize="@dimen/_12ssp"
+                    android:textColor="@color/Green"
+                    android:gravity="start"
+                    android:textStyle="bold"
+                    android:layout_gravity="start" />
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_margin="@dimen/_8sdp"
+                    >
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="0dp"
+                        android:weightSum="2">
+
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_80ssp"
+                            android:layout_gravity="center"
+                            android:layout_margin="@dimen/_8sdp"
+                            app:cardCornerRadius="@dimen/_6sdp"
+                            app:cardElevation="@dimen/_6ssp"
+                            app:cardUseCompatPadding="false">
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/ll_total_supply_trader"
+                                android:orientation="vertical">
+
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+
+                                    <ImageView
+                                        android:layout_width="100dp"
+                                        android:layout_height="52dp"
+                                        android:layout_alignParentStart="true"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:src="@drawable/supply" />
+
+                                    <TextView
+                                        android:id="@+id/txt_supply_count_trader"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_marginTop="@dimen/_10ssp"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_marginEnd="@dimen/_8ssp"
+                                        android:text="58"
+                                        android:textSize="@dimen/_14ssp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/txt_supply_count_trader"
+                                        android:fontFamily="@font/montserrat_medium"
+                                        android:layout_alignParentEnd="true"
+                                        android:text="Tons"
+                                        android:layout_marginEnd="@dimen/_5sdp"
+                                        android:textSize="@dimen/_8ssp" />
+                                </RelativeLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+
+                                    <!--                                <TextView-->
+                                    <!--                                    android:layout_width="117dp"-->
+                                    <!--                                    android:layout_height="wrap_content"-->
+                                    <!--                                    android:layout_gravity="bottom|center"-->
+                                    <!--                                    android:fontFamily="@font/montserrat_medium"-->
+                                    <!--                                    android:gravity="center"-->
+                                    <!--                                    android:paddingBottom="@dimen/_8ssp"-->
+                                    <!--                                    android:text="Total Procurement"-->
+                                    <!--                                    android:textSize="@dimen/_10ssp" />-->
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/et_supply_count_trader"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center|bottom"
+                                android:fontFamily="@font/montserrat_medium"
+                                android:text="Total Supply"
+                                android:textSize="@dimen/_10ssp" />
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+
+
+
+
+
+
+
+    <FrameLayout
+        android:id="@+id/containerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+    <RelativeLayout
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/white">
+
+    </RelativeLayout>
+</LinearLayout>

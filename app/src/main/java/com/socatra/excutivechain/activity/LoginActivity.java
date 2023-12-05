@@ -126,11 +126,12 @@ public class LoginActivity extends BaseActivity {
     ProgressBar progressBar;
     String strTodayDate;
 
-    TextView txtDeviceId,txtDbNo,txtAppVersion,txtUserName,txtPassword,txtLogin,txtDate;
+    TextView txtDeviceId, txtDbNo, txtAppVersion, txtUserName, txtPassword, txtLogin, txtDate;
     Dialog dialog;
     TextView txtOk;
     String strFirbaseToken;
     String strAppPackageName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -218,6 +219,7 @@ public class LoginActivity extends BaseActivity {
 
 
     }
+
     private void proceedToDashboard() {
         Intent intent = new Intent(LoginActivity.this, DashBoardFarmerListActivity.class);
         startActivity(intent);
@@ -247,7 +249,7 @@ public class LoginActivity extends BaseActivity {
                 }
             } else {
                 getTodayRecordExist();
-              //  getFireBaseTokenValue();
+                //  getFireBaseTokenValue();
             }
 
         }
@@ -307,7 +309,7 @@ public class LoginActivity extends BaseActivity {
             App.createDBPath();
             txtDeviceId.setText("Device ID   : " + CommonUtils.getIMEInumber(this));
             txtDbNo.setText("DB  Version : " + String.valueOf(DB_VERSION));
-            txtDate.setText("Date : "+ strTodayDate);
+            txtDate.setText("Date : " + strTodayDate);
             Log.d(TAG, "onCreate: " + CommonUtils.getIMEInumber(this));
             try {
                 PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -359,34 +361,34 @@ public class LoginActivity extends BaseActivity {
                         viewModel.getloginResponseDTOFromServerLiveData().removeObserver(this);
                         if (loginResponseDTOList != null) {
 //                            for (int i = 0; i < loginResponseDTOList.size(); i++) {
-                                App.createDBPath();
-                                Log.d(TAG, "onChanged: " + App.createDBPath());
-                                appHelper.getSharedPrefObj().edit().putString(DeviceUserID, loginResponseDTOList.getData().get(0).getId().toString()).apply();
-                                // appHelper.getSharedPrefObj().edit().putString(DeviceUserID, "10").apply();
+                            App.createDBPath();
+                            Log.d(TAG, "onChanged: " + App.createDBPath());
+                            appHelper.getSharedPrefObj().edit().putString(DeviceUserID, loginResponseDTOList.getData().get(0).getId().toString()).apply();
+                            // appHelper.getSharedPrefObj().edit().putString(DeviceUserID, "10").apply();
 //
-                                strUserDeviceId = loginResponseDTOList.getData().get(0).getId().toString();
+                            strUserDeviceId = loginResponseDTOList.getData().get(0).getId().toString();
 //
-                                appHelper.getSharedPrefObj().edit().putString(DeviceUserName, loginResponseDTOList.getData().get(0).getUserName()).apply();
-                                appHelper.getSharedPrefObj().edit().putString(DeviceUserPwd, loginResponseDTOList.getData().get(0).getPassword()).apply();
+                            appHelper.getSharedPrefObj().edit().putString(DeviceUserName, loginResponseDTOList.getData().get(0).getUserName()).apply();
+                            appHelper.getSharedPrefObj().edit().putString(DeviceUserPwd, loginResponseDTOList.getData().get(0).getPassword()).apply();
 //                                appHelper.getSharedPrefObj().edit().putString(AgentId, loginResponseDTOList.get(i).getAgentId()).apply();
-                                txtUserName.setText(loginResponseDTOList.getData().get(0).getUserName());//AM
-                                txtPassword.setText(loginResponseDTOList.getData().get(0).getPassword());
+                            txtUserName.setText(loginResponseDTOList.getData().get(0).getUserName());//AM
+                            txtPassword.setText(loginResponseDTOList.getData().get(0).getPassword());
 //
 //
-                                Log.d(TAG, "onChanged: " + loginResponseDTOList.getData().get(0).getId() + loginResponseDTOList.getData().get(0).getUserName());
-                                String token = "Bearer " + loginResponseDTOList.getData().get(0).getToken();
-                                TokenAccess = token;
-                                App.createDBPath();
+                            Log.d(TAG, "onChanged: " + loginResponseDTOList.getData().get(0).getId() + loginResponseDTOList.getData().get(0).getUserName());
+                            String token = "Bearer " + loginResponseDTOList.getData().get(0).getToken();
+                            TokenAccess = token;
+                            App.createDBPath();
 //                                // TODO: Inserting into key store
-                                appHelper.getSharedPrefObj().edit().putString(accessToken, token).apply();
-                                App.createDBPath();
+                            appHelper.getSharedPrefObj().edit().putString(accessToken, token).apply();
+                            App.createDBPath();
 //                                //   if (prefs.getBoolean("firstrun", true)) {
 //
-                                try {
-                                    testDialog(token);
-                                } catch (Exception ex){
-                                    Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
-                                }
+                            try {
+                                testDialog(token);
+                            } catch (Exception ex) {
+                                Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
 //                            }
 
 
@@ -624,7 +626,6 @@ public class LoginActivity extends BaseActivity {
                                 manufacturerMaster.setVillageId(jsonObjectManufacturer.getInt("VillageId"));
 
 
-
                                 manufacturerMaster.setIsActive(jsonObjectManufacturer.getBoolean("IsActive"));
                                 manufacturerMaster.setCreatedDate(jsonObjectManufacturer.getString("CreatedDate"));
                                 manufacturerMaster.setUpdatedDate(jsonObjectManufacturer.getString("UpdatedDate"));
@@ -664,12 +665,12 @@ public class LoginActivity extends BaseActivity {
                             }
 
                             //For App language HDR
-                            for (int i=0;i<jsonAppLanguageHDRArray.length();i++){
+                            for (int i = 0; i < jsonAppLanguageHDRArray.length(); i++) {
                                 JSONObject jsonObjectAppLangHDR = jsonAppLanguageHDRArray.getJSONObject(i);
 
                                 Log.d(TAG, "onResponse: jsonObjectAppLangHDR" + jsonObjectAppLangHDR);
 
-                                AppLanguageHDRTable appLanguageHDRTable= new AppLanguageHDRTable();
+                                AppLanguageHDRTable appLanguageHDRTable = new AppLanguageHDRTable();
 
                                 appLanguageHDRTable.setLanguageId(jsonObjectAppLangHDR.getInt("Id"));
                                 appLanguageHDRTable.setLanguageName(jsonObjectAppLangHDR.getString("LanguageName"));
@@ -684,12 +685,12 @@ public class LoginActivity extends BaseActivity {
                             }
 
                             //For App Language
-                            for (int i=0;i< jsonAppLanguageArray.length();i++){
+                            for (int i = 0; i < jsonAppLanguageArray.length(); i++) {
 
                                 JSONObject jsonObjectAppLanguage = jsonAppLanguageArray.getJSONObject(i);
                                 Log.d(TAG, "onResponse: jsonObjectAppLanguage" + jsonObjectAppLanguage);
 
-                                AppLanguageTable appLanguageTable= new AppLanguageTable();
+                                AppLanguageTable appLanguageTable = new AppLanguageTable();
 
                                 appLanguageTable.setLanguageId(jsonObjectAppLanguage.getInt("languageid"));
                                 appLanguageTable.setSelectedLang(jsonObjectAppLanguage.getString("selectedLanguage"));
@@ -710,7 +711,7 @@ public class LoginActivity extends BaseActivity {
                             Toast.makeText(LoginActivity.this, "Master Sync Successfully", Toast.LENGTH_LONG).show();
                             txtLogin.setEnabled(true);
                             if (appHelper.isNetworkAvailable()) {
-                                if(appHelper.getSharedPrefObj().getBoolean(IsFirst,true)){
+                                if (appHelper.getSharedPrefObj().getBoolean(IsFirst, true)) {
                                     progressBar.setVisibility(View.VISIBLE);
                                     txtLogin.setEnabled(false);
                                     viewModel.deleteTablesFromLocalTransactionData();//fixed but need to check
@@ -757,8 +758,8 @@ public class LoginActivity extends BaseActivity {
                         }
                         // Get new Instance ID token
                         strFirbaseToken = task.getResult().getToken();
-                        Log.d(TAG, "onComplete: FirbaseToken" +  strFirbaseToken);
-                        Log.e(TAG, "onComplete:Token "+ strFirbaseToken );
+                        Log.d(TAG, "onComplete: FirbaseToken" + strFirbaseToken);
+                        Log.e(TAG, "onComplete:Token " + strFirbaseToken);
 
                         // Log and toast
 //                        String msg = getString(R.string.msg_token_fmt, token);
@@ -767,6 +768,7 @@ public class LoginActivity extends BaseActivity {
                     }
                 });
     }
+
     //Todo: All farmer records
     public void getSyncFarmerAllDataFromServer() {
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
@@ -780,9 +782,11 @@ public class LoginActivity extends BaseActivity {
         callRetrofit.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+
+
                 try {
                     String strResponse = String.valueOf(response.body());
-                    Log.d(TAG, "onResponse: >>>"+strResponse);
+                    Log.d(TAG, "onResponse: >>>" + strResponse);
                     JSONObject jsonArray = new JSONObject(strResponse);
                     if (jsonArray.length() > 0) {
                         new Handler().postDelayed(new Runnable() {
@@ -822,12 +826,12 @@ public class LoginActivity extends BaseActivity {
                                             farmerTable.setNoOfPlots(jsonObjectFarmerPD.getString("NoOfPlots"));
                                             try {
                                                 farmerTable.setNationalIdentityCode(jsonObjectFarmerPD.getString("NationalIdentityCode"));
-                                            } catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                             try {
                                                 farmerTable.setNationalIdentityCodeDocument(jsonObjectFarmerPD.getString("NationalIdentityCodeDocument"));
-                                            } catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -837,7 +841,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
                                                 farmerTable.setImage(jsonObjectFarmerPD.getString("Image"));
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -874,7 +878,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int plt = 0; plt < jsonPlotDetailsArray.length(); plt++) {
                                             JSONObject jsonObjectFarmerPD = jsonPlotDetailsArray.getJSONObject(plt);
-                                            Plantation plantation=new Plantation();
+                                            Plantation plantation = new Plantation();
 
                                             plantation.setId(jsonObjectFarmerPD.getInt("Id"));
                                             plantation.setPlotCode(jsonObjectFarmerPD.getString("PlotCode"));
@@ -896,10 +900,9 @@ public class LoginActivity extends BaseActivity {
                                             //GeoboundariesArea
                                             try {
                                                 plantation.setGeoboundariesArea(Double.valueOf(jsonObjectFarmerPD.getString("GeoboundariesArea")));
-                                            } catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
-
 
 
                                             plantation.setAddress(jsonObjectFarmerPD.getString("Address"));
@@ -913,7 +916,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -949,7 +952,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltDoc = 0; pltDoc < jsonPlantationDocDetailsArray.length(); pltDoc++) {
                                             JSONObject jsonObjectPlantationDoc = jsonPlantationDocDetailsArray.getJSONObject(pltDoc);
-                                            PlantationDocuments plantationDocuments=new PlantationDocuments();
+                                            PlantationDocuments plantationDocuments = new PlantationDocuments();
 
                                             plantationDocuments.setFarmerCode(jsonObjectPlantationDoc.getString("FarmerCode"));
                                             plantationDocuments.setPlotCode(jsonObjectPlantationDoc.getString("PlotCode"));
@@ -967,7 +970,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1003,7 +1006,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonPlantationGeoDetailsArray.length(); pltGeo++) {
                                             JSONObject jsonObjectPlantationGeo = jsonPlantationGeoDetailsArray.getJSONObject(pltGeo);
-                                            PlantationGeoBoundaries plantationGeoBoundaries=new PlantationGeoBoundaries();
+                                            PlantationGeoBoundaries plantationGeoBoundaries = new PlantationGeoBoundaries();
 
                                             plantationGeoBoundaries.setPlotCode(jsonObjectPlantationGeo.getString("PlotCode"));
                                             plantationGeoBoundaries.setFarmerCode(jsonObjectPlantationGeo.getString("FarmerCode"));
@@ -1021,7 +1024,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1058,10 +1061,10 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int lbr = 0; lbr < jsonPlantationLabourSurveyArray.length(); lbr++) {
                                             JSONObject jsonObjectLabourSurvey = jsonPlantationLabourSurveyArray.getJSONObject(lbr);
-                                            PlantationLabourSurvey plantationLabourSurvey=new PlantationLabourSurvey();
+                                            PlantationLabourSurvey plantationLabourSurvey = new PlantationLabourSurvey();
 
                                             plantationLabourSurvey.setFarmerCode(jsonObjectLabourSurvey.getString("FarmerCode"));
-                                           // plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.optInt("PlantationId"));
+                                            // plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.optInt("PlantationId"));
                                             plantationLabourSurvey.setPlantationCode(jsonObjectLabourSurvey.getString("PlantationCode"));
                                             plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
 
@@ -1073,7 +1076,6 @@ public class LoginActivity extends BaseActivity {
                                             plantationLabourSurvey.setOccupationOfChildren(jsonObjectLabourSurvey.getString("OccupationOfChildren"));
 
 
-
                                             plantationLabourSurvey.setIsActive(jsonObjectLabourSurvey.getString("IsActive"));
 
 
@@ -1083,7 +1085,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1119,7 +1121,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonPlantationParentSurveyArray.length(); pltGeo++) {
                                             JSONObject jsonObjectParentSurvey = jsonPlantationParentSurveyArray.getJSONObject(pltGeo);
-                                            FarmerHouseholdParentSurvey farmerHouseholdParentSurvey=new FarmerHouseholdParentSurvey();
+                                            FarmerHouseholdParentSurvey farmerHouseholdParentSurvey = new FarmerHouseholdParentSurvey();
 
                                             farmerHouseholdParentSurvey.setFarmerCode(jsonObjectParentSurvey.getString("FarmerCode"));
                                             farmerHouseholdParentSurvey.setFarmerId(String.valueOf(jsonObjectParentSurvey.getInt("FarmerId")));
@@ -1139,7 +1141,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1175,7 +1177,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonPlantationChildSurveyArray.length(); pltGeo++) {
                                             JSONObject jsonObjectChildServey = jsonPlantationChildSurveyArray.getJSONObject(pltGeo);
-                                            FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey=new FarmerHouseholdChildrenSurvey();
+                                            FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey = new FarmerHouseholdChildrenSurvey();
 
                                             farmerHouseholdChildrenSurvey.setFarmerCode(jsonObjectChildServey.getString("FarmerCode"));
                                             farmerHouseholdChildrenSurvey.setFarmerHouseholdSurveyId(jsonObjectChildServey.getInt("FarmerHouseholdSurveyId"));
@@ -1194,7 +1196,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1229,7 +1231,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonRiskAssessmentArray.length(); pltGeo++) {
                                             JSONObject jsonObjectRiskAssessment = jsonRiskAssessmentArray.getJSONObject(pltGeo);
-                                            RiskAssessment riskAssessment=new RiskAssessment();
+                                            RiskAssessment riskAssessment = new RiskAssessment();
 
                                             riskAssessment.setRiskAssesmentQuestionHdrId(jsonObjectRiskAssessment.getInt("RiskAssesmentQuestionHdrId"));
                                             riskAssessment.setFarmerCode(jsonObjectRiskAssessment.getString("FarmerCode"));
@@ -1242,7 +1244,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1277,7 +1279,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonDealerArray.length(); pltGeo++) {
                                             JSONObject jsonObjectDealer = jsonDealerArray.getJSONObject(pltGeo);
-                                            DealerFarmer dealerFarmer=new DealerFarmer();
+                                            DealerFarmer dealerFarmer = new DealerFarmer();
 
                                             dealerFarmer.setDealerId(jsonObjectDealer.getInt("DealerId"));
                                             dealerFarmer.setFarmerCode(jsonObjectDealer.getString("FarmerCode"));
@@ -1289,7 +1291,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1324,7 +1326,7 @@ public class LoginActivity extends BaseActivity {
 
                                         for (int pltGeo = 0; pltGeo < jsonManufacturerArray.length(); pltGeo++) {
                                             JSONObject jsonObjectManufacturer = jsonManufacturerArray.getJSONObject(pltGeo);
-                                            ManfacturerFarmer manfacturerFarmer=new ManfacturerFarmer();
+                                            ManfacturerFarmer manfacturerFarmer = new ManfacturerFarmer();
                                             //for gaja
                                             manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ProcessorId"));
 //                                            manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ManfacturerId"));
@@ -1337,7 +1339,7 @@ public class LoginActivity extends BaseActivity {
 
                                             try {
 
-                                            }catch (Exception e){
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
 
@@ -1372,9 +1374,8 @@ public class LoginActivity extends BaseActivity {
                                     progressDialog.dismiss();
                                     Toast.makeText(LoginActivity.this, "Fetched All Data From Server SuccessFully", Toast.LENGTH_LONG).show();
 
-                                    appHelper.getSharedPrefObj().edit().putBoolean(IsFirst,false).apply();
-                                }
-                                catch (Exception ex) {
+                                    appHelper.getSharedPrefObj().edit().putBoolean(IsFirst, false).apply();
+                                } catch (Exception ex) {
                                     ex.printStackTrace();
                                     Toast.makeText(LoginActivity.this, String.valueOf(ex.getMessage()), Toast.LENGTH_SHORT).show();
                                     progressBar.setVisibility(View.GONE);
@@ -1393,6 +1394,14 @@ public class LoginActivity extends BaseActivity {
                     Toast.makeText(LoginActivity.this, "Transaction Sync Failed, please contact admin", Toast.LENGTH_SHORT).show();
                     Log.d("Error", ">>>>" + ex.toString());
                 }
+               /* if (response.isSuccessful() && response.body()!=null){
+                } else {
+                    progressBar.setVisibility(View.GONE);
+                    progressDialog.dismiss();
+                    txtLogin.setEnabled(true);
+                    Toast.makeText(LoginActivity.this, "Transaction Sync no records found", Toast.LENGTH_LONG).show();
+                }*/
+
             }
 
             @Override
@@ -1454,7 +1463,7 @@ public class LoginActivity extends BaseActivity {
         dialog.setCanceledOnTouchOutside(true);
         dialog.setCancelable(true);
 
-        txtOk= dialog.findViewById(R.id.txtTest);
+        txtOk = dialog.findViewById(R.id.txtTest);
 
 
         txtOk.setOnClickListener(new View.OnClickListener() {
@@ -1466,7 +1475,7 @@ public class LoginActivity extends BaseActivity {
             }
         });
 
-        if(appHelper.getSharedPrefObj().getBoolean(IsFirst,true)){
+        if (appHelper.getSharedPrefObj().getBoolean(IsFirst, true)) {
             dialog.show();
         }
 

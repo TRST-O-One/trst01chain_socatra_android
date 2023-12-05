@@ -129,7 +129,7 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
         });
 
         cardLabourSurvey.setOnClickListener(view->{
-            Toast.makeText(this, "Not applicable for Gajahruku!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Not applicable!!", Toast.LENGTH_SHORT).show();
 
 //            Intent intent=new Intent(this,LabourSurveyHomeActivity.class);
 //            intent.putExtra("mFarmerCode",farmerCode);
@@ -138,7 +138,7 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
 
 
         cardFarmerSurvey.setOnClickListener(view->{
-            Toast.makeText(this, "Not applicable for Gajahruku!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Not applicable!!", Toast.LENGTH_SHORT).show();
 //            if (farmerSurveyStatus=="0") {
 //                Intent intent = new Intent(this, FarmerSurveyActivity.class);
 //                intent.putExtra("mFarmerCode", farmerCode);

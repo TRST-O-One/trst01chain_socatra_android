@@ -1,4 +1,5 @@
 package com.socatra.excutivechain;
+
 import android.Manifest;
 
 import java.io.File;
@@ -6,18 +7,19 @@ import java.io.File;
 public class AppConstant {
 
 
-    // TODO: 10/3/2023 Live URl
+    // TODO: Live URl
 //    public static String BASE_AUTH_URL = "https://gajahruku.trst01.com/api/v1/";//Main Gajahruku api
 
-    //TODO : DEV
-   public static String BASE_AUTH_URL = "http://4.240.93.105/gajahrukuapi/V1/";//dev
+    //TODO : DEV - 04-12-23
+    public static String BASE_AUTH_URL = "https://socatra.trst01.com/api/V1/";//dev Socatra api
+
 
     public static String RAW_DATA_URL = BASE_AUTH_URL; // TODO: RAW DATA URL
 
     //DB
     public static final int DB_VERSION = 1; //Todo DB version
     public static String DB_NAME = "DemoExcutiveChain.db";
-//    public static String APP_FOLDER = "DemoExcutiveChain";
+    //    public static String APP_FOLDER = "DemoExcutiveChain";
 //    public static String DB_FOLDER = "DemoExcutiveChain_DB";
     public static String APP_ENVIRONMENT = "DemoExcutiveChain_Prod_DB";//DEV sub folder for db
     public static final String DB_SUB_FOLDER = APP_ENVIRONMENT;

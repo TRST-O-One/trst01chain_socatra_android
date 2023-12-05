@@ -143,4 +143,27 @@ public class AppHelper {
 
         return filePath;
     }
+
+
+    public String strAppFolderName(String pkName) {//for App Folder Name
+        String inputString = pkName.replace("com.", "");
+
+        // Split the string by dots
+        String[] parts = inputString.split("\\.");
+
+        // Capitalize the first letter of each part and join them with underscores
+        StringBuilder resultBuilder = new StringBuilder();
+        for (String part : parts) {
+            resultBuilder.append(capitalizeFirstLetter(part)).append("_");
+        }
+
+        // Remove the trailing underscore
+        String result = resultBuilder.toString().replaceAll("_$", "");
+
+        return result;
+    }
+
+    private String capitalizeFirstLetter(String str) {
+        return Character.toUpperCase(str.charAt(0)) + str.substring(1);
+    }
 }

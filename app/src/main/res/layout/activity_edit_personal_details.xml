@@ -1123,7 +1123,7 @@
                         android:layout_marginTop="10dp"
                         android:layout_height="120dp"
                         android:background="@drawable/bg_dialog"
-                        android:src="@drawable/identity" />
+                        android:src="@drawable/identity_green" />
 
                 </LinearLayout>
 

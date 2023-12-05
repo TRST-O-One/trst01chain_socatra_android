@@ -917,7 +917,7 @@
                         android:background="@drawable/bg_dialog"
                         android:elevation="3dp"
                         android:padding="5dp"
-                        android:src="@drawable/identity" />
+                        android:src="@drawable/identity_green" />
 
                 </LinearLayout>
 

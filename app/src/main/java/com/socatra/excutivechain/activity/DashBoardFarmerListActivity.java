@@ -495,7 +495,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
                     strFarmerLocalImage = null;
                     try {
                         f = setUpPhotoFile();
-
                         strFarmerLocalImage = f.getAbsolutePath();
 
                         strFileExtension = f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("."));

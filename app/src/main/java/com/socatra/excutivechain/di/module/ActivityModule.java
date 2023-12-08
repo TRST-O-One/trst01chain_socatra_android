@@ -19,6 +19,7 @@ import com.socatra.excutivechain.activity.PersonalRegistrationActivity;
 import com.socatra.excutivechain.activity.PlantationActivity;
 import com.socatra.excutivechain.activity.PlantationHomeActivity;
 import com.socatra.excutivechain.activity.RiskAssessmentActivity;
+import com.socatra.excutivechain.activity.SecondMap;
 import com.socatra.excutivechain.activity.SurveyActivity;
 import com.socatra.excutivechain.activity.SyncActivity;
 
@@ -64,6 +65,10 @@ public abstract class ActivityModule {
     //MapsActivity
     @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract MapsActivity ContributeMapsActivity();
+
+    //Second Map Act
+    @ContributesAndroidInjector(modules = FragmentModule.class)
+    abstract SecondMap ContributeSecondMapActivity();
 
     //FieldCalculatorActivity
     @ContributesAndroidInjector(modules = FragmentModule.class)

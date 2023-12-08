@@ -32,6 +32,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.socatra.excutivechain.AppConstant;
 import com.socatra.excutivechain.BaseActivity;
 import com.socatra.excutivechain.CommonUtils;
@@ -158,10 +159,12 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                     double distance = CommonUtils.distance(recordedBoundries.get(recordedBoundries.size() - 1).latitude,
                             recordedBoundries.get(recordedBoundries.size() - 1).longitude, AreaView.latitude, AreaView.longitude, 'M');
                     pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, distance);
-//                    latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
+//                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
+//                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
                 } else {
                     pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, 0.0);
-//                    latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
+//                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
+//                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
                 }
 //                latLngs.add(latLng);//Todo test
                 recordedBoundries.add(pointsToRecord);
@@ -331,6 +334,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 //        ProgressBar.showProgressBar(FieldCalculatorActivity.this, "Saving Gps data");
         try {
 
+            //Todo : All coordinates will be added in record
             if (recordedBoundries.isEmpty()) {
                 recordedBoundries.addAll(totalBoundries);
             }

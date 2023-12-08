@@ -379,13 +379,17 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         byWalk.setOnClickListener(view->{
             dialog.dismiss();
 //            Toast.makeText(this, "Coming Soon!!", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(PlantationHomeActivity.this, FieldCalculatorActivity.class);
+         /*   Intent intent = new Intent(PlantationHomeActivity.this, FieldCalculatorActivity.class);
             intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
             intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);
+            startActivityForResult(intent,RESULT_OK);*/
+            //Todo : Map 2 test
+            Intent intent = new Intent(PlantationHomeActivity.this, SecondMap.class);
+            startActivity(intent);
+
         });
 
         byMap.setOnClickListener(view->{

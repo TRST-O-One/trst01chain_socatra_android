@@ -947,7 +947,7 @@
     <!--
     <string name="google_maps_api_key">AIzaSyBESyc3qsmfvBaErpDx2FSHKu4KNnVBo18</string>
 -->
-    <string name="title_activity_second_map">SecondMAp</string>
+    <string name="title_activity_second_map">SecondMap</string>
     <string name="map_preview">Map Preview</string>
     <string name="gps_points">GPS Points</string>
     <string name="change_language">Change Language</string>

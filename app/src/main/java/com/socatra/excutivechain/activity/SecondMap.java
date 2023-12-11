@@ -1,7 +1,10 @@
 package com.socatra.excutivechain.activity;
 
+import static com.socatra.excutivechain.App.appHelper;
+
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,9 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -48,8 +53,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.android.SphericalUtil;
+import com.socatra.excutivechain.AppConstant;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.CoordinatesAdapter;
+import com.socatra.excutivechain.database.entity.PlantationGeoBoundaries;
 import com.socatra.excutivechain.view_models.AppViewModel;
 
 import java.util.ArrayList;
@@ -104,6 +111,12 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     LatLng recordLatLang;
 
+    String farmerCode,plotId,id;
+
+    int gpsCat=0;
+
+    double totalSize;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,6 +127,12 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                 .findFragmentById(R.id.map);
         supportMapFragment.getMapAsync(this);
 
+        plotId = getIntent().getStringExtra("PlotId");
+        farmerCode = getIntent().getStringExtra("FarmerCode");
+        id = getIntent().getStringExtra("id");
+        totalSize=Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
+        gpsCat = getIntent().getIntExtra("gpsCat", 0);
+
         initializeUI();
         initializeValues();
         configureDagger();
@@ -121,8 +140,8 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
         client = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
-        locationRequest.setInterval(2000);//1hr3600000
-        locationRequest.setFastestInterval(1000);//360000
+        locationRequest.setInterval(1000);//1hr3600000/2
+        locationRequest.setFastestInterval(700);//360000/1
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
 
         checkSettingsAndStartLocationUpdates();
@@ -148,7 +167,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                             Log.e(TAG, "first stop for loc");
                             myFirstLatLngCount++;
                         }
-                    }, 1 * 2000);//2sec
+                    }, 1 * 1000);//2sec/1sec
 
                     if (myMarkerCount > 0) {
                         if (myMarker != null) {
@@ -202,7 +221,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     private void initializeValues() {
         //Todo : Area text init
-        areaSmap.setText("Area : "+String.valueOf(totalArea)+" HAC");
+        areaSmap.setText(String.valueOf(totalArea));
 
         //Todo : RecyclerView and Adapter init
         coordinatesAdapter = new CoordinatesAdapter(SecondMap.this, recordedBoundries);
@@ -261,7 +280,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                     walkPathMarker.remove();
                 }
                 totalArea=0.0;
-                areaSmap.setText("Area : "+String.valueOf(totalArea)+" HAC");
+                areaSmap.setText(String.valueOf(totalArea));
                 mMap.clear();
                 myFirstLatLngCount = 0;
                 checkSettingsAndStartLocationUpdates();
@@ -304,12 +323,66 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
             totalArea = SphericalUtil.computeArea(totalBoundries) / 10000;// for hectares, for Acres( / 4046.86)
             String decimalForm = String.format("%.15f", totalArea);
 
-            areaSmap.setText("Area : "+decimalForm+" HAC");
+            areaSmap.setText(decimalForm);
         }
     }
 
     private void saveGeoboundariesToDB() {
         //Todo : Save to DB
+        if(Double.valueOf(areaSmap.getText().toString())<=totalSize+0.1) {
+            if (recordedBoundries.size() > 2) {
+                for (int i = 0; i < recordedBoundries.size(); i++) {
+
+
+                    String dateTime = appHelper.getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+
+
+                    //Todo:Plantation Geo
+
+                    PlantationGeoBoundaries geoBoundary = new PlantationGeoBoundaries();
+                    geoBoundary.setPlotCode(plotId);
+                    geoBoundary.setFarmerCode(farmerCode);
+                    geoBoundary.setLatitude(recordedBoundries.get(i).latitude);
+                    geoBoundary.setLongitude(recordedBoundries.get(i).longitude);
+                    geoBoundary.setSeqNo(i);
+                    geoBoundary.setPlotCount(gpsCat + 1);
+                    geoBoundary.setIsActive("true");
+                    geoBoundary.setCreatedByUserId(id);
+                    geoBoundary.setUpdatedByUserId(id);
+                    geoBoundary.setSync(false);
+                    geoBoundary.setServerSync("0");
+                    geoBoundary.setCreatedDate(dateTime);
+                    geoBoundary.setUpdatedDate(dateTime);
+
+
+                    insertOrUpdateGeoBoundariesDataToServer(geoBoundary);
+                    viewModel.updatePlotDetailListTableSyncAndPlotArea1(false, "0", Double.valueOf(areaSmap.getText().toString()), plotId);
+                    if (i == recordedBoundries.size() - 1) {
+                        Toast.makeText(SecondMap.this, "Geo-boundaries details are saved successfully",
+                                Toast.LENGTH_SHORT).show();
+
+
+                        new Handler().postDelayed(new Runnable() {
+
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent();
+                                intent.putExtra("areaField", totalArea);
+                                setResult(RESULT_OK, intent);
+                                finish();
+                            }
+
+                        }, 1 * 500);
+
+                    }
+
+                }
+            } else {
+                Toast.makeText(SecondMap.this, "Please mark at-least 3 boundaries", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(SecondMap.this, "Area must be less than provided area!!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -425,6 +498,29 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         // after generating our bitmap we are returning our
         // bitmap.
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+
+    //Todo : insert to DB
+    public void insertOrUpdateGeoBoundariesDataToServer(PlantationGeoBoundaries geoBoundariesTable) {
+        try {
+            viewModel.insertGeoBoundariesvaluesIntolocalDB(geoBoundariesTable);
+            if (viewModel.getGeoBoundariesTableLocalDB() != null) {
+                Observer getLeadRawDataObserver = new Observer() {
+                    @Override
+                    public void onChanged(@Nullable Object o) {
+                        PlantationGeoBoundaries customerSurveyTable1 = (PlantationGeoBoundaries) o;
+                        viewModel.getGeoBoundariesTableLocalDB().removeObserver(this);
+                        if (customerSurveyTable1 != null) {
+
+                        }
+                    }
+                };
+                viewModel.getGeoBoundariesTableLocalDB().observe(this, getLeadRawDataObserver);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
 }

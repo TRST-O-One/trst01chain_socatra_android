@@ -94,6 +94,15 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
+                    android:text="Area(Hec): " />
+
+                <TextView
                     android:id="@+id/areaSmap"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -101,7 +110,7 @@
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:layout_gravity="center_vertical"
-                    android:text="Area : " />
+                    android:text="0.0" />
 
 
             </LinearLayout>

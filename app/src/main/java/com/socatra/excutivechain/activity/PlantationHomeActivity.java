@@ -344,6 +344,7 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         LinearLayout byMap = dialog.findViewById(R.id.ll_map);
         LinearLayout upLoadKMl = dialog.findViewById(R.id.ll_kml_reader);
         TextView selectedPlotGeo=dialog.findViewById(R.id.selectedPlotGeo);
+        LinearLayout byWalkSmap=dialog.findViewById(R.id.ll_sec_map);
 
         selectedPlotGeo.setText("Plot Code : "+applicationStatusTable1.getPlotCode());
 
@@ -379,17 +380,28 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         byWalk.setOnClickListener(view->{
             dialog.dismiss();
 //            Toast.makeText(this, "Coming Soon!!", Toast.LENGTH_SHORT).show();
-         /*   Intent intent = new Intent(PlantationHomeActivity.this, FieldCalculatorActivity.class);
+            Intent intent = new Intent(PlantationHomeActivity.this, FieldCalculatorActivity.class);
             intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
             intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);*/
-            //Todo : Map 2 test
-            Intent intent = new Intent(PlantationHomeActivity.this, SecondMap.class);
-            startActivity(intent);
+            startActivityForResult(intent,RESULT_OK);
+        });
 
+        byWalkSmap.setOnClickListener(v -> {
+            dialog.dismiss();
+            //Todo : Map 2 test
+            /*Intent intent = new Intent(PlantationHomeActivity.this, SecondMap.class);
+            startActivity(intent);*/
+
+            Intent intent = new Intent(PlantationHomeActivity.this,SecondMap.class);
+            intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
+            intent.putExtra("gpsCat", gpsCat);
+            intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
+            intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
+            intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
+            startActivityForResult(intent,RESULT_OK);
         });
 
         byMap.setOnClickListener(view->{

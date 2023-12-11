@@ -58,13 +58,16 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
         if (plantations.get(position).getGeoboundariesArea()==0.0){
             holder.txtGeoAreaPlotInd.setText("n.a");
         } else {
-            holder.txtGeoAreaPlotInd.setText(plantations.get(position).getGeoboundariesArea().toString());
+//            holder.txtGeoAreaPlotInd.setText(plantations.get(position).getGeoboundariesArea().toString());
+            double totalArea=plantations.get(position).getGeoboundariesArea();
+            String decimalForm = String.format("%.15f", totalArea);
+            holder.txtGeoAreaPlotInd.setText(decimalForm);
         }
-        Log.e("onBindViewHolder:vilageId ",plantations.get(position).getVillageId());
+//        Log.e("onBindViewHolder:vilageId ",plantations.get(position).getVillageId());
 
         String id=plantations.get(position).getVillageId();
 
-        Log.e( "villageId: " , id);
+//        Log.e( "villageId: " , id);
         //Todo:Village details based on Village Id
         try {
             viewModel.getVillageDetailsListFromLocalDBbyId(id);

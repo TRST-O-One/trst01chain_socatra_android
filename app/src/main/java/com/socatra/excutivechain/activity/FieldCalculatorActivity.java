@@ -163,10 +163,12 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                     if (null != recordedBoundries && recordedBoundries.size() > 0) {
                         double distance = CommonUtils.distance(recordedBoundries.get(recordedBoundries.size() - 1).latitude,
                                 recordedBoundries.get(recordedBoundries.size() - 1).longitude, AreaView.latitude, AreaView.longitude, 'M');
+                        Log.e("testDist","distance"+distance);
                         DecimalFormatSymbols symbols=new DecimalFormatSymbols();
                         symbols.setDecimalSeparator('.');
                         DecimalFormat df_obj = new DecimalFormat("#.###",symbols);
                         double dis=Double.parseDouble(df_obj.format(distance));
+                        Log.e("testDist","dis"+dis);
                         pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, dis);
 //                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
 //                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
@@ -181,6 +183,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 //                    throw new Exception("Error runtime");
                 } catch (Exception e) {
 //                    appHelper.getErrorDialog(FieldCalculatorActivity.this,e);
+                    e.printStackTrace();
                 }
             }
 

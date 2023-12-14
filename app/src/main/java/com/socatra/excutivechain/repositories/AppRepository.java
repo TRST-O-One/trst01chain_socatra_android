@@ -937,7 +937,8 @@ public class AppRepository {
 
             if (!TextUtils.isEmpty(String.valueOf(plantation.getGeoboundariesArea()))) {
 //                spNamePlantationDetailsClass.setGeoboundariesArea(String.valueOf(plantation.getGeoboundariesArea()));
-                String decimalForm = String.format("%.15f", plantation.getGeoboundariesArea());
+                String decimalForm = String.format("%.5f", plantation.getGeoboundariesArea());
+                decimalForm = decimalForm.replace(",", ".");
                 spNamePlantationDetailsClass.setGeoboundariesArea(decimalForm);
             } else {
                 spNamePlantationDetailsClass.setGeoboundariesArea("0.0");

@@ -1032,7 +1032,9 @@ public static  String getGeneratedFarmerCode(final String userID, Integer maxNum
         } else if (unit == 'M' || unit == 'm') {
             dist = dist * 1609.344;
         }
-        return Double.parseDouble(twoDForm.format(dist));
+        Log.e("testDist","distance"+dist);
+//        return Double.parseDouble(twoDForm.format(dist));
+        return dist;
     }
 
     private static double deg2rad(double deg) {

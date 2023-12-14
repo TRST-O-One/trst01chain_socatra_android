@@ -60,7 +60,8 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
         } else {
 //            holder.txtGeoAreaPlotInd.setText(plantations.get(position).getGeoboundariesArea().toString());
             double totalArea=plantations.get(position).getGeoboundariesArea();
-            String decimalForm = String.format("%.15f", totalArea);
+            String decimalForm = String.format("%.5f", totalArea);
+            decimalForm = decimalForm.replace(",", ".");
             holder.txtGeoAreaPlotInd.setText(decimalForm);
         }
 //        Log.e("onBindViewHolder:vilageId ",plantations.get(position).getVillageId());

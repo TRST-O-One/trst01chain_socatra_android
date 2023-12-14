@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Trst01 Chain Executive</string>
+    <string name="app_name">Socatra Chain Executive</string>
     <string name="title_activity_maps">MapsActivity</string>
     <string name="key">AIzaSyBESyc3qsmfvBaErpDx2FSHKu4KNnVBo18</string><!--Need to check-->
     <string name="MANDATORY_TAG">MANDATORY</string>

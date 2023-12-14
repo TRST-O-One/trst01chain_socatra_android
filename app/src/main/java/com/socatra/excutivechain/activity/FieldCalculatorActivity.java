@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -28,6 +29,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +42,9 @@ import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.PlantationGeoBoundaries;
 import com.socatra.excutivechain.view_models.AppViewModel;
 
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;
@@ -82,8 +87,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     Integer gpsCat = 0;
     String farmerCode;
 
-    double totalSize=0.0;
-
+    double totalSize = 0.0;
 
 
     private BroadcastReceiver locationReceiver = new BroadcastReceiver() {
@@ -121,10 +125,10 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             plotId = getIntent().getStringExtra("PlotId");
             farmerCode = getIntent().getStringExtra("FarmerCode");
             id = getIntent().getStringExtra("id");
-            totalSize=Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
+            totalSize = Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
             gpsCat = getIntent().getIntExtra("gpsCat", 0);
 
-            Log.e("fieldLog",plotId+","+farmerCode+","+id+","+gpsCat);
+            Log.e("fieldLog", plotId + "," + farmerCode + "," + id + "," + gpsCat);
         }
 
         LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, new IntentFilter("location_receiver"));
@@ -141,7 +145,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
         firstFourCoordinates.clear();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        recordBtn =findViewById(R.id.recordBtn);
+        recordBtn = findViewById(R.id.recordBtn);
         // recordBtn.setTypeface(myFont);
         saveBtn = findViewById(R.id.saveBtn);
         resetBtn = findViewById(R.id.reset);
@@ -155,20 +159,29 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 
                 GPSCoordinate pointsToRecord;
 //                LatLng latLng;//Todo test
-                if (null != recordedBoundries && recordedBoundries.size() > 0) {
-                    double distance = CommonUtils.distance(recordedBoundries.get(recordedBoundries.size() - 1).latitude,
-                            recordedBoundries.get(recordedBoundries.size() - 1).longitude, AreaView.latitude, AreaView.longitude, 'M');
-                    pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, distance);
+                try {
+                    if (null != recordedBoundries && recordedBoundries.size() > 0) {
+                        double distance = CommonUtils.distance(recordedBoundries.get(recordedBoundries.size() - 1).latitude,
+                                recordedBoundries.get(recordedBoundries.size() - 1).longitude, AreaView.latitude, AreaView.longitude, 'M');
+                        DecimalFormatSymbols symbols=new DecimalFormatSymbols();
+                        symbols.setDecimalSeparator('.');
+                        DecimalFormat df_obj = new DecimalFormat("#.###",symbols);
+                        double dis=Double.parseDouble(df_obj.format(distance));
+                        pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, dis);
 //                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
 //                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
-                } else {
-                    pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, 0.0);
+                    } else {
+                        pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, 0.0);
 //                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
 //                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
-                }
+                    }
 //                latLngs.add(latLng);//Todo test
-                recordedBoundries.add(pointsToRecord);
-                recordsList.setAdapter(new RecordedCoordinatesAdapter(FieldCalculatorActivity.this, recordedBoundries));
+                    recordedBoundries.add(pointsToRecord);
+                    recordsList.setAdapter(new RecordedCoordinatesAdapter(FieldCalculatorActivity.this, recordedBoundries));
+//                    throw new Exception("Error runtime");
+                } catch (Exception e) {
+//                    appHelper.getErrorDialog(FieldCalculatorActivity.this,e);
+                }
             }
 
         });
@@ -304,7 +317,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
         try {
             DecimalFormatSymbols symbols = new DecimalFormatSymbols();//dec formatter
             symbols.setDecimalSeparator('.');//dec formatter
-            DecimalFormat f = new DecimalFormat("##.000000",symbols);
+            DecimalFormat f = new DecimalFormat("##.000000", symbols);
             String formattedValue = f.format(diffPercentage);
             if (!TextUtils.isEmpty(formattedValue)) {
                 roundedValue = Double.parseDouble(formattedValue);
@@ -341,9 +354,9 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 
             double measuredArea = Math.round(100 * measureView.getArea()) / (double) 100;
 
-            if(measuredArea<=totalSize){
+            if (measuredArea <= totalSize) {
                 //if(Double.parseDouble(dist)<=remArea){
-                if (recordedBoundries.size()>2) {
+                if (recordedBoundries.size() > 2) {
 //                    txtFrstLatLong.setText(latLngList.get(0).toString());
                     for (int i = 0; i < recordedBoundries.size(); i++) {
 
@@ -353,7 +366,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 
                         //Todo:Plantation Geo
 
-                        PlantationGeoBoundaries geoBoundary=new PlantationGeoBoundaries();
+                        PlantationGeoBoundaries geoBoundary = new PlantationGeoBoundaries();
                         geoBoundary.setPlotCode(plotId);
                         geoBoundary.setFarmerCode(farmerCode);
                         geoBoundary.setLatitude(recordedBoundries.get(i).latitude);
@@ -393,11 +406,10 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                         }
 
                     }
-                }else {
+                } else {
                     Toast.makeText(FieldCalculatorActivity.this, "Please mark at-least 3 boundaries", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else {
+            } else {
                 Toast.makeText(FieldCalculatorActivity.this, "Area must be less than provided area!!", Toast.LENGTH_SHORT).show();
             }
 

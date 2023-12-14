@@ -50,6 +50,9 @@ import com.socatra.excutivechain.view_models.AppViewModel;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.io.Writer;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -190,6 +193,12 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         txtRefList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*try {
+                    // Your code that may throw a RuntimeException
+                    throw new Exception("Error runtime");
+                } catch (Exception e) {
+                    // Display a toast message
+                }*/
                 getFarmerlistFromLocalDb();
             }
         });

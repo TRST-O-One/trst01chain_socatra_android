@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="10dp"
+    android:background="@null"
+    android:layout_margin="10dp"
+    app:cardElevation="5dp">
+
+   <TextView
+       android:id="@+id/crashDialogText"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:fontFamily="@font/montserrat_medium"
+       android:text="@string/adddetails"
+       android:textColor="@color/Orange"
+       android:textSize="7sp" />
+
+</LinearLayout>

@@ -186,7 +186,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
             Log.e(mTag,"Save LatLng:"+String.valueOf(latLngLists.get(i).latitude)
                     +","+String.valueOf(latLngLists.get(i).longitude));
 
-
             String dateTime = getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
 

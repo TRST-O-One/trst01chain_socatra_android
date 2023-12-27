@@ -21,6 +21,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -239,16 +241,20 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                 measureView.start();
                 startStopButton.setText("Stop");
                 startStopButton.postInvalidate();
+                startStopButton.setBackgroundTintList(ColorStateList.valueOf(Color.RED));
             } else if (measureView.isRunning()) {
                 measureView.stop();
                 startStopButton.setText("Start");
                 startStopButton.postInvalidate();
+                startStopButton.setBackgroundTintList(ColorStateList.valueOf(ContextCompat.getColor(this, R.color.lyt_green)));
             } else {
                 Toast.makeText(FieldCalculatorActivity.this, "Waiting for gps signal", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
+
+
 
     public boolean isLocationPermissionGranted() {
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION);
@@ -435,6 +441,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
         totalBoundries.clear();
         recordedBoundries.clear();
         firstFourCoordinates.clear();
+//        measureView.stop();
 //        Intent intent = new Intent();
 //        intent.putExtra("area", 0.0);
 //        setResult(RESULT_OK, intent);

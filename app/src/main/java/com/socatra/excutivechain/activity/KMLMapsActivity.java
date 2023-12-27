@@ -1,5 +1,6 @@
 package com.socatra.excutivechain.activity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 import static com.socatra.excutivechain.AppConstant.DeviceUserID;
 import static com.socatra.excutivechain.AppConstant.accessToken;
 
@@ -122,6 +123,8 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
 
     String extraLatLon="";
 
+    int saveCount=0;
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -165,7 +168,12 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
 
         saveButtonKml.setOnClickListener(v->{
             if (GetlatLngList.size()>0) {
-               saveLatLngToDb(GetlatLngList);
+                if (saveCount==0){
+                    saveCount++;
+                    saveLatLngToDb(GetlatLngList);
+                } else {
+                    Log.e(TAG,String.valueOf(saveCount));
+                }
             }
         });
 

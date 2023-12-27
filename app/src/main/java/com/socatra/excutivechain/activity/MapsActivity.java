@@ -139,6 +139,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     LatLng overLatLng;
 
+    int saveCount=0;
+
 
     Marker myMark;
     int myMarkerCount=0;
@@ -629,87 +631,88 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-
-                try {
-                    if(!latLngList.isEmpty()){
+                if (saveCount==0) {
+                    try {
+                        if (!latLngList.isEmpty()) {
 //                        PolygonOptions polygonOptions= new PolygonOptions()
-                        polygonOptions= new PolygonOptions()
-                                .addAll(latLngList)
-                                .clickable(true);
-                        polygon=mMap.addPolygon(polygonOptions);
-                        polygon.setFillColor(getApplicationContext().getResources().getColor(R.color.tab_bg_color));
+                            polygonOptions = new PolygonOptions()
+                                    .addAll(latLngList)
+                                    .clickable(true);
+                            polygon = mMap.addPolygon(polygonOptions);
+                            polygon.setFillColor(getApplicationContext().getResources().getColor(R.color.tab_bg_color));
+                        }
+
+                    } catch (Exception ex) {
+                        Toast.makeText(MapsActivity.this, "test bug", Toast.LENGTH_SHORT).show();
                     }
 
-                } catch (Exception ex){
-                    Toast.makeText(MapsActivity.this, "test bug", Toast.LENGTH_SHORT).show();
-                }
 
-
-                if (markerList.size() > 2) {
-                    List<LatLng> latLngLists = new ArrayList<>();
-                    latLngLists.add(latLngList.get(0));
-                    latLngLists.add(latLngList.get(latLngList.size() - 1));
-                    //create polylineoption
+                    if (markerList.size() > 2) {
+                        List<LatLng> latLngLists = new ArrayList<>();
+                        latLngLists.add(latLngList.get(0));
+                        latLngLists.add(latLngList.get(latLngList.size() - 1));
+                        //create polylineoption
 //                    PolylineOptions polylineOptions = new PolylineOptions()
-                    polylineOptions = new PolylineOptions()
-                            .addAll(latLngLists)
-                            .clickable(true);
-                    polyline = mMap.addPolyline(polylineOptions);
-                    polyline.setColor(getApplicationContext().getResources().getColor(R.color.teal_200));
-                    double distance = SphericalUtil.computeArea(latLngList);
+                        polylineOptions = new PolylineOptions()
+                                .addAll(latLngLists)
+                                .clickable(true);
+                        polyline = mMap.addPolyline(polylineOptions);
+                        polyline.setColor(getApplicationContext().getResources().getColor(R.color.teal_200));
+                        double distance = SphericalUtil.computeArea(latLngList);
 //                    dist = String.valueOf(SphericalUtil.computeArea(latLngList)*0.000247105);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        DecimalFormatSymbols symbols = new DecimalFormatSymbols();//dec formatter
-                        symbols.setDecimalSeparator('.');//dec formatter
-                        DecimalFormat df_obj = new DecimalFormat("#.###",symbols);
-                        df_obj.format(distance*0.000247105);
-                        dist = String.valueOf(df_obj.format(SphericalUtil.computeArea(latLngList)*0.000247105*0.404686));
-                        txtArea.setText(String.valueOf(df_obj.format(distance*0.000247105*0.404686)));
-                    }
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            DecimalFormatSymbols symbols = new DecimalFormatSymbols();//dec formatter
+                            symbols.setDecimalSeparator('.');//dec formatter
+                            DecimalFormat df_obj = new DecimalFormat("#.###", symbols);
+                            df_obj.format(distance * 0.000247105);
+                            dist = String.valueOf(df_obj.format(SphericalUtil.computeArea(latLngList) * 0.000247105 * 0.404686));
+                            txtArea.setText(String.valueOf(df_obj.format(distance * 0.000247105 * 0.404686)));
+                        }
 
-                }
+                    }
 
 //                double remArea=totalSize-totalArea;
-                //Insert
-                if(Double.parseDouble(dist)<=totalSize){
-                    //if(Double.parseDouble(dist)<=remArea){
-                    if (txtArea.getText().toString().length()>0 && markerList.size()>2) {
+                    //Insert
+                    if (Double.parseDouble(dist) <= totalSize) {
+                        //if(Double.parseDouble(dist)<=remArea){
+                        if (txtArea.getText().toString().length() > 0 && markerList.size() > 2) {
 //                    txtFrstLatLong.setText(latLngList.get(0).toString());
-                        for (int i = 0; i < latLngList.size(); i++) {
+                            saveCount++;
+                            for (int i = 0; i < latLngList.size(); i++) {
 
 
-                            String dateTime = getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                String dateTime = getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
 
-                            //Todo:Plantation Geo
+                                //Todo:Plantation Geo
 
-                            PlantationGeoBoundaries geoBoundary=new PlantationGeoBoundaries();
-                            geoBoundary.setPlotCode(PlotId);
-                            geoBoundary.setFarmerCode(farmerCode);
-                            geoBoundary.setLatitude(latLngList.get(i).latitude);
-                            geoBoundary.setLongitude(latLngList.get(i).longitude);
-                            geoBoundary.setSeqNo(i);
-                            geoBoundary.setPlotCount(gpsCat + 1);
-                            geoBoundary.setIsActive("true");
-                            geoBoundary.setCreatedByUserId(id);
-                            geoBoundary.setUpdatedByUserId(id);
-                            geoBoundary.setSync(false);
-                            geoBoundary.setServerSync("0");
-                            geoBoundary.setCreatedDate(dateTime);
-                            geoBoundary.setUpdatedDate(dateTime);
+                                PlantationGeoBoundaries geoBoundary = new PlantationGeoBoundaries();
+                                geoBoundary.setPlotCode(PlotId);
+                                geoBoundary.setFarmerCode(farmerCode);
+                                geoBoundary.setLatitude(latLngList.get(i).latitude);
+                                geoBoundary.setLongitude(latLngList.get(i).longitude);
+                                geoBoundary.setSeqNo(i);
+                                geoBoundary.setPlotCount(gpsCat + 1);
+                                geoBoundary.setIsActive("true");
+                                geoBoundary.setCreatedByUserId(id);
+                                geoBoundary.setUpdatedByUserId(id);
+                                geoBoundary.setSync(false);
+                                geoBoundary.setServerSync("0");
+                                geoBoundary.setCreatedDate(dateTime);
+                                geoBoundary.setUpdatedDate(dateTime);
 
 
-                            insertOrUpdateGeoBoundariesDataToServer(geoBoundary);
-                            viewModel.updatePlotDetailListTableSyncAndPlotArea1(false, "0", Double.parseDouble(dist), PlotId);
-                            if (i == latLngList.size() - 1) {
-                                Toast.makeText(MapsActivity.this, "Geobounds details are saved successfully", Toast.LENGTH_SHORT).show();
+                                insertOrUpdateGeoBoundariesDataToServer(geoBoundary);
+                                viewModel.updatePlotDetailListTableSyncAndPlotArea1(false, "0", Double.parseDouble(dist), PlotId);
+                                if (i == latLngList.size() - 1) {
+                                    Toast.makeText(MapsActivity.this, "Geobounds details are saved successfully", Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(MapsActivity.this, "Area " + dist, Toast.LENGTH_SHORT).show();
 
 
-                                new Handler().postDelayed(new Runnable() {
+                                    new Handler().postDelayed(new Runnable() {
 
-                                    @Override
-                                    public void run() {
+                                        @Override
+                                        public void run() {
 
 //                                    intent.putExtra("area", dist);
 //                                    viewModel.updatePlotDetailListTableGps(dist,PlotId);
@@ -738,25 +741,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                                        Log.e("MapDist", dist);
 //                            intent.putExtra("area", txtArea.getText().toString());
 //                            intent.putExtra("geo_value", txtArea.getText().toString());
-                                        Intent intent = new Intent();
-                                        intent.putExtra("areaGeo",dist);
-                                        setResult(RESULT_OK, intent);
-                                        finish();
-                                    }
+                                            Intent intent = new Intent();
+                                            intent.putExtra("areaGeo", dist);
+                                            setResult(RESULT_OK, intent);
+                                            finish();
+                                        }
 
-                                }, 1 * 1000);
+                                    }, 1 * 1000);
 
 
 //                            finish();
-                            }
+                                }
 
+                            }
+                        } else {
+                            Toast.makeText(MapsActivity.this, "Please mark at-least 3 boundaries", Toast.LENGTH_SHORT).show();
                         }
-                    }else {
-                        Toast.makeText(MapsActivity.this, "Please mark at-least 3 boundaries", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MapsActivity.this, "Area must be less than provided area!!", Toast.LENGTH_SHORT).show();
                     }
-                }
-                else {
-                    Toast.makeText(MapsActivity.this, "Area must be less than provided area!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Log.e("MapActSavebtn:",String.valueOf(saveCount));
                 }
             }
         });

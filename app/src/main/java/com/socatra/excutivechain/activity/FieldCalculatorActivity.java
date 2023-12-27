@@ -1,5 +1,7 @@
 package com.socatra.excutivechain.activity;
 
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
@@ -76,6 +78,8 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     private RecyclerView recordsList;
 
 //    List<LatLng> latLngs;//Todo test
+
+    int saveCount=0;
 
     //Todo test New
     @Inject
@@ -339,7 +343,11 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 dialog.dismiss();
-                saveLatLongData();
+                if (saveCount==0){
+                    saveLatLongData();
+                } else {
+                    Log.e(TAG,String.valueOf(saveCount));
+                }
             }
         });
         builder.show();
@@ -348,6 +356,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 
     public void saveLatLongData() {
 //        ProgressBar.showProgressBar(FieldCalculatorActivity.this, "Saving Gps data");
+        saveCount++;
         try {
 
             //Todo : All coordinates will be added in record

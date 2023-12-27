@@ -117,6 +117,8 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     double totalSize;
 
+    int saveCount=0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -256,12 +258,19 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                     Log.e(TAG, "totalList:" + totalBoundries.toString());
                     if (recordedBoundries.size()>0){
                         Log.e(TAG, "recordedList:" + recordedBoundries.toString());
-                        saveGeoboundariesToDB();
+                        if (saveCount==0){
+                            saveGeoboundariesToDB();
+                        } else {
+                            Log.e(TAG,String.valueOf(saveCount));
+                        }
                     } else {
                         recordedBoundries=totalBoundries;
                         Log.e(TAG, "recordedList:" + recordedBoundries.toString());
-                        saveGeoboundariesToDB();
-
+                        if (saveCount==0){
+                            saveGeoboundariesToDB();
+                        } else {
+                            Log.e(TAG,String.valueOf(saveCount));
+                        }
                     }
                 } else {
                     Toast.makeText(this, "Please stop the progress first!!", Toast.LENGTH_SHORT).show();
@@ -331,6 +340,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         //Todo : Save to DB
         if(Double.valueOf(areaSmap.getText().toString())<=totalSize+0.1) {
             if (recordedBoundries.size() > 2) {
+                saveCount++;
                 for (int i = 0; i < recordedBoundries.size(); i++) {
 
 

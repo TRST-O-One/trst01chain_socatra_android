@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -45,6 +46,7 @@ import com.socatra.excutivechain.multispineeradapters.DropDownListAdapterQ37;
 import com.socatra.excutivechain.multispineeradapters.DropDownListAdapterQ40;
 import com.socatra.excutivechain.view_models.AppViewModel;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -57,7 +59,7 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class RiskAssessmentActivity extends BaseActivity implements HasSupportFragmentInjector {
 
-    String TAG="RiskAssessmentActivity";
+    String TAG="RiskAssessmentActivityTAG";
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
     public AppViewModel viewModel;
@@ -80,7 +82,6 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
 
     //New
-
     String[] PlantationArr=new String[] {"Select","Less than 10 years","11-25 years","26-50 years","More than 50 years"};
 
     String[] YesArr=new String[] {"Select","Yes","No"};
@@ -258,13 +259,14 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         farmerCode=getIntent().getStringExtra("mFarmerCode");
 //        getAreaValue();
         Log.e(TAG,farmerCode);
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         initializeUI();
         configureDagger();
         configureViewModel();
+        initializeLangForArray();
         initializeValues();
         saveDataFun();
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         question1_text = findViewById(R.id.question1_text);
         question2 = findViewById(R.id.question2);
@@ -348,8 +350,6 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         question80_text = findViewById(R.id.question80_text);
         txtSaveRisk = findViewById(R.id.txtSaveRisk);
 
-        preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
 
         dropDownQuestion11(autoCompleteQuestion11Txt);
         dropDownQuestion10(txtQuestion10);
@@ -367,6 +367,28 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
         updateButtonLabels();
 
+    }
+
+    private void initializeLangForArray() {
+        String selectedLanguage = getSelectedLanguage();
+        if (selectedLanguage.equals("English")) {
+            //not required
+        } else {
+            //for normal spinner
+            YesArr=getArrayData(YesArr,selectedLanguage);
+            WorkershiredArr=getArrayData(WorkershiredArr,selectedLanguage);
+
+            //for multi select spinner
+            JobtypeArr=getArrayData(JobtypeArr,selectedLanguage);
+
+        }
+    }
+
+    private String[] getArrayData(String[] arr,String selectedLanguage){
+        for (int i=0;i<arr.length;i++){
+            arr[i]=getLanguageFromLocalDb(selectedLanguage,arr[i].toString().trim());
+        }
+        return arr;
     }
 
     private void saveDataFun() {
@@ -4034,10 +4056,12 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     private void dropDownQuestion10(TextView txtData){
         //data source for drop-down list
         //   ArrayList<String> ActivitiesArr=new String[] {"Select","Spraying chemical (Herbicide)","Plantation maintenance","Other","I don't use contractors"};
-        String[] JobtypeArr=new String[] {"Tapping","Collecting cuplumps, latex","Spraying chemical (Herbicide)","Delivering/ Rubber transportation","Plantation maintenance","Rubber processing (Rubber sheets)","Other"};
+//        String[] JobtypeArr=new String[] {"Tapping","Collecting cuplumps, latex","Spraying chemical (Herbicide)","Delivering/ Rubber transportation","Plantation maintenance","Rubber processing (Rubber sheets)","Other"};
 
         final ArrayList<String> items = new ArrayList<String>();
-        items.addAll(Arrays.asList(JobtypeArr));
+        String[] JobtypeArr1 = new String[JobtypeArr.length - 1];
+        System.arraycopy(JobtypeArr, 1, JobtypeArr1, 0, JobtypeArr.length - 1);
+        items.addAll(Arrays.asList(JobtypeArr1));
         checkSelected10 = new boolean[items.size()];
         //initialize all values of list to 'unselected' initially
         for (int i = 0; i < checkSelected10.length; i++) {

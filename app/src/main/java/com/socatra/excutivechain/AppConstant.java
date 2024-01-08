@@ -98,7 +98,7 @@ public class AppConstant {
     public static String ERROR_MESSAGE_ENTER_PLOTDETAILS = "Please enter farmer Plot Details";
     public static String ERROR_MESSAGE_ENTER_VILLAGE_NAME = "Please enter farmer Village Name";
     public static String ERROR_MESSAGE_ENTER_STATE_NAME = "Please enter farmer State Name";
-    public static String ERROR_MESSAGE_ENTER_PINCODE = "Please enter farmer Pincode ";
+    public static String ERROR_MESSAGE_ENTER_PINCODE = "Please enter farmer Pincode";
 
     public File getDbFileToUpload() {
         try {

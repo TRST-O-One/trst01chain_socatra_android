@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.metrics.EditingSession;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -62,8 +63,11 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     String TAG="RiskAssessmentActivityTAG";
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
+
     public AppViewModel viewModel;
     private SharedPreferences preferences;
+
+
 
     TextView question1_text,question2,question3_text,question4,question5_text,question6_text,question7_text,question8_text,question9,question10,question11_text,question12_text,question13,
             question14_text,question15_text,question16_text,question17_text,question18_text,question19_text,question20_text,question21_text,question22_text,question23_text,question24_text,
@@ -90,18 +94,18 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
     String[] JobtypeArr=new String[] {"Select","Tapping","Collecting cuplumps, latex","Spraying chemical (Herbicide)","Delivering/ Rubber transportation","Plantation maintenance","Rubber processing (Rubber sheets)","Other"};
 
-    String[] ActivitiesArr=new String[] {"Spraying chemical (Herbicide)","Plantation maintenance","Other","I don't use contractors"};
+    String[] ActivitiesArr=new String[] {"Spraying chemical (Herbicide)","Plantation maintenance","Other","I dont use contractors"};
 
     String[] YesorNoArr=new String[] {"Select","Yes","No","I dont Know"};
 
-    String[] MontlyincomeArr=new String[] {"Select","Less than 60 US$","60 to 150 US$","151 to 300 US$","301 to 600 US$","301 to 600 US$","more than 600 US$"};
+    String[] MontlyincomeArr=new String[] {"Less than 60 US$","60 to 150 US$","151 to 300 US$","301 to 600 US$","more than 600 US$"};
 
 
-    String[] wagecalculatorArr=new String[] {"Select","Provide wage slips in country language","For foreign workers provide wage slips in workers","Verbal explanation","We don’t really do that"};
+    String[] wagecalculatorArr=new String[] {"Provide wage slips in country language","For foreign workers provide wage slips in workers","Verbal explanation","We don’t really do that"};
 
     String[] WorkinghoursArr=new String[] {"Select","Less than 10 hours","10 to12 hours","More than 12 hours"};
 
-    String[] WorkerscomplaintsArr=new String[] {"Select","Workers never complain","Face to face/ personal interview","Workers Representatives/ workers Workers consultating","Workers' supporting group- Third party (NGO..)","Workers can complain through hotline/ SMS"};
+    String[] WorkerscomplaintsArr=new String[] {"Workers never complain","Face to face/ personal interview","Workers Representatives/ workers Workers consultating","Workers supporting group- Third party (NGO..)","Workers can complain through hotline/ SMS"};
 
     String[] VacationArr=new String[] {"Select","Yes, paid leave","Yes, no-pay leave","No"};
 
@@ -109,57 +113,65 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
     String[] childrendetailsArr=new String[] {"Select","Yes, we rely on/ need their help/there is no school","Yes, they help when activity levels are high at the farm","No, they go to school, but they will likely help after school","No, they are too young/ they only go to school","Not applicable (do not have children below 15)"};
 
-    String[] InjuriesArr=new String[] {"Select","Eye infection/ red eye","Skin rash","Cough","Cut/ Wound (get cut during tapping, plantation)","Animal bited (snakes…)","Road accident (communicating to site)","Falls, hits (Safety in movement inside the plantation)","Pain in the back, painful arm/hand… (ergonomics)","Other","Other"};
+    String[] InjuriesArr=new String[] {"Eye infection/ red eye","Skin rash","Cough","Cut/ Wound (get cut during tapping, plantation)","Animal bited (snakes…)","Road accident (communicating to site)","Falls, hits (Safety in movement inside the plantation)","Pain in the back, painful arm/hand… (ergonomics)","Never have injury","Other"};
 
     String[] nightInjuryyesornoArr=new String[] {"Select","Yes","No","Not applicable- We only start tapping when we have day"};
 
-    String[] EquipmentArr=new String[] {"Select","Friend/ Family","Buyer/cooperative","Chemical seller","Agency/administrator (e.g: Forestry department)","Third party (NGO, Consultant)","Self-study (Books, internet)","Never","Not applicable- I don't use chemicals"};
+    String[] EquipmentArr=new String[] {"Friend/ Family","Buyer/cooperative","Chemical seller","Agency/administrator (e.g: Forestry department)","Third party (NGO, Consultant)","Self-study (Books, internet)","Never","Not applicable- I dont use chemicals"};
 
-    String[] PersonalEquipmentArr=new String[] {"Select","Yes, all of us use them","Yes, we use them but subcontractors don't","Only subcontractors use them","No","Not applicable- I don't use chemicals"};
+    String[] PersonalEquipmentArr=new String[] {"Select","Yes, all of us use them","Yes, we use them but subcontractors don't","Only subcontractors use them","No","Not applicable- I dont use chemicals"};
 
-    String[] PersonalEquipmentlistArr=new String[] {"Select","Mask","Gloves","Protective googles","Boots","Apron"};
+    String[] PersonalEquipmentlistArr=new String[] {"Mask","Gloves","Protective googles","Boots","Apron"};
 
-    String[] chemicalsArr=new String[] {"Select","Paraquat/Gramoxone","2-4D","Glyphosate/ Roundup","Other herbicide","sulfuric Acid","Formic Acid","Other coagulant","Ammonia","TMTD/ZnO (TZ)","Ethephon stimulant","Other chemicals/ local brand","I don't know","I don't use any chemicals"};
+    String[] chemicalsArr=new String[] {"Paraquat/Gramoxone","2-4D","Glyphosate/ Roundup","Other herbicide","sulfuric Acid","Formic Acid","Other coagulant","Ammonia","TMTD/ZnO (TZ)","Ethephon stimulant","Other chemicals/ local brand","I dont Know","I dont use any chemicals"};
 
-    String[] cropsArr=new String[] {"Select","Forest","Degraded Forest (thick bush, old scrub, dense","Fallow (light bush, low/light scrub, savanna,","Perennial crop (rubber, palm, coffee, cocoa,","Annual crop (rice, cassava, maize, vegetables,"};
 
-    String[] ans62Arr=new String[] {"Select","Workers have access to adequate healthcare services.","Healthcare services are limited.","Workers have no access to healthcare services."};
 
-    String[] ans63Arr=new String[] {"Select","Working conditions are fair and equitable, with reasonable hours and rest periods.","Working conditions need improvement.","Working conditions are inadequate."};
+    String[] cropsArr=new String[] {"Select","Forest","Degraded Forest (thick bush, old scrub, dense)","Fallow (light bush, low/light scrub, savanna)","Perennial crop (rubber, palm, coffee, cocoa)","Annual crop (rice, cassava, maize, vegetables)"};
 
-    String[] ans64Arr=new String[] {"Select","Workers have the right to organize and join unions.","Workers' rights in this regard are restricted.","Workers do not have the right to organize or join unions."};
+    String[] ans62Arr=new String[] {"Select","Workers have access to adequate healthcare services","Healthcare services are limited","Workers have no access to healthcare services"};
 
-    String[] ans65Arr=new String[] {"Select","There is a well-established mechanism for resolving labor disputes.","Labor disputes are not effectively addressed.","There is no mechanism in place for dispute resolution."};
+    String[] ans63Arr=new String[] {"Select","Working conditions are fair and equitable, with reasonable hours and rest periods","Working conditions need improvement","Working conditions are inadequate"};
 
-    String[] ans66Arr=new String[] {"Select","Yes, there is a policy to prevent child labor.","There is no specific policy in place.","Child labor is not a concern on the plantation"};
 
-    String[] ans67Arr=new String[] {"Select","Yes, we have actively sought FPIC.","We have sought FPIC in some instances.","No, we have not sought FPIC."};
+    String[] ans64Arr=new String[] {"Select","Workers have the right to organize and join unions","Workers rights in this regard are restricted","Workers do not have the right to organize or join unions"};
 
-    String[] ans68Arr=new String[] {"Select","Yes, we have a comprehensive FPIC policy.","We have a basic FPIC policy.","We do not have an FPIC policy."};
+    String[] ans65Arr=new String[] {"Select","There is a well-established mechanism for resolving labor disputes","Labor disputes are not effectively addressed","There is no mechanism in place for dispute resolution"};
 
-    String[] ans69Arr=new String[] {"Select","We provide detailed information and hold consultations.","We provide some information and engage in discussions.","We do not provide comprehensive information."};
+    String[] ans66Arr=new String[] {"Select","Yes, there is a policy to prevent child labor","There is no specific policy in place","Child labor is not a concern on the plantation"};
 
-    String[] ans70Arr=new String[] {"Select","Yes, we have faced challenges and resolved them.","Yes, we have faced challenges but have not yet resolved them.","No, we have not encountered challenges related to FPIC"};
+    String[] ans67Arr=new String[] {"Select","Yes, we have actively sought FPIC","We have sought FPIC in some instances","No, we have not sought FPIC"};
 
-    String[] ans71Arr=new String[] {"Select","Yes, actively ensuring supplier compliance.","Yes, but not yet fully compliant.","No specific supplier accountability measures in place."};
+    String[] ans68Arr=new String[] {"Select","Yes, we have a comprehensive FPIC policy","We have a basic FPIC policy","We do not have an FPIC policy"};
 
-    String[] ans72Arr=new String[] {"Select","Yes, a comprehensive verification and monitoring system.","Yes, a basic verification and monitoring system.","No specific system in place."};
+    String[] ans69Arr=new String[] {"Select","We provide detailed information and hold consultations","We provide some information and engage in discussions","We do not provide comprehensive information"};
 
-    String[] ans73Arr=new String[] {"Select","Yes, actively seeking diverse and ethical suppliers.","Yes, but not yet fully diverse and ethical.","No specific efforts in place."};
+    String[] ans70Arr=new String[] {"Select","Yes, we have faced challenges and resolved them","Yes, we have faced challenges but have not yet resolved them","No, we have not encountered challenges related to FPIC"};
 
-    String[] ans74Arr=new String[] {"Select","Yes, and we have mitigation plans in place.","Yes, but no mitigation plans.","No, not yet assessed."};
 
-    String[] ans75Arr=new String[] {"Select","Yes, actively ensuring supplier compliance.","Yes, but not yet fully compliant.","No specific supplier accountability measures in place"};
 
-    String[] ans76Arr=new String[] {"Select","Yes, and we have anti-corruption policies.","Yes, but no specific anti-corruption policies.","No, not applicable."};
+    String[] ans71Arr=new String[] {"Select","Yes, actively ensuring supplier compliance","Yes, but not yet fully compliant","No specific supplier accountability measures in place"};
 
-    String[] ans77Arr=new String[] {"Select","Yes, and we are compliant.","Yes, but working on compliance.","No measures in place."};
+    String[] ans72Arr=new String[] {"Select","Yes, a comprehensive verification and monitoring system","Yes, a basic verification and monitoring system","No specific system in place"};
 
-    String[] ans78Arr=new String[] {"Select","Yes, comprehensive documentation.","Basic documentation.","No documentation."};
+    String[] ans73Arr=new String[] {"Select","Yes, actively seeking diverse and ethical suppliers","Yes, but not yet fully diverse and ethical","No specific efforts in place"};
 
-    String[] ans79Arr=new String[] {"Select","Yes, regularly.","Occasionally.","No."};
 
-    String[] ans80Arr=new String[] {"Select","Yes, actively engage with stakeholders and employees.","Partially engage with them.","No specific engagement measures in place."};
+
+
+    String[] ans74Arr=new String[] {"Select","Yes, and we have mitigation plans in place","Yes, but no mitigation plans","No, not yet assessed"};
+
+    String[] ans75Arr=new String[] {"Select","Yes, actively ensuring supplier compliance","Yes, but not yet fully compliant","No specific supplier accountability measures in place"};
+
+    String[] ans76Arr=new String[] {"Select","Yes, and we have anti-corruption policies","Yes, but no specific anti-corruption policies","No, not applicable"};
+
+    String[] ans77Arr=new String[] {"Select","Yes, and we are compliant","Yes, but working on compliance","No measures in place"};
+
+    String[] ans78Arr=new String[] {"Select","Yes, comprehensive documentation","Basic documentation","No documentation"};
+
+    String[] ans79Arr=new String[] {"Select","Yes, regularly","Occasionally","No"};
+
+    String[] ans80Arr=new String[] {"Select","Yes, actively engage with stakeholders and employees","Partially engage with them","No specific engagement measures in place"};
 
 
 //    CheckBox option4_1, option4_2, option5_1, option5_2, option42_1,option42_2,option42_3 , option45_1,option45_2,option45_3,option47_1,option47_2,option47_3,option49_1,option49_2,option49_3,option50_1,option50_2,option50_3,option53_1,option53_2,option53_3,option56_1,option56_2,option56_3,option57_1,option57_2,option57_3,option59_1,option59_2,option59_3;
@@ -174,6 +186,8 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     spQuestion62,spQuestion63,spQuestion64,spQuestion65,spQuestion66,spQuestion67,spQuestion68,spQuestion69,spQuestion70,spQuestion71,spQuestion72,spQuestion73,spQuestion74,spQuestion75,spQuestion76,spQuestion77,spQuestion78,spQuestion79,spQuestion80;
 
     TextView question3_number;
+
+    TextView txtriskassesment;
 
     String ans3=null,ans7=null,ans8=null,ans9=null,ans10=null,ans11=null,ans12=null,ans13=null,ans14=null,ans15=null,ans16=null,
             ans17=null,ans18=null,ans19=null,ans20=null,ans21=null,ans22=null,ans23=null,ans24=null,ans25=null,ans26=null,ans27=null,
@@ -351,6 +365,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         txtSaveRisk = findViewById(R.id.txtSaveRisk);
 
 
+
         dropDownQuestion11(autoCompleteQuestion11Txt);
         dropDownQuestion10(txtQuestion10);
 
@@ -365,9 +380,20 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         dropDownQuestion40(txtQuestion40);
 
 
+        txtriskassesment = findViewById(R.id.txt_riskassesment);
+
+
+
+
+
+
+
         updateButtonLabels();
 
     }
+
+
+
 
     private void initializeLangForArray() {
         String selectedLanguage = getSelectedLanguage();
@@ -375,11 +401,52 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             //not required
         } else {
             //for normal spinner
+            PlantationArr=getArrayData(PlantationArr,selectedLanguage);
             YesArr=getArrayData(YesArr,selectedLanguage);
             WorkershiredArr=getArrayData(WorkershiredArr,selectedLanguage);
+            YesorNoArr=getArrayData(YesorNoArr,selectedLanguage);
+            WorkinghoursArr = getArrayData(WorkinghoursArr,selectedLanguage);
+            VacationArr = getArrayData(VacationArr,selectedLanguage);
+            daysArr = getArrayData(daysArr,selectedLanguage);
+            childrendetailsArr = getArrayData(childrendetailsArr,selectedLanguage);
+            nightInjuryyesornoArr = getArrayData(nightInjuryyesornoArr,selectedLanguage);
+            PersonalEquipmentArr = getArrayData(PersonalEquipmentArr,selectedLanguage);
+            cropsArr = getArrayData(cropsArr,selectedLanguage);
+            ans62Arr = getArrayData(ans62Arr,selectedLanguage);
+            ans63Arr = getArrayData(ans63Arr,selectedLanguage);
+            ans64Arr = getArrayData(ans64Arr,selectedLanguage);
+            ans62Arr = getArrayData(ans62Arr,selectedLanguage);
+            ans63Arr = getArrayData(ans63Arr,selectedLanguage);
+            ans64Arr = getArrayData(ans64Arr,selectedLanguage);
+            ans65Arr = getArrayData(ans65Arr,selectedLanguage);
+            ans66Arr = getArrayData(ans66Arr,selectedLanguage);
+            ans67Arr = getArrayData(ans67Arr,selectedLanguage);
+            ans68Arr = getArrayData(ans68Arr,selectedLanguage);
+            ans69Arr = getArrayData(ans69Arr,selectedLanguage);
+            ans70Arr = getArrayData(ans70Arr,selectedLanguage);
+            ans71Arr = getArrayData(ans71Arr,selectedLanguage);
+            ans72Arr = getArrayData(ans72Arr,selectedLanguage);
+            ans73Arr = getArrayData(ans73Arr,selectedLanguage);
+            ans74Arr = getArrayData(ans74Arr,selectedLanguage);
+            ans75Arr = getArrayData(ans75Arr,selectedLanguage);
+            ans76Arr = getArrayData(ans76Arr,selectedLanguage);
+            ans77Arr = getArrayData(ans78Arr,selectedLanguage);
+            ans79Arr = getArrayData(ans79Arr,selectedLanguage);
+            ans80Arr = getArrayData(ans80Arr,selectedLanguage);
 
             //for multi select spinner
             JobtypeArr=getArrayData(JobtypeArr,selectedLanguage);
+            PlantationArr=getArrayData(PlantationArr,selectedLanguage);
+            MontlyincomeArr = getArrayData(MontlyincomeArr,selectedLanguage);
+            wagecalculatorArr = getArrayData(wagecalculatorArr,selectedLanguage);
+            WorkerscomplaintsArr = getArrayData(WorkerscomplaintsArr,selectedLanguage);
+            InjuriesArr = getArrayData(InjuriesArr,selectedLanguage);
+            EquipmentArr = getArrayData(EquipmentArr,selectedLanguage);
+            PersonalEquipmentlistArr = getArrayData(PersonalEquipmentlistArr,selectedLanguage);
+            chemicalsArr = getArrayData(chemicalsArr,selectedLanguage);
+            ActivitiesArr = getArrayData(ActivitiesArr,selectedLanguage);
+
+
 
         }
     }
@@ -1677,12 +1744,11 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans72
-            if (ans72!=null){
+            if (ans72!=null) {
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(77);
                 risk.setFarmerCode(farmerCode);
                 risk.setAnswers(ans72);
-
                 risk.setIsActive("true");
                 risk.setSync(false);
                 risk.setServerSync("0");
@@ -1949,6 +2015,15 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
         String hdSave=getResources().getString(R.string.save);
 
+        String txtselect =getResources().getString(R.string.select);
+        String hdriskassesment = getResources().getString(R.string.risk_assesment);
+
+
+        String AQ1b = getResources().getString(R.string.enter_distance);
+        String AQ2b = getResources().getString(R.string.enter_size);
+        String AQEnteraswr = getResources().getString(R.string.enter_your_answer);
+
+
 
         if (selectedLanguage.equals("English")) {
             question1_text.setText(hdQ1);
@@ -2034,6 +2109,49 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             question80_text.setText(hdQ80);
 
             txtSaveRisk.setText(hdSave);
+
+            txtQuestion24.setText(txtselect);
+            autoCompleteQuestion11Txt.setText(txtselect);
+            txtQuestion10.setText(txtselect);
+            txtQuestion20.setText(txtselect);
+            txtQuestion21.setText(txtselect);
+            txtQuestion24.setText(txtselect);
+            txtQuestion31.setText(txtselect);
+            txtQuestion35.setText(txtselect);
+            txtQuestion37.setText(txtselect);
+            txtQuestion40.setText(txtselect);
+
+
+            et_answer1.setHint(AQ1b);
+            et_answer2.setHint(AQ2b);
+            etAns4.setHint(AQEnteraswr);
+            etAns5.setHint(AQEnteraswr);
+            et_answer6.setHint( AQEnteraswr);
+            etAns42.setHint( AQEnteraswr);
+            etAns45.setHint( AQEnteraswr);
+            et_answer46.setHint( AQEnteraswr);
+            etAns47.setHint( AQEnteraswr);
+            et_answer48.setHint( AQEnteraswr);
+            etAns49.setHint( AQEnteraswr);
+            etAns50.setHint( AQEnteraswr);
+            et_answer51.setHint( AQEnteraswr);
+            et_answer52.setHint( AQEnteraswr);
+
+            etAns53.setHint( AQEnteraswr);
+            et_answer54.setHint( AQEnteraswr);
+            et_answer55.setHint( AQEnteraswr);
+            etAns56.setHint( AQEnteraswr);
+            etAns57.setHint( AQEnteraswr);
+            et_answer58.setHint( AQEnteraswr);
+            etAns59.setHint( AQEnteraswr);
+            et_answer60.setHint( AQEnteraswr);
+            et_answer61.setHint(AQEnteraswr);
+
+            txtriskassesment.setText(hdriskassesment);
+
+
+
+
 
 
         } else {
@@ -2122,6 +2240,60 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             question80_text.setText(getLanguageFromLocalDb(selectedLanguage, hdQ80));
 
             txtSaveRisk.setText(getLanguageFromLocalDb(selectedLanguage, hdSave));
+
+
+
+            txtQuestion10.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            autoCompleteQuestion11Txt.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+
+            txtQuestion20.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion21.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion24.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion31.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion35.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion37.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+            txtQuestion40.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
+
+
+
+            et_answer1.setHint(getLanguageFromLocalDb(selectedLanguage,AQ1b));
+//            et_answer1.setHint(getLanguageFromLocalDb(selectedLanguage, AQ1b));
+            et_answer2.setHint(getLanguageFromLocalDb(selectedLanguage, AQ2b));
+            etAns4.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns5.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer6.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns42.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns45.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer46.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns47.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer48.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns49.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns50.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer51.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer52.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+
+            etAns53.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer54.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer55.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns56.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns57.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer58.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            etAns59.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer60.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+            et_answer61.setHint(getLanguageFromLocalDb(selectedLanguage, AQEnteraswr));
+
+
+            txtriskassesment.setText(getLanguageFromLocalDb(selectedLanguage, hdriskassesment) + "/" + hdriskassesment);
+
+
+
+
+
+
+
+
+
+
 
         }
 
@@ -3951,7 +4123,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         String[] ActivitiesArrData=new String[] {"Spraying chemical (Herbicide)","Plantation maintenance","Other","I don't use contractors"};
 
         final ArrayList<String> items = new ArrayList<String>();
-        items.addAll(Arrays.asList(ActivitiesArrData));
+        items.addAll(Arrays.asList(ActivitiesArr));
         checkSelected = new boolean[items.size()];
         //initialize all values of list to 'unselected' initially
         for (int i = 0; i < checkSelected.length; i++) {
@@ -4160,7 +4332,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     // TODO: 9/21/2023 for question 20 
     private void dropDownQuestion20(TextView txtData){
         //data source for drop-down list
-        String[] MontlyincomeArr=new String[] {"Less than 60 US$","60 to 150 US$","151 to 300 US$","301 to 600 US$","301 to 600 US$","more than 600 US$"};
+//        String[] MontlyincomeArr=new String[] {"Less than 60 US$","60 to 150 US$","151 to 300 US$","301 to 600 US$","301 to 600 US$","more than 600 US$"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(MontlyincomeArr));
@@ -4261,7 +4433,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     // TODO: 9/21/2023 for question 21
     private void dropDownQuestion21(TextView txtData){
         //data source for drop-down list
-        String[] wagecalculatorArr=new String[] {"Provide wage slips in country language","For foreign workers provide wage slips in workers","Verbal explanation","We don’t really do that"};
+//        String[] wagecalculatorArr=new String[] {"Provide wage slips in country language","For foreign workers provide wage slips in workers","Verbal explanation","We don’t really do that"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(wagecalculatorArr));
@@ -4363,7 +4535,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     private void dropDownQuestion24(TextView txtData){
         //data source for drop-down list
         //   ArrayList<String> ActivitiesArr=new String[] {"Select","Spraying chemical (Herbicide)","Plantation maintenance","Other","I don't use contractors"};
-        String[] WorkerscomplaintsArr=new String[] {"Select","Workers never complain","Face to face/ personal interview","Workers Representatives/ workers Workers consultating","Workers' supporting group- Third party (NGO..)","Workers can complain through hotline/ SMS"};
+//        String[] WorkerscomplaintsArr=new String[] {"Select","Workers never complain","Face to face/ personal interview","Workers Representatives/ workers Workers consultating","Workers' supporting group- Third party (NGO..)","Workers can complain through hotline/ SMS"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(WorkerscomplaintsArr));
@@ -4464,7 +4636,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     // TODO: 9/21/2023 for question 31
     private void dropDownQuestion31(TextView txtData){
         //data source for drop-down list
-        String[] InjuriesArr=new String[] {"Eye infection/ red eye","Skin rash","Cough","Cut/ Wound (get cut during tapping, plantation)","Animal bited (snakes…)","Road accident (communicating to site)","Falls, hits (Safety in movement inside the plantation)","Pain in the back, painful arm/hand… (ergonomics)","Other"};
+//        String[] InjuriesArr=new String[] {"Eye infection/ red eye","Skin rash","Cough","Cut/ Wound (get cut during tapping, plantation)","Animal bited (snakes…)","Road accident (communicating to site)","Falls, hits (Safety in movement inside the plantation)","Pain in the back, painful arm/hand… (ergonomics)","Other"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(InjuriesArr));
@@ -4565,7 +4737,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     // TODO: 9/21/2023 for question 35
     private void dropDownQuestion35(TextView txtData){
         //data source for drop-down list
-        String[] EquipmentArr=new String[] {"Friend/ Family","Buyer/cooperative","Chemical seller","Agency/administrator (e.g: Forestry department)","Third party (NGO, Consultant)","Self-study (Books, internet)","Never","Not applicable- I don't use chemicals"};
+//        String[] EquipmentArr=new String[] {"Friend/ Family","Buyer/cooperative","Chemical seller","Agency/administrator (e.g: Forestry department)","Third party (NGO, Consultant)","Self-study (Books, internet)","Never","Not applicable- I don't use chemicals"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(EquipmentArr));
@@ -4665,7 +4837,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
     // TODO: 9/21/2023 for question 37
     private void dropDownQuestion37(TextView txtData){
-        String[] PersonalEquipmentlistArr=new String[] {"Mask","Gloves","Protective googles","Boots","Apron"};
+//        String[] PersonalEquipmentlistArr=new String[] {"Mask","Gloves","Protective googles","Boots","Apron"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(PersonalEquipmentlistArr));
@@ -4767,7 +4939,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
     // TODO: 9/21/2023 for question 40
     private void dropDownQuestion40(TextView txtData){
-        String[] chemicalsArr=new String[] {"Paraquat/Gramoxone","2-4D","Glyphosate/ Roundup","Other herbicide","sulfuric Acid","Formic Acid","Other coagulant","Ammonia","TMTD/ZnO (TZ)","Ethephon stimulant","Other chemicals/ local brand","I don't know","I don't use any chemicals"};
+//        String[] chemicalsArr=new String[] {"Paraquat/Gramoxone","2-4D","Glyphosate/ Roundup","Other herbicide","sulfuric Acid","Formic Acid","Other coagulant","Ammonia","TMTD/ZnO (TZ)","Ethephon stimulant","Other chemicals/ local brand","I don't know","I don't use any chemicals"};
 
         final ArrayList<String> items = new ArrayList<String>();
         items.addAll(Arrays.asList(chemicalsArr));
@@ -4837,6 +5009,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
         //Pop-up window background cannot be null if we want the pop-up to listen touch events outside its window
         pw40.setBackgroundDrawable(new BitmapDrawable());
         pw40.setTouchable(true);
+
 
         //let pop-up be informed about touch events outside its window. This  should be done before setting the content of pop-up
         pw40.setOutsideTouchable(true);

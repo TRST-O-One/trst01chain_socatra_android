@@ -979,6 +979,8 @@
     <string name="sign_and_save">Add Sign and Save</string>
     <string name="add_signature">Add Signature</string>
     <string name="upload_pdf">Upload PDF</string>
+    <string name="select">Select</string>
+    <string name="risk_assesment">Risk Assesment</string>
 
 
 </resources>

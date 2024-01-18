@@ -14,7 +14,7 @@ android {
         minSdk 24
         targetSdk 33
         versionCode 3
-        versionName "1.0.4"
+        versionName "1.0.5"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,7 +53,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Map
-    implementation files("C:\\Users\\Nandini M\\Desktop\\areaviewlib-release.aar")
+//    implementation files("C:\\Users\\Nandini M\\Desktop\\areaviewlib-release.aar")
+    implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
 //    implementation files("D:\\SrikanthAndroid\\Trst01_Projects\\GajaRhakuProject\\DevCode\\areaviewlib-release.aar")
 
 

@@ -265,6 +265,8 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
     private boolean expanded40; 		//to  store information whether the selected values are displayed completely or in shortened representatn
     public static boolean[] checkSelected40;
 
+    String mainSelect="";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -622,7 +624,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans10
-            if (!txtQuestion10.getText().toString().isEmpty() && !txtQuestion10.getText().equals("select")){
+            if (!txtQuestion10.getText().toString().isEmpty() && !txtQuestion10.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(18);
                 risk.setFarmerCode(farmerCode);
@@ -642,7 +644,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             //ans11
             //  if (ans11!=null){
 
-            if(!autoCompleteQuestion11Txt.getText().toString().isEmpty() && !autoCompleteQuestion11Txt.getText().equals("select")){
+            if(!autoCompleteQuestion11Txt.getText().toString().isEmpty() && !autoCompleteQuestion11Txt.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(19);
                 risk.setFarmerCode(farmerCode);
@@ -804,7 +806,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
             //ans20
           //  if (ans20!=null){
-            if(!txtQuestion20.getText().toString().isEmpty() && !txtQuestion20.getText().equals("select")){
+            if(!txtQuestion20.getText().toString().isEmpty() && !txtQuestion20.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(32);
                 risk.setFarmerCode(farmerCode);
@@ -822,7 +824,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans21
-            if(!txtQuestion21.getText().toString().isEmpty() && !txtQuestion21.getText().equals("select")){
+            if(!txtQuestion21.getText().toString().isEmpty() && !txtQuestion21.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(33);
                 risk.setFarmerCode(farmerCode);
@@ -876,7 +878,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans24
-            if(!txtQuestion24.getText().toString().isEmpty() && !txtQuestion24.getText().equals("select")){
+            if(!txtQuestion24.getText().toString().isEmpty() && !txtQuestion24.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(39);
                 risk.setFarmerCode(farmerCode);
@@ -1001,7 +1003,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans31
-            if(!txtQuestion31.getText().toString().isEmpty() && !txtQuestion31.getText().equals("select")){
+            if(!txtQuestion31.getText().toString().isEmpty() && !txtQuestion31.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(47);
                 risk.setFarmerCode(farmerCode);
@@ -1073,7 +1075,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans35
-            if(!txtQuestion35.getText().toString().isEmpty() && !txtQuestion35.getText().equals("select")){
+            if(!txtQuestion35.getText().toString().isEmpty() && !txtQuestion35.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(51);
                 risk.setFarmerCode(farmerCode);
@@ -1109,7 +1111,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans37
-            if(!txtQuestion37.getText().toString().isEmpty() && !txtQuestion37.getText().equals("select")){
+            if(!txtQuestion37.getText().toString().isEmpty() && !txtQuestion37.getText().equals(mainSelect)){
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(53);
                 risk.setFarmerCode(farmerCode);
@@ -1163,7 +1165,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             }
 
             //ans40
-            if(!txtQuestion40.getText().toString().isEmpty() && !txtQuestion40.getText().equals("select")){
+            if(!txtQuestion40.getText().toString().isEmpty() && !txtQuestion40.getText().equals(mainSelect)){//todo changed
                 RiskAssessment risk=new RiskAssessment();
                 risk.setRiskAssesmentQuestionHdrId(8);
                 risk.setFarmerCode(farmerCode);
@@ -2106,6 +2108,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
             txtSaveRisk.setText(hdSave);
 
+            mainSelect=txtselect;
             txtQuestion24.setText(txtselect);
             autoCompleteQuestion11Txt.setText(txtselect);
             txtQuestion10.setText(txtselect);
@@ -2238,6 +2241,7 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
             txtSaveRisk.setText(getLanguageFromLocalDb(selectedLanguage, hdSave));
 
 
+            mainSelect=getLanguageFromLocalDb(selectedLanguage,txtselect);
 
             txtQuestion10.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));
             autoCompleteQuestion11Txt.setText(getLanguageFromLocalDb(selectedLanguage,txtselect));

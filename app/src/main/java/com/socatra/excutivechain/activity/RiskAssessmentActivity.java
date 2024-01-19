@@ -2150,9 +2150,6 @@ public class RiskAssessmentActivity extends BaseActivity implements HasSupportFr
 
 
 
-
-
-
         } else {
             //Todo : commented as not added in DB
             question1_text.setText(getLanguageFromLocalDb(selectedLanguage,hdQ1));

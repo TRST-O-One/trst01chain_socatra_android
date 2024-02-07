@@ -18,7 +18,8 @@ public class AppConstant {
 
     //DB
     public static final int DB_VERSION = 1; //Todo DB version
-    public static String DB_NAME = "DemoExcutiveChain.db";
+    public static String DB_NAME = "SocatraExcutiveChain.db";
+
     //    public static String APP_FOLDER = "DemoExcutiveChain";
 //    public static String DB_FOLDER = "DemoExcutiveChain_DB";
     public static String APP_ENVIRONMENT = "DemoExcutiveChain_Prod_DB";//DEV sub folder for db

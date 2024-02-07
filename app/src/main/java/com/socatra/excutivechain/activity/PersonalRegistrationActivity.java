@@ -721,8 +721,9 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
     private void successfulBack() {
         Toast.makeText(this, "Successful!!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, DashBoardFarmerListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
-        finish();
+//        finish();
     }
 
     private void getVillageListFromLocalDbById(String id) {

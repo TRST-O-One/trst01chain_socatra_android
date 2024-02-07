@@ -50,9 +50,6 @@ import com.socatra.excutivechain.view_models.AppViewModel;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -381,11 +378,12 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         });
 
         farmerMapping.setOnClickListener(view -> {
-            Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
+            /*Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
             intent.putExtra("mFarmerCode", farmerCode);
             intent.putExtra("mFarmerObj", farmerTable1);
             startActivity(intent);
-            dialog.dismiss();
+            dialog.dismiss();*/
+            getFarmerDealerStatus(farmerCode,farmerTable1);
 
 //            if (farmerManufacturerStatus ==0) {
 //                if (farmerDealerStatus==0){
@@ -399,6 +397,48 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
 
 
         dialog.show();
+    }
+
+
+    private void getFarmerDealerStatus(String fid, FarmersTable farmerTable1) {
+        try {
+            viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
+            viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, new Observer<List<DealerFarmer>>() {
+                @Override
+                public void onChanged(List<DealerFarmer> dealerFarmers) {
+                    //dealer mapping
+                    if (dealerFarmers.size()>0){
+                        Log.e("validatDash","Dealer not exist");
+                        dialog.dismiss();
+                        Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // producer mapping
+                        viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
+                        viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, new Observer<List<ManfacturerFarmer>>() {
+                            @Override
+                            public void onChanged(List<ManfacturerFarmer> manfacturerFarmers) {
+                                if (manfacturerFarmers.size()>0){
+                                    Log.e("validatDash","Producer exist");
+                                    dialog.dismiss();
+                                    Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("validatDash","Producer not exist");
+                                    Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
+                                    intent.putExtra("mFarmerCode", farmerCode);
+                                    intent.putExtra("mFarmerObj", farmerTable1);
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e("validatDash","1st catch");
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -752,57 +792,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         return stream.toByteArray();
     }
 
-    public void getDealerStatus(String fid){
-        try {
-            viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getDealerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<DealerFarmer> dealerFarmers = (List<DealerFarmer>) o;
-                        viewModel.getDealerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (dealerFarmers != null && dealerFarmers.size() > 0) {
-//                            farmerDealerStatus =1;
-//                            Log.e("dashListStat",dealerFarmers.toString());
-
-                        } else {
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-//                            farmerDealerStatus=0;
-
-                        }
-                    }
-                };
-                viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void getManufacturerStatus(String fid){
-        try {
-            viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getManfacturerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<ManfacturerFarmer> manfacturerFarmers = (List<ManfacturerFarmer>) o;
-                        viewModel.getManfacturerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (manfacturerFarmers != null && manfacturerFarmers.size() > 0) {
-//                            farmerManufacturerStatus =1;
-//                            Log.e("dashListStat",manfacturerFarmers.toString());
-                        } else {
-//                            farmerManufacturerStatus=0;
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                };
-                viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
 
         try {

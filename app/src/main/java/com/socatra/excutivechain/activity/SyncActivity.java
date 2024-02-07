@@ -1,9 +1,11 @@
 package com.socatra.excutivechain.activity;
 
 
+import static android.provider.ContactsContract.Directory.PACKAGE_NAME;
 import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS;
 import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS;
 import static com.socatra.excutivechain.AppConstant.DB_NAME;
+import static com.socatra.excutivechain.AppConstant.DB_VERSION;
 import static com.socatra.excutivechain.AppConstant.DeviceUserID;
 import static com.socatra.excutivechain.AppConstant.SUCCESS_RESPONSE_MESSAGE;
 import static com.socatra.excutivechain.AppConstant.accessToken;
@@ -19,11 +21,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -104,6 +108,12 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
     long nanoTime;
     String strDBName,strDBSubName,strMainDbFile;
+
+    TextView txtAppVersion;
+
+    String appVersion="";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -289,10 +299,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
         txtChildSync = findViewById(R.id.txtChildSync);
         txtParentSync = findViewById(R.id.txtParentSync);
         txtRiskSync = findViewById(R.id.txtRiskSync);
-        txtMasterSync = findViewById(R.id.txtMasterSync);
-        txtSendData = findViewById(R.id.txtSendData);
-        txtGetData = findViewById(R.id.txtGetData);
-        txtUploadDb = findViewById(R.id.txtUploadDb);
+//        txtMasterSync = findViewById(R.id.txtMasterSync);
+//        txtSendData = findViewById(R.id.txtSendData);
+//        txtGetData = findViewById(R.id.txtGetData);
+//        txtUploadDb = findViewById(R.id.txtUploadDb);
         txtDealerSync = findViewById(R.id.txtDealerSync);
         txtManufacturerSync = findViewById(R.id.txtManufacturerSync);
 
@@ -302,6 +312,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
         txtGetData = findViewById(R.id.txtGetData);
         txtUploadDb = findViewById(R.id.txtUploadDb);
         changeLanguageButton = findViewById(R.id.changeLanguageButton);
+        txtAppVersion = findViewById(R.id.versionTxt);
 
     }
 
@@ -340,6 +351,17 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
 
     private void initializeValues() {
+        //App version and DB version
+        try {
+                PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+                appVersion = packageInfo.versionName;
+                if (!TextUtils.isEmpty(appVersion)) {
+                    txtAppVersion.setText("*App Version : "+appVersion+" || DB Version : "+ String.valueOf(DB_VERSION)+"*");
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+
         txtMasterSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -410,7 +432,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
           //  final String filePathToSave = "/sdcard/SupplyChain_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
 
-            final String filePathToSave = "/sdcard/"+appHelper.getSharedPrefObj().getString(DB_NAME,"")+"_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
+            final String filePathToSave = "/sdcard/"+"SCE_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
 
             final File toZipFile = getDbFileToUpload();
             getzipFile(toZipFile, filePathToSave, progressDialog,dialog);
@@ -422,8 +444,9 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     public File getDbFileToUpload() {
         try {
 //            File dir = Environment.getExternalStorageDirectory();
-            File dbFileToUpload = new File("/sdcard/"+strDBName+strDBSubName+strMainDbFile);
-
+//            File dbFileToUpload = new File("/sdcard/"+strDBName+strDBSubName+strMainDbFile);
+//            File dbFileToUpload=new File("/sdcard/Android/data/"+ appHelper.getSharedPrefObj().getString(PACKAGE_NAME, "")+"com.socatra.excutivechain/db/"+DB_NAME);
+            File dbFileToUpload=new File("/sdcard/Android/data/com.socatra.excutivechain/db/"+DB_NAME);
        //     File dbFileToUpload = new File("/sdcard/SupplyChain/SupplyChain_DB/SupplyChain_Prod_DB/SupplyChain.db");
             return dbFileToUpload;
         } catch (Exception e) {
@@ -447,12 +470,28 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             gzipOuputStream.close();
             System.out.println("The file was compressed successfully!");
             File dir = Environment.getExternalStorageDirectory();
-            File uploadFile = new File(dir, "SupplyChain_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip");
+            File uploadFile = new File(dir, "SCE_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip");
             if (uploadFile != null) {
-                //   newUploadDbFile(uploadFile, BASE_AUTH_URL + AppConstant.UPLOAD_DB_LINK,progressDialog);
-                // uploadFileToServer(uploadFile, BASE_AUTH_URL + AppConstant.UPLOAD_DB_LINK, progressDialog);
-                uploadDataBaseTOServerAPI(uploadFile, progressDialog,dialog);
-                //  new MyTask(uploadFile, progressDialog);
+
+                if (uploadFile.exists()) {
+
+                    long fileSizeInBytes = uploadFile.length();
+                    long fileSizeInKB = fileSizeInBytes / 1024;
+//                    Log.e("SyncActTag","File size: " + fileSizeInKB + " KB");
+                    if (fileSizeInKB<=10000){
+
+                        uploadDataBaseTOServerAPI(uploadFile, progressDialog, dialog);
+
+                    } else {
+                        dialog.dismiss();
+                        progressDialog.dismiss();
+                        Toast.makeText(this, "File too big upload through portal!!", Toast.LENGTH_LONG).show();
+                    }
+
+                } else {
+                    Log.e("SyncActTag","File does not exist.");
+                }
+
             }
         } catch (IOException ex) {
             ex.printStackTrace();

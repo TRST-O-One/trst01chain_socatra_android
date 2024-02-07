@@ -197,16 +197,16 @@ public class AppModule {
     @Singleton
     AppDatabase provideBootStrapDatabase(Application application) {
         String currentDBPath="";
-
+        currentDBPath="/sdcard/Android/data/com.socatra.excutivechain/db/"+DB_NAME;
        // SafeHelperFactory factory=SafeHelperFactory.fromUser(new SpannableStringBuilder("Rbl@123"));
-        try {
+       /* try {
            currentDBPath = App.createDBPath();
            if (TextUtils.isEmpty(currentDBPath)) {
                currentDBPath = App.context.getDatabasePath(DB_NAME).getAbsolutePath();
            }
        }catch (Exception ex){
            ex.printStackTrace();
-       }
+       }*/
 //        Room.databaseBuilder(context.getApplicationContext(), AppDatabase.class, SystemStrings.ROOM_DATABASE_NAME)
 //                // allow queries on the main thread.
 //                // Don't do this on a real app!

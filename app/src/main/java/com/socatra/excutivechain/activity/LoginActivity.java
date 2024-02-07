@@ -165,12 +165,12 @@ public class LoginActivity extends BaseActivity {
         takePermission();
 
 
-        LoginActivity.this.runOnUiThread(new Runnable() {
+        /*LoginActivity.this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 App.createDBPath();
             }
-        });
+        });*/
 
         LoginActivity.this.runOnUiThread(new Runnable() {
             @Override
@@ -306,7 +306,7 @@ public class LoginActivity extends BaseActivity {
 
     public void takePermission() {
         if (isPermissionGranted()) {
-            App.createDBPath();
+//            App.createDBPath();
             txtDeviceId.setText("Device ID   : " + CommonUtils.getIMEInumber(this));
             txtDbNo.setText("DB  Version : " + String.valueOf(DB_VERSION));
             txtDate.setText("Date : " + strTodayDate);
@@ -361,8 +361,8 @@ public class LoginActivity extends BaseActivity {
                         viewModel.getloginResponseDTOFromServerLiveData().removeObserver(this);
                         if (loginResponseDTOList != null) {
 //                            for (int i = 0; i < loginResponseDTOList.size(); i++) {
-                            App.createDBPath();
-                            Log.d(TAG, "onChanged: " + App.createDBPath());
+//                            App.createDBPath();
+//                            Log.d(TAG, "onChanged: " + App.createDBPath());
                             appHelper.getSharedPrefObj().edit().putString(DeviceUserID, loginResponseDTOList.getData().get(0).getId().toString()).apply();
                             // appHelper.getSharedPrefObj().edit().putString(DeviceUserID, "10").apply();
 //
@@ -378,10 +378,10 @@ public class LoginActivity extends BaseActivity {
                             Log.d(TAG, "onChanged: " + loginResponseDTOList.getData().get(0).getId() + loginResponseDTOList.getData().get(0).getUserName());
                             String token = "Bearer " + loginResponseDTOList.getData().get(0).getToken();
                             TokenAccess = token;
-                            App.createDBPath();
+//                            App.createDBPath();
 //                                // TODO: Inserting into key store
                             appHelper.getSharedPrefObj().edit().putString(accessToken, token).apply();
-                            App.createDBPath();
+//                            App.createDBPath();
 //                                //   if (prefs.getBoolean("firstrun", true)) {
 //
                             try {

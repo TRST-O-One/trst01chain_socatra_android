@@ -87,7 +87,7 @@
             android:background="@drawable/bg_ui_light_orange_box_dark"
             android:gravity="center"
             android:text="LOGIN"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
     </LinearLayout>

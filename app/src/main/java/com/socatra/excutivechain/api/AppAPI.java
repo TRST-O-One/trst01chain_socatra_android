@@ -27,42 +27,24 @@ public interface AppAPI {
     Call<JsonElement> getMasterSyncDetailsFromServer(@Header("Authorization") String authHeader);//https://trst01chainrubber.trst01.com/api/v1/Master/GetMasterDetails
     @GET("Transaction/GetTransactionDetailsByIMEINo/{userId}")
     Call<JsonElement> getFarmerAllSyncDataDetailsFromServer(@Path("userId") String userId,@Header("Authorization") String authHeader);
-    //Transaction/GetTransactionDetailsByIMEINo/4c3b2e586efcade7
 
-    @POST("Transaction/AddTransactionDetails")//http://localhost:4000/V1/Transaction/AddTransactionDetails
+    @POST("Transaction/AddTransactionDetails")
     Call<ResponseBody> syncFarmerDetailsDataToServer(@Body SyncPersonalLandAllDetailsRequestDTO syncPersonalLandAllDetailsRequestDTO, @Header("Authorization") String authHeader);
 
     @Multipart
-    @POST("Image/UploadImages")//https://trst01chainrubber.trst01.com/api/v1/Image/UploadImages
+    @POST("Image/UploadImages")
     Call<ResponseBody> uploadFileDataToServer(@Part("UserId") RequestBody api_key, @Part MultipartBody.Part file);
 
     @Multipart
-    @POST("PDFUpload/UploadPDF")//http://localhost:4000/V1/PDFUpload/UploadPDF
+    @POST("PDFUpload/UploadPDF")
     Call<ResponseBody> uploadPdfDataToServer(@Part("UserId") RequestBody api_key, @Part MultipartBody.Part file);
-
-
-  /*  @Multipart
-    @POST("Upload/UploadFiles")
-    Call<ResponseBody> uploadSHPFileDataToServer(@Part("UserId") RequestBody api_key, @Part MultipartBody.Part file);*/
-
 
     @Multipart
     @POST("Upload/UploadFiles")
     Call<ResponseBody> uploadShapeFileToserver(@Part("plotcode") RequestBody plot_code, @Part MultipartBody.Part file);
 
-
-
-    //Old
-    @Multipart
-    @POST("TabDatabase/UploadTabDatabaseFileByVoluntaryId")
-    Call<ResponseBody> uploadDatabasefileDataToServer(@Part("AgentId") RequestBody api_key,@Part("VoluntaryId") RequestBody api_key2, @Part MultipartBody.Part file);
-
-
     @Multipart
     @POST("TabDatabase/UploadDatabase")
     Call<ResponseBody> uploadDatabasefileDataToServer(@Part("UserId") RequestBody api_key, @Part MultipartBody.Part file);
-
-//    @POST("Sync/AddVoluntaryTransactionDetails")
-//    Call<ResponseBody> syncFarmerDetailsDataToServer(@Body SyncPersonalLandAllDetailsRequestDTO syncPersonalLandAllDetailsRequestDTO, @Header("Authorization") String authHeader);
 
 }

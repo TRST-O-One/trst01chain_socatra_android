@@ -14,11 +14,20 @@ android {
         minSdk 24
         targetSdk 33
         versionCode 3
-        versionName "1.0.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+
+    signingConfigs {
+        release {
+            storeFile file('../app/socatra_supply_chain.jks')
+            storePassword 'android'
+            keyAlias 'key0'
+            keyPassword 'android'
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -54,8 +63,8 @@ dependencies {
 
     //Map
 //    implementation files("C:\\Users\\Nandini M\\Desktop\\areaviewlib-release.aar")
-    implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
-//    implementation files("D:\\SrikanthAndroid\\Trst01_Projects\\GajaRhakuProject\\DevCode\\areaviewlib-release.aar")
+   // implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
+    implementation files("D:\\Trst01LatetstWorkingProjects\\SocatraProject\\SocatraFieldExcutiveSupplyChain\\areaviewlib-release.aar")
 
 
 //    implementation files("C://Users//traya//AndroidStudioProjects//12-08-2023//areaviewlib-release.aar")//Chandu

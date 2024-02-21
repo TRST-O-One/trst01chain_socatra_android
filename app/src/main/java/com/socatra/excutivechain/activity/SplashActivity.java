@@ -93,7 +93,7 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Redirect the user to the Play Store for the update.
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.trst01.excutivechain"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.socatra.excutivechain"));
                 startActivity(intent);
             }
         });
@@ -151,20 +151,7 @@ public class SplashActivity extends AppCompatActivity {
         });
     }
 
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == APP_UPDATE_REQUEST_CODE) {
-//            if (resultCode != RESULT_OK) {
-//                // If the update is not completed, you can handle it here.
-//                // You may choose to retry or continue with the app.
-//                moveToLoginActivity();
-//            }
-//            // Continue to the login screen or next activity
-//
-//        }
-//
-//    }
+
 
     private void moveToLoginActivity() {
         new Handler().postDelayed(new Runnable() {

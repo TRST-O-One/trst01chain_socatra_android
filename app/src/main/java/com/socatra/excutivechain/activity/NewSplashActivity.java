@@ -375,7 +375,7 @@ public class NewSplashActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // Redirect the user to the Play Store for the update.
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.trst01.excutivechain"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.socatra.excutivechain"));
                 startActivity(intent);
             }
         });

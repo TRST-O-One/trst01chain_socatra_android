@@ -139,7 +139,7 @@ public class LoginActivity extends BaseActivity {
         intilalizeUI();
         strTodayDate = appHelper.getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD);
 
-        prefs = getSharedPreferences("com.trst01.excutivechain", MODE_PRIVATE);
+        prefs = getSharedPreferences("com.socatra.excutivechain", MODE_PRIVATE);
 
         mGetPermission = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -243,6 +243,7 @@ public class LoginActivity extends BaseActivity {
                     appHelper.getSharedPrefObj().edit().remove(AgentId).apply();
 
                     getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
+
                     //getFireBaseTokenValue();
                 } else {
                     Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();

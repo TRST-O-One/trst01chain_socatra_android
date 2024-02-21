@@ -157,19 +157,10 @@ public class CommonUtils {
             deviceId = mTelephony.getDeviceId();
         }
 
-//          return "123456789";//test dev user
-//          return "f8209e59ecbdfd4a";//test live user
-//          return "Voluntary";
-//          return "f8209e59ecbdfd4a";
-//          return "abc";
-          return deviceId;
-//          return "Manual2Entry";
-//          return "Agent";
-//          return "ManualEntry1";
-//          return "23385adfa2ce057a";
-//          return "d96ebb68a9cb3d8c";
-       // return "6e37ab3a336a1bed";
-        // return telephonyManager.getDeviceId();
+
+          //return deviceId;
+          return "4c3b2e586efcade7";
+
     }
 
     public static void showToast(final String message, final Context context) {

@@ -97,7 +97,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+//@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getCanonicalName();
     String appVersion;
@@ -106,12 +106,14 @@ public class LoginActivity extends BaseActivity {
     // TODO: List of all permissions
     private String[] PERMISSIONS_STORAGE = {
             Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+          /*  Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,*/
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_PHONE_STATE,
-            Manifest.permission.POST_NOTIFICATIONS
+            Manifest.permission.ACCESS_MEDIA_LOCATION,
+
+
     };
 
     private static final int PERMISSIONS_REQUESTS_CODE = 2000;
@@ -139,7 +141,7 @@ public class LoginActivity extends BaseActivity {
         intilalizeUI();
         strTodayDate = appHelper.getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD);
 
-        prefs = getSharedPreferences("com.socatra.excutivechain", MODE_PRIVATE);
+        prefs = getSharedPreferences("com.trst01.excutivechain", MODE_PRIVATE);
 
         mGetPermission = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
@@ -243,7 +245,6 @@ public class LoginActivity extends BaseActivity {
                     appHelper.getSharedPrefObj().edit().remove(AgentId).apply();
 
                     getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
-
                     //getFireBaseTokenValue();
                 } else {
                     Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
@@ -306,7 +307,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     public void takePermission() {
-        if (isPermissionGranted()) {
+        if (checkAllPermissions()) {
 //            App.createDBPath();
             txtDeviceId.setText("Device ID   : " + CommonUtils.getIMEInumber(this));
             txtDbNo.setText("DB  Version : " + String.valueOf(DB_VERSION));
@@ -317,14 +318,15 @@ public class LoginActivity extends BaseActivity {
                 appVersion = packageInfo.versionName;
                 if (!TextUtils.isEmpty(appVersion)) {
                     txtAppVersion.setText("App Version : " + appVersion);
-
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
 
         } else {
-            requestPermission();
+
+            checkAllPermissions();
+            //requestPermission();
         }
 
     }

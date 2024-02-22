@@ -12,9 +12,10 @@ android {
     defaultConfig {
         applicationId "com.socatra.excutivechain"
         minSdk 24
+        //noinspection ExpiredTargetSdkVersion
         targetSdk 33
-        versionCode 3
-        versionName "1.0.1"
+        versionCode 5
+        versionName "1.1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

@@ -158,8 +158,8 @@ public class CommonUtils {
         }
 
 
-          //return deviceId;
-          return "4c3b2e586efcade7";
+        return deviceId;
+        //return "4c3b2e586efcade7"; //testing device id
 
     }
 

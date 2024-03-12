@@ -62,7 +62,7 @@
                    android:layout_height="@dimen/_60sdp"
                    android:layout_gravity="center"
                    android:layout_marginTop="@dimen/_10ssp"
-                   android:src="@drawable/map_dialog_img" />
+                   android:src="@drawable/by_coordinate_green" />
 
                <TextView
                    android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                    android:layout_height="@dimen/_60sdp"
                    android:layout_gravity="center"
                    android:layout_marginTop="@dimen/_10ssp"
-                   android:src="@drawable/walk_dialog_img" />
+                   android:src="@drawable/by_walk_green" />
 
                <TextView
                    android:layout_width="wrap_content"
@@ -254,7 +254,7 @@
                       android:layout_height="@dimen/_60sdp"
                       android:layout_gravity="center"
                       android:layout_marginTop="@dimen/_10ssp"
-                      android:src="@drawable/baseline_walk" />
+                      android:src="@drawable/by_walk_with_map_green" />
 
                   <TextView
                       android:layout_width="wrap_content"

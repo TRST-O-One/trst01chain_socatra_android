@@ -989,6 +989,25 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 viewModel.insertLanguageMasterDetailIntoLocalDBQuery(appLanguageTable);
                             }
 
+                            /*//Todo Consent test
+                            AppLanguageTable appLanguageTable= new AppLanguageTable();
+
+                            appLanguageTable.setLanguageId(7);
+                            appLanguageTable.setSelectedLang("French");
+                            appLanguageTable.setSelectedWord("I, the undersigned %s, residing at %s %s %s, confirm the accuracy of the geolocation data and personal data collected by SOCATRA. I authorize the use, transfer and processing of my data by SOCATRA, by TRST01, by Golden Rubber and by their subcontractors, within the framework of their general activities, more particularly with the aim of ensuring that my Agricultural production complies with the international requirements of the sector, in particular the EUDR (Anti-Deforestation Regulation of the European Union). I understand that my original documents will not be shared with unauthorized third parties. I take responsibility for this decision and express my gratitude and confidence in this matter.");
+//                            appLanguageTable.setConvertedWord("Je, soussigné(e) %s, résidant à %s %s %s, confirme l exactitude des données de géolocalisation et des données personnelles collectées par la SOCATRA. J autorise l utilisation, le transfert et le traitement de mes données par SOCATRA, par TRST01, par Golden Rubber et par leurs sous-traitants et ce, dans le cadre de leurs activités générales, plus particulièrement dans but d assurer que ma production agricole respecte les exigences internationales de la filière, en particulier le RDUE (Règlement Anti-Déforestation de l Union Européenne). Je comprends que mes documents originaux ne seront pas partagés avec des tiers non-autorisés. J assume la responsabilité de cette décision et exprime ma gratitude et ma confiance pour ce sujet.");
+                            appLanguageTable.setConvertedWord("Je, soussigné(e) %s, résidant à %s %s %s, confirme l`exactitude des données de géolocalisation et des données personnelles collectées par la SOCATRA. J`autorise l`utilisation, le transfert et le traitement de mes données par SOCATRA, par TRST01, par Golden Rubber et par leurs sous-traitants et ce, dans le cadre de leurs activités générales, plus particulièrement dans but d`assurer que ma production agricole respecte les exigences internationales de la filière, en particulier le RDUE (Règlement Anti-Déforestation de l’Union Européenne). Je comprends que mes documents originaux ne seront pas partagés avec des tiers non-autorisés. J’assume la responsabilité de cette décision et exprime ma gratitude et ma confiance pour ce sujet.");
+//                            appLanguageTable.setConvertedWord("""Je, soussigné(e) %s, résidant à %s %s %s, confirme l'exactitude des données de géolocalisation et des données personnelles collectées par la SOCATRA. J'autorise l'utilisation, le transfert et le traitement de mes données par SOCATRA, par TRST01, par Golden Rubber et par leurs sous-traitants et ce, dans le cadre de leurs activités générales, plus particulièrement dans but d'assurer que ma production agricole respecte les exigences internationales de la filière, en particulier le RDUE (Règlement Anti-Déforestation de l’Union Européenne). Je comprends que mes documents originaux ne seront pas partagés avec des tiers non-autorisés. J’assume la responsabilité de cette décision et exprime ma gratitude et ma confiance pour ce sujet.""");
+
+                            appLanguageTable.setIsActive(true);
+                            appLanguageTable.setCreatedDate("18-04-24");
+                            appLanguageTable.setUpdatedDate("18-04-24");
+                            appLanguageTable.setCreatedByUserId(1);
+                            appLanguageTable.setUpdatedByUserId(1);
+
+                            viewModel.insertLanguageMasterDetailIntoLocalDBQuery(appLanguageTable);*/
+
+
                             progressDialog.dismiss();
                             progressBar.setVisibility(View.GONE);
                             Toast.makeText(SyncActivity.this, "Master Sync Successfully", Toast.LENGTH_LONG).show();

@@ -38,6 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="TS1826_160085000" />
@@ -46,7 +47,7 @@
                 android:id="@+id/txtFarmerName1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:text="Farmer Name : "
                 android:textSize="12sp" />
@@ -56,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="SunRisers Hyderabad " />
@@ -64,7 +66,7 @@
                 android:id="@+id/primary1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:text="Mobile No : "
                 android:textSize="12sp" />
@@ -74,6 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="8331984353 " />
@@ -82,7 +85,7 @@
                 android:id="@+id/fathername1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:text="Father Name : "
                 android:textSize="12sp" />
@@ -92,6 +95,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginTop="5dp"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 tools:text="Deccan Chargers " />
@@ -100,7 +104,7 @@
                 android:id="@+id/village1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="6dp"
                 android:ellipsize="end"
                 android:text="Village : "
                 android:textSize="12sp" />
@@ -110,9 +114,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:layout_marginTop="5dp"
                 android:text="Telangana "
                 android:textSize="14sp"
                 android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="No. of plots : (0/0)"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/status_incomplete_circle"
+                android:ellipsize="end"
+                android:layout_marginTop="5dp"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                tools:text="Farmer Mapping " />
 
             <!--<TextView
                 android:layout_width="match_parent"
@@ -147,68 +174,93 @@
                 android:layout_height="100dp"
                 android:src="@drawable/ic_baseline_agriculture_24" />
 
-            <!--<TextView
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:ellipsize="end"
-                android:text="Plot Status:"
+                android:text="Status:"
                 android:textSize="12sp"
+                android:textStyle="normal"
+                android:layout_marginBottom="3dp"
                 android:visibility="visible" />
 
             <TextView
-                android:id="@+id/txtPlotBoundStatus"
+                android:id="@+id/txtNoOfPlots"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/baseline_cancel_24"
                 android:ellipsize="end"
-                android:gravity="center|left"
+                android:text="No. of plots : (0/0)"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:visibility="visible"
-                tools:text="Boundaries " />
+                android:visibility="visible" />
 
             <TextView
+                android:id="@+id/txtBoundStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:ellipsize="end"
-                android:text="Logbook Status:"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/txtDateOfSowing"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/baseline_cancel_24"
-                android:ellipsize="end"
-                android:gravity="center|left"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                tools:text="Sowing Date " />
-
-            <TextView
-                android:id="@+id/txtPipeInstallation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:drawableEnd="@drawable/status_incomplete_circle"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                tools:text="Pipe Installation " />
+                android:visibility="gone"
+                android:text="Geo- Boundaries " />
 
             <TextView
-                android:id="@+id/txtWaterCyclesStatus"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableEnd="@drawable/baseline_cancel_24"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:text="Doc Status:"
+                android:visibility="gone"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/txtLegalDocStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/status_incomplete_circle"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Legal Doc " />
+
+            <TextView
+                android:id="@+id/txtConsentDocStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/status_incomplete_circle"
+                android:ellipsize="end"
+                android:gravity="center|left"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:text="Consent Doc " />
+
+            <TextView
+                android:id="@+id/txtRiskStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/status_incomplete_circle"
                 android:ellipsize="end"
                 android:gravity="center|left"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 android:visibility="visible"
-                tools:text="Water Cycles " />-->
+                android:text="Risk Survey " />
+
+            <TextView
+                android:id="@+id/txtMapping"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@drawable/status_incomplete_circle"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:text="Farmer Mapping " />
         </LinearLayout>
 
     </RelativeLayout>

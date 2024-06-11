@@ -20,7 +20,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="Sync   "
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <ImageView
@@ -65,7 +65,7 @@
         android:background="@drawable/bg_ui_light_orange_box_dark"
         android:gravity="center"
         android:text="ADD"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <TextView
@@ -83,7 +83,7 @@
         android:drawableEnd="@drawable/baseline_refresh"
         android:gravity="center"
         android:text="Refresh"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textStyle="bold" />
 
     <androidx.recyclerview.widget.RecyclerView

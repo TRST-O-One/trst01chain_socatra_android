@@ -4,6 +4,7 @@ package com.socatra.excutivechain.activity;
 import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS;
 import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS;
 import static com.socatra.excutivechain.AppConstant.DB_NAME;
+import static com.socatra.excutivechain.AppConstant.DB_VERSION;
 import static com.socatra.excutivechain.AppConstant.DeviceUserID;
 import static com.socatra.excutivechain.AppConstant.SUCCESS_RESPONSE_MESSAGE;
 import static com.socatra.excutivechain.AppConstant.accessToken;
@@ -19,11 +20,13 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
 import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
@@ -104,6 +107,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
     long nanoTime;
     String strDBName,strDBSubName,strMainDbFile;
+
+    TextView txtAppVersion;
+
+    String appVersion="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -295,6 +302,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
         txtUploadDb = findViewById(R.id.txtUploadDb);
         txtDealerSync = findViewById(R.id.txtDealerSync);
         txtManufacturerSync = findViewById(R.id.txtManufacturerSync);
+        txtAppVersion = findViewById(R.id.versionTxt);
 
         //Labels
         txtMasterSync = findViewById(R.id.txtMasterSync);
@@ -340,6 +348,18 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
 
     private void initializeValues() {
+
+        //App version and DB version
+        try {
+            PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
+            appVersion = packageInfo.versionName;
+            if (!TextUtils.isEmpty(appVersion)) {
+                txtAppVersion.setText("*App Version : "+appVersion+" || DB Version : "+ String.valueOf(DB_VERSION)+"*");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         txtMasterSync.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

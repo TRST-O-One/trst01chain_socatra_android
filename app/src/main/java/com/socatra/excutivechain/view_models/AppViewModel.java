@@ -697,6 +697,15 @@ public class AppViewModel extends ViewModel {
         }
     }
 
+    //for geo status
+    public void getPlantationGeoDetailsStatusFromLocalDbByFId(String strFarmerCode) {
+        try {
+            plantationDetailsById = appRepository.getPlantationGeoDetailsStatusFromLocalDbByFId(strFarmerCode);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public LiveData<List<Plantation>> getPlantationDetailsByIdLiveData() {
         return plantationDetailsById;
     }

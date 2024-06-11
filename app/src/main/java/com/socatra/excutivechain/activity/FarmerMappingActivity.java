@@ -141,8 +141,8 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
 
     private void configureViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
-        getFarmerDealerStatus(farmerCode);
-        getFarmerManufacturerStatus(farmerCode);
+//        getFarmerDealerStatus(farmerCode);
+//        getFarmerManufacturerStatus(farmerCode);
     }
 
     @Override

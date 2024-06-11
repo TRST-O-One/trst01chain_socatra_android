@@ -646,6 +646,18 @@ public class AppRepository {
         return data;
     }
 
+    //for geo status
+    public LiveData<List<Plantation>> getPlantationGeoDetailsStatusFromLocalDbByFId(String strFarmercode) {
+        final MutableLiveData<List<Plantation>> data = new MutableLiveData<>();
+        executor.execute(() -> {
+            Log.d(TAG, "FId" + strFarmercode);
+            boolean dataExist = (appDAO.getPlantationGeoDetailsStatusFromLocalDbByFId(strFarmercode) != null);
+            if (dataExist) {
+                data.postValue(appDAO.getPlantationGeoDetailsStatusFromLocalDbByFId(strFarmercode));
+            }
+        });
+        return data;
+    }
 
     //
     //PlantationLabourSurvey by fid

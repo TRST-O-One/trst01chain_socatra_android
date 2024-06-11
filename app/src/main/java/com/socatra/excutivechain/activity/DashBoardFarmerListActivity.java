@@ -381,11 +381,13 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         });
 
         farmerMapping.setOnClickListener(view -> {
-            Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
+
+            getFarmerDealerStatus(farmerCode,farmerTable1);
+            /*Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
             intent.putExtra("mFarmerCode", farmerCode);
             intent.putExtra("mFarmerObj", farmerTable1);
             startActivity(intent);
-            dialog.dismiss();
+            dialog.dismiss();*/
 
 //            if (farmerManufacturerStatus ==0) {
 //                if (farmerDealerStatus==0){
@@ -431,6 +433,48 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     }
 
 
+    private void getFarmerDealerStatus(String fid, FarmersTable farmerTable1) {
+        try {
+            viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
+            viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, new Observer<List<DealerFarmer>>() {
+                @Override
+                public void onChanged(List<DealerFarmer> dealerFarmers) {
+                    //dealer mapping
+                    if (dealerFarmers.size()>0){
+                        Log.e("validatDash","Dealer not exist");
+                        dialog.dismiss();
+                        Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // producer mapping
+                        viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
+                        viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, new Observer<List<ManfacturerFarmer>>() {
+                            @Override
+                            public void onChanged(List<ManfacturerFarmer> manfacturerFarmers) {
+                                if (manfacturerFarmers.size()>0){
+                                    Log.e("validatDash","Producer exist");
+                                    dialog.dismiss();
+                                    Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Log.e("validatDash","Producer not exist");
+                                    Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
+                                    intent.putExtra("mFarmerCode", farmerCode);
+                                    intent.putExtra("mFarmerObj", farmerTable1);
+                                    startActivity(intent);
+                                    dialog.dismiss();
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e("validatDash","1st catch");
+        }
+    }
+
+
     @Override
     public void onClick(View view) {
 
@@ -464,6 +508,9 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         super.onResume();
 //        shimmerFrameLayout.startShimmerAnimation();
 //        For refresh farmer list
+        if (farmerDetailsListAdapter!=null){
+            farmerDetailsListAdapter.notifyDataSetChanged();//update view
+        }
         try {
 //            searchByName.setQuery("", false);
 //            searchByName.setIconified(true);

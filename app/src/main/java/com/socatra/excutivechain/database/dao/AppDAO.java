@@ -393,6 +393,10 @@ public abstract class AppDAO {
     @Query("SELECT * FROM Plantation where FarmerCode=:strFarmercode  ORDER BY PlotId desc")
     public abstract List<Plantation> getPlantationDetailsFromLocalDbById(String strFarmercode);
 
+    //Plantation status
+    @Query("SELECT * FROM Plantation where FarmerCode=:strFarmerCode and GeoboundariesArea != 0.0 ORDER BY PlotId desc")
+    public abstract List<Plantation> getPlantationGeoDetailsStatusFromLocalDbByFId(String strFarmerCode);
+
     //for lab adpt
     @Query("SELECT * FROM Plantation where PlotCode=:fcode order by PlotId desc")
     public abstract List<Plantation> getPlantationDetailsFromLocalDbBymId(String fcode);

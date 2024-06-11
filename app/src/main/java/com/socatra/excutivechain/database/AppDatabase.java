@@ -1,7 +1,7 @@
 package com.socatra.excutivechain.database;
 
 
-import static com.socatra.excutivechain.AppConstant.DB_VERSION;
+import static com.socatra.excutivechain.utils.AppConstant.DB_VERSION;
 
 import androidx.room.Database;
 import androidx.room.RoomDatabase;

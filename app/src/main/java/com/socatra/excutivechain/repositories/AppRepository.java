@@ -1,9 +1,9 @@
 package com.socatra.excutivechain.repositories;
 
-import static com.socatra.excutivechain.AppConstant.FAILURE_RESPONSE_MESSAGE;
-import static com.socatra.excutivechain.AppConstant.RAW_DATA_URL;
-import static com.socatra.excutivechain.AppConstant.SUCCESS_RESPONSE_MESSAGE;
-import static com.socatra.excutivechain.AppConstant.accessToken;
+import static com.socatra.excutivechain.utils.AppConstant.FAILURE_RESPONSE_MESSAGE;
+import static com.socatra.excutivechain.utils.AppConstant.RAW_DATA_URL;
+import static com.socatra.excutivechain.utils.AppConstant.SUCCESS_RESPONSE_MESSAGE;
+import static com.socatra.excutivechain.utils.AppConstant.accessToken;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -12,7 +12,7 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.socatra.excutivechain.AppHelper;
+import com.socatra.excutivechain.utils.AppHelper;
 import com.socatra.excutivechain.api.AppAPI;
 import com.socatra.excutivechain.api.webservice.AppWebService;
 import com.socatra.excutivechain.database.dao.AppDAO;

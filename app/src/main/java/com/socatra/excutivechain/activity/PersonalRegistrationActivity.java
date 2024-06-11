@@ -1,11 +1,11 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
-import static com.socatra.excutivechain.AppConstant.ERROR_MESSAGE_ENTER_ADDRESS;
-import static com.socatra.excutivechain.AppConstant.ERROR_MESSAGE_ENTER_FATHERNAME;
-import static com.socatra.excutivechain.AppConstant.ERROR_MESSAGE_ENTER_FIRSTNAME;
-import static com.socatra.excutivechain.AppConstant.ERROR_MESSAGE_ENTER_LASTNAME;
-import static com.socatra.excutivechain.AppConstant.ERROR_MESSAGE_ENTER_PINCODE;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.ERROR_MESSAGE_ENTER_ADDRESS;
+import static com.socatra.excutivechain.utils.AppConstant.ERROR_MESSAGE_ENTER_FATHERNAME;
+import static com.socatra.excutivechain.utils.AppConstant.ERROR_MESSAGE_ENTER_FIRSTNAME;
+import static com.socatra.excutivechain.utils.AppConstant.ERROR_MESSAGE_ENTER_LASTNAME;
+import static com.socatra.excutivechain.utils.AppConstant.ERROR_MESSAGE_ENTER_PINCODE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -66,10 +66,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.BuildConfig;
-import com.socatra.excutivechain.CommonUtils;
+import com.socatra.excutivechain.utils.CommonUtils;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.Country;
 import com.socatra.excutivechain.database.entity.DistrictorRegency;

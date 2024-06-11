@@ -3,7 +3,7 @@ package com.socatra.excutivechain.api.webservice;
 
 
 
-import static com.socatra.excutivechain.AppConstant.BASE_AUTH_URL;
+import static com.socatra.excutivechain.utils.AppConstant.BASE_AUTH_URL;
 
 import com.socatra.excutivechain.api.interceptors.DownloadOkHtttpClient;
 import com.socatra.excutivechain.api.interceptors.UnsafeOkHttpClient;

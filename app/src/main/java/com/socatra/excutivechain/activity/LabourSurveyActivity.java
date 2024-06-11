@@ -1,6 +1,6 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -22,8 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.Plantation;
 import com.socatra.excutivechain.database.entity.PlantationLabourSurvey;

@@ -1,8 +1,8 @@
-package com.socatra.excutivechain;
+package com.socatra.excutivechain.di.app;
 
 
-import static com.socatra.excutivechain.AppConstant.DB_NAME;
-import static com.socatra.excutivechain.AppConstant.DB_SUB_FOLDER;
+import static com.socatra.excutivechain.utils.AppConstant.DB_NAME;
+import static com.socatra.excutivechain.utils.AppConstant.DB_SUB_FOLDER;
 
 import android.app.Activity;
 import android.app.Application;
@@ -11,6 +11,7 @@ import android.os.Environment;
 import android.text.TextUtils;
 
 import com.socatra.excutivechain.di.component.DaggerAppComponent;
+import com.socatra.excutivechain.utils.AppHelper;
 
 
 import java.io.File;

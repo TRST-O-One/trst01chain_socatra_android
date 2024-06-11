@@ -2,7 +2,7 @@ package com.socatra.excutivechain.di.component;
 
 import android.app.Application;
 
-import com.socatra.excutivechain.App;
+import com.socatra.excutivechain.di.app.App;
 import com.socatra.excutivechain.di.module.ActivityModule;
 import com.socatra.excutivechain.di.module.AppModule;
 import com.socatra.excutivechain.di.module.FragmentModule;

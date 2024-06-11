@@ -1,13 +1,12 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.App.appHelper;
+import static com.socatra.excutivechain.di.app.App.appHelper;
 
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
-import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -54,7 +53,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.maps.android.SphericalUtil;
-import com.socatra.excutivechain.AppConstant;
+import com.socatra.excutivechain.utils.AppConstant;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.CoordinatesAdapter;
 import com.socatra.excutivechain.database.entity.PlantationGeoBoundaries;

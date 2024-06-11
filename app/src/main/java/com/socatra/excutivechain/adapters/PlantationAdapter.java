@@ -2,7 +2,6 @@ package com.socatra.excutivechain.adapters;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.socatra.excutivechain.AppHelper;
+import com.socatra.excutivechain.utils.AppHelper;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.Plantation;
 import com.socatra.excutivechain.database.entity.VillageTable;

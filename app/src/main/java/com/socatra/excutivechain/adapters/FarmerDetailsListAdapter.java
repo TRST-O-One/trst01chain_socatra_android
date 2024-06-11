@@ -11,7 +11,6 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,14 +18,12 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.socatra.excutivechain.activity.FarmerMappingActivity;
-import com.socatra.excutivechain.activity.PlantationHomeActivity;
 import com.socatra.excutivechain.database.entity.DealerFarmer;
 import com.socatra.excutivechain.database.entity.ManfacturerFarmer;
 import com.socatra.excutivechain.database.entity.Plantation;
 import com.socatra.excutivechain.database.entity.RiskAssessment;
 import com.squareup.picasso.Picasso;
-import com.socatra.excutivechain.AppHelper;
+import com.socatra.excutivechain.utils.AppHelper;
 import com.socatra.excutivechain.R;
 
 import com.socatra.excutivechain.database.entity.PlantationDocuments;

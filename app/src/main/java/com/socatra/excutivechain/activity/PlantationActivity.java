@@ -1,6 +1,6 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,8 +46,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.FarmersTable;
 import com.socatra.excutivechain.database.entity.Plantation;

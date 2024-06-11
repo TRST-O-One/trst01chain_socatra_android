@@ -1,6 +1,6 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,8 +24,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.ChildSurveyAdapter;
 import com.socatra.excutivechain.database.entity.FarmerHouseholdChildrenSurvey;

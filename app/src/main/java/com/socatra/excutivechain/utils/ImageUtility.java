@@ -1,4 +1,4 @@
-package com.socatra.excutivechain;
+package com.socatra.excutivechain.utils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,8 @@ import android.os.Environment;
 import android.util.Base64;
 import android.view.Display;
 import android.view.WindowManager;
+
+import com.socatra.excutivechain.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;

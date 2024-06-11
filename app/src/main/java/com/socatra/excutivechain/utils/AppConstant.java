@@ -1,4 +1,4 @@
-package com.socatra.excutivechain;
+package com.socatra.excutivechain.utils;
 
 import android.Manifest;
 
@@ -8,10 +8,7 @@ public class AppConstant {
 
 
     // TODO: Live URl
-//    public static String BASE_AUTH_URL = "https://gajahruku.trst01.com/api/v1/";//Main Gajahruku api
-
-    //TODO : DEV - 04-12-23
-    public static String BASE_AUTH_URL = "https://socatra.trst01.com/api/V1/";//dev Socatra api
+    public static String BASE_AUTH_URL = "https://socatra.trst01.com/api/V1/";//Socatra api
 
 
     public static String RAW_DATA_URL = BASE_AUTH_URL; // TODO: RAW DATA URL

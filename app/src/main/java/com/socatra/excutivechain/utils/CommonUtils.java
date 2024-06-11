@@ -1,4 +1,4 @@
-package com.socatra.excutivechain;
+package com.socatra.excutivechain.utils;
 
 import android.Manifest;
 import android.annotation.SuppressLint;

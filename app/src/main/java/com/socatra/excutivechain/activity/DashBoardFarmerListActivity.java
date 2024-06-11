@@ -36,9 +36,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.BaseActivity;
 
-import com.socatra.excutivechain.CommonUtils;
+import com.socatra.excutivechain.utils.CommonUtils;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.FarmerDetailsListAdapter;
 
@@ -50,9 +50,6 @@ import com.socatra.excutivechain.view_models.AppViewModel;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.List;
 
 import javax.inject.Inject;

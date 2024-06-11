@@ -1,4 +1,4 @@
-package com.socatra.excutivechain;
+package com.socatra.excutivechain.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
@@ -13,7 +13,7 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.socatra.excutivechain.activity.FieldCalculatorActivity;
+import com.socatra.excutivechain.R;
 
 import java.io.File;
 import java.io.FileOutputStream;

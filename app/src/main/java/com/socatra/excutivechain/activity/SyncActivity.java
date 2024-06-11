@@ -1,13 +1,13 @@
 package com.socatra.excutivechain.activity;
 
 
-import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS;
-import static com.socatra.excutivechain.AppConstant.DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS;
-import static com.socatra.excutivechain.AppConstant.DB_NAME;
-import static com.socatra.excutivechain.AppConstant.DB_VERSION;
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
-import static com.socatra.excutivechain.AppConstant.SUCCESS_RESPONSE_MESSAGE;
-import static com.socatra.excutivechain.AppConstant.accessToken;
+import static com.socatra.excutivechain.utils.AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS;
+import static com.socatra.excutivechain.utils.AppConstant.DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS;
+import static com.socatra.excutivechain.utils.AppConstant.DB_NAME;
+import static com.socatra.excutivechain.utils.AppConstant.DB_VERSION;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.SUCCESS_RESPONSE_MESSAGE;
+import static com.socatra.excutivechain.utils.AppConstant.accessToken;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Observer;
@@ -36,8 +36,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonElement;
-import com.socatra.excutivechain.BaseActivity;
-import com.socatra.excutivechain.CommonUtils;
+import com.socatra.excutivechain.utils.BaseActivity;
+import com.socatra.excutivechain.utils.CommonUtils;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.LanguageAdapter;
 import com.socatra.excutivechain.api.AppAPI;

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -33,22 +32,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
-import com.socatra.excutivechain.CommonUtils;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
+import com.socatra.excutivechain.utils.CommonUtils;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.PlantationGeoBoundaries;
 import com.socatra.excutivechain.view_models.AppViewModel;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.socatra.excutivechain.di.module;
 
 
 
-import static com.socatra.excutivechain.AppConstant.DB_NAME;
+import static com.socatra.excutivechain.utils.AppConstant.DB_NAME;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,8 +12,8 @@ import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.socatra.excutivechain.App;
-import com.socatra.excutivechain.AppHelper;
+import com.socatra.excutivechain.di.app.App;
+import com.socatra.excutivechain.utils.AppHelper;
 import com.socatra.excutivechain.database.AppDatabase;
 import com.socatra.excutivechain.database.dao.AppDAO;
 import com.socatra.excutivechain.repositories.AppRepository;

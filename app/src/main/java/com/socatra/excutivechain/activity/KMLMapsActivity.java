@@ -1,8 +1,8 @@
 package com.socatra.excutivechain.activity;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
-import static com.socatra.excutivechain.AppConstant.accessToken;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.accessToken;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -45,8 +45,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.maps.android.SphericalUtil;
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.AppHelper;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.AppHelper;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.CoordinatesKmlAdapter;
 import com.socatra.excutivechain.api.AppAPI;

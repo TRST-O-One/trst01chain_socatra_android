@@ -1,6 +1,6 @@
 package com.socatra.excutivechain.activity;
 
-import static com.socatra.excutivechain.AppConstant.DeviceUserID;
+import static com.socatra.excutivechain.utils.AppConstant.DeviceUserID;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.drawable.BitmapDrawable;
-import android.media.metrics.EditingSession;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -30,8 +28,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.socatra.excutivechain.AppConstant;
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.AppConstant;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.MyAdapter;
 import com.socatra.excutivechain.database.entity.RiskAssessment;
@@ -47,7 +45,6 @@ import com.socatra.excutivechain.multispineeradapters.DropDownListAdapterQ37;
 import com.socatra.excutivechain.multispineeradapters.DropDownListAdapterQ40;
 import com.socatra.excutivechain.view_models.AppViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

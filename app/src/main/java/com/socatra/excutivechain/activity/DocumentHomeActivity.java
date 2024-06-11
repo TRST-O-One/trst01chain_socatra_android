@@ -15,7 +15,7 @@ import android.preference.PreferenceManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.adapters.DocHomeAdapter;
 import com.socatra.excutivechain.database.entity.FarmersTable;

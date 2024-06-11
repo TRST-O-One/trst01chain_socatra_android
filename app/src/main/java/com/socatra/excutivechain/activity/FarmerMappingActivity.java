@@ -15,7 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.socatra.excutivechain.BaseActivity;
+import com.socatra.excutivechain.utils.BaseActivity;
 import com.socatra.excutivechain.R;
 import com.socatra.excutivechain.database.entity.DealerFarmer;
 import com.socatra.excutivechain.database.entity.FarmersTable;

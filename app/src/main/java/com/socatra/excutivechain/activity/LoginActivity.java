@@ -149,7 +149,7 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-        appHelper.getSharedPrefObj().edit().remove(DB_NAME).apply();
+//        appHelper.getSharedPrefObj().edit().remove(DB_NAME).apply();
 
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -236,11 +236,11 @@ public class LoginActivity extends BaseActivity {
         if (checkAllPermissions()) {
             if (prefs.getBoolean("firstrun", true)) {
                 if (appHelper.isNetworkAvailable()) {
-                    appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
+                    /*appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
                     appHelper.getSharedPrefObj().edit().remove(accessToken).apply();
                     appHelper.getSharedPrefObj().edit().remove(DeviceUserName).apply();
                     appHelper.getSharedPrefObj().edit().remove(DeviceUserPwd).apply();
-                    appHelper.getSharedPrefObj().edit().remove(AgentId).apply();
+                    appHelper.getSharedPrefObj().edit().remove(AgentId).apply();*/
 
                     getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
                     //getFireBaseTokenValue();
@@ -460,6 +460,7 @@ public class LoginActivity extends BaseActivity {
 
     //Todo: Main Master Sync
     public void getMasterSyncFromServerDetails(String token) {
+        Log.e(TAG,"Called Master");
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<JsonElement> callRetrofit = null;
         callRetrofit = service.getMasterSyncDetailsFromServer(token);
@@ -771,6 +772,7 @@ public class LoginActivity extends BaseActivity {
 
     //Todo: All farmer records
     public void getSyncFarmerAllDataFromServer() {
+        Log.e(TAG,"Called Master Farmer");
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<JsonElement> callRetrofit = null;
         callRetrofit = service.getFarmerAllSyncDataDetailsFromServer(CommonUtils.getIMEInumber(LoginActivity.this), appHelper.getSharedPrefObj().getString(accessToken, ""));
@@ -1431,13 +1433,15 @@ public class LoginActivity extends BaseActivity {
                             txtPassword.setText(appHelper.getSharedPrefObj().getString(DeviceUserPwd, ""));
                         } else {
                             if (appHelper.isNetworkAvailable()) {
-                                appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
+                                /*appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
                                 appHelper.getSharedPrefObj().edit().remove(accessToken).apply();
                                 appHelper.getSharedPrefObj().edit().remove(DeviceUserName).apply();
-                                appHelper.getSharedPrefObj().edit().remove(DeviceUserPwd).apply();
+                                appHelper.getSharedPrefObj().edit().remove(DeviceUserPwd).apply();*/
 //                                getLoginDetailsByImeiNumber("Voluntary");
                                 getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
                             } else {
+                                txtUserName.setText(appHelper.getSharedPrefObj().getString(DeviceUserName, ""));
+                                txtPassword.setText(appHelper.getSharedPrefObj().getString(DeviceUserPwd, ""));
                                 Toast.makeText(LoginActivity.this, "no internet", Toast.LENGTH_SHORT).show();
                             }
                         }

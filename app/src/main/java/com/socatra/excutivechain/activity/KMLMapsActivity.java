@@ -196,7 +196,7 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
             geoBoundary.setFarmerCode(farmerCode);
             geoBoundary.setLatitude(latLngLists.get(i).latitude);
             geoBoundary.setLongitude(latLngLists.get(i).longitude);
-            geoBoundary.setSeqNo(i+1);
+            geoBoundary.setSeqNo(i);
             geoBoundary.setPlotCount(gpsCat + 1);
             geoBoundary.setIsActive("true");
             geoBoundary.setCreatedByUserId(id);

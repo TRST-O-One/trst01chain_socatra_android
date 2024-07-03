@@ -57,7 +57,6 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/recordCoOrdinates"
         android:layout_below="@+id/btnPannel"
-        android:layout_marginTop="20dp"
         android:keepScreenOn="true" />
 
     <LinearLayout

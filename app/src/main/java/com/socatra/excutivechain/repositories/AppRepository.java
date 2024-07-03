@@ -1476,8 +1476,14 @@ public class AppRepository {
                 spNameGPSDetailsClass.setPlotCount(1);
             }
 
-            if (!TextUtils.isEmpty(String.valueOf(index))) {
+           /* if (!TextUtils.isEmpty(String.valueOf(index))) {
                 spNameGPSDetailsClass.setSeqNo(index);
+            } else {
+                spNameGPSDetailsClass.setSeqNo(0);
+            }*/
+
+            if (!TextUtils.isEmpty(String.valueOf(geoBoundariesTable.getSeqNo()))) {
+                spNameGPSDetailsClass.setSeqNo(geoBoundariesTable.getSeqNo());
             } else {
                 spNameGPSDetailsClass.setSeqNo(0);
             }

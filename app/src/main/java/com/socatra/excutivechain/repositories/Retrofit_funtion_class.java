@@ -11,6 +11,7 @@ import com.socatra.excutivechain.api.webservice.NullOnEmptyConverterFactory;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -18,12 +19,16 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Retrofit_funtion_class {
 
     private static Retrofit retrofit = null;
+
     private static OkHttpClient httpClient =  new OkHttpClient.Builder()
-            .readTimeout(60, TimeUnit.SECONDS)
-            .connectTimeout(60, TimeUnit.SECONDS)
+            .readTimeout(360, TimeUnit.SECONDS)
+            .connectTimeout(360, TimeUnit.SECONDS)
             .addInterceptor(new LoggingInterceptor())
+//            .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
+
     public static Retrofit getClient() {
+
         if (retrofit == null) {
             Gson gson = new GsonBuilder().setLenient().create();
             retrofit = new Retrofit.Builder().baseUrl(apiBaseUrl)

@@ -74,6 +74,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.zip.GZIPOutputStream;
 
 import javax.inject.Inject;
@@ -1076,12 +1078,608 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
         callRetrofit.enqueue(new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(SyncActivity.this, "Fetched All Data From Server SuccessFully", Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                }, 1500);
+
+
+                ExecutorService executorService = Executors.newSingleThreadExecutor();
+                executorService.execute(() -> {
                 try {
                     String strResponse = String.valueOf(response.body());
                     Log.d(TAG, "onResponse: >>>"+strResponse);
                     JSONObject jsonArray = new JSONObject(strResponse);
                     if (jsonArray.length() > 0) {
-                        new Handler().postDelayed(new Runnable() {
+
+                        try {//Todo Sync : Response sequence
+
+                            JSONArray jsonFarmerPDArray = jsonArray.getJSONArray("data").getJSONArray(0);
+                            JSONArray jsonPlotDetailsArray = jsonArray.getJSONArray("data").getJSONArray(1);
+                            JSONArray jsonPlantationDocDetailsArray = jsonArray.getJSONArray("data").getJSONArray(2);
+                            JSONArray jsonPlantationGeoDetailsArray = jsonArray.getJSONArray("data").getJSONArray(3);
+                            JSONArray jsonPlantationLabourSurveyArray = jsonArray.getJSONArray("data").getJSONArray(4);
+                            JSONArray jsonPlantationParentSurveyArray = jsonArray.getJSONArray("data").getJSONArray(5);
+                            JSONArray jsonPlantationChildSurveyArray = jsonArray.getJSONArray("data").getJSONArray(6);
+                            JSONArray jsonRiskAssessmentArray = jsonArray.getJSONArray("data").getJSONArray(7);
+                            JSONArray jsonDealerArray = jsonArray.getJSONArray("data").getJSONArray(8);
+                            JSONArray jsonManufacturerArray = jsonArray.getJSONArray("data").getJSONArray(9);
+
+                            //For Farmer
+                            if (jsonFarmerPDArray.length() != 0 || jsonFarmerPDArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int farmerPD = 0; farmerPD < jsonFarmerPDArray.length(); farmerPD++) {
+                                    JSONObject jsonObjectFarmerPD = jsonFarmerPDArray.getJSONObject(farmerPD);
+                                    FarmersTable farmerTable = new FarmersTable();
+
+                                    farmerTable.setId(jsonObjectFarmerPD.getInt("Id"));
+                                    farmerTable.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
+                                    farmerTable.setFirstName(jsonObjectFarmerPD.getString("FirstName"));
+                                    farmerTable.setLastName(jsonObjectFarmerPD.getString("LastName"));
+                                    farmerTable.setFatherName(jsonObjectFarmerPD.getString("FatherName"));
+                                    farmerTable.setGender(jsonObjectFarmerPD.getString("Gender"));
+                                    farmerTable.setAge(jsonObjectFarmerPD.getString("Age"));
+                                    farmerTable.setPrimaryContactNo(jsonObjectFarmerPD.getString("PrimaryContactNo"));
+                                    farmerTable.setAddress(jsonObjectFarmerPD.getString("Address"));
+
+                                    farmerTable.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
+                                    farmerTable.setNoOfPlots(jsonObjectFarmerPD.getString("NoOfPlots"));
+                                    try {
+                                        farmerTable.setNationalIdentityCode(jsonObjectFarmerPD.getString("NationalIdentityCode"));
+                                    } catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+                                    try {
+                                        farmerTable.setNationalIdentityCodeDocument(jsonObjectFarmerPD.getString("NationalIdentityCodeDocument"));
+                                    } catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    farmerTable.setSync(true);
+                                    farmerTable.setServerSync("1");
+
+
+                                    try {
+                                        farmerTable.setImage(jsonObjectFarmerPD.getString("Image"));
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+                                    farmerTable.setIsActive("1");
+                                    farmerTable.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
+                                    farmerTable.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
+                                        farmerTable.setCreatedDate(destFormat.format(createDate));
+                                        farmerTable.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertFarmerDetailListTableLocal(farmerTable);
+
+                                }
+                            } else {
+                            }
+
+
+                            //For Plantation
+                            if (jsonPlotDetailsArray.length() != 0 || jsonPlotDetailsArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int plt = 0; plt < jsonPlotDetailsArray.length(); plt++) {
+                                    JSONObject jsonObjectFarmerPD = jsonPlotDetailsArray.getJSONObject(plt);
+                                    Plantation plantation=new Plantation();
+
+                                    plantation.setId(jsonObjectFarmerPD.getInt("Id"));
+                                    plantation.setPlotCode(jsonObjectFarmerPD.getString("PlotCode"));
+                                    plantation.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
+                                    plantation.setTypeOfOwnership(jsonObjectFarmerPD.getString("TypeOfOwnership"));
+
+                                    plantation.setLabourStatus(jsonObjectFarmerPD.getString("LabourStatus"));
+                                    plantation.setAreaInHectors(jsonObjectFarmerPD.getDouble("AreaInHectors"));
+                                    plantation.setLatitude(jsonObjectFarmerPD.getDouble("Latitude"));
+                                    plantation.setLongitude(jsonObjectFarmerPD.getDouble("Longitude"));
+                                    //GeoboundariesArea
+                                    try {
+                                        plantation.setGeoboundariesArea(Double.valueOf(jsonObjectFarmerPD.getString("GeoboundariesArea")));
+                                    } catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    plantation.setAddress(jsonObjectFarmerPD.getString("Address"));
+                                    plantation.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
+                                    plantation.setIsActive(jsonObjectFarmerPD.getString("IsActive"));
+
+
+                                    plantation.setSync(true);
+                                    plantation.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    plantation.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
+                                    plantation.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
+                                        plantation.setCreatedDate(destFormat.format(createDate));
+                                        plantation.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertPlantationDetailListTableLocal(plantation);
+
+                                }
+                            } else {
+                            }
+
+                            //For PlantationDoc
+                            if (jsonPlantationDocDetailsArray.length() != 0 || jsonPlantationDocDetailsArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int pltDoc = 0; pltDoc < jsonPlantationDocDetailsArray.length(); pltDoc++) {
+                                    JSONObject jsonObjectPlantationDoc = jsonPlantationDocDetailsArray.getJSONObject(pltDoc);
+                                    PlantationDocuments plantationDocuments=new PlantationDocuments();
+
+                                    plantationDocuments.setFarmerCode(jsonObjectPlantationDoc.getString("FarmerCode"));
+                                    plantationDocuments.setPlotCode(jsonObjectPlantationDoc.getString("PlotCode"));
+                                    plantationDocuments.setDocURL(jsonObjectPlantationDoc.getString("DocURL"));
+                                    plantationDocuments.setDocType(jsonObjectPlantationDoc.getString("DocType"));
+                                    plantationDocuments.setDocUrlValue(jsonObjectPlantationDoc.getString("DocUrlValue"));
+
+                                    plantationDocuments.setIsActive(jsonObjectPlantationDoc.getString("IsActive"));
+
+
+                                    plantationDocuments.setSync(true);
+                                    plantationDocuments.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    plantationDocuments.setUpdatedByUserId(jsonObjectPlantationDoc.getString("UpdatedByUserId"));
+                                    plantationDocuments.setCreatedByUserId(jsonObjectPlantationDoc.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("UpdatedDate"));
+                                        plantationDocuments.setCreatedDate(destFormat.format(createDate));
+                                        plantationDocuments.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertPlantationDocDetailListTableLocal(plantationDocuments);
+
+                                }
+                            } else {
+                            }
+
+                            //For Plantation Geo
+                            if (jsonPlantationGeoDetailsArray.length() != 0 || jsonPlantationGeoDetailsArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int pltGeo = 0; pltGeo < jsonPlantationGeoDetailsArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectPlantationGeo = jsonPlantationGeoDetailsArray.getJSONObject(pltGeo);
+                                    PlantationGeoBoundaries plantationGeoBoundaries=new PlantationGeoBoundaries();
+
+                                    plantationGeoBoundaries.setPlotCode(jsonObjectPlantationGeo.getString("PlotCode"));
+                                    plantationGeoBoundaries.setFarmerCode(jsonObjectPlantationGeo.getString("FarmerCode"));
+                                    plantationGeoBoundaries.setLatitude(jsonObjectPlantationGeo.getDouble("Latitude"));
+                                    plantationGeoBoundaries.setLongitude(jsonObjectPlantationGeo.getDouble("Longitude"));
+                                    plantationGeoBoundaries.setSeqNo(jsonObjectPlantationGeo.getInt("SeqNo"));
+                                    plantationGeoBoundaries.setPlotCount(jsonObjectPlantationGeo.getInt("PlotCount"));
+
+                                    plantationGeoBoundaries.setIsActive(jsonObjectPlantationGeo.getString("IsActive"));
+
+
+
+                                    plantationGeoBoundaries.setSync(true);
+                                    plantationGeoBoundaries.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    plantationGeoBoundaries.setUpdatedByUserId(jsonObjectPlantationGeo.getString("UpdatedByUserId"));
+                                    plantationGeoBoundaries.setCreatedByUserId(jsonObjectPlantationGeo.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("UpdatedDate"));
+                                        plantationGeoBoundaries.setCreatedDate(destFormat.format(createDate));
+                                        plantationGeoBoundaries.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertPlantationGeoDetailListTableLocal(plantationGeoBoundaries);
+
+                                }
+                            } else {
+                            }
+
+                            //For Labour Survey
+                            if (jsonPlantationLabourSurveyArray.length() != 0 || jsonPlantationLabourSurveyArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int lbr = 0; lbr < jsonPlantationLabourSurveyArray.length(); lbr++) {
+                                    JSONObject jsonObjectLabourSurvey = jsonPlantationLabourSurveyArray.getJSONObject(lbr);
+                                    PlantationLabourSurvey plantationLabourSurvey=new PlantationLabourSurvey();
+
+                                    plantationLabourSurvey.setFarmerCode(jsonObjectLabourSurvey.getString("FarmerCode"));
+                                    //plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.getInt("PlantationId"));
+                                    plantationLabourSurvey.setPlantationCode(jsonObjectLabourSurvey.getString("PlantationCode"));
+                                    plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
+
+                                    plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
+                                    plantationLabourSurvey.setNoOfMaleWorkers(jsonObjectLabourSurvey.getInt("NoOfMaleWorkers"));
+                                    plantationLabourSurvey.setNoOfFemaleWorkers(jsonObjectLabourSurvey.getInt("NoOfFemaleWorkers"));
+                                    plantationLabourSurvey.setNoOfResident(jsonObjectLabourSurvey.getInt("NoOfResident"));
+                                    plantationLabourSurvey.setNoOfMigrant(jsonObjectLabourSurvey.getInt("NoOfMigrant"));
+                                    plantationLabourSurvey.setOccupationOfChildren(jsonObjectLabourSurvey.getString("OccupationOfChildren"));
+
+
+
+                                    plantationLabourSurvey.setIsActive(jsonObjectLabourSurvey.getString("IsActive"));
+
+
+                                    plantationLabourSurvey.setSync(true);
+                                    plantationLabourSurvey.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    plantationLabourSurvey.setUpdatedByUserId(jsonObjectLabourSurvey.getString("UpdatedByUserId"));
+                                    plantationLabourSurvey.setCreatedByUserId(jsonObjectLabourSurvey.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("UpdatedDate"));
+                                        plantationLabourSurvey.setCreatedDate(destFormat.format(createDate));
+                                        plantationLabourSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertPlantationLabourSurveyListTableLocal(plantationLabourSurvey);
+
+                                }
+                            } else {
+                            }
+
+                            //For Parent Survey
+                            if (jsonPlantationParentSurveyArray.length() != 0 || jsonPlantationParentSurveyArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int pltGeo = 0; pltGeo < jsonPlantationParentSurveyArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectParentSurvey = jsonPlantationParentSurveyArray.getJSONObject(pltGeo);
+                                    FarmerHouseholdParentSurvey farmerHouseholdParentSurvey=new FarmerHouseholdParentSurvey();
+
+                                    farmerHouseholdParentSurvey.setFarmerCode(jsonObjectParentSurvey.getString("FarmerCode"));
+                                    farmerHouseholdParentSurvey.setFarmerId(String.valueOf(jsonObjectParentSurvey.getInt("FarmerId")));
+                                    farmerHouseholdParentSurvey.setFamilyCount(jsonObjectParentSurvey.getInt("FamilyCount"));
+                                    farmerHouseholdParentSurvey.setMaritalStatus(jsonObjectParentSurvey.getString("MaritalStatus"));
+                                    farmerHouseholdParentSurvey.setSpouseName(jsonObjectParentSurvey.getString("SpouseName"));
+                                    farmerHouseholdParentSurvey.setAge(jsonObjectParentSurvey.getInt("Age"));
+                                    farmerHouseholdParentSurvey.setGender(jsonObjectParentSurvey.getString("Gender"));
+                                    farmerHouseholdParentSurvey.setOccupation(jsonObjectParentSurvey.getString("Occupation"));
+                                    farmerHouseholdParentSurvey.setNoofChildren(jsonObjectParentSurvey.getInt("NoofChildren"));
+
+                                    farmerHouseholdParentSurvey.setIsActive(jsonObjectParentSurvey.getString("IsActive"));
+
+                                    farmerHouseholdParentSurvey.setSync(true);
+                                    farmerHouseholdParentSurvey.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    farmerHouseholdParentSurvey.setUpdatedByUserId(jsonObjectParentSurvey.getString("UpdatedByUserId"));
+                                    farmerHouseholdParentSurvey.setCreatedByUserId(jsonObjectParentSurvey.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectParentSurvey.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectParentSurvey.getString("UpdatedDate"));
+                                        farmerHouseholdParentSurvey.setCreatedDate(destFormat.format(createDate));
+                                        farmerHouseholdParentSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertFarmerHouseholdParentSurveyListTableLocal(farmerHouseholdParentSurvey);
+
+                                }
+                            } else {
+                            }
+
+                            //For Child Survey
+                            if (jsonPlantationChildSurveyArray.length() != 0 || jsonPlantationChildSurveyArray.length() > 0) {
+//                                        getPersoanlEmptyDataFromServer = false;
+
+                                for (int pltGeo = 0; pltGeo < jsonPlantationChildSurveyArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectChildServey = jsonPlantationChildSurveyArray.getJSONObject(pltGeo);
+                                    FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey=new FarmerHouseholdChildrenSurvey();
+
+                                    farmerHouseholdChildrenSurvey.setFarmerCode(jsonObjectChildServey.getString("FarmerCode"));
+                                    farmerHouseholdChildrenSurvey.setFarmerHouseholdSurveyId(jsonObjectChildServey.getInt("FarmerHouseholdSurveyId"));
+                                    farmerHouseholdChildrenSurvey.setFarmerId(jsonObjectChildServey.getString("FarmerId"));
+                                    farmerHouseholdChildrenSurvey.setChildrenName(jsonObjectChildServey.getString("ChildrenName"));
+                                    farmerHouseholdChildrenSurvey.setChildrenGender(jsonObjectChildServey.getString("ChildrenGender"));
+                                    farmerHouseholdChildrenSurvey.setChildrenAge(jsonObjectChildServey.getInt("ChildrenAge"));
+                                    farmerHouseholdChildrenSurvey.setChildrenOccupation(jsonObjectChildServey.getString("ChildrenOccupation"));
+
+                                    farmerHouseholdChildrenSurvey.setIsActive(jsonObjectChildServey.getString("IsActive"));
+
+
+                                    farmerHouseholdChildrenSurvey.setSync(true);
+                                    farmerHouseholdChildrenSurvey.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    farmerHouseholdChildrenSurvey.setUpdatedByUserId(jsonObjectChildServey.getString("UpdatedByUserId"));
+                                    farmerHouseholdChildrenSurvey.setCreatedByUserId(jsonObjectChildServey.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectChildServey.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectChildServey.getString("UpdatedDate"));
+                                        farmerHouseholdChildrenSurvey.setCreatedDate(destFormat.format(createDate));
+                                        farmerHouseholdChildrenSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertFarmerHouseholdChildrenSurveyListTableLocal(farmerHouseholdChildrenSurvey);
+
+                                }
+                            } else {
+                            }
+
+
+                            //Risk Assessment Answers
+                            if (jsonRiskAssessmentArray.length() != 0 || jsonRiskAssessmentArray.length() > 0) {
+
+                                for (int pltGeo = 0; pltGeo < jsonRiskAssessmentArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectRiskAssessment = jsonRiskAssessmentArray.getJSONObject(pltGeo);
+                                    RiskAssessment riskAssessment=new RiskAssessment();
+
+                                    riskAssessment.setRiskAssesmentQuestionHdrId(jsonObjectRiskAssessment.getInt("RiskAssesmentQuestionHdrId"));
+                                    riskAssessment.setFarmerCode(jsonObjectRiskAssessment.getString("FarmerCode"));
+                                    riskAssessment.setAnswers(jsonObjectRiskAssessment.getString("Answers"));
+
+                                    riskAssessment.setIsActive(jsonObjectRiskAssessment.getString("IsActive"));
+                                    riskAssessment.setSync(true);
+                                    riskAssessment.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    riskAssessment.setUpdatedByUserId(jsonObjectRiskAssessment.getString("UpdatedByUserId"));
+                                    riskAssessment.setCreatedByUserId(jsonObjectRiskAssessment.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("UpdatedDate"));
+                                        riskAssessment.setCreatedDate(destFormat.format(createDate));
+                                        riskAssessment.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertRiskAssessmentDataLocalDB(riskAssessment);
+
+                                }
+                            } else {
+                            }
+
+                            //Dealer sync
+                            if (jsonDealerArray.length() != 0 || jsonDealerArray.length() > 0) {
+
+                                for (int pltGeo = 0; pltGeo < jsonDealerArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectDealer = jsonDealerArray.getJSONObject(pltGeo);
+                                    DealerFarmer dealerFarmer=new DealerFarmer();
+
+                                    dealerFarmer.setDealerId(jsonObjectDealer.getInt("DealerId"));
+                                    dealerFarmer.setFarmerCode(jsonObjectDealer.getString("FarmerCode"));
+
+                                    dealerFarmer.setIsActive(jsonObjectDealer.getString("IsActive"));
+                                    dealerFarmer.setSync(true);
+                                    dealerFarmer.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    dealerFarmer.setUpdatedByUserId(jsonObjectDealer.getString("UpdatedByUserId"));
+                                    dealerFarmer.setCreatedByUserId(jsonObjectDealer.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectDealer.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectDealer.getString("UpdatedDate"));
+                                        dealerFarmer.setCreatedDate(destFormat.format(createDate));
+                                        dealerFarmer.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertDealerFarmerDataLocalDB(dealerFarmer);
+
+                                }
+                            } else {
+                            }
+
+                            //Manufacturer sync
+                            if (jsonManufacturerArray.length() != 0 || jsonManufacturerArray.length() > 0) {
+
+                                for (int pltGeo = 0; pltGeo < jsonManufacturerArray.length(); pltGeo++) {
+                                    JSONObject jsonObjectManufacturer = jsonManufacturerArray.getJSONObject(pltGeo);
+                                    ManfacturerFarmer manfacturerFarmer=new ManfacturerFarmer();
+
+                                    //for gaja
+                                    manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ProcessorId"));
+//                                            manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ManfacturerId"));
+                                    manfacturerFarmer.setFarmerCode(jsonObjectManufacturer.getString("FarmerCode"));
+
+                                    manfacturerFarmer.setIsActive(jsonObjectManufacturer.getString("IsActive"));
+                                    manfacturerFarmer.setSync(true);
+                                    manfacturerFarmer.setServerSync("1");
+
+
+                                    try {
+
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
+
+                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                    Log.d(TAG, "onClick: date" + dateTime);
+
+                                    manfacturerFarmer.setUpdatedByUserId(jsonObjectManufacturer.getString("UpdatedByUserId"));
+                                    manfacturerFarmer.setCreatedByUserId(jsonObjectManufacturer.getString("CreatedByUserId"));
+
+                                    try {
+                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        // sourceFormat.setTimeZone(utc);
+                                        Date createDate = sourceFormat.parse(jsonObjectManufacturer.getString("CreatedDate"));
+                                        Date updatedDate = sourceFormat.parse(jsonObjectManufacturer.getString("UpdatedDate"));
+                                        manfacturerFarmer.setCreatedDate(destFormat.format(createDate));
+                                        manfacturerFarmer.setUpdatedDate(destFormat.format(updatedDate));
+
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+
+                                    viewModel.insertManfacturerFarmerDataLocalDB(manfacturerFarmer);
+
+                                }
+                            } else {
+                            }
+
+                        }
+                        catch (Exception ex) {
+                            ex.printStackTrace();
+                            Toast.makeText(SyncActivity.this, String.valueOf(ex.getMessage()), Toast.LENGTH_SHORT).show();
+                            progressBar.setVisibility(View.GONE);
+                            progressDialog.dismiss();
+                            Log.d("Error", ">>>>" + ex.toString());
+                        }
+
+
+
+                        //Todo : Old
+                        /*new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
                                 try {//Todo Sync : Response sequence
@@ -1668,7 +2266,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                     Log.d("Error", ">>>>" + ex.toString());
                                 }
                             }
-                        }, 2000);
+                        }, 2000);*/
+
+
+
                     } else {
                         Toast.makeText(SyncActivity.this, "no records found", Toast.LENGTH_LONG).show();
                     }
@@ -1679,6 +2280,9 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                     Toast.makeText(SyncActivity.this, "Transaction Sync Failed, please contact admin", Toast.LENGTH_SHORT).show();
                     Log.d("Error", ">>>>" + ex.toString());
                 }
+
+                });
+
             }
 
             @Override

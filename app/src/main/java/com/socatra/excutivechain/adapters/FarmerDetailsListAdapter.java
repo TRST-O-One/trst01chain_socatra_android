@@ -62,6 +62,11 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
         return new LoanTypeViewHolder(view);
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
+
     @SuppressLint("ResourceType")
     @Override
     public void onBindViewHolder(@NonNull LoanTypeViewHolder loanTypeViewHolder, @SuppressLint("RecyclerView") int i) {

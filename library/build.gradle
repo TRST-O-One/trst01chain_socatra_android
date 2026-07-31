@@ -28,6 +28,7 @@ ext {
 }
 
 android {
+    namespace 'com.androidbuts.multispinnerfilter'
     compileSdkVersion 33
     defaultConfig {
         minSdkVersion 19

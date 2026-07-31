@@ -16,12 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.install.InstallStateUpdatedListener;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
-import com.google.android.play.core.tasks.OnSuccessListener;
+
 import com.socatra.excutivechain.R;
 
 import java.util.ArrayList;
@@ -44,9 +39,8 @@ public class SplashActivity extends AppCompatActivity {
     };
 
     private static final int PERMISSIONS_REQUESTS_CODE = 3000;
-    private AppUpdateManager appUpdateManager;
+
     private static final int APP_UPDATE_REQUEST_CODE = 123;
-    InstallStateUpdatedListener listener;
     String strPlayStoreVersion,strCurrentVersion;
 
 //    private AppUpdateManager mAppUpdateManager;
@@ -126,30 +120,30 @@ public class SplashActivity extends AppCompatActivity {
         return true;
     }
 
-    private void checkForAppUpdate() {
-        // Create an instance of the AppUpdateInfo
-        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
-            @Override
-            public void onSuccess(AppUpdateInfo appUpdateInfo) {
-                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
-                    // Prompt the user to update
-                    try {
-                        appUpdateManager.startUpdateFlowForResult(
-                                appUpdateInfo,
-                                AppUpdateType.IMMEDIATE,
-                                SplashActivity.this,
-                                APP_UPDATE_REQUEST_CODE);
-                    } catch (IntentSender.SendIntentException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    // Continue to the login screen or next activity
-                    moveToLoginActivity();
-                }
-            }
-        });
-    }
+//    private void checkForAppUpdate() {
+//        // Create an instance of the AppUpdateInfo
+//        appUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+//            @Override
+//            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+//                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
+//                        appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+//                    // Prompt the user to update
+//                    try {
+//                        appUpdateManager.startUpdateFlowForResult(
+//                                appUpdateInfo,
+//                                AppUpdateType.IMMEDIATE,
+//                                SplashActivity.this,
+//                                APP_UPDATE_REQUEST_CODE);
+//                    } catch (IntentSender.SendIntentException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    // Continue to the login screen or next activity
+//                    moveToLoginActivity();
+//                }
+//            }
+//        });
+//    }
 
 //    @Override
 //    protected void onActivityResult(int requestCode, int resultCode, Intent data) {

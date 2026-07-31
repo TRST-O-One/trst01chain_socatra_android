@@ -1,23 +1,22 @@
 plugins {
     id 'com.android.application'
-    //Map
     id 'com.google.gms.google-services'
-    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+    id 'org.jetbrains.kotlin.android' // Apply Kotlin plugin here
 }
-
 android {
     namespace 'com.socatra.excutivechain'
-    compileSdk 33
+    compileSdk 36
 
     defaultConfig {
         applicationId "com.socatra.excutivechain"
         minSdk 24
-        targetSdk 33
-        versionCode 3
-        versionName "1.0.9"
+        targetSdk 36
+        versionCode 12
+        versionName "1.2.1"//31-07-26
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+    ndkVersion "26.1.10909125" // or latest
 
     buildTypes {
         release {
@@ -26,8 +25,12 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_17
     }
 
     /*
@@ -39,6 +42,37 @@ android {
 
     buildFeatures {
         viewBinding true
+        buildConfig true
+    }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        exclude 'AndroidManifest.xml'
+        exclude 'jsr305_annotations/Jsr305_annotations.gwt.xml'
+        jniLibs {
+            useLegacyPackaging true
+        }
+    }
+    packagingOptions {
+        // exclude ARMEABI native so file, ARMEABI has been removed in NDK r17.
+        exclude "lib/armeabi/**"
+    }
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
     }
 }
 
@@ -53,12 +87,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
     //Map
-//    implementation files("C:\\Users\\Nandini M\\Desktop\\areaviewlib-release.aar")
-    implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
-//    implementation files("D:\\SrikanthAndroid\\Trst01_Projects\\GajaRhakuProject\\DevCode\\areaviewlib-release.aar")
+//    implementation files("C:\\Users\\drspo\\OneDrive\\Desktop\\trst01android\\areaviewlib-release.aar")
+    implementation files("D:\\Trst01LatetstWorkingProjects\\Rubber Supply  Chain Projects\\12. Socatra Golden Rubbber Project(Ivory Coast)\\SocatraFieldExcutiveSupplyChain\\areaviewlib-release.aar")
 
-
-//    implementation files("C://Users//traya//AndroidStudioProjects//12-08-2023//areaviewlib-release.aar")//Chandu
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.google.maps.android:android-maps-utils:0.4'
     /* GPS Location */
@@ -98,7 +129,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.71828'
     //Circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
-    implementation 'com.google.android.play:core:1.10.3'
+//    implementation 'com.google.android.play:core:1.10.3'
     implementation 'com.google.android.material:material:1.6.0'
     //firebase
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
@@ -142,3 +173,4 @@ dependencies {
 
 
 }
+apply plugin: 'com.google.gms.google-services'

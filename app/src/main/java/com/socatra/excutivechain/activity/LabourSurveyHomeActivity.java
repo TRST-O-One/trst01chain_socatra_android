@@ -55,8 +55,6 @@ public class LabourSurveyHomeActivity extends BaseActivity implements HasSupport
         setContentView(R.layout.activity_labour_survey_home);
 
         farmerCode = getIntent().getStringExtra("mFarmerCode");
-//        getAreaValue();
-        Log.e(TAG, farmerCode);
 
         initializeUI();
         initializeValues();

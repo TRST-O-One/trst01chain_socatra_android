@@ -96,8 +96,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     public AppViewModel viewModel;
     private SharedPreferences preferences;
     ImageView imgBack;
-    TextView txtFarmerSync,txtPlotSync,txtBankSync,txtDocSync,txtGpsSync, txtSurvey, txtParentSync,txtRiskSync,
-            txtMasterSync,txtSendData,txtGetData,txtUploadDb, txtChildSync,txtDealerSync,txtManufacturerSync,
+    TextView txtFarmerSync, txtPlotSync, txtBankSync, txtDocSync, txtGpsSync, txtSurvey, txtParentSync, txtRiskSync,
+            txtMasterSync, txtSendData, txtGetData, txtUploadDb, txtChildSync, txtDealerSync, txtManufacturerSync,
             changeLanguageButton;
     ProgressBar progressBar;
     Dialog dialog;
@@ -105,14 +105,14 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     LanguageAdapter languageAdapter;
     List<AppLanguageHDRTable> appLanguageHDRTable;
 
-    boolean languageChanged=false;
+    boolean languageChanged = false;
 
     long nanoTime;
-    String strDBName,strDBSubName,strMainDbFile;
+    String strDBName, strDBSubName, strMainDbFile;
 
     TextView txtAppVersion;
 
-    String appVersion="";
+    String appVersion = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,10 +126,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        strDBName = appHelper.getSharedPrefObj().getString(DB_NAME,"");
+        strDBName = appHelper.getSharedPrefObj().getString(DB_NAME, "");
         strDBSubName = strDBName + "_DB";
         strMainDbFile = strDBName + ".db";
-        appLanguageHDRTable=new ArrayList<>();
+        appLanguageHDRTable = new ArrayList<>();
 
         getAllLanguagesFromHDR();
 
@@ -155,7 +155,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         List<AppLanguageHDRTable> list = (List<AppLanguageHDRTable>) o;
                         viewModel.getAllLanguagesFromHDRLiveData().removeObserver(this);
                         if (list != null && list.size() > 0) {
-                            appLanguageHDRTable=list;
+                            appLanguageHDRTable = list;
 
                         } else {
 
@@ -170,117 +170,29 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
     private void showLanguageSelectionDialog() {
-        final Dialog languageDialog = new Dialog(this,R.style.MyAlertDialogThemeNew);
+        final Dialog languageDialog = new Dialog(this, R.style.MyAlertDialogThemeNew);
         languageDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        languageDialog.setContentView(R.layout.dialog_language_selection);
         languageDialog.setContentView(R.layout.dialog_language_selection_new);//for dynamic list
         languageDialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_dialog);
         languageDialog.setCanceledOnTouchOutside(true);
         languageDialog.setCancelable(true);
 
         //For dynamic list
-        RecyclerView recycleLang=languageDialog.findViewById(R.id.selectLangRecycle);
+        RecyclerView recycleLang = languageDialog.findViewById(R.id.selectLangRecycle);
         recycleLang.setLayoutManager(new LinearLayoutManager(this));
-        languageAdapter=new LanguageAdapter(appLanguageHDRTable,preferences,getSelectedLanguage(),languageDialog,this);//set list and content
+        languageAdapter = new LanguageAdapter(appLanguageHDRTable, preferences, getSelectedLanguage(), languageDialog, this);//set list and content
         recycleLang.setAdapter(languageAdapter);
-
-//        Button englishButton = languageDialog.findViewById(R.id.englishButtonDialog);
-//        englishButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("English");
-//                showToast("English selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
-//
-//        Button hindiButton = languageDialog.findViewById(R.id.hindiButtonDialog);
-//        hindiButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("Hindi");
-//                showToast("Hindi selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
-//
-//        Button vietnamButton = languageDialog.findViewById(R.id.vietnamButtonDialog);
-//        vietnamButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("Vietnamese");
-//                showToast("Vietnamese selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
-//
-//        Button thaiButton = languageDialog.findViewById(R.id.thaiButtonDialog);
-//        thaiButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("Thai");
-//                showToast("Thai selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
-//        Button malayButton = languageDialog.findViewById(R.id.MalayButtonDialog);
-//        malayButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("Malay");
-//                showToast("Malay selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
-//        Button indonesianButton = languageDialog.findViewById(R.id.IndonesianButtonDialog);
-//        indonesianButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                saveSelectedLanguage("Indonesian");
-//                showToast("Indonesian selected");
-//                languageDialog.dismiss();
-//                recreateApp();
-//            }
-//        });
 
         languageDialog.show();
     }
 
-
-
-    private void recreateApp() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
-    }
-
-
-
-//    private void saveSelectedLanguage(String language) {
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putString("selected_language", language);
-//        editor.apply();
-////refresh activity
-//        recreateApp();
-//    }
     @Override
     public void onBackPressed() {
-        if (languageChanged==true){
+        if (languageChanged == true) {
             Intent intent = new Intent(this, DashBoardFarmerListActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//            overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             startActivity(intent);
-//            finish(); // Finish the SyncActivity
         } else {
-//            Intent intent = new Intent(this, DashBoardFarmerListActivity.class);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//            startActivity(intent);
             finish(); // Finish the SyncActivity
         }
     }
@@ -316,7 +228,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
 
-
     private String getSelectedLanguage() {
         return preferences.getString("selected_language", "English");
     }
@@ -325,11 +236,11 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     private void updateButtonLabels() {
         String selectedLanguage = getSelectedLanguage();
 
-        String hdMasterSync=getResources().getString(R.string.masterdata1);
-        String hdSendDataSync=getResources().getString(R.string.senddata1);
-        String hdGetDataSync=getResources().getString(R.string.getdata1);
-        String hdUploadDataSync=getResources().getString(R.string.uploaddata1);
-        String hdChangeLanguageSync=getResources().getString(R.string.change_language);
+        String hdMasterSync = getResources().getString(R.string.masterdata1);
+        String hdSendDataSync = getResources().getString(R.string.senddata1);
+        String hdGetDataSync = getResources().getString(R.string.getdata1);
+        String hdUploadDataSync = getResources().getString(R.string.uploaddata1);
+        String hdChangeLanguageSync = getResources().getString(R.string.change_language);
 
         if (selectedLanguage.equals("English")) {
             txtMasterSync.setText(hdMasterSync);
@@ -339,16 +250,16 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             changeLanguageButton.setText(hdChangeLanguageSync);
             // Update your UI elements' text accordingly
         } else {
-            txtMasterSync.setText(getLanguageFromLocalDb(selectedLanguage,hdMasterSync) + "/" + hdMasterSync);
-            txtSendData.setText(getLanguageFromLocalDb(selectedLanguage,hdSendDataSync) + "/" + hdSendDataSync);
-            txtGetData.setText(getLanguageFromLocalDb(selectedLanguage,hdGetDataSync) + "/" + hdGetDataSync);
-            txtUploadDb.setText(getLanguageFromLocalDb(selectedLanguage,hdUploadDataSync) + "/" + hdUploadDataSync);
-            changeLanguageButton.setText(getLanguageFromLocalDb(selectedLanguage,hdChangeLanguageSync) + "/" + hdChangeLanguageSync);
+            txtMasterSync.setText(getLanguageFromLocalDb(selectedLanguage, hdMasterSync) + "/" + hdMasterSync);
+            txtSendData.setText(getLanguageFromLocalDb(selectedLanguage, hdSendDataSync) + "/" + hdSendDataSync);
+            txtGetData.setText(getLanguageFromLocalDb(selectedLanguage, hdGetDataSync) + "/" + hdGetDataSync);
+            txtUploadDb.setText(getLanguageFromLocalDb(selectedLanguage, hdUploadDataSync) + "/" + hdUploadDataSync);
+            changeLanguageButton.setText(getLanguageFromLocalDb(selectedLanguage, hdChangeLanguageSync) + "/" + hdChangeLanguageSync);
         }
     }
 
 
-
+    @SuppressLint("SetTextI18n")
     private void initializeValues() {
 
         //App version and DB version
@@ -356,7 +267,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             appVersion = packageInfo.versionName;
             if (!TextUtils.isEmpty(appVersion)) {
-                txtAppVersion.setText("*App Version : "+appVersion+" || DB Version : "+ String.valueOf(DB_VERSION)+"*");
+                txtAppVersion.setText("*App Version : " + appVersion + " || DB Version : " + String.valueOf(DB_VERSION) + "*");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -404,16 +315,16 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         progressDialog.setMessage("fetch db and uploading to server...");
                         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDialog.show();
-                        newUploadDataBase(getDbFileToUpload(), progressDialog,dialog);
+                        newUploadDataBase(getDbFileToUpload(), progressDialog, dialog);
                     }
                 });
 
-              txtNo.setOnClickListener(new View.OnClickListener() {
-                  @Override
-                  public void onClick(View v) {
-                      dialog.dismiss();
-                  }
-              });
+                txtNo.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
             }
         });
 
@@ -429,13 +340,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     public void newUploadDataBase(final File uploadNewFile, ProgressDialog progressDialog, Dialog dialog) {
         nanoTime = System.nanoTime();
         if (null != uploadNewFile) {
-
-          //  final String filePathToSave = "/sdcard/SupplyChain_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
-
-            final String filePathToSave = "/sdcard/"+appHelper.getSharedPrefObj().getString(DB_NAME,"")+"_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
+            final String filePathToSave = "/sdcard/" + appHelper.getSharedPrefObj().getString(DB_NAME, "") + "_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip";
 
             final File toZipFile = getDbFileToUpload();
-            getzipFile(toZipFile, filePathToSave, progressDialog,dialog);
+            getzipFile(toZipFile, filePathToSave, progressDialog, dialog);
         } else {
             Toast.makeText(SyncActivity.this, "file upload failed", Toast.LENGTH_SHORT).show();
         }
@@ -443,16 +351,14 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
     public File getDbFileToUpload() {
         try {
-//            File dir = Environment.getExternalStorageDirectory();
-            File dbFileToUpload = new File("/sdcard/"+strDBName+strDBSubName+strMainDbFile);
-
-       //     File dbFileToUpload = new File("/sdcard/SupplyChain/SupplyChain_DB/SupplyChain_Prod_DB/SupplyChain.db");
+            File dbFileToUpload = new File("/sdcard/" + strDBName + strDBSubName + strMainDbFile);
             return dbFileToUpload;
         } catch (Exception e) {
             android.util.Log.w("Settings Backup", e);
         }
         return null;
     }
+
     public void getzipFile(File sourceFile, String destinaton_zip_filepath, ProgressDialog progressDialog, Dialog dialog) {
         //  final long nanoTime = System.nanoTime();
         byte[] buffer = new byte[1024];
@@ -467,13 +373,10 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             fileInput.close();
             gzipOuputStream.finish();
             gzipOuputStream.close();
-            System.out.println("The file was compressed successfully!");
             File dir = Environment.getExternalStorageDirectory();
             File uploadFile = new File(dir, "SupplyChain_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "") + "_" + nanoTime + "_v_" + CommonUtils.getAppVersion(SyncActivity.this) + ".gzip");
             if (uploadFile != null) {
-                //   newUploadDbFile(uploadFile, BASE_AUTH_URL + AppConstant.UPLOAD_DB_LINK,progressDialog);
-                // uploadFileToServer(uploadFile, BASE_AUTH_URL + AppConstant.UPLOAD_DB_LINK, progressDialog);
-                uploadDataBaseTOServerAPI(uploadFile, progressDialog,dialog);
+                uploadDataBaseTOServerAPI(uploadFile, progressDialog, dialog);
                 //  new MyTask(uploadFile, progressDialog);
             }
         } catch (IOException ex) {
@@ -482,20 +385,12 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
     private void uploadDataBaseTOServerAPI(File uploadFile, ProgressDialog progressDialog, Dialog dialog) {
-
-        Log.d(TAG, "uploadDataBaseTOServerAPI: " + uploadFile.getAbsolutePath());
-        MultipartBody.Part file_pathDB = null;
         File file = new File(uploadFile.getAbsolutePath());
         // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse(getMimeType(uploadFile.getAbsolutePath())), file);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        Log.d("Filepath", ">>>>>>>>>>" + fileToUpload);
-        RequestBody r_acces_token = RequestBody.create(MediaType.parse("multipart/form-data"),
-                appHelper.getSharedPrefObj().getString(accessToken, ""));
-
         RequestBody r_userID = RequestBody.create(MediaType.parse("multipart/form-data"),
                 appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-        Log.d(TAG, "uploadDataBaseTOServerAPIUserId: " + appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<ResponseBody> callRetrofit = null;
         callRetrofit = service.uploadDatabasefileDataToServer(r_userID, fileToUpload);
@@ -506,20 +401,15 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                     progressDialog.dismiss();
                     dialog.dismiss();
                     String strResponse = response.body().string();
-                    Log.d(TAG, "onResponse: AppData " + response);
                     JSONObject json_object = new JSONObject(strResponse);
                     String message = "", status = "";
-                    Log.e(TAG, "onResponse: data json" + json_object);
                     message = json_object.getString("message");
                     status = json_object.getString("status");
-                    Log.d(TAG, "status " + status);
                     if (status.equals("1")) {
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else if (status.equals("0")) {
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
-
-
                 } catch (Exception ex) {
                     ex.printStackTrace();
                     Log.d("Error Call", ">>>>" + ex.toString());
@@ -594,7 +484,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             ex.printStackTrace();
         }
     }
-
 
 
     // TODO: Plant Not sync count
@@ -729,14 +618,13 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                 @Override
                 public void onChanged(@Nullable Integer integer) {
 //                    notSyncDocCount = integer;
-                    txtDocSync.setText( String.valueOf(integer));
+                    txtDocSync.setText(String.valueOf(integer));
                 }
             });
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
 
 
     // TODO: Geo Not sync count
@@ -746,7 +634,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                 @Override
                 public void onChanged(@Nullable Integer integer) {
 //                    notSyncGeoCount = integer;
-                    txtGpsSync.setText( String.valueOf(integer));
+                    txtGpsSync.setText(String.valueOf(integer));
                 }
             });
         } catch (Exception ex) {
@@ -787,8 +675,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                             JSONArray jsonAppLanguageHDRArray = jsonArray.getJSONArray("data").getJSONArray(8);
                             JSONArray jsonAppLanguageArray = jsonArray.getJSONArray("data").getJSONArray(9);
 
-                            Log.e("jsonAppLanguageHDRArray",jsonAppLanguageHDRArray.toString());
-                            Log.e("jsonAppLanguageArray",jsonAppLanguageArray.toString());
+                            Log.e("jsonAppLanguageHDRArray", jsonAppLanguageHDRArray.toString());
+                            Log.e("jsonAppLanguageArray", jsonAppLanguageArray.toString());
 
                             //For Country Master
                             for (int cont = 0; cont < jsonCountryArray.length(); cont++) {
@@ -930,7 +818,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 manufacturerMaster.setVillageId(jsonObjectManufacturer.getInt("VillageId"));
 
 
-
                                 manufacturerMaster.setIsActive(jsonObjectManufacturer.getBoolean("IsActive"));
                                 manufacturerMaster.setCreatedDate(jsonObjectManufacturer.getString("CreatedDate"));
                                 manufacturerMaster.setUpdatedDate(jsonObjectManufacturer.getString("UpdatedDate"));
@@ -970,12 +857,12 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                             }
 
                             //For App language HDR
-                            for (int i=0;i<jsonAppLanguageHDRArray.length();i++){
+                            for (int i = 0; i < jsonAppLanguageHDRArray.length(); i++) {
                                 JSONObject jsonObjectAppLangHDR = jsonAppLanguageHDRArray.getJSONObject(i);
 
                                 Log.d(TAG, "onResponse: jsonObjectAppLangHDR" + jsonObjectAppLangHDR);
 
-                                AppLanguageHDRTable appLanguageHDRTable= new AppLanguageHDRTable();
+                                AppLanguageHDRTable appLanguageHDRTable = new AppLanguageHDRTable();
 
                                 appLanguageHDRTable.setLanguageId(jsonObjectAppLangHDR.getInt("Id"));
                                 appLanguageHDRTable.setLanguageName(jsonObjectAppLangHDR.getString("LanguageName"));
@@ -990,12 +877,12 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                             }
 
                             //For App Language
-                            for (int i=0;i< jsonAppLanguageArray.length();i++){
+                            for (int i = 0; i < jsonAppLanguageArray.length(); i++) {
 
                                 JSONObject jsonObjectAppLanguage = jsonAppLanguageArray.getJSONObject(i);
                                 Log.d(TAG, "onResponse: jsonObjectAppLanguage" + jsonObjectAppLanguage);
 
-                                AppLanguageTable appLanguageTable= new AppLanguageTable();
+                                AppLanguageTable appLanguageTable = new AppLanguageTable();
 
                                 appLanguageTable.setLanguageId(jsonObjectAppLanguage.getInt("languageid"));
                                 appLanguageTable.setSelectedLang(jsonObjectAppLanguage.getString("selectedLanguage"));
@@ -1090,1196 +977,598 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
 
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
                 executorService.execute(() -> {
-                try {
-                    String strResponse = String.valueOf(response.body());
-                    Log.d(TAG, "onResponse: >>>"+strResponse);
-                    JSONObject jsonArray = new JSONObject(strResponse);
-                    if (jsonArray.length() > 0) {
+                    try {
+                        String strResponse = String.valueOf(response.body());
+                        Log.d(TAG, "onResponse: >>>" + strResponse);
+                        JSONObject jsonArray = new JSONObject(strResponse);
+                        if (jsonArray.length() > 0) {
 
-                        try {//Todo Sync : Response sequence
+                            try {//Todo Sync : Response sequence
 
-                            JSONArray jsonFarmerPDArray = jsonArray.getJSONArray("data").getJSONArray(0);
-                            JSONArray jsonPlotDetailsArray = jsonArray.getJSONArray("data").getJSONArray(1);
-                            JSONArray jsonPlantationDocDetailsArray = jsonArray.getJSONArray("data").getJSONArray(2);
-                            JSONArray jsonPlantationGeoDetailsArray = jsonArray.getJSONArray("data").getJSONArray(3);
-                            JSONArray jsonPlantationLabourSurveyArray = jsonArray.getJSONArray("data").getJSONArray(4);
-                            JSONArray jsonPlantationParentSurveyArray = jsonArray.getJSONArray("data").getJSONArray(5);
-                            JSONArray jsonPlantationChildSurveyArray = jsonArray.getJSONArray("data").getJSONArray(6);
-                            JSONArray jsonRiskAssessmentArray = jsonArray.getJSONArray("data").getJSONArray(7);
-                            JSONArray jsonDealerArray = jsonArray.getJSONArray("data").getJSONArray(8);
-                            JSONArray jsonManufacturerArray = jsonArray.getJSONArray("data").getJSONArray(9);
+                                JSONArray jsonFarmerPDArray = jsonArray.getJSONArray("data").getJSONArray(0);
+                                JSONArray jsonPlotDetailsArray = jsonArray.getJSONArray("data").getJSONArray(1);
+                                JSONArray jsonPlantationDocDetailsArray = jsonArray.getJSONArray("data").getJSONArray(2);
+                                JSONArray jsonPlantationGeoDetailsArray = jsonArray.getJSONArray("data").getJSONArray(3);
+                                JSONArray jsonPlantationLabourSurveyArray = jsonArray.getJSONArray("data").getJSONArray(4);
+                                JSONArray jsonPlantationParentSurveyArray = jsonArray.getJSONArray("data").getJSONArray(5);
+                                JSONArray jsonPlantationChildSurveyArray = jsonArray.getJSONArray("data").getJSONArray(6);
+                                JSONArray jsonRiskAssessmentArray = jsonArray.getJSONArray("data").getJSONArray(7);
+                                JSONArray jsonDealerArray = jsonArray.getJSONArray("data").getJSONArray(8);
+                                JSONArray jsonManufacturerArray = jsonArray.getJSONArray("data").getJSONArray(9);
 
-                            //For Farmer
-                            if (jsonFarmerPDArray.length() != 0 || jsonFarmerPDArray.length() > 0) {
+                                //For Farmer
+                                if (jsonFarmerPDArray.length() != 0 || jsonFarmerPDArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int farmerPD = 0; farmerPD < jsonFarmerPDArray.length(); farmerPD++) {
-                                    JSONObject jsonObjectFarmerPD = jsonFarmerPDArray.getJSONObject(farmerPD);
-                                    FarmersTable farmerTable = new FarmersTable();
+                                    for (int farmerPD = 0; farmerPD < jsonFarmerPDArray.length(); farmerPD++) {
+                                        JSONObject jsonObjectFarmerPD = jsonFarmerPDArray.getJSONObject(farmerPD);
+                                        FarmersTable farmerTable = new FarmersTable();
 
-                                    farmerTable.setId(jsonObjectFarmerPD.getInt("Id"));
-                                    farmerTable.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
-                                    farmerTable.setFirstName(jsonObjectFarmerPD.getString("FirstName"));
-                                    farmerTable.setLastName(jsonObjectFarmerPD.getString("LastName"));
-                                    farmerTable.setFatherName(jsonObjectFarmerPD.getString("FatherName"));
-                                    farmerTable.setGender(jsonObjectFarmerPD.getString("Gender"));
-                                    farmerTable.setAge(jsonObjectFarmerPD.getString("Age"));
-                                    farmerTable.setPrimaryContactNo(jsonObjectFarmerPD.getString("PrimaryContactNo"));
-                                    farmerTable.setAddress(jsonObjectFarmerPD.getString("Address"));
+                                        farmerTable.setId(jsonObjectFarmerPD.getInt("Id"));
+                                        farmerTable.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
+                                        farmerTable.setFirstName(jsonObjectFarmerPD.getString("FirstName"));
+                                        farmerTable.setLastName(jsonObjectFarmerPD.getString("LastName"));
+                                        farmerTable.setFatherName(jsonObjectFarmerPD.getString("FatherName"));
+                                        farmerTable.setGender(jsonObjectFarmerPD.getString("Gender"));
+                                        farmerTable.setAge(jsonObjectFarmerPD.getString("Age"));
+                                        farmerTable.setPrimaryContactNo(jsonObjectFarmerPD.getString("PrimaryContactNo"));
+                                        farmerTable.setAddress(jsonObjectFarmerPD.getString("Address"));
 
-                                    farmerTable.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
-                                    farmerTable.setNoOfPlots(jsonObjectFarmerPD.getString("NoOfPlots"));
-                                    try {
-                                        farmerTable.setNationalIdentityCode(jsonObjectFarmerPD.getString("NationalIdentityCode"));
-                                    } catch (Exception e){
-                                        e.printStackTrace();
+                                        farmerTable.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
+                                        farmerTable.setNoOfPlots(jsonObjectFarmerPD.getString("NoOfPlots"));
+                                        try {
+                                            farmerTable.setNationalIdentityCode(jsonObjectFarmerPD.getString("NationalIdentityCode"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+                                        try {
+                                            farmerTable.setNationalIdentityCodeDocument(jsonObjectFarmerPD.getString("NationalIdentityCodeDocument"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        farmerTable.setSync(true);
+                                        farmerTable.setServerSync("1");
+
+
+                                        try {
+                                            farmerTable.setImage(jsonObjectFarmerPD.getString("Image"));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+                                        farmerTable.setIsActive("1");
+                                        farmerTable.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
+                                        farmerTable.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
+                                            farmerTable.setCreatedDate(destFormat.format(createDate));
+                                            farmerTable.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertFarmerDetailListTableLocal(farmerTable);
+
                                     }
-                                    try {
-                                        farmerTable.setNationalIdentityCodeDocument(jsonObjectFarmerPD.getString("NationalIdentityCodeDocument"));
-                                    } catch (Exception e){
-                                        e.printStackTrace();
-                                    }
-
-                                    farmerTable.setSync(true);
-                                    farmerTable.setServerSync("1");
-
-
-                                    try {
-                                        farmerTable.setImage(jsonObjectFarmerPD.getString("Image"));
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                    }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-                                    farmerTable.setIsActive("1");
-                                    farmerTable.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
-                                    farmerTable.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
-                                        farmerTable.setCreatedDate(destFormat.format(createDate));
-                                        farmerTable.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertFarmerDetailListTableLocal(farmerTable);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
 
-                            //For Plantation
-                            if (jsonPlotDetailsArray.length() != 0 || jsonPlotDetailsArray.length() > 0) {
+                                //For Plantation
+                                if (jsonPlotDetailsArray.length() != 0 || jsonPlotDetailsArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int plt = 0; plt < jsonPlotDetailsArray.length(); plt++) {
-                                    JSONObject jsonObjectFarmerPD = jsonPlotDetailsArray.getJSONObject(plt);
-                                    Plantation plantation=new Plantation();
+                                    for (int plt = 0; plt < jsonPlotDetailsArray.length(); plt++) {
+                                        JSONObject jsonObjectFarmerPD = jsonPlotDetailsArray.getJSONObject(plt);
+                                        Plantation plantation = new Plantation();
 
-                                    plantation.setId(jsonObjectFarmerPD.getInt("Id"));
-                                    plantation.setPlotCode(jsonObjectFarmerPD.getString("PlotCode"));
-                                    plantation.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
-                                    plantation.setTypeOfOwnership(jsonObjectFarmerPD.getString("TypeOfOwnership"));
+                                        plantation.setId(jsonObjectFarmerPD.getInt("Id"));
+                                        plantation.setPlotCode(jsonObjectFarmerPD.getString("PlotCode"));
+                                        plantation.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
+                                        plantation.setTypeOfOwnership(jsonObjectFarmerPD.getString("TypeOfOwnership"));
 
-                                    plantation.setLabourStatus(jsonObjectFarmerPD.getString("LabourStatus"));
-                                    plantation.setAreaInHectors(jsonObjectFarmerPD.getDouble("AreaInHectors"));
-                                    plantation.setLatitude(jsonObjectFarmerPD.getDouble("Latitude"));
-                                    plantation.setLongitude(jsonObjectFarmerPD.getDouble("Longitude"));
-                                    //GeoboundariesArea
-                                    try {
-                                        plantation.setGeoboundariesArea(Double.valueOf(jsonObjectFarmerPD.getString("GeoboundariesArea")));
-                                    } catch (Exception e){
-                                        e.printStackTrace();
+                                        plantation.setLabourStatus(jsonObjectFarmerPD.getString("LabourStatus"));
+                                        plantation.setAreaInHectors(jsonObjectFarmerPD.getDouble("AreaInHectors"));
+                                        plantation.setLatitude(jsonObjectFarmerPD.getDouble("Latitude"));
+                                        plantation.setLongitude(jsonObjectFarmerPD.getDouble("Longitude"));
+                                        //GeoboundariesArea
+                                        try {
+                                            plantation.setGeoboundariesArea(Double.valueOf(jsonObjectFarmerPD.getString("GeoboundariesArea")));
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        plantation.setAddress(jsonObjectFarmerPD.getString("Address"));
+                                        plantation.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
+                                        plantation.setIsActive(jsonObjectFarmerPD.getString("IsActive"));
+
+
+                                        plantation.setSync(true);
+                                        plantation.setServerSync("1");
+
+
+                                        try {
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        plantation.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
+                                        plantation.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
+                                            plantation.setCreatedDate(destFormat.format(createDate));
+                                            plantation.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertPlantationDetailListTableLocal(plantation);
+
                                     }
-
-                                    plantation.setAddress(jsonObjectFarmerPD.getString("Address"));
-                                    plantation.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
-                                    plantation.setIsActive(jsonObjectFarmerPD.getString("IsActive"));
-
-
-                                    plantation.setSync(true);
-                                    plantation.setServerSync("1");
-
-
-                                    try {
-
-                                    }catch (Exception e){
-                                        e.printStackTrace();
-                                    }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    plantation.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
-                                    plantation.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
-                                        plantation.setCreatedDate(destFormat.format(createDate));
-                                        plantation.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertPlantationDetailListTableLocal(plantation);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //For PlantationDoc
-                            if (jsonPlantationDocDetailsArray.length() != 0 || jsonPlantationDocDetailsArray.length() > 0) {
+                                //For PlantationDoc
+                                if (jsonPlantationDocDetailsArray.length() != 0 || jsonPlantationDocDetailsArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int pltDoc = 0; pltDoc < jsonPlantationDocDetailsArray.length(); pltDoc++) {
-                                    JSONObject jsonObjectPlantationDoc = jsonPlantationDocDetailsArray.getJSONObject(pltDoc);
-                                    PlantationDocuments plantationDocuments=new PlantationDocuments();
+                                    for (int pltDoc = 0; pltDoc < jsonPlantationDocDetailsArray.length(); pltDoc++) {
+                                        JSONObject jsonObjectPlantationDoc = jsonPlantationDocDetailsArray.getJSONObject(pltDoc);
+                                        PlantationDocuments plantationDocuments = new PlantationDocuments();
 
-                                    plantationDocuments.setFarmerCode(jsonObjectPlantationDoc.getString("FarmerCode"));
-                                    plantationDocuments.setPlotCode(jsonObjectPlantationDoc.getString("PlotCode"));
-                                    plantationDocuments.setDocURL(jsonObjectPlantationDoc.getString("DocURL"));
-                                    plantationDocuments.setDocType(jsonObjectPlantationDoc.getString("DocType"));
-                                    plantationDocuments.setDocUrlValue(jsonObjectPlantationDoc.getString("DocUrlValue"));
+                                        plantationDocuments.setFarmerCode(jsonObjectPlantationDoc.getString("FarmerCode"));
+                                        plantationDocuments.setPlotCode(jsonObjectPlantationDoc.getString("PlotCode"));
+                                        plantationDocuments.setDocURL(jsonObjectPlantationDoc.getString("DocURL"));
+                                        plantationDocuments.setDocType(jsonObjectPlantationDoc.getString("DocType"));
+                                        plantationDocuments.setDocUrlValue(jsonObjectPlantationDoc.getString("DocUrlValue"));
 
-                                    plantationDocuments.setIsActive(jsonObjectPlantationDoc.getString("IsActive"));
-
-
-                                    plantationDocuments.setSync(true);
-                                    plantationDocuments.setServerSync("1");
+                                        plantationDocuments.setIsActive(jsonObjectPlantationDoc.getString("IsActive"));
 
 
-                                    try {
+                                        plantationDocuments.setSync(true);
+                                        plantationDocuments.setServerSync("1");
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+
+                                        try {
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        plantationDocuments.setUpdatedByUserId(jsonObjectPlantationDoc.getString("UpdatedByUserId"));
+                                        plantationDocuments.setCreatedByUserId(jsonObjectPlantationDoc.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("UpdatedDate"));
+                                            plantationDocuments.setCreatedDate(destFormat.format(createDate));
+                                            plantationDocuments.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertPlantationDocDetailListTableLocal(plantationDocuments);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    plantationDocuments.setUpdatedByUserId(jsonObjectPlantationDoc.getString("UpdatedByUserId"));
-                                    plantationDocuments.setCreatedByUserId(jsonObjectPlantationDoc.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("UpdatedDate"));
-                                        plantationDocuments.setCreatedDate(destFormat.format(createDate));
-                                        plantationDocuments.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertPlantationDocDetailListTableLocal(plantationDocuments);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //For Plantation Geo
-                            if (jsonPlantationGeoDetailsArray.length() != 0 || jsonPlantationGeoDetailsArray.length() > 0) {
+                                //For Plantation Geo
+                                if (jsonPlantationGeoDetailsArray.length() != 0 || jsonPlantationGeoDetailsArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int pltGeo = 0; pltGeo < jsonPlantationGeoDetailsArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectPlantationGeo = jsonPlantationGeoDetailsArray.getJSONObject(pltGeo);
-                                    PlantationGeoBoundaries plantationGeoBoundaries=new PlantationGeoBoundaries();
+                                    for (int pltGeo = 0; pltGeo < jsonPlantationGeoDetailsArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectPlantationGeo = jsonPlantationGeoDetailsArray.getJSONObject(pltGeo);
+                                        PlantationGeoBoundaries plantationGeoBoundaries = new PlantationGeoBoundaries();
 
-                                    plantationGeoBoundaries.setPlotCode(jsonObjectPlantationGeo.getString("PlotCode"));
-                                    plantationGeoBoundaries.setFarmerCode(jsonObjectPlantationGeo.getString("FarmerCode"));
-                                    plantationGeoBoundaries.setLatitude(jsonObjectPlantationGeo.getDouble("Latitude"));
-                                    plantationGeoBoundaries.setLongitude(jsonObjectPlantationGeo.getDouble("Longitude"));
-                                    plantationGeoBoundaries.setSeqNo(jsonObjectPlantationGeo.getInt("SeqNo"));
-                                    plantationGeoBoundaries.setPlotCount(jsonObjectPlantationGeo.getInt("PlotCount"));
+                                        plantationGeoBoundaries.setPlotCode(jsonObjectPlantationGeo.getString("PlotCode"));
+                                        plantationGeoBoundaries.setFarmerCode(jsonObjectPlantationGeo.getString("FarmerCode"));
+                                        plantationGeoBoundaries.setLatitude(jsonObjectPlantationGeo.getDouble("Latitude"));
+                                        plantationGeoBoundaries.setLongitude(jsonObjectPlantationGeo.getDouble("Longitude"));
+                                        plantationGeoBoundaries.setSeqNo(jsonObjectPlantationGeo.getInt("SeqNo"));
+                                        plantationGeoBoundaries.setPlotCount(jsonObjectPlantationGeo.getInt("PlotCount"));
 
-                                    plantationGeoBoundaries.setIsActive(jsonObjectPlantationGeo.getString("IsActive"));
-
-
-
-                                    plantationGeoBoundaries.setSync(true);
-                                    plantationGeoBoundaries.setServerSync("1");
+                                        plantationGeoBoundaries.setIsActive(jsonObjectPlantationGeo.getString("IsActive"));
 
 
-                                    try {
+                                        plantationGeoBoundaries.setSync(true);
+                                        plantationGeoBoundaries.setServerSync("1");
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+
+                                        try {
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        plantationGeoBoundaries.setUpdatedByUserId(jsonObjectPlantationGeo.getString("UpdatedByUserId"));
+                                        plantationGeoBoundaries.setCreatedByUserId(jsonObjectPlantationGeo.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("UpdatedDate"));
+                                            plantationGeoBoundaries.setCreatedDate(destFormat.format(createDate));
+                                            plantationGeoBoundaries.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertPlantationGeoDetailListTableLocal(plantationGeoBoundaries);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    plantationGeoBoundaries.setUpdatedByUserId(jsonObjectPlantationGeo.getString("UpdatedByUserId"));
-                                    plantationGeoBoundaries.setCreatedByUserId(jsonObjectPlantationGeo.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("UpdatedDate"));
-                                        plantationGeoBoundaries.setCreatedDate(destFormat.format(createDate));
-                                        plantationGeoBoundaries.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertPlantationGeoDetailListTableLocal(plantationGeoBoundaries);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //For Labour Survey
-                            if (jsonPlantationLabourSurveyArray.length() != 0 || jsonPlantationLabourSurveyArray.length() > 0) {
+                                //For Labour Survey
+                                if (jsonPlantationLabourSurveyArray.length() != 0 || jsonPlantationLabourSurveyArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int lbr = 0; lbr < jsonPlantationLabourSurveyArray.length(); lbr++) {
-                                    JSONObject jsonObjectLabourSurvey = jsonPlantationLabourSurveyArray.getJSONObject(lbr);
-                                    PlantationLabourSurvey plantationLabourSurvey=new PlantationLabourSurvey();
+                                    for (int lbr = 0; lbr < jsonPlantationLabourSurveyArray.length(); lbr++) {
+                                        JSONObject jsonObjectLabourSurvey = jsonPlantationLabourSurveyArray.getJSONObject(lbr);
+                                        PlantationLabourSurvey plantationLabourSurvey = new PlantationLabourSurvey();
 
-                                    plantationLabourSurvey.setFarmerCode(jsonObjectLabourSurvey.getString("FarmerCode"));
-                                    //plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.getInt("PlantationId"));
-                                    plantationLabourSurvey.setPlantationCode(jsonObjectLabourSurvey.getString("PlantationCode"));
-                                    plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
+                                        plantationLabourSurvey.setFarmerCode(jsonObjectLabourSurvey.getString("FarmerCode"));
+                                        //plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.getInt("PlantationId"));
+                                        plantationLabourSurvey.setPlantationCode(jsonObjectLabourSurvey.getString("PlantationCode"));
+                                        plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
 
-                                    plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
-                                    plantationLabourSurvey.setNoOfMaleWorkers(jsonObjectLabourSurvey.getInt("NoOfMaleWorkers"));
-                                    plantationLabourSurvey.setNoOfFemaleWorkers(jsonObjectLabourSurvey.getInt("NoOfFemaleWorkers"));
-                                    plantationLabourSurvey.setNoOfResident(jsonObjectLabourSurvey.getInt("NoOfResident"));
-                                    plantationLabourSurvey.setNoOfMigrant(jsonObjectLabourSurvey.getInt("NoOfMigrant"));
-                                    plantationLabourSurvey.setOccupationOfChildren(jsonObjectLabourSurvey.getString("OccupationOfChildren"));
-
-
-
-                                    plantationLabourSurvey.setIsActive(jsonObjectLabourSurvey.getString("IsActive"));
+                                        plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
+                                        plantationLabourSurvey.setNoOfMaleWorkers(jsonObjectLabourSurvey.getInt("NoOfMaleWorkers"));
+                                        plantationLabourSurvey.setNoOfFemaleWorkers(jsonObjectLabourSurvey.getInt("NoOfFemaleWorkers"));
+                                        plantationLabourSurvey.setNoOfResident(jsonObjectLabourSurvey.getInt("NoOfResident"));
+                                        plantationLabourSurvey.setNoOfMigrant(jsonObjectLabourSurvey.getInt("NoOfMigrant"));
+                                        plantationLabourSurvey.setOccupationOfChildren(jsonObjectLabourSurvey.getString("OccupationOfChildren"));
 
 
-                                    plantationLabourSurvey.setSync(true);
-                                    plantationLabourSurvey.setServerSync("1");
+                                        plantationLabourSurvey.setIsActive(jsonObjectLabourSurvey.getString("IsActive"));
 
 
-                                    try {
+                                        plantationLabourSurvey.setSync(true);
+                                        plantationLabourSurvey.setServerSync("1");
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+
+                                        try {
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        plantationLabourSurvey.setUpdatedByUserId(jsonObjectLabourSurvey.getString("UpdatedByUserId"));
+                                        plantationLabourSurvey.setCreatedByUserId(jsonObjectLabourSurvey.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("UpdatedDate"));
+                                            plantationLabourSurvey.setCreatedDate(destFormat.format(createDate));
+                                            plantationLabourSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertPlantationLabourSurveyListTableLocal(plantationLabourSurvey);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    plantationLabourSurvey.setUpdatedByUserId(jsonObjectLabourSurvey.getString("UpdatedByUserId"));
-                                    plantationLabourSurvey.setCreatedByUserId(jsonObjectLabourSurvey.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("UpdatedDate"));
-                                        plantationLabourSurvey.setCreatedDate(destFormat.format(createDate));
-                                        plantationLabourSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertPlantationLabourSurveyListTableLocal(plantationLabourSurvey);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //For Parent Survey
-                            if (jsonPlantationParentSurveyArray.length() != 0 || jsonPlantationParentSurveyArray.length() > 0) {
+                                //For Parent Survey
+                                if (jsonPlantationParentSurveyArray.length() != 0 || jsonPlantationParentSurveyArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int pltGeo = 0; pltGeo < jsonPlantationParentSurveyArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectParentSurvey = jsonPlantationParentSurveyArray.getJSONObject(pltGeo);
-                                    FarmerHouseholdParentSurvey farmerHouseholdParentSurvey=new FarmerHouseholdParentSurvey();
+                                    for (int pltGeo = 0; pltGeo < jsonPlantationParentSurveyArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectParentSurvey = jsonPlantationParentSurveyArray.getJSONObject(pltGeo);
+                                        FarmerHouseholdParentSurvey farmerHouseholdParentSurvey = new FarmerHouseholdParentSurvey();
 
-                                    farmerHouseholdParentSurvey.setFarmerCode(jsonObjectParentSurvey.getString("FarmerCode"));
-                                    farmerHouseholdParentSurvey.setFarmerId(String.valueOf(jsonObjectParentSurvey.getInt("FarmerId")));
-                                    farmerHouseholdParentSurvey.setFamilyCount(jsonObjectParentSurvey.getInt("FamilyCount"));
-                                    farmerHouseholdParentSurvey.setMaritalStatus(jsonObjectParentSurvey.getString("MaritalStatus"));
-                                    farmerHouseholdParentSurvey.setSpouseName(jsonObjectParentSurvey.getString("SpouseName"));
-                                    farmerHouseholdParentSurvey.setAge(jsonObjectParentSurvey.getInt("Age"));
-                                    farmerHouseholdParentSurvey.setGender(jsonObjectParentSurvey.getString("Gender"));
-                                    farmerHouseholdParentSurvey.setOccupation(jsonObjectParentSurvey.getString("Occupation"));
-                                    farmerHouseholdParentSurvey.setNoofChildren(jsonObjectParentSurvey.getInt("NoofChildren"));
+                                        farmerHouseholdParentSurvey.setFarmerCode(jsonObjectParentSurvey.getString("FarmerCode"));
+                                        farmerHouseholdParentSurvey.setFarmerId(String.valueOf(jsonObjectParentSurvey.getInt("FarmerId")));
+                                        farmerHouseholdParentSurvey.setFamilyCount(jsonObjectParentSurvey.getInt("FamilyCount"));
+                                        farmerHouseholdParentSurvey.setMaritalStatus(jsonObjectParentSurvey.getString("MaritalStatus"));
+                                        farmerHouseholdParentSurvey.setSpouseName(jsonObjectParentSurvey.getString("SpouseName"));
+                                        farmerHouseholdParentSurvey.setAge(jsonObjectParentSurvey.getInt("Age"));
+                                        farmerHouseholdParentSurvey.setGender(jsonObjectParentSurvey.getString("Gender"));
+                                        farmerHouseholdParentSurvey.setOccupation(jsonObjectParentSurvey.getString("Occupation"));
+                                        farmerHouseholdParentSurvey.setNoofChildren(jsonObjectParentSurvey.getInt("NoofChildren"));
 
-                                    farmerHouseholdParentSurvey.setIsActive(jsonObjectParentSurvey.getString("IsActive"));
+                                        farmerHouseholdParentSurvey.setIsActive(jsonObjectParentSurvey.getString("IsActive"));
 
-                                    farmerHouseholdParentSurvey.setSync(true);
-                                    farmerHouseholdParentSurvey.setServerSync("1");
+                                        farmerHouseholdParentSurvey.setSync(true);
+                                        farmerHouseholdParentSurvey.setServerSync("1");
 
 
-                                    try {
+                                        try {
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        farmerHouseholdParentSurvey.setUpdatedByUserId(jsonObjectParentSurvey.getString("UpdatedByUserId"));
+                                        farmerHouseholdParentSurvey.setCreatedByUserId(jsonObjectParentSurvey.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectParentSurvey.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectParentSurvey.getString("UpdatedDate"));
+                                            farmerHouseholdParentSurvey.setCreatedDate(destFormat.format(createDate));
+                                            farmerHouseholdParentSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertFarmerHouseholdParentSurveyListTableLocal(farmerHouseholdParentSurvey);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    farmerHouseholdParentSurvey.setUpdatedByUserId(jsonObjectParentSurvey.getString("UpdatedByUserId"));
-                                    farmerHouseholdParentSurvey.setCreatedByUserId(jsonObjectParentSurvey.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectParentSurvey.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectParentSurvey.getString("UpdatedDate"));
-                                        farmerHouseholdParentSurvey.setCreatedDate(destFormat.format(createDate));
-                                        farmerHouseholdParentSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertFarmerHouseholdParentSurveyListTableLocal(farmerHouseholdParentSurvey);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //For Child Survey
-                            if (jsonPlantationChildSurveyArray.length() != 0 || jsonPlantationChildSurveyArray.length() > 0) {
+                                //For Child Survey
+                                if (jsonPlantationChildSurveyArray.length() != 0 || jsonPlantationChildSurveyArray.length() > 0) {
 //                                        getPersoanlEmptyDataFromServer = false;
 
-                                for (int pltGeo = 0; pltGeo < jsonPlantationChildSurveyArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectChildServey = jsonPlantationChildSurveyArray.getJSONObject(pltGeo);
-                                    FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey=new FarmerHouseholdChildrenSurvey();
+                                    for (int pltGeo = 0; pltGeo < jsonPlantationChildSurveyArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectChildServey = jsonPlantationChildSurveyArray.getJSONObject(pltGeo);
+                                        FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey = new FarmerHouseholdChildrenSurvey();
 
-                                    farmerHouseholdChildrenSurvey.setFarmerCode(jsonObjectChildServey.getString("FarmerCode"));
-                                    farmerHouseholdChildrenSurvey.setFarmerHouseholdSurveyId(jsonObjectChildServey.getInt("FarmerHouseholdSurveyId"));
-                                    farmerHouseholdChildrenSurvey.setFarmerId(jsonObjectChildServey.getString("FarmerId"));
-                                    farmerHouseholdChildrenSurvey.setChildrenName(jsonObjectChildServey.getString("ChildrenName"));
-                                    farmerHouseholdChildrenSurvey.setChildrenGender(jsonObjectChildServey.getString("ChildrenGender"));
-                                    farmerHouseholdChildrenSurvey.setChildrenAge(jsonObjectChildServey.getInt("ChildrenAge"));
-                                    farmerHouseholdChildrenSurvey.setChildrenOccupation(jsonObjectChildServey.getString("ChildrenOccupation"));
+                                        farmerHouseholdChildrenSurvey.setFarmerCode(jsonObjectChildServey.getString("FarmerCode"));
+                                        farmerHouseholdChildrenSurvey.setFarmerHouseholdSurveyId(jsonObjectChildServey.getInt("FarmerHouseholdSurveyId"));
+                                        farmerHouseholdChildrenSurvey.setFarmerId(jsonObjectChildServey.getString("FarmerId"));
+                                        farmerHouseholdChildrenSurvey.setChildrenName(jsonObjectChildServey.getString("ChildrenName"));
+                                        farmerHouseholdChildrenSurvey.setChildrenGender(jsonObjectChildServey.getString("ChildrenGender"));
+                                        farmerHouseholdChildrenSurvey.setChildrenAge(jsonObjectChildServey.getInt("ChildrenAge"));
+                                        farmerHouseholdChildrenSurvey.setChildrenOccupation(jsonObjectChildServey.getString("ChildrenOccupation"));
 
-                                    farmerHouseholdChildrenSurvey.setIsActive(jsonObjectChildServey.getString("IsActive"));
-
-
-                                    farmerHouseholdChildrenSurvey.setSync(true);
-                                    farmerHouseholdChildrenSurvey.setServerSync("1");
+                                        farmerHouseholdChildrenSurvey.setIsActive(jsonObjectChildServey.getString("IsActive"));
 
 
-                                    try {
+                                        farmerHouseholdChildrenSurvey.setSync(true);
+                                        farmerHouseholdChildrenSurvey.setServerSync("1");
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+
+                                        try {
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        farmerHouseholdChildrenSurvey.setUpdatedByUserId(jsonObjectChildServey.getString("UpdatedByUserId"));
+                                        farmerHouseholdChildrenSurvey.setCreatedByUserId(jsonObjectChildServey.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectChildServey.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectChildServey.getString("UpdatedDate"));
+                                            farmerHouseholdChildrenSurvey.setCreatedDate(destFormat.format(createDate));
+                                            farmerHouseholdChildrenSurvey.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertFarmerHouseholdChildrenSurveyListTableLocal(farmerHouseholdChildrenSurvey);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    farmerHouseholdChildrenSurvey.setUpdatedByUserId(jsonObjectChildServey.getString("UpdatedByUserId"));
-                                    farmerHouseholdChildrenSurvey.setCreatedByUserId(jsonObjectChildServey.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectChildServey.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectChildServey.getString("UpdatedDate"));
-                                        farmerHouseholdChildrenSurvey.setCreatedDate(destFormat.format(createDate));
-                                        farmerHouseholdChildrenSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertFarmerHouseholdChildrenSurveyListTableLocal(farmerHouseholdChildrenSurvey);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
 
-                            //Risk Assessment Answers
-                            if (jsonRiskAssessmentArray.length() != 0 || jsonRiskAssessmentArray.length() > 0) {
+                                //Risk Assessment Answers
+                                if (jsonRiskAssessmentArray.length() != 0 || jsonRiskAssessmentArray.length() > 0) {
 
-                                for (int pltGeo = 0; pltGeo < jsonRiskAssessmentArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectRiskAssessment = jsonRiskAssessmentArray.getJSONObject(pltGeo);
-                                    RiskAssessment riskAssessment=new RiskAssessment();
+                                    for (int pltGeo = 0; pltGeo < jsonRiskAssessmentArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectRiskAssessment = jsonRiskAssessmentArray.getJSONObject(pltGeo);
+                                        RiskAssessment riskAssessment = new RiskAssessment();
 
-                                    riskAssessment.setRiskAssesmentQuestionHdrId(jsonObjectRiskAssessment.getInt("RiskAssesmentQuestionHdrId"));
-                                    riskAssessment.setFarmerCode(jsonObjectRiskAssessment.getString("FarmerCode"));
-                                    riskAssessment.setAnswers(jsonObjectRiskAssessment.getString("Answers"));
+                                        riskAssessment.setRiskAssesmentQuestionHdrId(jsonObjectRiskAssessment.getInt("RiskAssesmentQuestionHdrId"));
+                                        riskAssessment.setFarmerCode(jsonObjectRiskAssessment.getString("FarmerCode"));
+                                        riskAssessment.setAnswers(jsonObjectRiskAssessment.getString("Answers"));
 
-                                    riskAssessment.setIsActive(jsonObjectRiskAssessment.getString("IsActive"));
-                                    riskAssessment.setSync(true);
-                                    riskAssessment.setServerSync("1");
+                                        riskAssessment.setIsActive(jsonObjectRiskAssessment.getString("IsActive"));
+                                        riskAssessment.setSync(true);
+                                        riskAssessment.setServerSync("1");
 
 
-                                    try {
+                                        try {
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        riskAssessment.setUpdatedByUserId(jsonObjectRiskAssessment.getString("UpdatedByUserId"));
+                                        riskAssessment.setCreatedByUserId(jsonObjectRiskAssessment.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("UpdatedDate"));
+                                            riskAssessment.setCreatedDate(destFormat.format(createDate));
+                                            riskAssessment.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertRiskAssessmentDataLocalDB(riskAssessment);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    riskAssessment.setUpdatedByUserId(jsonObjectRiskAssessment.getString("UpdatedByUserId"));
-                                    riskAssessment.setCreatedByUserId(jsonObjectRiskAssessment.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("UpdatedDate"));
-                                        riskAssessment.setCreatedDate(destFormat.format(createDate));
-                                        riskAssessment.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertRiskAssessmentDataLocalDB(riskAssessment);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //Dealer sync
-                            if (jsonDealerArray.length() != 0 || jsonDealerArray.length() > 0) {
+                                //Dealer sync
+                                if (jsonDealerArray.length() != 0 || jsonDealerArray.length() > 0) {
 
-                                for (int pltGeo = 0; pltGeo < jsonDealerArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectDealer = jsonDealerArray.getJSONObject(pltGeo);
-                                    DealerFarmer dealerFarmer=new DealerFarmer();
+                                    for (int pltGeo = 0; pltGeo < jsonDealerArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectDealer = jsonDealerArray.getJSONObject(pltGeo);
+                                        DealerFarmer dealerFarmer = new DealerFarmer();
 
-                                    dealerFarmer.setDealerId(jsonObjectDealer.getInt("DealerId"));
-                                    dealerFarmer.setFarmerCode(jsonObjectDealer.getString("FarmerCode"));
+                                        dealerFarmer.setDealerId(jsonObjectDealer.getInt("DealerId"));
+                                        dealerFarmer.setFarmerCode(jsonObjectDealer.getString("FarmerCode"));
 
-                                    dealerFarmer.setIsActive(jsonObjectDealer.getString("IsActive"));
-                                    dealerFarmer.setSync(true);
-                                    dealerFarmer.setServerSync("1");
+                                        dealerFarmer.setIsActive(jsonObjectDealer.getString("IsActive"));
+                                        dealerFarmer.setSync(true);
+                                        dealerFarmer.setServerSync("1");
 
 
-                                    try {
+                                        try {
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        dealerFarmer.setUpdatedByUserId(jsonObjectDealer.getString("UpdatedByUserId"));
+                                        dealerFarmer.setCreatedByUserId(jsonObjectDealer.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectDealer.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectDealer.getString("UpdatedDate"));
+                                            dealerFarmer.setCreatedDate(destFormat.format(createDate));
+                                            dealerFarmer.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertDealerFarmerDataLocalDB(dealerFarmer);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    dealerFarmer.setUpdatedByUserId(jsonObjectDealer.getString("UpdatedByUserId"));
-                                    dealerFarmer.setCreatedByUserId(jsonObjectDealer.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectDealer.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectDealer.getString("UpdatedDate"));
-                                        dealerFarmer.setCreatedDate(destFormat.format(createDate));
-                                        dealerFarmer.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertDealerFarmerDataLocalDB(dealerFarmer);
-
+                                } else {
                                 }
-                            } else {
-                            }
 
-                            //Manufacturer sync
-                            if (jsonManufacturerArray.length() != 0 || jsonManufacturerArray.length() > 0) {
+                                //Manufacturer sync
+                                if (jsonManufacturerArray.length() != 0 || jsonManufacturerArray.length() > 0) {
 
-                                for (int pltGeo = 0; pltGeo < jsonManufacturerArray.length(); pltGeo++) {
-                                    JSONObject jsonObjectManufacturer = jsonManufacturerArray.getJSONObject(pltGeo);
-                                    ManfacturerFarmer manfacturerFarmer=new ManfacturerFarmer();
+                                    for (int pltGeo = 0; pltGeo < jsonManufacturerArray.length(); pltGeo++) {
+                                        JSONObject jsonObjectManufacturer = jsonManufacturerArray.getJSONObject(pltGeo);
+                                        ManfacturerFarmer manfacturerFarmer = new ManfacturerFarmer();
 
-                                    //for gaja
-                                    manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ProcessorId"));
+                                        //for gaja
+                                        manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ProcessorId"));
 //                                            manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ManfacturerId"));
-                                    manfacturerFarmer.setFarmerCode(jsonObjectManufacturer.getString("FarmerCode"));
+                                        manfacturerFarmer.setFarmerCode(jsonObjectManufacturer.getString("FarmerCode"));
 
-                                    manfacturerFarmer.setIsActive(jsonObjectManufacturer.getString("IsActive"));
-                                    manfacturerFarmer.setSync(true);
-                                    manfacturerFarmer.setServerSync("1");
+                                        manfacturerFarmer.setIsActive(jsonObjectManufacturer.getString("IsActive"));
+                                        manfacturerFarmer.setSync(true);
+                                        manfacturerFarmer.setServerSync("1");
 
 
-                                    try {
+                                        try {
 
-                                    }catch (Exception e){
-                                        e.printStackTrace();
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                        Log.d(TAG, "onClick: date" + dateTime);
+
+                                        manfacturerFarmer.setUpdatedByUserId(jsonObjectManufacturer.getString("UpdatedByUserId"));
+                                        manfacturerFarmer.setCreatedByUserId(jsonObjectManufacturer.getString("CreatedByUserId"));
+
+                                        try {
+                                            //  TimeZone utc = TimeZone.getTimeZone("UTC");
+                                            SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
+                                            SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
+                                            // sourceFormat.setTimeZone(utc);
+                                            Date createDate = sourceFormat.parse(jsonObjectManufacturer.getString("CreatedDate"));
+                                            Date updatedDate = sourceFormat.parse(jsonObjectManufacturer.getString("UpdatedDate"));
+                                            manfacturerFarmer.setCreatedDate(destFormat.format(createDate));
+                                            manfacturerFarmer.setUpdatedDate(destFormat.format(updatedDate));
+
+                                        } catch (Exception e) {
+                                            e.printStackTrace();
+                                        }
+
+                                        viewModel.insertManfacturerFarmerDataLocalDB(manfacturerFarmer);
+
                                     }
-
-                                    String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                    Log.d(TAG, "onClick: date" + dateTime);
-
-                                    manfacturerFarmer.setUpdatedByUserId(jsonObjectManufacturer.getString("UpdatedByUserId"));
-                                    manfacturerFarmer.setCreatedByUserId(jsonObjectManufacturer.getString("CreatedByUserId"));
-
-                                    try {
-                                        //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                        SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                        SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                        // sourceFormat.setTimeZone(utc);
-                                        Date createDate = sourceFormat.parse(jsonObjectManufacturer.getString("CreatedDate"));
-                                        Date updatedDate = sourceFormat.parse(jsonObjectManufacturer.getString("UpdatedDate"));
-                                        manfacturerFarmer.setCreatedDate(destFormat.format(createDate));
-                                        manfacturerFarmer.setUpdatedDate(destFormat.format(updatedDate));
-
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    viewModel.insertManfacturerFarmerDataLocalDB(manfacturerFarmer);
-
+                                } else {
                                 }
-                            } else {
+
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                Toast.makeText(SyncActivity.this, String.valueOf(ex.getMessage()), Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.GONE);
+                                progressDialog.dismiss();
+                                Log.d("Error", ">>>>" + ex.toString());
                             }
-
+                        } else {
+                            Toast.makeText(SyncActivity.this, "no records found", Toast.LENGTH_LONG).show();
                         }
-                        catch (Exception ex) {
-                            ex.printStackTrace();
-                            Toast.makeText(SyncActivity.this, String.valueOf(ex.getMessage()), Toast.LENGTH_SHORT).show();
-                            progressBar.setVisibility(View.GONE);
-                            progressDialog.dismiss();
-                            Log.d("Error", ">>>>" + ex.toString());
-                        }
-
-
-
-                        //Todo : Old
-                        /*new Handler().postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {//Todo Sync : Response sequence
-
-                                    JSONArray jsonFarmerPDArray = jsonArray.getJSONArray("data").getJSONArray(0);
-                                    JSONArray jsonPlotDetailsArray = jsonArray.getJSONArray("data").getJSONArray(1);
-                                    JSONArray jsonPlantationDocDetailsArray = jsonArray.getJSONArray("data").getJSONArray(2);
-                                    JSONArray jsonPlantationGeoDetailsArray = jsonArray.getJSONArray("data").getJSONArray(3);
-                                    JSONArray jsonPlantationLabourSurveyArray = jsonArray.getJSONArray("data").getJSONArray(4);
-                                    JSONArray jsonPlantationParentSurveyArray = jsonArray.getJSONArray("data").getJSONArray(5);
-                                    JSONArray jsonPlantationChildSurveyArray = jsonArray.getJSONArray("data").getJSONArray(6);
-                                    JSONArray jsonRiskAssessmentArray = jsonArray.getJSONArray("data").getJSONArray(7);
-                                    JSONArray jsonDealerArray = jsonArray.getJSONArray("data").getJSONArray(8);
-                                    JSONArray jsonManufacturerArray = jsonArray.getJSONArray("data").getJSONArray(9);
-
-                                    //For Farmer
-                                    if (jsonFarmerPDArray.length() != 0 || jsonFarmerPDArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int farmerPD = 0; farmerPD < jsonFarmerPDArray.length(); farmerPD++) {
-                                            JSONObject jsonObjectFarmerPD = jsonFarmerPDArray.getJSONObject(farmerPD);
-                                            FarmersTable farmerTable = new FarmersTable();
-
-                                            farmerTable.setId(jsonObjectFarmerPD.getInt("Id"));
-                                            farmerTable.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
-                                            farmerTable.setFirstName(jsonObjectFarmerPD.getString("FirstName"));
-                                            farmerTable.setLastName(jsonObjectFarmerPD.getString("LastName"));
-                                            farmerTable.setFatherName(jsonObjectFarmerPD.getString("FatherName"));
-                                            farmerTable.setGender(jsonObjectFarmerPD.getString("Gender"));
-                                            farmerTable.setAge(jsonObjectFarmerPD.getString("Age"));
-                                            farmerTable.setPrimaryContactNo(jsonObjectFarmerPD.getString("PrimaryContactNo"));
-                                            farmerTable.setAddress(jsonObjectFarmerPD.getString("Address"));
-
-                                            farmerTable.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
-                                            farmerTable.setNoOfPlots(jsonObjectFarmerPD.getString("NoOfPlots"));
-                                            try {
-                                                farmerTable.setNationalIdentityCode(jsonObjectFarmerPD.getString("NationalIdentityCode"));
-                                            } catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-                                            try {
-                                                farmerTable.setNationalIdentityCodeDocument(jsonObjectFarmerPD.getString("NationalIdentityCodeDocument"));
-                                            } catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            farmerTable.setSync(true);
-                                            farmerTable.setServerSync("1");
-
-
-                                            try {
-                                                farmerTable.setImage(jsonObjectFarmerPD.getString("Image"));
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-                                            farmerTable.setIsActive("1");
-                                            farmerTable.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
-                                            farmerTable.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
-                                                farmerTable.setCreatedDate(destFormat.format(createDate));
-                                                farmerTable.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertFarmerDetailListTableLocal(farmerTable);
-
-                                        }
-                                    } else {
-                                    }
-
-
-                                    //For Plantation
-                                    if (jsonPlotDetailsArray.length() != 0 || jsonPlotDetailsArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int plt = 0; plt < jsonPlotDetailsArray.length(); plt++) {
-                                            JSONObject jsonObjectFarmerPD = jsonPlotDetailsArray.getJSONObject(plt);
-                                            Plantation plantation=new Plantation();
-
-                                            plantation.setId(jsonObjectFarmerPD.getInt("Id"));
-                                            plantation.setPlotCode(jsonObjectFarmerPD.getString("PlotCode"));
-                                            plantation.setFarmerCode(jsonObjectFarmerPD.getString("FarmerCode"));
-                                            plantation.setTypeOfOwnership(jsonObjectFarmerPD.getString("TypeOfOwnership"));
-
-                                            plantation.setLabourStatus(jsonObjectFarmerPD.getString("LabourStatus"));
-                                            plantation.setAreaInHectors(jsonObjectFarmerPD.getDouble("AreaInHectors"));
-                                            plantation.setLatitude(jsonObjectFarmerPD.getDouble("Latitude"));
-                                            plantation.setLongitude(jsonObjectFarmerPD.getDouble("Longitude"));
-                                            //GeoboundariesArea
-                                            try {
-                                                plantation.setGeoboundariesArea(Double.valueOf(jsonObjectFarmerPD.getString("GeoboundariesArea")));
-                                            } catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            plantation.setAddress(jsonObjectFarmerPD.getString("Address"));
-                                            plantation.setVillageId(jsonObjectFarmerPD.getString("VillageId"));
-                                            plantation.setIsActive(jsonObjectFarmerPD.getString("IsActive"));
-
-
-                                            plantation.setSync(true);
-                                            plantation.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            plantation.setUpdatedByUserId(jsonObjectFarmerPD.getString("UpdatedByUserId"));
-                                            plantation.setCreatedByUserId(jsonObjectFarmerPD.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectFarmerPD.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectFarmerPD.getString("UpdatedDate"));
-                                                plantation.setCreatedDate(destFormat.format(createDate));
-                                                plantation.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertPlantationDetailListTableLocal(plantation);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //For PlantationDoc
-                                    if (jsonPlantationDocDetailsArray.length() != 0 || jsonPlantationDocDetailsArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int pltDoc = 0; pltDoc < jsonPlantationDocDetailsArray.length(); pltDoc++) {
-                                            JSONObject jsonObjectPlantationDoc = jsonPlantationDocDetailsArray.getJSONObject(pltDoc);
-                                            PlantationDocuments plantationDocuments=new PlantationDocuments();
-
-                                            plantationDocuments.setFarmerCode(jsonObjectPlantationDoc.getString("FarmerCode"));
-                                            plantationDocuments.setPlotCode(jsonObjectPlantationDoc.getString("PlotCode"));
-                                            plantationDocuments.setDocURL(jsonObjectPlantationDoc.getString("DocURL"));
-                                            plantationDocuments.setDocType(jsonObjectPlantationDoc.getString("DocType"));
-                                            plantationDocuments.setDocUrlValue(jsonObjectPlantationDoc.getString("DocUrlValue"));
-
-                                            plantationDocuments.setIsActive(jsonObjectPlantationDoc.getString("IsActive"));
-
-
-                                            plantationDocuments.setSync(true);
-                                            plantationDocuments.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            plantationDocuments.setUpdatedByUserId(jsonObjectPlantationDoc.getString("UpdatedByUserId"));
-                                            plantationDocuments.setCreatedByUserId(jsonObjectPlantationDoc.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectPlantationDoc.getString("UpdatedDate"));
-                                                plantationDocuments.setCreatedDate(destFormat.format(createDate));
-                                                plantationDocuments.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertPlantationDocDetailListTableLocal(plantationDocuments);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //For Plantation Geo
-                                    if (jsonPlantationGeoDetailsArray.length() != 0 || jsonPlantationGeoDetailsArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int pltGeo = 0; pltGeo < jsonPlantationGeoDetailsArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectPlantationGeo = jsonPlantationGeoDetailsArray.getJSONObject(pltGeo);
-                                            PlantationGeoBoundaries plantationGeoBoundaries=new PlantationGeoBoundaries();
-
-                                            plantationGeoBoundaries.setPlotCode(jsonObjectPlantationGeo.getString("PlotCode"));
-                                            plantationGeoBoundaries.setFarmerCode(jsonObjectPlantationGeo.getString("FarmerCode"));
-                                            plantationGeoBoundaries.setLatitude(jsonObjectPlantationGeo.getDouble("Latitude"));
-                                            plantationGeoBoundaries.setLongitude(jsonObjectPlantationGeo.getDouble("Longitude"));
-                                            plantationGeoBoundaries.setSeqNo(jsonObjectPlantationGeo.getInt("SeqNo"));
-                                            plantationGeoBoundaries.setPlotCount(jsonObjectPlantationGeo.getInt("PlotCount"));
-
-                                            plantationGeoBoundaries.setIsActive(jsonObjectPlantationGeo.getString("IsActive"));
-
-
-
-                                            plantationGeoBoundaries.setSync(true);
-                                            plantationGeoBoundaries.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            plantationGeoBoundaries.setUpdatedByUserId(jsonObjectPlantationGeo.getString("UpdatedByUserId"));
-                                            plantationGeoBoundaries.setCreatedByUserId(jsonObjectPlantationGeo.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectPlantationGeo.getString("UpdatedDate"));
-                                                plantationGeoBoundaries.setCreatedDate(destFormat.format(createDate));
-                                                plantationGeoBoundaries.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertPlantationGeoDetailListTableLocal(plantationGeoBoundaries);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //For Labour Survey
-                                    if (jsonPlantationLabourSurveyArray.length() != 0 || jsonPlantationLabourSurveyArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int lbr = 0; lbr < jsonPlantationLabourSurveyArray.length(); lbr++) {
-                                            JSONObject jsonObjectLabourSurvey = jsonPlantationLabourSurveyArray.getJSONObject(lbr);
-                                            PlantationLabourSurvey plantationLabourSurvey=new PlantationLabourSurvey();
-
-                                            plantationLabourSurvey.setFarmerCode(jsonObjectLabourSurvey.getString("FarmerCode"));
-                                            //plantationLabourSurvey.setPlantationId(jsonObjectLabourSurvey.getInt("PlantationId"));
-                                            plantationLabourSurvey.setPlantationCode(jsonObjectLabourSurvey.getString("PlantationCode"));
-                                            plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
-
-                                            plantationLabourSurvey.setNoOfFieldWorkers(jsonObjectLabourSurvey.getInt("NoOfFieldWorkers"));
-                                            plantationLabourSurvey.setNoOfMaleWorkers(jsonObjectLabourSurvey.getInt("NoOfMaleWorkers"));
-                                            plantationLabourSurvey.setNoOfFemaleWorkers(jsonObjectLabourSurvey.getInt("NoOfFemaleWorkers"));
-                                            plantationLabourSurvey.setNoOfResident(jsonObjectLabourSurvey.getInt("NoOfResident"));
-                                            plantationLabourSurvey.setNoOfMigrant(jsonObjectLabourSurvey.getInt("NoOfMigrant"));
-                                            plantationLabourSurvey.setOccupationOfChildren(jsonObjectLabourSurvey.getString("OccupationOfChildren"));
-
-
-
-                                            plantationLabourSurvey.setIsActive(jsonObjectLabourSurvey.getString("IsActive"));
-
-
-                                            plantationLabourSurvey.setSync(true);
-                                            plantationLabourSurvey.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            plantationLabourSurvey.setUpdatedByUserId(jsonObjectLabourSurvey.getString("UpdatedByUserId"));
-                                            plantationLabourSurvey.setCreatedByUserId(jsonObjectLabourSurvey.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectLabourSurvey.getString("UpdatedDate"));
-                                                plantationLabourSurvey.setCreatedDate(destFormat.format(createDate));
-                                                plantationLabourSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertPlantationLabourSurveyListTableLocal(plantationLabourSurvey);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //For Parent Survey
-                                    if (jsonPlantationParentSurveyArray.length() != 0 || jsonPlantationParentSurveyArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int pltGeo = 0; pltGeo < jsonPlantationParentSurveyArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectParentSurvey = jsonPlantationParentSurveyArray.getJSONObject(pltGeo);
-                                            FarmerHouseholdParentSurvey farmerHouseholdParentSurvey=new FarmerHouseholdParentSurvey();
-
-                                            farmerHouseholdParentSurvey.setFarmerCode(jsonObjectParentSurvey.getString("FarmerCode"));
-                                            farmerHouseholdParentSurvey.setFarmerId(String.valueOf(jsonObjectParentSurvey.getInt("FarmerId")));
-                                            farmerHouseholdParentSurvey.setFamilyCount(jsonObjectParentSurvey.getInt("FamilyCount"));
-                                            farmerHouseholdParentSurvey.setMaritalStatus(jsonObjectParentSurvey.getString("MaritalStatus"));
-                                            farmerHouseholdParentSurvey.setSpouseName(jsonObjectParentSurvey.getString("SpouseName"));
-                                            farmerHouseholdParentSurvey.setAge(jsonObjectParentSurvey.getInt("Age"));
-                                            farmerHouseholdParentSurvey.setGender(jsonObjectParentSurvey.getString("Gender"));
-                                            farmerHouseholdParentSurvey.setOccupation(jsonObjectParentSurvey.getString("Occupation"));
-                                            farmerHouseholdParentSurvey.setNoofChildren(jsonObjectParentSurvey.getInt("NoofChildren"));
-
-                                            farmerHouseholdParentSurvey.setIsActive(jsonObjectParentSurvey.getString("IsActive"));
-
-                                            farmerHouseholdParentSurvey.setSync(true);
-                                            farmerHouseholdParentSurvey.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            farmerHouseholdParentSurvey.setUpdatedByUserId(jsonObjectParentSurvey.getString("UpdatedByUserId"));
-                                            farmerHouseholdParentSurvey.setCreatedByUserId(jsonObjectParentSurvey.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectParentSurvey.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectParentSurvey.getString("UpdatedDate"));
-                                                farmerHouseholdParentSurvey.setCreatedDate(destFormat.format(createDate));
-                                                farmerHouseholdParentSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertFarmerHouseholdParentSurveyListTableLocal(farmerHouseholdParentSurvey);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //For Child Survey
-                                    if (jsonPlantationChildSurveyArray.length() != 0 || jsonPlantationChildSurveyArray.length() > 0) {
-//                                        getPersoanlEmptyDataFromServer = false;
-
-                                        for (int pltGeo = 0; pltGeo < jsonPlantationChildSurveyArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectChildServey = jsonPlantationChildSurveyArray.getJSONObject(pltGeo);
-                                            FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey=new FarmerHouseholdChildrenSurvey();
-
-                                            farmerHouseholdChildrenSurvey.setFarmerCode(jsonObjectChildServey.getString("FarmerCode"));
-                                            farmerHouseholdChildrenSurvey.setFarmerHouseholdSurveyId(jsonObjectChildServey.getInt("FarmerHouseholdSurveyId"));
-                                            farmerHouseholdChildrenSurvey.setFarmerId(jsonObjectChildServey.getString("FarmerId"));
-                                            farmerHouseholdChildrenSurvey.setChildrenName(jsonObjectChildServey.getString("ChildrenName"));
-                                            farmerHouseholdChildrenSurvey.setChildrenGender(jsonObjectChildServey.getString("ChildrenGender"));
-                                            farmerHouseholdChildrenSurvey.setChildrenAge(jsonObjectChildServey.getInt("ChildrenAge"));
-                                            farmerHouseholdChildrenSurvey.setChildrenOccupation(jsonObjectChildServey.getString("ChildrenOccupation"));
-
-                                            farmerHouseholdChildrenSurvey.setIsActive(jsonObjectChildServey.getString("IsActive"));
-
-
-                                            farmerHouseholdChildrenSurvey.setSync(true);
-                                            farmerHouseholdChildrenSurvey.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            farmerHouseholdChildrenSurvey.setUpdatedByUserId(jsonObjectChildServey.getString("UpdatedByUserId"));
-                                            farmerHouseholdChildrenSurvey.setCreatedByUserId(jsonObjectChildServey.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectChildServey.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectChildServey.getString("UpdatedDate"));
-                                                farmerHouseholdChildrenSurvey.setCreatedDate(destFormat.format(createDate));
-                                                farmerHouseholdChildrenSurvey.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertFarmerHouseholdChildrenSurveyListTableLocal(farmerHouseholdChildrenSurvey);
-
-                                        }
-                                    } else {
-                                    }
-
-
-                                    //Risk Assessment Answers
-                                    if (jsonRiskAssessmentArray.length() != 0 || jsonRiskAssessmentArray.length() > 0) {
-
-                                        for (int pltGeo = 0; pltGeo < jsonRiskAssessmentArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectRiskAssessment = jsonRiskAssessmentArray.getJSONObject(pltGeo);
-                                            RiskAssessment riskAssessment=new RiskAssessment();
-
-                                            riskAssessment.setRiskAssesmentQuestionHdrId(jsonObjectRiskAssessment.getInt("RiskAssesmentQuestionHdrId"));
-                                            riskAssessment.setFarmerCode(jsonObjectRiskAssessment.getString("FarmerCode"));
-                                            riskAssessment.setAnswers(jsonObjectRiskAssessment.getString("Answers"));
-
-                                            riskAssessment.setIsActive(jsonObjectRiskAssessment.getString("IsActive"));
-                                            riskAssessment.setSync(true);
-                                            riskAssessment.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            riskAssessment.setUpdatedByUserId(jsonObjectRiskAssessment.getString("UpdatedByUserId"));
-                                            riskAssessment.setCreatedByUserId(jsonObjectRiskAssessment.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectRiskAssessment.getString("UpdatedDate"));
-                                                riskAssessment.setCreatedDate(destFormat.format(createDate));
-                                                riskAssessment.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertRiskAssessmentDataLocalDB(riskAssessment);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //Dealer sync
-                                    if (jsonDealerArray.length() != 0 || jsonDealerArray.length() > 0) {
-
-                                        for (int pltGeo = 0; pltGeo < jsonDealerArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectDealer = jsonDealerArray.getJSONObject(pltGeo);
-                                            DealerFarmer dealerFarmer=new DealerFarmer();
-
-                                            dealerFarmer.setDealerId(jsonObjectDealer.getInt("DealerId"));
-                                            dealerFarmer.setFarmerCode(jsonObjectDealer.getString("FarmerCode"));
-
-                                            dealerFarmer.setIsActive(jsonObjectDealer.getString("IsActive"));
-                                            dealerFarmer.setSync(true);
-                                            dealerFarmer.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            dealerFarmer.setUpdatedByUserId(jsonObjectDealer.getString("UpdatedByUserId"));
-                                            dealerFarmer.setCreatedByUserId(jsonObjectDealer.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectDealer.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectDealer.getString("UpdatedDate"));
-                                                dealerFarmer.setCreatedDate(destFormat.format(createDate));
-                                                dealerFarmer.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertDealerFarmerDataLocalDB(dealerFarmer);
-
-                                        }
-                                    } else {
-                                    }
-
-                                    //Manufacturer sync
-                                    if (jsonManufacturerArray.length() != 0 || jsonManufacturerArray.length() > 0) {
-
-                                        for (int pltGeo = 0; pltGeo < jsonManufacturerArray.length(); pltGeo++) {
-                                            JSONObject jsonObjectManufacturer = jsonManufacturerArray.getJSONObject(pltGeo);
-                                            ManfacturerFarmer manfacturerFarmer=new ManfacturerFarmer();
-
-                                            //for gaja
-                                            manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ProcessorId"));
-//                                            manfacturerFarmer.setManfacturerId(jsonObjectManufacturer.getInt("ManfacturerId"));
-                                            manfacturerFarmer.setFarmerCode(jsonObjectManufacturer.getString("FarmerCode"));
-
-                                            manfacturerFarmer.setIsActive(jsonObjectManufacturer.getString("IsActive"));
-                                            manfacturerFarmer.setSync(true);
-                                            manfacturerFarmer.setServerSync("1");
-
-
-                                            try {
-
-                                            }catch (Exception e){
-                                                e.printStackTrace();
-                                            }
-
-                                            String dateTime = appHelper.getCurrentDateTime(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                            Log.d(TAG, "onClick: date" + dateTime);
-
-                                            manfacturerFarmer.setUpdatedByUserId(jsonObjectManufacturer.getString("UpdatedByUserId"));
-                                            manfacturerFarmer.setCreatedByUserId(jsonObjectManufacturer.getString("CreatedByUserId"));
-
-                                            try {
-                                                //  TimeZone utc = TimeZone.getTimeZone("UTC");
-                                                SimpleDateFormat sourceFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_T_HH_MM_SS_SSS);
-                                                SimpleDateFormat destFormat = new SimpleDateFormat(DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-                                                // sourceFormat.setTimeZone(utc);
-                                                Date createDate = sourceFormat.parse(jsonObjectManufacturer.getString("CreatedDate"));
-                                                Date updatedDate = sourceFormat.parse(jsonObjectManufacturer.getString("UpdatedDate"));
-                                                manfacturerFarmer.setCreatedDate(destFormat.format(createDate));
-                                                manfacturerFarmer.setUpdatedDate(destFormat.format(updatedDate));
-
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-
-                                            viewModel.insertManfacturerFarmerDataLocalDB(manfacturerFarmer);
-
-                                        }
-                                    } else {
-                                    }
-
-
-                                    Toast.makeText(SyncActivity.this, "Fetched All Data From Server SuccessFully", Toast.LENGTH_LONG).show();
-                                    progressDialog.dismiss();
-
-                                }
-                                catch (Exception ex) {
-                                    ex.printStackTrace();
-                                    Toast.makeText(SyncActivity.this, String.valueOf(ex.getMessage()), Toast.LENGTH_SHORT).show();
-                                    progressBar.setVisibility(View.GONE);
-                                    progressDialog.dismiss();
-                                    Log.d("Error", ">>>>" + ex.toString());
-                                }
-                            }
-                        }, 2000);*/
-
-
-
-                    } else {
-                        Toast.makeText(SyncActivity.this, "no records found", Toast.LENGTH_LONG).show();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        progressBar.setVisibility(View.GONE);
+                        progressDialog.dismiss();
+                        Toast.makeText(SyncActivity.this, "Transaction Sync Failed, please contact admin", Toast.LENGTH_SHORT).show();
+                        Log.d("Error", ">>>>" + ex.toString());
                     }
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-                    progressBar.setVisibility(View.GONE);
-                    progressDialog.dismiss();
-                    Toast.makeText(SyncActivity.this, "Transaction Sync Failed, please contact admin", Toast.LENGTH_SHORT).show();
-                    Log.d("Error", ">>>>" + ex.toString());
-                }
 
                 });
 
@@ -2336,7 +1625,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Farmer Personal Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Farmer Personal Details are Submitted 1");
+                            Log.e("testProgress", "Farmer Personal Details are Submitted 1");
 //                            getFarmerProfileImageFromLocalDB();
                         } else {
 //                            syncProgressDialog.dismiss();
@@ -2393,7 +1682,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Plantation Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Plantation Details are Submitted 1");
+                            Log.e("testProgress", "Plantation Details are Submitted 1");
 //                            getFarmerProfileImageFromLocalDB();
                         } else {
 //                            syncProgressDialog.dismiss();
@@ -2420,40 +1709,29 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         List<PlantationDocuments> odVisitSurveyTableList = (List<PlantationDocuments>) o;
                         viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-//                            for (DocIdentiFicationDeatilsTable docIdentiFicationDeatilsTable : odVisitSurveyTableList) {
-//                                syncDocIdentificationToServer(odVisitSurveyTableList.get(0));
                             final ProgressDialog progressDialog = new ProgressDialog(SyncActivity.this, R.style.AppCompatAlertDialogStyle);
                             progressDialog.setCancelable(false);
                             progressDialog.setMessage("fetch identity images and uploading to server...");
                             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                             progressDialog.show();
-//                                    File f = new File(docIdentiFicationDeatilsTable.getDocLocal());
-//                                    uploadImagesTOServerAPI(f,progressDialog,docIdentiFicationDeatilsTable);
                             try {
-                                if (odVisitSurveyTableList.get(0).getDocURL().endsWith(".jpeg")){
+                                if (odVisitSurveyTableList.get(0).getDocURL().endsWith(".jpeg")) {
                                     File f = new File(odVisitSurveyTableList.get(0).getDocURL());
-                                    uploadImagesTOServerAPI(f,progressDialog,odVisitSurveyTableList.get(0));
-                                } else if (odVisitSurveyTableList.get(0).getDocURL().endsWith(".jpg")){
+                                    uploadImagesTOServerAPI(f, progressDialog, odVisitSurveyTableList.get(0));
+                                } else if (odVisitSurveyTableList.get(0).getDocURL().endsWith(".jpg")) {
                                     File f = new File(odVisitSurveyTableList.get(0).getDocURL());
-                                    uploadImagesTOServerAPI(f,progressDialog,odVisitSurveyTableList.get(0));
+                                    uploadImagesTOServerAPI(f, progressDialog, odVisitSurveyTableList.get(0));
                                 } else if (odVisitSurveyTableList.get(0).getDocURL().endsWith(".png")) {
                                     File f = new File(odVisitSurveyTableList.get(0).getDocURL());
-                                    uploadImagesTOServerAPI(f,progressDialog,odVisitSurveyTableList.get(0));
+                                    uploadImagesTOServerAPI(f, progressDialog, odVisitSurveyTableList.get(0));
                                 } else {
                                     File f = new File(odVisitSurveyTableList.get(0).getDocURL());
-                                    uploadPDFTOServerAPI(f,progressDialog,odVisitSurveyTableList.get(0));
+                                    uploadPDFTOServerAPI(f, progressDialog, odVisitSurveyTableList.get(0));
                                 }
-//                                File f = new File(odVisitSurveyTableList.get(0).getDocURL());
-//                                uploadImagesTOServerAPI(f,progressDialog,odVisitSurveyTableList.get(0));
-                            } catch (Exception exception){
+                            } catch (Exception exception) {
                                 Toast.makeText(SyncActivity.this, "no file found", Toast.LENGTH_SHORT).show();
                                 progressDialog.dismiss();
                             }
-
-
-//                            }
-                        } else {
-//                            farmerDocImageCountZero = true;
                         }
                     }
                 };
@@ -2475,13 +1753,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         viewModel.getDocLiveData().removeObserver(this);
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
-                            Log.e("testProgress","Doc Identification Details are Submitted 3");
-//                            Toast.makeText(SyncActivity.this, "Farmer Identification  Details are Submitted", Toast.LENGTH_SHORT).show();
-//                            getBankDetailsFromLocalDB();
+                            Log.e("testProgress", "Doc Identification Details are Submitted 3");
                             getIdentificationDetailsFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
                         }
 
                     }
@@ -2494,19 +1767,9 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
 
-    private void uploadImagesTOServerAPI(File uploadFile, ProgressDialog progressDialog,PlantationDocuments docIdentiFicationDeatilsTable) {
-
-        Log.d(TAG, "uploadDataBaseTOServerAPI: " + uploadFile.getAbsolutePath());
-        MultipartBody.Part file_pathDB = null;
-
-//        File file = new File(uploadFile.getAbsolutePath());
-        // Parsing any Media type file
+    private void uploadImagesTOServerAPI(File uploadFile, ProgressDialog progressDialog, PlantationDocuments docIdentiFicationDeatilsTable) {
         RequestBody requestBody = RequestBody.create(MediaType.parse(getMimeType(String.valueOf(uploadFile))), uploadFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", uploadFile.getName(), requestBody);
-//        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        Log.d("Filepath", ">>>>>>>>>>" + fileToUpload);
-        RequestBody r_acces_token = RequestBody.create(MediaType.parse("multipart/form-data"),
-                appHelper.getSharedPrefObj().getString(accessToken, ""));
         RequestBody r_userID = RequestBody.create(MediaType.parse("multipart/form-data"),
                 appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
@@ -2518,44 +1781,27 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                 try {
                     progressDialog.dismiss();
                     String strResponse = response.body().string();
-                    Log.d(TAG, "onResponse: AppData " + response);
                     JSONObject json_object = new JSONObject(strResponse);
                     String message = "";
                     int status = 0;
-                    Log.e(TAG, "onResponse: data json" + json_object);
                     message = json_object.getString("message");
                     status = json_object.getInt("status");
-                    String  location = json_object.getString("location");
-                    Log.e(TAG, "status of location in new method" + location);
+                    String location = json_object.getString("location");
                     Toast.makeText(SyncActivity.this, location, Toast.LENGTH_SHORT).show();
-                    if (status==1) {
-//                        PlantationDocuments docIdentiFicationDeatilsTable1 = new PlantationDocuments();
-//                        docIdentiFicationDeatilsTable1=docIdentiFicationDeatilsTable;
-//                        docIdentiFicationDeatilsTable1.setDocLocal(docIdentiFicationDeatilsTable.getDocUrl());
-//                        docIdentiFicationDeatilsTable.setDocLocal(docIdentiFicationDeatilsTable.getDocUrl());
-                        //as we are altering the docurl here we got to assign its value to doc local
-
-//                        docIdentiFicationDeatilsTable1.setDocURL(location);
+                    if (status == 1) {
                         docIdentiFicationDeatilsTable.setDocURL(location);
-
-                        Log.e("test",json_object.getString("location"));
-//                        Log.e("contract", String.valueOf(docIdentiFicationDeatilsTable));
-//                        Log.e("contract", String.valueOf(docIdentiFicationDeatilsTable1));
-
                         syncDocIdentificationToServer(docIdentiFicationDeatilsTable);
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
-                    } else if (status==0) {
+                    } else if (status == 0) {
                         Log.e(TAG, "status of location in new method error message");
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else {
                         Log.e(TAG, "status of location in new method error message");
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
-
-
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Log.e(TAG, "status of location in new method error" );
+                    Log.e(TAG, "status of location in new method error");
                     Log.d("Error Call", ">>>>" + ex.toString());
                 }
 
@@ -2570,19 +1816,9 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
 
-    private void uploadPDFTOServerAPI(File uploadFile, ProgressDialog progressDialog,PlantationDocuments docIdentiFicationDeatilsTable) {
-
-        Log.d(TAG, "uploadDataBaseTOServerAPI: " + uploadFile.getAbsolutePath());
-        MultipartBody.Part file_pathDB = null;
-
-//        File file = new File(uploadFile.getAbsolutePath());
-        // Parsing any Media type file
+    private void uploadPDFTOServerAPI(File uploadFile, ProgressDialog progressDialog, PlantationDocuments docIdentiFicationDeatilsTable) {
         RequestBody requestBody = RequestBody.create(MediaType.parse(getMimeType(String.valueOf(uploadFile))), uploadFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", uploadFile.getName(), requestBody);
-//        MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", file.getName(), requestBody);
-        Log.d("Filepath", ">>>>>>>>>>" + fileToUpload);
-        RequestBody r_acces_token = RequestBody.create(MediaType.parse("multipart/form-data"),
-                appHelper.getSharedPrefObj().getString(accessToken, ""));
         RequestBody r_userID = RequestBody.create(MediaType.parse("multipart/form-data"),
                 appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
@@ -2594,44 +1830,27 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                 try {
                     progressDialog.dismiss();
                     String strResponse = response.body().string();
-                    Log.d(TAG, "onResponse: AppData " + response);
                     JSONObject json_object = new JSONObject(strResponse);
                     String message = "";
                     int status = 0;
-                    Log.e(TAG, "onResponse: data json" + json_object);
                     message = json_object.getString("message");
                     status = json_object.getInt("status");
-                    String  location = json_object.getString("location");
-                    Log.e(TAG, "status of location in new method" + location);
+                    String location = json_object.getString("location");
                     Toast.makeText(SyncActivity.this, location, Toast.LENGTH_SHORT).show();
-                    if (status==1) {
-//                        PlantationDocuments docIdentiFicationDeatilsTable1 = new PlantationDocuments();
-//                        docIdentiFicationDeatilsTable1=docIdentiFicationDeatilsTable;
-//                        docIdentiFicationDeatilsTable1.setDocLocal(docIdentiFicationDeatilsTable.getDocUrl());
-//                        docIdentiFicationDeatilsTable.setDocLocal(docIdentiFicationDeatilsTable.getDocUrl());
-                        //as we are altering the docurl here we got to assign its value to doc local
-
-//                        docIdentiFicationDeatilsTable1.setDocURL(location);
+                    if (status == 1) {
                         docIdentiFicationDeatilsTable.setDocURL(location);
-
-                        Log.e("PdfPost",json_object.getString("location"));
-//                        Log.e("contract", String.valueOf(docIdentiFicationDeatilsTable));
-//                        Log.e("contract", String.valueOf(docIdentiFicationDeatilsTable1));
-
                         syncDocIdentificationToServer(docIdentiFicationDeatilsTable);
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
-                    } else if (status==0) {
+                    } else if (status == 0) {
                         Log.e(TAG, "status of location in new method error message");
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     } else {
                         Log.e(TAG, "status of location in new method error message");
                         Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
                     }
-
-
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    Log.e(TAG, "status of location in new method error" );
+                    Log.e(TAG, "status of location in new method error");
                     Log.d("Error Call", ">>>>" + ex.toString());
                 }
 
@@ -2646,9 +1865,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
 
-
     //Todo :Sync Geo Main
-    public void  getGeoBoundariesDetails() {
+    public void getGeoBoundariesDetails() {
         try {
             viewModel.getGeoBoudariesFromLocalDB();
             if (viewModel.getGeoBoundariesFromLocalLiveData() != null) {
@@ -2658,34 +1876,24 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         List<PlantationGeoBoundaries> odVisitSurveyTableList = (List<PlantationGeoBoundaries>) o;
                         viewModel.getGeoBoundariesFromLocalLiveData().removeObserver(this);
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-//                            for (GeoBoundariesTable geoBoundariesTable : odVisitSurveyTableList) {
-//                                syncGeoBoundariesDetailsToServer(geoBoundariesTable);
-//                            }
-                            for (int i =0;i<odVisitSurveyTableList.size();i++) {
-                                syncGeoBoundariesDetailsToServer(odVisitSurveyTableList.get(i),i);//Commented to test
+                            for (int i = 0; i < odVisitSurveyTableList.size(); i++) {
+                                syncGeoBoundariesDetailsToServer(odVisitSurveyTableList.get(i), i);//Commented to test
                             }
-                        } else {
-//                            PlotGeoBoundiresCountZero = true;
-                            //getFertlizerListFromLocalDbCheckDBNotSync();
                         }
-
                     }
                 };
                 viewModel.getGeoBoundariesFromLocalLiveData().observe(this, getLeadRawDataObserver);
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-
-
-//            INSERT_LOG("getGeoBoundariesFromLocalLiveData", "Exception : " + ex.getMessage());
         }
     }
 
     //Todo Sync Geo Main
-    public void syncGeoBoundariesDetailsToServer(PlantationGeoBoundaries geoBoundariesTable,int index) {
+    public void syncGeoBoundariesDetailsToServer(PlantationGeoBoundaries geoBoundariesTable, int index) {
         try {
 
-            viewModel.syncGeoBoundariesDetailsSubmitTableDataToServer(geoBoundariesTable,index);
+            viewModel.syncGeoBoundariesDetailsSubmitTableDataToServer(geoBoundariesTable, index);
             if (viewModel.getStringLiveData() != null) {
                 Observer getLeadRawDataObserver = new Observer() {
                     @Override
@@ -2693,14 +1901,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         viewModel.getStringLiveData().removeObserver(this);
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
-                            Log.e("testProgress","GeoBoundaries Details are Submitted 8");
-//                            Toast.makeText(SyncActivity.this, "Geo boundaries details submitted", Toast.LENGTH_SHORT).show();
-//                            syncProgressDialog.dismiss();
-                            // Toast.makeText(SyncFunctionalityDeatilsActivity.this, "Geo Boundaries Sync Successfully", Toast.LENGTH_SHORT).show();
-                            //getFertlizerListFromLocalDbCheckDBNotSync();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "GeoBoundaries Details are Submitted 8");
                         }
                     }
                 };
@@ -2727,8 +1928,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncSurveyPersonalDetailsToServer(plantationLabourSurvey, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -2753,11 +1952,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Labour Survey Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Labour Survey Details are Submitted 1");
-//                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "Labour Survey Details are Submitted 1");
                         }
 
                     }
@@ -2785,8 +1980,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncParentSurveyDetailsToServer(farmerHouseholdParentSurvey, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -2811,11 +2004,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Parent Survey Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Labour Survey Details are Submitted 1");
-//                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "Labour Survey Details are Submitted 1");
                         }
 
                     }
@@ -2843,8 +2032,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncChildSurveyDetailsToServer(farmerHouseholdChildrenSurvey, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -2868,13 +2055,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Child Survey Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Labour Survey Details are Submitted 1");
-//                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "Labour Survey Details are Submitted 1");
                         }
-
                     }
                 };
                 viewModel.getStringLiveData().observe(this, getLeadRawDataObserver);
@@ -2900,8 +2082,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncRiskDetailsToServer(riskAssessment, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -2925,11 +2105,8 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Risk Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Labour Survey Details are Submitted 1");
+                            Log.e("testProgress", "Labour Survey Details are Submitted 1");
 //                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
                         }
 
                     }
@@ -2956,8 +2133,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncManufacturerDetailsToServer(manfacturerFarmer, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -2981,11 +2156,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Manufacturer Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Manu Details are Submitted 1");
-//                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "Manu Details are Submitted 1");
                         }
 
                     }
@@ -3013,8 +2184,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                                 // TODO: Need to remove for lead
                                 syncDealerDetailsToServer(dealerFarmer, odVisitSurveyTableList);
                             }
-                        } else {
-
                         }
                     }
 
@@ -3038,11 +2207,7 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
                         String dataResponse = (String) o;
                         if (dataResponse.equals(SUCCESS_RESPONSE_MESSAGE)) {
                             Toast.makeText(SyncActivity.this, "Dealer Details are Submitted", Toast.LENGTH_SHORT).show();
-                            Log.e("testProgress","Dealer Details are Submitted 1");
-//                            getFarmerProfileImageFromLocalDB();
-                        } else {
-//                            syncProgressDialog.dismiss();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ERROR, dataResponse);
+                            Log.e("testProgress", "Dealer Details are Submitted 1");
                         }
 
                     }
@@ -3055,7 +2220,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
     }
 
 
-
     @Override
     public void onResume() {
         super.onResume();
@@ -3063,7 +2227,6 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
             refreshDBModuleCall();
         } catch (Exception ex) {
             ex.printStackTrace();
-//            INSERT_LOG("onResume", "Exception : " + ex.getMessage());
         }
     }
 
@@ -3079,35 +2242,22 @@ public class SyncActivity extends BaseActivity implements LanguageAdapter.Langua
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//            String type = null;
-//        String extension = MimeTypeMap.getFileExtensionFromUrl(url);
-//        Log.d("MIME_TYPE_EXT", extension);
-//        if (extension != null && extension != "") {
-//            type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(extension);
-//            //  Log.d("MIME_TYPE", type);
-//        } else {
-//            FileNameMap fileNameMap = URLConnection.getFileNameMap();
-//            type = fileNameMap.getContentTypeFor(url);
-//        }
         return String.valueOf(file);
     }
 
 
     @Override
     public void languageCallback(int position, AppLanguageHDRTable appLanguageHDRTable) {
-        languageChanged=true;
-        Log.e(TAG,"interface clicked");
-//        recreateApp();
+        languageChanged = true;
         updateButtonLabels();
     }
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
 
         try {
-            if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
+            if (viewModel.getLanguageDataVM(stLanguage, stWord) != null) {
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
-            } else{
+            } else {
                 return stWord;
             }
         } catch (Exception ex) {

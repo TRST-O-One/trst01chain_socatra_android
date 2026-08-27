@@ -188,14 +188,6 @@ public class CircleImageView extends AppCompatImageView {
     public int getFillColor() {
         return mFillColor;
     }
-
-    /**
-     * Set a color to be drawn behind the circle-shaped drawable. Note that
-     * this has no effect if the drawable is opaque or no drawable is set.
-     *
-     * @param fillColor The color to be drawn behind the drawable
-     * @deprecated Fill color support is going to be removed in the future
-     */
     @Deprecated
     public void setFillColor(@ColorInt int fillColor) {
         if (fillColor == mFillColor) {
@@ -206,59 +198,10 @@ public class CircleImageView extends AppCompatImageView {
         mFillPaint.setColor(fillColor);
         invalidate();
     }
-
-    /**
-     * Set a color to be drawn behind the circle-shaped drawable. Note that
-     * this has no effect if the drawable is opaque or no drawable is set.
-     *
-     * @param fillColorRes The color resource to be resolved to a color and
-     *                     drawn behind the drawable
-     * @deprecated Fill color support is going to be removed in the future
-     */
     @Deprecated
     public void setFillColorResource(@ColorRes int fillColorRes) {
         setFillColor(getContext().getResources().getColor(fillColorRes));
     }
-
-    public int getBorderWidth() {
-        return mBorderWidth;
-    }
-
-    public void setBorderWidth(int borderWidth) {
-        if (borderWidth == mBorderWidth) {
-            return;
-        }
-
-        mBorderWidth = borderWidth;
-        setup();
-    }
-
-    public boolean isBorderOverlay() {
-        return mBorderOverlay;
-    }
-
-    public void setBorderOverlay(boolean borderOverlay) {
-        if (borderOverlay == mBorderOverlay) {
-            return;
-        }
-
-        mBorderOverlay = borderOverlay;
-        setup();
-    }
-
-    public boolean isDisableCircularTransformation() {
-        return mDisableCircularTransformation;
-    }
-
-    public void setDisableCircularTransformation(boolean disableCircularTransformation) {
-        if (mDisableCircularTransformation == disableCircularTransformation) {
-            return;
-        }
-
-        mDisableCircularTransformation = disableCircularTransformation;
-        initializeBitmap();
-    }
-
     @Override
     public void setImageBitmap(Bitmap bm) {
         super.setImageBitmap(bm);

@@ -32,14 +32,11 @@ public class BoundLocationManager extends LiveData<Location> {
     private BoundLocationManager(final Context appContext) {
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(appContext);
         createLocationRequest();
-        mFusedLocationClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
-            @Override
-            public void onComplete(@NonNull Task<Location> task) {
-                if(task.isSuccessful() && task.getResult() != null) {
-                    setValue(task.getResult());
-                } else {
-                    mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
-                }
+        mFusedLocationClient.getLastLocation().addOnCompleteListener(task -> {
+            if(task.isSuccessful() && task.getResult() != null) {
+                setValue(task.getResult());
+            } else {
+                mFusedLocationClient.requestLocationUpdates(mLocationRequest, mLocationCallback, null);
             }
         });
 

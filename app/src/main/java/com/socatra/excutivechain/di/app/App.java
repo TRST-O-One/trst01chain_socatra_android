@@ -2,8 +2,6 @@ package com.socatra.excutivechain.di.app;
 
 
 import static com.socatra.excutivechain.utils.AppConstant.DB_NAME;
-import static com.socatra.excutivechain.utils.AppConstant.DB_SUB_FOLDER;
-
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
@@ -24,7 +22,6 @@ import dagger.android.HasActivityInjector;
 
 
 public class App extends Application implements HasActivityInjector {
-
 
     public static Context context;
     public static AppHelper appHelper;
@@ -59,33 +56,15 @@ public class App extends Application implements HasActivityInjector {
             // String dbName=DB_NAME;
 
             String dbName = appHelper.getSharedPrefObj().getString(DB_NAME, "") + ".db";
-            ;
-//            String appFolderName=appHelper.getSharedPrefObj().getString(DB_NAME, "");
             String appFolderName = appHelper.strAppFolderName(appHelper.getSharedPrefObj().getString(DB_NAME, ""));
             String appDBFolderName = appHelper.getSharedPrefObj().getString(DB_NAME, "") + "_DB";
-            String appEnvFolderName = DB_SUB_FOLDER;
 
-
-            // TODO: For LEAD
-           /* String rootPath = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + "/LOS_DB/";
-
-                    String appEnvPath = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + File.separator + appFolderName + File.separator + appDBFolderName + File.separator
-                    + appEnvFolderName + File.separator ;
-            // TODO: FULL FILE PATH
-            filePath = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + File.separator + appFolderName + File.separator + appDBFolderName + File.separator
-                    + appEnvFolderName + File.separator + dbName ;*/
 
             // TODO: FOR LOS
             String appFolderPath = Environment.getExternalStorageDirectory()
                     .getAbsolutePath() + File.separator + appFolderName + File.separator;
-            String appDBPath = Environment.getExternalStorageDirectory()
-                    .getAbsolutePath() + File.separator + appFolderName + File.separator + appDBFolderName + File.separator;
             String appEnvPath = Environment.getExternalStorageDirectory()
                     .getAbsolutePath() + File.separator + appFolderName + File.separator + appDBFolderName + File.separator;
-            //       + appEnvFolderName + File.separator ;
             // TODO: FULL FILE PATH
             filePath = Environment.getExternalStorageDirectory()
                     .getAbsolutePath() + File.separator + appFolderName + File.separator + appDBFolderName + File.separator
@@ -98,10 +77,6 @@ public class App extends Application implements HasActivityInjector {
                 folder.mkdirs();
             }
 
-//            folder = new File(appDBPath);
-//            if (!folder.exists()) {
-//                folder.mkdirs();
-//            }
 
             folder = new File(appEnvPath);
             if (!folder.exists()) {
@@ -126,11 +101,7 @@ public class App extends Application implements HasActivityInjector {
     }
 
 
-
-
-
 }
-
 
 
 

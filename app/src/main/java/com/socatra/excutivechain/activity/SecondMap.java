@@ -3,6 +3,7 @@ package com.socatra.excutivechain.activity;
 import static com.socatra.excutivechain.di.app.App.appHelper;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -77,14 +78,11 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
 
     SupportMapFragment supportMapFragment;
-
-//    private ActivitySecondMapBinding binding;
-
     Button startStopButton, saveBtnSmap, resetSmap, recordBtnSmap;
 
     TextView areaSmap;
 
-    double totalArea=0.0;
+    double totalArea = 0.0;
 
     RecyclerView recordsRecyclerViewSmap;
 
@@ -92,7 +90,6 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     List<LatLng> totalBoundries = new ArrayList<>();
     CoordinatesAdapter coordinatesAdapter;
-
 
     //Location
     FusedLocationProviderClient client;
@@ -111,13 +108,13 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     LatLng recordLatLang;
 
-    String farmerCode,plotId,id;
+    String farmerCode, plotId, id;
 
-    int gpsCat=0;
+    int gpsCat = 0;
 
     double totalSize;
 
-    int saveCount=0;
+    int saveCount = 0;
 
 
     @Override
@@ -132,7 +129,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         plotId = getIntent().getStringExtra("PlotId");
         farmerCode = getIntent().getStringExtra("FarmerCode");
         id = getIntent().getStringExtra("id");
-        totalSize=Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
+        totalSize = Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
         gpsCat = getIntent().getIntExtra("gpsCat", 0);
 
         initializeUI();
@@ -155,58 +152,50 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         public void onLocationResult(@NonNull LocationResult locationResult) {
             super.onLocationResult(locationResult);
 
-            if (locationResult != null) {
-                if (myFirstLatLngCount == 0) {
-                    //initial latlng for my loc
-                    myLocLatLng = new LatLng(locationResult.getLocations().get(0).getLatitude(), locationResult.getLocations().get(0).getLongitude());
-
-                    Log.e(TAG, "firstloc:" + String.valueOf(myLocLatLng.latitude) + "," + String.valueOf(myLocLatLng.longitude));
-
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            stopLocationUpdate();
-                            Log.e(TAG, "first stop for loc");
-                            myFirstLatLngCount++;
-                        }
-                    }, 1 * 1000);//2sec/1sec
-
-                    if (myMarkerCount > 0) {
-                        if (myMarker != null) {
-                            myMarker.remove();
-                        }
+            if (myFirstLatLngCount == 0) {
+                //initial latlng for my loc
+                myLocLatLng = new LatLng(locationResult.getLocations().get(0).getLatitude(), locationResult.getLocations().get(0).getLongitude());
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        stopLocationUpdate();
+                        Log.e(TAG, "first stop for loc");
+                        myFirstLatLngCount++;
                     }
+                }, 1 * 1000);//2sec/1sec
 
-                    myMarker = mMap.addMarker(new MarkerOptions()
-                            .position(myLocLatLng).title("My Location")
-                            .icon(BitmapFromVector(getApplicationContext(), R.drawable.baseline_my_location))
-                            .visible(true));
-                    myMarkerCount++;
-
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocLatLng, 19));
-
-                } else {
-                    if (locationResult == null) {
-                        return;
-                    } else {
-                        for (Location location : locationResult.getLocations()) {
-                            LatLng crLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-                            recordLatLang = crLatLng;//curr lat record
-                            totalBoundries.add(crLatLng);//new LatLng(location.getLatitude(),location.getLongitude())
-                            Log.e(TAG, "Cont loc:" + String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()));
-                            walkPathMarker = mMap.addMarker(new MarkerOptions()
-                                    .position(crLatLng)//new LatLng(location.getLatitude(),location.getLongitude())
-                                    .icon(BitmapFromVector(getApplicationContext(), R.drawable.baseline_circle_path))
-                                    .title(String.valueOf(location.getLatitude()) + "," + String.valueOf(location.getLongitude()))
-                                    .visible(true));
-
-                            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(crLatLng, 20));
-                        }
+                if (myMarkerCount > 0) {
+                    if (myMarker != null) {
+                        myMarker.remove();
                     }
-
                 }
+
+                myMarker = mMap.addMarker(new MarkerOptions()
+                        .position(myLocLatLng).title("My Location")
+                        .icon(BitmapFromVector(getApplicationContext(), R.drawable.baseline_my_location))
+                        .visible(true));
+                myMarkerCount++;
+
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(myLocLatLng, 19));
+
             } else {
-                Log.e(TAG, "Loc Null");
+                if (locationResult == null) {
+                    return;
+                } else {
+                    for (Location location : locationResult.getLocations()) {
+                        LatLng crLatLng = new LatLng(location.getLatitude(), location.getLongitude());
+                        recordLatLang = crLatLng;//curr lat record
+                        totalBoundries.add(crLatLng);//new LatLng(location.getLatitude(),location.getLongitude())
+                        walkPathMarker = mMap.addMarker(new MarkerOptions()
+                                .position(crLatLng)//new LatLng(location.getLatitude(),location.getLongitude())
+                                .icon(BitmapFromVector(getApplicationContext(), R.drawable.baseline_circle_path))
+                                .title(location.getLatitude() + "," + location.getLongitude())
+                                .visible(true));
+
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(crLatLng, 20));
+                    }
+                }
+
             }
 
         }
@@ -255,21 +244,18 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         saveBtnSmap.setOnClickListener(v -> {
             if (totalBoundries.size() > 0) {//recordedBoundries
                 if (startStopStatus == 0) {
-                    Log.e(TAG, "totalList:" + totalBoundries.toString());
-                    if (recordedBoundries.size()>0){
-                        Log.e(TAG, "recordedList:" + recordedBoundries.toString());
-                        if (saveCount==0){
+                    if (recordedBoundries.size() > 0) {
+                        if (saveCount == 0) {
                             saveGeoboundariesToDB();
                         } else {
-                            Log.e(TAG,String.valueOf(saveCount));
+                            Log.e(TAG, String.valueOf(saveCount));
                         }
                     } else {
-                        recordedBoundries=totalBoundries;
-                        Log.e(TAG, "recordedList:" + recordedBoundries.toString());
-                        if (saveCount==0){
+                        recordedBoundries = totalBoundries;
+                        if (saveCount == 0) {
                             saveGeoboundariesToDB();
                         } else {
-                            Log.e(TAG,String.valueOf(saveCount));
+                            Log.e(TAG, String.valueOf(saveCount));
                         }
                     }
                 } else {
@@ -288,7 +274,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                 if (walkPathMarker != null) {
                     walkPathMarker.remove();
                 }
-                totalArea=0.0;
+                totalArea = 0.0;
                 areaSmap.setText(String.valueOf(totalArea));
                 mMap.clear();
                 myFirstLatLngCount = 0;
@@ -298,26 +284,20 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
             } else {
                 Toast.makeText(this, "Please stop the progress first!!", Toast.LENGTH_SHORT).show();
             }
-
-//            latLngList.clear();
         });
 
         //Todo : Record btn
         recordBtnSmap.setOnClickListener(v -> {
             if (startStopStatus == 1) {
                 if (recordLatLang != null) {
-                    Log.e(TAG, "recorded crrLatLng:" + recordLatLang.toString());
-
                     MarkerOptions markerOptionsRecorded = new MarkerOptions();
                     markerOptionsRecorded.position(recordLatLang);
-                    markerOptionsRecorded.title(String.valueOf(recordLatLang.latitude) + "," + String.valueOf(recordLatLang.longitude));
+                    markerOptionsRecorded.title(recordLatLang.latitude + "," + recordLatLang.longitude);
                     mMap.addMarker(markerOptionsRecorded);
 
                     recordedBoundries.add(recordLatLang);//Add in arrayList
                     coordinatesAdapter = new CoordinatesAdapter(SecondMap.this, recordedBoundries);
-                    Log.e(TAG, "recorded boundaries:" + recordedBoundries.toString());
                     recordsRecyclerViewSmap.setAdapter(coordinatesAdapter);
-//                    coordinatesAdapter.notifyDataSetChanged();
                 }
             } else {
                 Toast.makeText(this, "Please start progress!!", Toast.LENGTH_SHORT).show();
@@ -327,10 +307,10 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     private void calculateAreaGeo() {
         //Todo :calculate area
-        if (totalBoundries.size()>1){
+        if (totalBoundries.size() > 1) {
             totalBoundries.add(totalBoundries.get(0));
             totalArea = SphericalUtil.computeArea(totalBoundries) / 10000;// for hectares, for Acres( / 4046.86)
-            String decimalForm = String.format("%.15f", totalArea);
+            @SuppressLint("DefaultLocale") String decimalForm = String.format("%.15f", totalArea);
 
             areaSmap.setText(decimalForm);
         }
@@ -338,14 +318,13 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     private void saveGeoboundariesToDB() {
         //Todo : Save to DB
-        if(Double.valueOf(areaSmap.getText().toString())<=totalSize+0.1) {
+        if (Double.valueOf(areaSmap.getText().toString()) <= totalSize + 0.1) {
             if (recordedBoundries.size() > 2) {
                 saveCount++;
                 for (int i = 0; i < recordedBoundries.size(); i++) {
 
 
                     String dateTime = appHelper.getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-
 
                     //Todo:Plantation Geo
 
@@ -381,7 +360,6 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
                                 setResult(RESULT_OK, intent);
                                 finish();
                             }
-
                         }, 1 * 500);
 
                     }
@@ -395,6 +373,7 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -409,28 +388,11 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
         mMap.setIndoorEnabled(true);
-
-        // Add a marker in Sydney and move the camera
-       /* LatLng hydOff = new LatLng(17.457776989405062, 78.36810104548931);
-        mMap.addMarker(new MarkerOptions().position(hydOff).title("Marker here"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(hydOff));
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(hydOff, 21));*/
-
-
     }
 
 
@@ -440,23 +402,15 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
 
         Task<LocationSettingsResponse> locationSettingsResponseTask = settingsClient.checkLocationSettings(request);
-        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                startLocationUpdate();
-            }
-        });
+        locationSettingsResponseTask.addOnSuccessListener(locationSettingsResponse -> startLocationUpdate());
 
-        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                    try {
-                        resolvableApiException.startResolutionForResult(SecondMap.this, 2000001);
-                    } catch (IntentSender.SendIntentException ex) {
-                        throw new RuntimeException(ex);
-                    }
+        locationSettingsResponseTask.addOnFailureListener(e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                try {
+                    resolvableApiException.startResolutionForResult(SecondMap.this, 2000001);
+                } catch (IntentSender.SendIntentException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -464,13 +418,6 @@ public class SecondMap extends FragmentActivity implements OnMapReadyCallback {
 
     private void startLocationUpdate() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());

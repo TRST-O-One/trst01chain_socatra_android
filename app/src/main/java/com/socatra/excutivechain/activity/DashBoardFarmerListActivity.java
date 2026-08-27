@@ -59,8 +59,8 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import letsrock.areaviewlib.BuildConfig;
 
-public class DashBoardFarmerListActivity extends BaseActivity implements View.OnClickListener, HasSupportFragmentInjector, FarmerDetailsListAdapter.SyncCallbackInterface {
-
+public class DashBoardFarmerListActivity extends BaseActivity implements View.OnClickListener, HasSupportFragmentInjector,
+        FarmerDetailsListAdapter.SyncCallbackInterface {
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
     public AppViewModel viewModel;
@@ -71,32 +71,11 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     TextView txtAddFarmer, txtSync, txtRefList;
     SearchView svFarmer;
     Dialog dialog;
-
     RecyclerView recycler;
     SearchView searchByName;
     FarmerDetailsListAdapter farmerDetailsListAdapter;
-    private static final int CAMERA_REQUEST = 1888;
-    Integer testPictureCount = 0;
-
-    String pltNo = "";
-
-    private String[] PERMISSIONS_STORAGE = {
-            android.Manifest.permission.CAMERA,
-            android.Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
-    public static final int REQUEST_CAM_PERMISSIONS = 1;
-    static File f = null;
-    private String strFarmerLocalImage = "";
-    Bitmap bitmapFarmer = null;
-    private String strImageOnePath = "";
-    private byte[] bytes = null;
-    String strFileExtension = null;
     ImageView imageOne;
     String farmerCode = "";
-
-    int farmerManufacturerStatus = 0;
-    int farmerDealerStatus = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,9 +93,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         syncButton = findViewById(R.id.txtSync);
 
 
-//
-//        updateButtonLabels();
-
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         updateButtonLabels();
@@ -128,19 +104,12 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         return preferences.getString("selected_language", "English");
     }
 
-    private void restartDashboardActivity() {
-        Intent intent = new Intent(this, DashBoardFarmerListActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
-        finish();
-    }
-
     private void updateButtonLabels() {
         String selectedLanguage = getSelectedLanguage();
 
-        String hdRefresh=getResources().getString(R.string.refresh);
-        String hdAdd=getResources().getString(R.string.add);
-        String hdSync=getResources().getString(R.string.sync);
+        String hdRefresh = getResources().getString(R.string.refresh);
+        String hdAdd = getResources().getString(R.string.add);
+        String hdSync = getResources().getString(R.string.sync);
 
         if (selectedLanguage.equals("English")) {
             //Default English
@@ -153,17 +122,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
             syncButton.setText(getLanguageFromLocalDb(selectedLanguage, hdSync) + "/" + hdSync);
         }
 
-    }
-
-
-    private void showToast(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    private void restartActivity() {
-        Intent intent = getIntent();
-        finish();
-        startActivity(intent);
     }
 
     private void initializeUI() {
@@ -190,12 +148,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         txtRefList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*try {
-                    // Your code that may throw a RuntimeException
-                    throw new Exception("Error runtime");
-                } catch (Exception e) {
-                    // Display a toast message
-                }*/
                 getFarmerlistFromLocalDb();
             }
         });
@@ -255,8 +207,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     private void configureViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
         getFarmerlistFromLocalDb();
-//        getFarmerManufacturerStatus(farmerCode);
-//        getFarmerDealerStatus(farmerCode);
 
     }
 
@@ -277,26 +227,8 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
                                     odVisitSurveyTableList, DashBoardFarmerListActivity.this, appHelper, viewModel);
                             recycler.setAdapter(farmerDetailsListAdapter);
                             farmerDetailsListAdapter.notifyDataSetChanged();
-
-//                            if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-//
-//                                shimmerFrameLayout.stopShimmerAnimation();
-//                                shimmerFrameLayout.setVisibility(View.GONE);
-//
-//                                farmerDetailsListAdapter = new FarmerDetailsListAdapter(RegisterdFarmerListActivity.this,
-//                                        odVisitSurveyTableList, RegisterdFarmerListActivity.this, appHelper, viewModel);
-//                                rvFarmerList.setAdapter(farmerDetailsListAdapter);
-//                                farmerDetailsListAdapter.notifyDataSetChanged();
-//                            }else {
-//                                shimmerFrameLayout.startShimmerAnimation();
-//                                shimmerFrameLayout.setVisibility(View.VISIBLE);
-//                            }
-
                         } else {
                             Toast.makeText(DashBoardFarmerListActivity.this, "no farmer list", Toast.LENGTH_SHORT).show();
-                            // progressDialog.dismiss();
-                            // appHelper.getDialogHelper().getLoadingDialog().closeDialog();
-//                            appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ALERT, "No Farmer list");
                         }
                     }
                 };
@@ -304,12 +236,6 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-
-//            shimmerFrameLayout.startShimmerAnimation();
-//            shimmerFrameLayout.setVisibility(View.VISIBLE);
-            //progressDialog.dismiss();
-            // appHelper.getDialogHelper().getLoadingDialog().closeDialog();
-//            INSERT_LOG("getFarmerlistFromLocalDb", "Exception : " + ex.getMessage());
         }
     }
 
@@ -336,7 +262,7 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
 
         selectedFarm.setText("Farmer Code : " + farmerCode);
 
-        updateButtonLabels(selectedLanguage, adddetails, editpersonald, plantationd, documend, surveyd,farmer_mapping);
+        updateButtonLabels(selectedLanguage, adddetails, editpersonald, plantationd, documend, surveyd, farmer_mapping);
 
         LinearLayout farmerEdit = dialog.findViewById(R.id.ll_farmer_reg);
         LinearLayout plantationDetails = dialog.findViewById(R.id.ll_land_details);
@@ -348,7 +274,7 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
             Intent intent = new Intent(DashBoardFarmerListActivity.this, EditPersonalDetailsActivity.class);
             intent.putExtra("mFarmerCode", farmerCode);
             intent.putExtra("farmData", farmerTable1);
-            intent.putExtra("villageId",villageId);
+            intent.putExtra("villageId", villageId);
             startActivity(intent);
             dialog.dismiss();
         });
@@ -364,7 +290,7 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
             Intent intent = new Intent(DashBoardFarmerListActivity.this, DocumentHomeActivity.class);
             intent.putExtra("mFarmerCode", farmerCode);
             intent.putExtra("farmData", farmerTable1);
-            intent.putExtra("villageId",villageId);
+            intent.putExtra("villageId", villageId);
             startActivity(intent);
             dialog.dismiss();
         });
@@ -378,22 +304,7 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
         });
 
         farmerMapping.setOnClickListener(view -> {
-
-            getFarmerDealerStatus(farmerCode,farmerTable1);
-            /*Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
-            intent.putExtra("mFarmerCode", farmerCode);
-            intent.putExtra("mFarmerObj", farmerTable1);
-            startActivity(intent);
-            dialog.dismiss();*/
-
-//            if (farmerManufacturerStatus ==0) {
-//                if (farmerDealerStatus==0){
-//                } else {
-//                    Toast.makeText(this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-//                }
-//            } else {
-//                Toast.makeText(this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-//            }
+            getFarmerDealerStatus(farmerCode, farmerTable1);
         });
 
 
@@ -401,15 +312,15 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     }
 
     @SuppressLint("SetTextI18n")
-    private void updateButtonLabels(String selectedLanguage, TextView adddetails, TextView editpersonald, TextView plantationd, TextView documend, TextView surveyd,TextView farmer_mapping) {
+    private void updateButtonLabels(String selectedLanguage, TextView adddetails, TextView editpersonald, TextView plantationd, TextView documend, TextView surveyd, TextView farmer_mapping) {
 
         //Todo lang
-        String hdAddDetails=getResources().getString(R.string.adddetails);
-        String hdEditPersonal=getResources().getString(R.string.editpersonald);
-        String hdPlantation=getResources().getString(R.string.plantationd);
-        String hdDocument=getResources().getString(R.string.documend);
-        String hdSurvey=getResources().getString(R.string.surveyd);
-        String hdFarmerMapping=getResources().getString(R.string.farmer_mapping);
+        String hdAddDetails = getResources().getString(R.string.adddetails);
+        String hdEditPersonal = getResources().getString(R.string.editpersonald);
+        String hdPlantation = getResources().getString(R.string.plantationd);
+        String hdDocument = getResources().getString(R.string.documend);
+        String hdSurvey = getResources().getString(R.string.surveyd);
+        String hdFarmerMapping = getResources().getString(R.string.farmer_mapping);
 
         if (selectedLanguage.equals("English")) {
             adddetails.setText(hdAddDetails);
@@ -433,41 +344,35 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     private void getFarmerDealerStatus(String fid, FarmersTable farmerTable1) {
         try {
             viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
-            viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, new Observer<List<DealerFarmer>>() {
-                @Override
-                public void onChanged(List<DealerFarmer> dealerFarmers) {
-                    //dealer mapping
-                    if (dealerFarmers.size()>0){
-                        Log.e("validatDash","Dealer not exist");
-                        dialog.dismiss();
-                        Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                    } else {
-                        // producer mapping
-                        viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
-                        viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, new Observer<List<ManfacturerFarmer>>() {
-                            @Override
-                            public void onChanged(List<ManfacturerFarmer> manfacturerFarmers) {
-                                if (manfacturerFarmers.size()>0){
-                                    Log.e("validatDash","Producer exist");
-                                    dialog.dismiss();
-                                    Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    Log.e("validatDash","Producer not exist");
-                                    Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
-                                    intent.putExtra("mFarmerCode", farmerCode);
-                                    intent.putExtra("mFarmerObj", farmerTable1);
-                                    startActivity(intent);
-                                    dialog.dismiss();
-                                }
-                            }
-                        });
-                    }
+            viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, dealerFarmers -> {
+                //dealer mapping
+                if (dealerFarmers.size() > 0) {
+                    Log.e("validatDash", "Dealer not exist");
+                    dialog.dismiss();
+                    Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                } else {
+                    // producer mapping
+                    viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
+                    viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, manfacturerFarmers -> {
+                        if (manfacturerFarmers.size() > 0) {
+                            Log.e("validatDash", "Producer exist");
+                            dialog.dismiss();
+                            Toast.makeText(DashBoardFarmerListActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.e("validatDash", "Producer not exist");
+                            Intent intent = new Intent(DashBoardFarmerListActivity.this, FarmerMappingActivity.class);
+                            intent.putExtra("mFarmerCode", farmerCode);
+                            intent.putExtra("mFarmerObj", farmerTable1);
+                            startActivity(intent);
+                            dialog.dismiss();
+                        }
+                    });
                 }
             });
 
         } catch (Exception ex) {
             ex.printStackTrace();
-            Log.e("validatDash","1st catch");
+            Log.e("validatDash", "1st catch");
         }
     }
 
@@ -491,7 +396,7 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     public void addPlotDetailsCallback(int position, FarmersTable applicationStatusTable, String strFarmercode, ImageView imgFarmer) {
         imageOne = imgFarmer;
         farmerCode = applicationStatusTable.getFarmerCode();
-        mainNavDialog(applicationStatusTable,applicationStatusTable.getVillageId());
+        mainNavDialog(applicationStatusTable, applicationStatusTable.getVillageId());
     }
 
     @Override
@@ -503,356 +408,17 @@ public class DashBoardFarmerListActivity extends BaseActivity implements View.On
     @Override
     public void onResume() {
         super.onResume();
-//        shimmerFrameLayout.startShimmerAnimation();
-//        For refresh farmer list
-        if (farmerDetailsListAdapter!=null){
+        if (farmerDetailsListAdapter != null) {
             farmerDetailsListAdapter.notifyDataSetChanged();//update view
         }
-        try {
-//            searchByName.setQuery("", false);
-//            searchByName.setIconified(true);
-//            getFarmerlistFromLocalDb();
-//             farmerDetailsListAdapter.notifyDataSetChanged();//update view
-        } catch (Exception ex) {
-            ex.printStackTrace();
-//            INSERT_LOG("onResume", "Exception : " + ex.getMessage());
-        }
-
-//        getFarmerDealerStatus(farmerCode);
-//        getFarmerManufacturerStatus(farmerCode);
     }
 
-    private void openCameraPermission(Boolean land, Integer pictureCount) {
-        testPictureCount = pictureCount;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && (!CommonUtils.isPermissionAllowed(DashBoardFarmerListActivity.this, Manifest.permission.CAMERA))) {
-            android.util.Log.v("AddSoilHealthActivity", "Location Permissions Not Granted");
-            ActivityCompat.requestPermissions(
-                    DashBoardFarmerListActivity.this,
-                    PERMISSIONS_STORAGE,
-                    REQUEST_CAM_PERMISSIONS
-            );
-        } else {
-
-            firstDispatchTakePictureIntent(CAMERA_REQUEST, land);
-
-
-        }
-    }
-
-    private void firstDispatchTakePictureIntent(int actionCode, Boolean land) {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        switch (actionCode) {
-            case CAMERA_REQUEST:
-                if (testPictureCount == 0) {
-                    f = null;
-                    strFarmerLocalImage = null;
-                    try {
-                        f = setUpPhotoFile();
-                        strFarmerLocalImage = f.getAbsolutePath();
-
-                        strFileExtension = f.getAbsolutePath().substring(f.getAbsolutePath().lastIndexOf("."));
-
-                        Uri photoURI = FileProvider.getUriForFile(DashBoardFarmerListActivity.this,
-                                BuildConfig.APPLICATION_ID + ".provider",
-                                f);
-                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                        f = null;
-                        strFarmerLocalImage = null;
-                    }
-                }
-                break;
-
-            default:
-                break;
-        } // switch
-        startActivityForResult(takePictureIntent, actionCode);
-//        Intent i = new Intent();
-//        i.setType("image/*");
-//        i.setAction(Intent.ACTION_GET_CONTENT);
-//
-//        launchSomeActivity.launch(i);
-    }
-
-    private File setUpPhotoFile() throws IOException {
-
-        File f;
-        f = createImageFileFirst();
-
-        if (testPictureCount == 0) {
-            strFarmerLocalImage = f.getAbsolutePath();
-        }
-
-        return f;
-    }
-
-    private File createImageFileFirst() {
-        File image = null;
-        File mediaStorageDir = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            mediaStorageDir = new File(DashBoardFarmerListActivity.this.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "SRLand");
-        } else
-            mediaStorageDir = new File(Environment.getExternalStorageDirectory(), "SRLandPictures");
-        if (!mediaStorageDir.exists()) {
-            if (!mediaStorageDir.mkdirs()) {
-                Log.d("App", "failed to create directory");
-            }
-        }
-//            File image = null;
-        try {
-            image = File.createTempFile("imageFiles", ".jpg", mediaStorageDir);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-//
-        return image;
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case CAMERA_REQUEST:
-                if (resultCode == RESULT_OK) {
-                    try {
-                        handleBigCameraPhoto();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                } else {
-//                    strImageOnePath = null;
-//                    strImageOnePath = null;
-                }
-                break;
-
-
-        } // switch
-    }
-
-    private void handleBigCameraPhoto() throws Exception {
-
-        if (testPictureCount == 0) {
-
-            if (strFarmerLocalImage != null) {
-//                setPic();//When needed add
-//                galleryAddPic();
-            }
-        }
-
-
-    }
-
-//    private void setPic() throws Exception {
-//
-//        /* There isn't enough memory to open up more than a couple camera photos */
-//        /* So pre-scale the target bitmap into which the file is decoded */
-//
-//        /* Get the size of the ImageView */
-//
-//        if(testPictureCount==0){
-////            int targetW = imageOne.getWidth();
-////            int targetH = imageOne.getHeight();
-//
-//            /* Get the size of the image */
-//            BitmapFactory.Options bmOptions = new BitmapFactory.Options();
-//            bmOptions.inJustDecodeBounds = true;
-//            BitmapFactory.decodeFile(strFarmerLocalImage, bmOptions);
-////            int photoW = bmOptions.outWidth;
-////            int photoH = bmOptions.outHeight;
-//
-//            /* Figure out which way needs to be reduced less */
-////            int scaleFactor = 1;
-////            if ((targetW > 0) || (targetH > 0)) {
-////                scaleFactor = Math.min(photoW / targetW, photoH / targetH);
-////            }
-//
-//            /* Set bitmap options to scale the image decode target */
-////            bmOptions.inJustDecodeBounds = false;
-////            bmOptions.inSampleSize = scaleFactor;
-////            bmOptions.inPurgeable = true;
-//
-//            bitmapFarmer = BitmapFactory.decodeFile(strFarmerLocalImage, bmOptions);
-////        if(!isLand){
-////            bitmapPatta = BitmapFactory.decodeFile(strLandImagePath, bmOptions);
-////        } else {
-////
-////        }
-//            getBytesFromBitmap(bitmapFarmer);
-//
-////            ExifInterface ei = new ExifInterface(strFarmerLocalImage);
-////            int orientation = ei.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-////                    ExifInterface.ORIENTATION_UNDEFINED);
-//            /* Decode the JPEG file into a Bitmap */
-//
-//            //bitmapLand = ImageUtility.rotatePicture(90, bitmapLand);
-////        imageLand.setImageBitmap(rotatedBitmap);
-//            Bitmap rotatedBitmap = null;
-//            rotatedBitmap = bitmapFarmer;
-////            switch (orientation) {
-////
-////                case ExifInterface.ORIENTATION_ROTATE_90:
-////                    rotatedBitmap = rotateImage(bitmapFarmer, 90);
-////                    break;
-////
-////                case ExifInterface.ORIENTATION_ROTATE_180:
-////                    rotatedBitmap = rotateImage(bitmapFarmer, 180);
-////                    break;
-////
-////                case ExifInterface.ORIENTATION_ROTATE_270:
-////                    rotatedBitmap = rotateImage(bitmapFarmer, 270);
-////                    break;
-////
-////                case ExifInterface.ORIENTATION_NORMAL:
-////                default:
-////                    rotatedBitmap = bitmapFarmer;
-////            }
-//
-//
-////        bitmapLand = rotatedBitmap;
-////        if(isLand){
-//            bitmapFarmer = rotatedBitmap;
-////            imageOne.setImageBitmap(rotatedBitmap);
-////            imageOne.invalidate();
-//
-//            //Insert farmer image
-//            viewModel.updateFarmerImage(strFarmerLocalImage,farmerCode);
-//            {
-//                // CommonConstants.FARMER_CODE = etFarmerCode.getText().toString().trim();
-////                        String strFarmerCode = etFarmerCode.getText().toString().trim();
-//                String strDocUrl = "data:image/png;base64," + ImageUtility.convertBitmapToString(bitmapFarmer);
-//                String strLocalDoc = strFarmerLocalImage;
-////                        Log.d("TAG", "onClick: file" + strImageFileExtension +strIdtype);
-//                DocIdentiFicationDeatilsTable docIdentiFicationDeatilsTable = new DocIdentiFicationDeatilsTable();
-//
-//                docIdentiFicationDeatilsTable.setDocUrl(strDocUrl);
-////                        savingFarmerProfieImagesTable.setDocUrl(strFarmerPic);
-//                docIdentiFicationDeatilsTable.setFarmerCode(farmerCode);
-//                docIdentiFicationDeatilsTable.setDocLocal(strFarmerLocalImage);
-//                docIdentiFicationDeatilsTable.setDocExtension(strFileExtension);
-//                docIdentiFicationDeatilsTable.setDocType("photo");
-//                docIdentiFicationDeatilsTable.setSync(false);
-//                docIdentiFicationDeatilsTable.setServerPost("0");
-//                docIdentiFicationDeatilsTable.setCreatedByUserId(appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-//                docIdentiFicationDeatilsTable.setUpdatedByUserId(appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-//                docIdentiFicationDeatilsTable.setIsActive("1");
-//                String dateTime = appHelper.getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
-//                docIdentiFicationDeatilsTable.setCreatedDate(dateTime);
-//                docIdentiFicationDeatilsTable.setUpdatedDate(dateTime);
-//
-//
-//                viewModel.insertDoctable(docIdentiFicationDeatilsTable);
-//
-//                farmerDetailsListAdapter.notifyDataSetChanged();
-//
-//            }
-//
-////            txtFarmerImage.setText(strFarmerLocalImage);
-////        } else {
-////            bitmapPatta = rotatedBitmap;
-////            imagePatta.setImageBitmap(rotatedBitmap);
-////            imagePatta.invalidate();
-////        }
-//
-//            /* Decode the JPEG file into a Bitmap */
-////        bitmapLand = BitmapFactory.decodeFile(strLandImagePath, bmOptions);
-////        getBytesFromBitmap(bitmapLand);
-////        bitmapLand = ImageUtility.rotatePicture(90, bitmapLand);
-////
-//
-//            /* There isn't enough memory to open up more than a couple camera photos */
-//            /* So pre-scale the target bitmap into which the file is decoded */
-//
-//            /* Get the size of the ImageView */
-//
-//
-//        }
-//
-//    }
-
-    private static Bitmap rotateImage(Bitmap source, float angle) {
-        Matrix matrix = new Matrix();
-        matrix.postRotate(angle);
-        return Bitmap.createBitmap(source, 0, 0, source.getWidth(), source.getHeight(),
-                matrix, true);
-    }
-
-    private void galleryAddPic() {
-        if (testPictureCount == 1) {
-            Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
-            File f;
-            f = new File(strImageOnePath);
-            Uri contentUri = Uri.fromFile(f);
-            mediaScanIntent.setData(contentUri);
-            sendBroadcast(mediaScanIntent);
-        }
-    }
-
-    public byte[] getBytesFromBitmap(Bitmap bitmap) throws Exception {
-        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
-        bytes = stream.toByteArray();
-        return stream.toByteArray();
-    }
-
-    public void getDealerStatus(String fid){
-        try {
-            viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getDealerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<DealerFarmer> dealerFarmers = (List<DealerFarmer>) o;
-                        viewModel.getDealerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (dealerFarmers != null && dealerFarmers.size() > 0) {
-//                            farmerDealerStatus =1;
-//                            Log.e("dashListStat",dealerFarmers.toString());
-
-                        } else {
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-//                            farmerDealerStatus=0;
-
-                        }
-                    }
-                };
-                viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void getManufacturerStatus(String fid){
-        try {
-            viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getManfacturerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<ManfacturerFarmer> manfacturerFarmers = (List<ManfacturerFarmer>) o;
-                        viewModel.getManfacturerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (manfacturerFarmers != null && manfacturerFarmers.size() > 0) {
-//                            farmerManufacturerStatus =1;
-//                            Log.e("dashListStat",manfacturerFarmers.toString());
-                        } else {
-//                            farmerManufacturerStatus=0;
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                };
-                viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(DashBoardFarmerListActivity.this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
 
         try {
-            if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
+            if (viewModel.getLanguageDataVM(stLanguage, stWord) != null) {
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
-            } else{
+            } else {
                 return stWord;
             }
 

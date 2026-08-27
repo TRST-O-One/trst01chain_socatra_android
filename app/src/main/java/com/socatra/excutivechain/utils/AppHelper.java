@@ -1,28 +1,17 @@
 package com.socatra.excutivechain.utils;
 
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.provider.MediaStore;
 import android.util.Log;
-import android.view.Window;
-import android.widget.TextView;
-
-import com.socatra.excutivechain.R;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -30,18 +19,9 @@ public class AppHelper {
 
     private static final String TAG = AppHelper.class.getCanonicalName();
     private Context context;
-    Dialog dialog;
-
     public AppHelper(Context context) {
         this.context = context;
     }
-
-//    public DialogHelper getDialogHelper() {
-//        if (dialogHelper == null) {
-//            dialogHelper = new DialogHelper(context);
-//        }
-//        return dialogHelper;
-//    }
 
     public String getCurrentDateTime(String strDateFormat) {
         String strCurrDate = null;
@@ -135,22 +115,6 @@ public class AppHelper {
         }
     }
 
-    public static String getFilePathFromContentUri(Context context, Uri contentUri) {
-        String filePath = null;
-
-        String[] projection = {MediaStore.MediaColumns.DATA};
-
-        Cursor cursor = context.getContentResolver().query(contentUri, projection, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            filePath = cursor.getString(columnIndex);
-            cursor.close();
-        }
-
-        return filePath;
-    }
-
 
     public String strAppFolderName(String pkName) {//for App Folder Name
         String inputString = pkName.replace("com.", "");
@@ -172,24 +136,5 @@ public class AppHelper {
 
     private String capitalizeFirstLetter(String str) {
         return Character.toUpperCase(str.charAt(0)) + str.substring(1);
-    }
-
-    public void getErrorDialog(Context context,Exception e){
-        Writer writer=new StringWriter();
-        e.printStackTrace(new PrintWriter(writer));
-        String s=writer.toString();
-
-        Dialog crashDialog = new Dialog(context, R.style.MyAlertDialogThemeNew);
-        crashDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        crashDialog.setContentView(R.layout.crash_dialog);
-        crashDialog.getWindow().setBackgroundDrawableResource(R.drawable.bg_dialog);
-        crashDialog.setCanceledOnTouchOutside(true);
-        crashDialog.setCancelable(true);
-
-        TextView crashDialogText = crashDialog.findViewById(R.id.crashDialogText);
-
-        crashDialogText.setText(s);
-
-        crashDialog.show();
     }
 }

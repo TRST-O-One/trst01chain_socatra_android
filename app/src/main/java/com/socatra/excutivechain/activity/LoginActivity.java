@@ -14,6 +14,7 @@ import static com.socatra.excutivechain.utils.AppConstant.IsFirst;
 import static com.socatra.excutivechain.utils.AppConstant.accessToken;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -103,28 +104,22 @@ import retrofit2.Response;
 public class LoginActivity extends BaseActivity {
     private static final String TAG = LoginActivity.class.getCanonicalName();
     String appVersion;
-    public static String SuserId;
     public String strUserDeviceId;
     // TODO: List of all permissions
     private String[] PERMISSIONS_STORAGE = {
             Manifest.permission.CAMERA,
-            /*  Manifest.permission.READ_EXTERNAL_STORAGE,
-              Manifest.permission.WRITE_EXTERNAL_STORAGE,*/
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
-//            Manifest.permission.READ_PHONE_STATE,
             Manifest.permission.ACCESS_MEDIA_LOCATION,
 
 
     };
     private static final int PERMISSIONS_REQUESTS_CODE = 2000;
     SharedPreferences prefs = null;
-    //    ProgressBar progressDialog;
     ActivityResultLauncher<Intent> mGetPermission;
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
     public AppViewModel viewModel;
-    //    public AppViewModel viewModel;
     String TokenAccess = "";
     ProgressBar progressBar;
     String strTodayDate;
@@ -152,7 +147,6 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         });
-//        appHelper.getSharedPrefObj().edit().remove(DB_NAME).apply();
 
         try {
             PackageInfo packageInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
@@ -239,20 +233,12 @@ public class LoginActivity extends BaseActivity {
         if (checkAllPermissions()) {
             if (prefs.getBoolean("firstrun", true)) {
                 if (appHelper.isNetworkAvailable()) {
-                    /*appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
-                    appHelper.getSharedPrefObj().edit().remove(accessToken).apply();
-                    appHelper.getSharedPrefObj().edit().remove(DeviceUserName).apply();
-                    appHelper.getSharedPrefObj().edit().remove(DeviceUserPwd).apply();
-                    appHelper.getSharedPrefObj().edit().remove(AgentId).apply();*/
-
                     getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
-                    //getFireBaseTokenValue();
                 } else {
                     Toast.makeText(this, "no internet connection", Toast.LENGTH_SHORT).show();
                 }
             } else {
                 getTodayRecordExist();
-                //  getFireBaseTokenValue();
             }
 
         }
@@ -307,11 +293,12 @@ public class LoginActivity extends BaseActivity {
 
     }
 
+    @SuppressLint("SetTextI18n")
     public void takePermission() {
         if (checkAllPermissions()) {
             App.createDBPath();
             txtDeviceId.setText("Device ID   : " + CommonUtils.getIMEInumber(this));
-            txtDbNo.setText("DB  Version : " + String.valueOf(DB_VERSION));
+            txtDbNo.setText("DB  Version : " + DB_VERSION);
             txtDate.setText("Date : " + strTodayDate);
             Log.d(TAG, "onCreate: " + CommonUtils.getIMEInumber(this));
             try {
@@ -354,7 +341,6 @@ public class LoginActivity extends BaseActivity {
 
     public void getLoginDetailsByImeiNumber(String userId) {
         try {
-            Log.e(TAG, "getLoginDetailsByImeiNumber: " + userId);
             viewModel.logInServiceList(userId);
             if (viewModel.getloginResponseDTOFromServerLiveData() != null) {
                 Observer observer = new Observer() {
@@ -363,40 +349,26 @@ public class LoginActivity extends BaseActivity {
                         LoginResponseDTO loginResponseDTOList = (LoginResponseDTO) o;
                         viewModel.getloginResponseDTOFromServerLiveData().removeObserver(this);
                         if (loginResponseDTOList != null) {
-//                            for (int i = 0; i < loginResponseDTOList.size(); i++) {
                             App.createDBPath();
-                            Log.d(TAG, "onChanged: " + App.createDBPath());
                             appHelper.getSharedPrefObj().edit().putString(DeviceUserID, loginResponseDTOList.getData().get(0).getId().toString()).apply();
-                            // appHelper.getSharedPrefObj().edit().putString(DeviceUserID, "10").apply();
-//
                             strUserDeviceId = loginResponseDTOList.getData().get(0).getId().toString();
-//
                             appHelper.getSharedPrefObj().edit().putString(DeviceUserName, loginResponseDTOList.getData().get(0).getUserName()).apply();
                             appHelper.getSharedPrefObj().edit().putString(DeviceUserPwd, loginResponseDTOList.getData().get(0).getPassword()).apply();
-//                                appHelper.getSharedPrefObj().edit().putString(AgentId, loginResponseDTOList.get(i).getAgentId()).apply();
                             txtUserName.setText(loginResponseDTOList.getData().get(0).getUserName());//AM
                             txtPassword.setText(loginResponseDTOList.getData().get(0).getPassword());
-//
-//
-                            Log.d(TAG, "onChanged: " + loginResponseDTOList.getData().get(0).getId() + loginResponseDTOList.getData().get(0).getUserName());
                             String token = "Bearer " + loginResponseDTOList.getData().get(0).getToken();
                             TokenAccess = token;
                             App.createDBPath();
 //                                // TODO: Inserting into key store
                             appHelper.getSharedPrefObj().edit().putString(accessToken, token).apply();
                             App.createDBPath();
-//                                //   if (prefs.getBoolean("firstrun", true)) {
-//
                             try {
                                 testDialog(token);
                             } catch (Exception ex) {
                                 Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-//                            }
-
 
                         } else {
-
                             Toast.makeText(LoginActivity.this, "Unable to fetch Details please contact Admin", Toast.LENGTH_SHORT).show();
                         }
 
@@ -408,7 +380,6 @@ public class LoginActivity extends BaseActivity {
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_SHORT).show();
             ex.printStackTrace();
-            // appHelper.getDialogHelper().getLoadingDialog().closeDialog();
         }
     }
 
@@ -436,7 +407,6 @@ public class LoginActivity extends BaseActivity {
                         viewModel.getRefreshTableDateCheckLiveDataFromLocalDB().removeObserver(this);
                         if (refreshTableDateCheck1 != null) {
                             progressBar.setVisibility(View.VISIBLE);
-//                            getCropDetailsFromServer();  // check Table
 
                             new Handler().postDelayed(new Runnable() {
                                 @Override
@@ -447,8 +417,6 @@ public class LoginActivity extends BaseActivity {
 
                                 }
                             }, 100);
-//                            progressBar.setVisibility(View.GONE);//only for test
-//                            txtLogin.setEnabled(true);//only for test
                         }
 
                     }
@@ -457,13 +425,11 @@ public class LoginActivity extends BaseActivity {
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-//            appHelper.getDialogHelper().getLoadingDialog().closeDialog();
         }
     }
 
     //Todo: Main Master Sync
     public void getMasterSyncFromServerDetails(String token) {
-        Log.e(TAG,"Called Master");
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<JsonElement> callRetrofit = null;
         callRetrofit = service.getMasterSyncDetailsFromServer(token);
@@ -474,7 +440,6 @@ public class LoginActivity extends BaseActivity {
                 try {
                     String strResponse = String.valueOf(response.body());
                     JSONObject jsonArray = new JSONObject(strResponse);
-                    Log.d(TAG, "onResponse: Json_array" + jsonArray);
                     if (jsonArray.length() > 0) {
                         try {
                             prefs.edit().putBoolean("firstrun", false).commit();
@@ -750,32 +715,8 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-
-    private void getFireBaseTokenValue() {
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        if (!task.isSuccessful()) {
-                            Log.w("ggg", "getInstanceId failed", task.getException());
-                            return;
-                        }
-                        // Get new Instance ID token
-                        strFirbaseToken = task.getResult().getToken();
-                        Log.d(TAG, "onComplete: FirbaseToken" + strFirbaseToken);
-                        Log.e(TAG, "onComplete:Token " + strFirbaseToken);
-
-                        // Log and toast
-//                        String msg = getString(R.string.msg_token_fmt, token);
-//                        Log.d("tag", msg);
-//                        Toast.makeText(SignInActivity.this, token, Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
     //Todo: All farmer records
     public void getSyncFarmerAllDataFromServer() {
-        Log.e(TAG,"Called Master Farmer");
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<JsonElement> callRetrofit = null;
         callRetrofit = service.getFarmerAllSyncDataDetailsFromServer(CommonUtils.getIMEInumber(LoginActivity.this), appHelper.getSharedPrefObj().getString(accessToken, ""));
@@ -796,7 +737,6 @@ public class LoginActivity extends BaseActivity {
                         Toast.makeText(LoginActivity.this, "Fetched All Data From Server SuccessFully", Toast.LENGTH_LONG).show();
                     }
                 }, 1500);
-
 
                 appHelper.getSharedPrefObj().edit().putBoolean(IsFirst, false).apply();
                 ExecutorService executorService = Executors.newSingleThreadExecutor();
@@ -1429,17 +1369,10 @@ public class LoginActivity extends BaseActivity {
                         RefreshTableDateCheck refreshTableDateCheck = (RefreshTableDateCheck) o;
                         viewModel.getRefreshTableDateCheckByDateFromLocalDBLiveData().removeObserver(this);
                         if (refreshTableDateCheck != null) {
-                            Log.d(TAG, "onChanged: " + refreshTableDateCheck);
-                            Log.d(TAG, "onChanged: Date" + refreshTableDateCheck.getDate());
                             txtUserName.setText(appHelper.getSharedPrefObj().getString(DeviceUserName, ""));
                             txtPassword.setText(appHelper.getSharedPrefObj().getString(DeviceUserPwd, ""));
                         } else {
                             if (appHelper.isNetworkAvailable()) {
-                                /*appHelper.getSharedPrefObj().edit().remove(DeviceUserID).apply();
-                                appHelper.getSharedPrefObj().edit().remove(accessToken).apply();
-                                appHelper.getSharedPrefObj().edit().remove(DeviceUserName).apply();
-                                appHelper.getSharedPrefObj().edit().remove(DeviceUserPwd).apply();*/
-//                                getLoginDetailsByImeiNumber("Voluntary");
                                 getLoginDetailsByImeiNumber(CommonUtils.getIMEInumber(LoginActivity.this));
                             } else {
                                 txtUserName.setText(appHelper.getSharedPrefObj().getString(DeviceUserName, ""));
@@ -1448,8 +1381,6 @@ public class LoginActivity extends BaseActivity {
                             }
                         }
                     }
-
-
                 };
                 viewModel.getRefreshTableDateCheckByDateFromLocalDBLiveData().observe(this, getLeadRawDataObserver);
             }
@@ -1460,8 +1391,6 @@ public class LoginActivity extends BaseActivity {
 
     //Todo: Ok dialog
     private void testDialog(String token) {
-
-
         dialog = new Dialog(LoginActivity.this, R.style.MyAlertDialogThemeNew);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.master_success);

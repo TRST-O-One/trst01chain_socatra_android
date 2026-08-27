@@ -59,7 +59,6 @@ public class AppViewModel extends ViewModel {
 
     // for clearing local db for master details
 
-
     public void deleteAllTablesFromLocalMaster() {
         try {
             appRepository.deleteAllTablesFromLocalMaster();
@@ -118,10 +117,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Country> getinsertCountryTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertCountryListDataIntoLocalDBQueryLiveData;
-    }
-
     //StateorProvince
     private LiveData<StateorProvince> insertStateListDataIntoLocalDBQueryLiveData;
 
@@ -133,9 +128,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<StateorProvince> getinsertStateTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertStateListDataIntoLocalDBQueryLiveData;
-    }
 
     //DistrictorRegency
     private LiveData<DistrictorRegency> insertDistrictListDataIntoLocalDBQueryLiveData;
@@ -146,10 +138,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<DistrictorRegency> getinsertDistrictTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertDistrictListDataIntoLocalDBQueryLiveData;
     }
 
 
@@ -165,11 +153,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<SubDistrict> getinsertSubDistrictTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertSubDistrictListDataIntoLocalDBQueryLiveData;
-    }
-
-
     //village
     private LiveData<VillageTable> insertVillageListDataIntoLocalDBQueryLiveData;
 
@@ -179,10 +162,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<VillageTable> getinsertVillageTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertVillageListDataIntoLocalDBQueryLiveData;
     }
 
 
@@ -197,10 +176,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<RiskAssessmentQuestion> getInsertRiskAssessmentQuestionTableListDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertRiskAssessmentQuestionIntoLocalDBQueryLiveData;
-    }
-
 
     //Manufacturer Master
     private LiveData<ManufacturerMaster> insertManufacturerMasterIntoLocalDBQueryLiveData;
@@ -211,10 +186,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<ManufacturerMaster> getInsertManufacturerMasterDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertManufacturerMasterIntoLocalDBQueryLiveData;
     }
 
     //Dealer Master
@@ -228,13 +199,10 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<DealerMaster> getInsertDealerMasterDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertDealerMasterIntoLocalDBQueryLiveData;
-    }
-
     //App Language
 
     private LiveData<AppLanguageTable> insertAppLanguageMasterIntoLocalDBQueryLiveData;
+
     public void insertLanguageMasterDetailIntoLocalDBQuery(AppLanguageTable appLanguageTable) {
         try {
             insertAppLanguageMasterIntoLocalDBQueryLiveData = appRepository.insertLanguageMasterDataIntoLocalDBRepository(appLanguageTable);
@@ -242,21 +210,17 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
-    public LiveData<AppLanguageTable> getInsertAppLanguageMasterDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertAppLanguageMasterIntoLocalDBQueryLiveData;
-    }
+
 
     //App Language HDR
     private LiveData<AppLanguageHDRTable> insertAppLanguageHDRMasterIntoLocalDBQueryLiveData;
+
     public void insertLanguageHDRMasterDetailIntoLocalDBQuery(AppLanguageHDRTable appLanguageHDRTable) {
         try {
             insertAppLanguageHDRMasterIntoLocalDBQueryLiveData = appRepository.insertLanguageHDRMasterDataIntoLocalDBRepository(appLanguageHDRTable);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-    public LiveData<AppLanguageHDRTable> getInsertAppLanguageHDRMasterDataIntoLocalDBQueryLiveDataLocalDB() {
-        return insertAppLanguageHDRMasterIntoLocalDBQueryLiveData;
     }
 
     //Farmer Main
@@ -271,13 +235,10 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<FarmersTable> getfarmerDetailListTableLiveDataInsertLiveDataFromLocalDB() {
-        return farmerDetailListTableLiveDataInsert;
-    }
-
 
     // TODO: 9/14/2023 get Farmer details by farmer code
     private LiveData<FarmersTable> farmersTableLiveData;
+
     public void getFarmerDetailsByFarmerCode(String strFarmercode) {
         try {
             farmersTableLiveData = appRepository.getFarmersDataFromLocalDb(strFarmercode);
@@ -290,26 +251,14 @@ public class AppViewModel extends ViewModel {
         return farmersTableLiveData;
     }
 
-    //App Language
-    private LiveData<String > stLanguage;
-    public void getLanguageDataViewModel(String stLang,String stWord) {
-        try {
-            stLanguage = appRepository.getLanguageDataRepository(stLang,stWord);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public String getLanguageDataVM(String stLang, String stWord) {
         return appRepository.getLanguageDataRepo(stLang, stWord);
     }
 
-    public LiveData<String > getLanguageLiveData() {
-        return stLanguage;
-    }
-
     // TODO: 9/14/2023 get distric id by village id
     private LiveData<VillageTable> villageTableLiveData;
+
     public void getDistricIDFromVillageTableDetailsByVillageId(String strVillageId) {
         try {
             villageTableLiveData = appRepository.getDisIdFromVillageTableById(strVillageId);
@@ -323,9 +272,9 @@ public class AppViewModel extends ViewModel {
     }
 
 
-
     // TODO: 9/14/2023 get distric id by village id
     private LiveData<SubDistrict> subDistrictLiveData;
+
     public void getDistricIDFromSubDistricId(String strSubdistricId) {
         try {
             subDistrictLiveData = appRepository.getDisIdFromSubDistricTableById(strSubdistricId);
@@ -341,6 +290,7 @@ public class AppViewModel extends ViewModel {
     // TODO: 9/14/2023 distric details
 
     private LiveData<DistrictorRegency> districtorRegencyLiveData;
+
     public void getDistricDetailsFromLocalDBById(Integer strDisId) {
         try {
             districtorRegencyLiveData = appRepository.getDistricDetailsByIdFromLocalDb(strDisId);
@@ -348,11 +298,13 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<DistrictorRegency> getDistrictorRegencyLiveDataLiveData() {
         return districtorRegencyLiveData;
     }
 
     private LiveData<StateorProvince> stateOfProvinceLiveData;
+
     public void getStateorProvinceDetailsFromLocalDBById(Integer strSateId) {
         try {
             stateOfProvinceLiveData = appRepository.getSateorProvinceDetailsFromLocalDb(strSateId);
@@ -360,13 +312,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<StateorProvince> getStateorProvinceLiveDataLiveData() {
         return stateOfProvinceLiveData;
     }
 
 
-
     private LiveData<Country> CountryLiveData;
+
     public void getCountryDetailsFromLocalDBById(Integer strCountryId) {
         try {
             CountryLiveData = appRepository.getCountryDetailsByIdFromLocalDb(strCountryId);
@@ -374,6 +327,7 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<Country> getCountryRegencyLiveDataLiveData() {
         return CountryLiveData;
     }
@@ -389,11 +343,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<Plantation> getPlantationDetailListTableLiveDataInsertLiveDataFromLocalDB() {
-        return plantationLiveData;
-    }
-
-
     //PlantationDoc insert and get
     private LiveData<PlantationDocuments> plantationDocumentsLiveData;
 
@@ -403,10 +352,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<PlantationDocuments> getPlantationDocDetailListTableLiveDataInsertLiveDataFromLocalDB() {
-        return plantationDocumentsLiveData;
     }
 
     //Plantation Geo insert and get
@@ -420,10 +365,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<PlantationGeoBoundaries> getPlantationGeoDetailListTableLiveDataInsertLiveDataFromLocalDB() {
-        return plantationGeoBoundariesLiveData;
-    }
-
     //Labour Survey
     private LiveData<PlantationLabourSurvey> plantationPlantationLabourSurveyLiveData;
 
@@ -433,10 +374,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<PlantationLabourSurvey> getPlantationLabourSurveyListTableLiveDataInsertLiveDataFromLocalDB() {
-        return plantationPlantationLabourSurveyLiveData;
     }
 
     //sync
@@ -454,9 +391,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-
-
-
     //FarmerHouseholdParentSurvey
     private LiveData<FarmerHouseholdParentSurvey> farmerHouseholdParentSurveyLiveData;
 
@@ -466,10 +400,6 @@ public class AppViewModel extends ViewModel {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<FarmerHouseholdParentSurvey> getFarmerHouseholdParentSurveyListTableLiveDataInsertLiveDataFromLocalDB() {
-        return farmerHouseholdParentSurveyLiveData;
     }
 
     //FarmerHouseholdChildrenSurvey
@@ -483,14 +413,10 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<FarmerHouseholdChildrenSurvey> getFarmerHouseholdChildrenSurveyListTableLiveDataInsertLiveDataFromLocalDB() {
-        return farmerHouseholdChildrenSurveyLiveData;
-    }
-
-
 
     //Plantation added
     private LiveData<PlantationGeoBoundaries> geoBoundariesTableLiveDataInsert;
+
     public void insertGeoBoundariesvaluesIntolocalDB(PlantationGeoBoundaries geoBoundariesTable) {
         try {
             geoBoundariesTableLiveDataInsert = appRepository.insertGoeDataIntolocaDB(geoBoundariesTable);
@@ -498,12 +424,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     //Plantation added
     public LiveData<PlantationGeoBoundaries> getGeoBoundariesTableLocalDB() {
         return geoBoundariesTableLiveDataInsert;
     }
 
     private LiveData<PlantationDocuments> documentSavingDataLocalDB;
+
     public void insertDoctable(PlantationDocuments docIdentiFicationDeatilsTable) {
         try {
             documentSavingDataLocalDB = appRepository.insertDocIntoLocalDB(docIdentiFicationDeatilsTable);
@@ -512,12 +440,9 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<PlantationDocuments> getDocDetailLsTableLiveDataFromLocalDB() {
-        return documentSavingDataLocalDB;
-    }
-
     //PlantationLabourSurvey
     private LiveData<PlantationLabourSurvey> plantationLabourSurveyDataLocalDB;
+
     public void insertPlantationLabourSurveyDataLocalDB(PlantationLabourSurvey plantationLabourSurvey) {
         try {
             plantationLabourSurveyDataLocalDB = appRepository.insertPlantationLabourSurveyIntoLocalDB(plantationLabourSurvey);
@@ -525,11 +450,6 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
-
-    public LiveData<PlantationLabourSurvey> getPlantationLabourSurveyDataLocalDBTableLiveDataFromLocalDB() {
-        return plantationLabourSurveyDataLocalDB;
-    }
-
 
 
     public LiveData<Integer> getNotSyncFarmerCountDataFromLocalDB() {
@@ -563,6 +483,7 @@ public class AppViewModel extends ViewModel {
 
     //Village by pin-code
     private LiveData<List<VillageTable>> villageDetailsByPincode;
+
     public void getVillageDetailsListFromLocalDB(String pincode) {
         try {
             villageDetailsByPincode = appRepository.getVillageTableDetailsFromLocalDbByPincode(pincode);
@@ -593,9 +514,9 @@ public class AppViewModel extends ViewModel {
     }
 
 
-
     //Sub District
     private LiveData<List<SubDistrict>> subDistrictDetailsById;
+
     public void getSubDistrictDetailsListFromLocalDB(String id) {
         try {
             subDistrictDetailsById = appRepository.getSubDistrictTableDetailsFromLocalDbById(id);
@@ -603,12 +524,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<List<SubDistrict>> getSubDistrictDetailsByIdLiveData() {
         return subDistrictDetailsById;
     }
 
     //District
     private LiveData<List<DistrictorRegency>> districtDetailsById;
+
     public void getDistrictDetailsListFromLocalDB(int id) {
         try {
             districtDetailsById = appRepository.getDistrictTableDetailsFromLocalDbById(id);
@@ -616,12 +539,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<List<DistrictorRegency>> getDistrictDetailsByIdLiveData() {
         return districtDetailsById;
     }
 
     //StateOrProvince
-     private LiveData<List<StateorProvince>> stateOrProvinceDetailsById;
+    private LiveData<List<StateorProvince>> stateOrProvinceDetailsById;
+
     public void getStateorProvinceDetailsListFromLocalDB(int id) {
         try {
             stateOrProvinceDetailsById = appRepository.getStateTableDetailsFromLocalDbById(id);
@@ -629,12 +554,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<List<StateorProvince>> getStateOrProvinceDetailsByIdLiveData() {
         return stateOrProvinceDetailsById;
     }
 
     //Country
     private LiveData<List<Country>> countryDetailsById;
+
     public void getCountryDetailsListFromLocalDB() {
         try {
             countryDetailsById = appRepository.getCountryTableDetailsFromLocalDbById();
@@ -649,6 +576,7 @@ public class AppViewModel extends ViewModel {
 
     //App Language HDR
     private LiveData<List<AppLanguageHDRTable>> appLanguageLiveData;
+
     public void getAllLanguagesFromHDR() {
         try {
             appLanguageLiveData = appRepository.getAllLanguagesFromHDR();
@@ -663,6 +591,7 @@ public class AppViewModel extends ViewModel {
 
     //Manufacturer Master list
     private LiveData<List<ManufacturerMaster>> manufacturerMasterDetails;
+
     public void getManufacturerMasterDetailsListFromLocalDB() {
         try {
             manufacturerMasterDetails = appRepository.getManufacturerMasterTableDetailsFromLocalDb();
@@ -670,12 +599,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<List<ManufacturerMaster>> getManufacturerMasterDetailsLiveData() {
         return manufacturerMasterDetails;
     }
 
     //Dealer Master list
     private LiveData<List<DealerMaster>> dealerMasterDetails;
+
     public void getDealerMasterDetailsListFromLocalDB() {
         try {
             dealerMasterDetails = appRepository.getDealerMasterTableDetailsFromLocalDb();
@@ -683,12 +614,14 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     public LiveData<List<DealerMaster>> getDealerMasterDetailsLiveData() {
         return dealerMasterDetails;
     }
 
     //Plantation by fid
     private LiveData<List<Plantation>> plantationDetailsById;
+
     public void getPlantationDetailsFromLocalDbById(String strFarmerCode) {
         try {
             plantationDetailsById = appRepository.getPlantationDetailsFromLocalDbById(strFarmerCode);
@@ -709,14 +642,16 @@ public class AppViewModel extends ViewModel {
     public LiveData<List<Plantation>> getPlantationDetailsByIdLiveData() {
         return plantationDetailsById;
     }
+
     //For Lab stat
     public void getPlantationDetailsFromLocalDbByIdAndStatus(String id) {
         try {
-            plantationDetailsById = appRepository.getPlantationDetailsFromLocalDbByIdAndStatus(id,"false");
+            plantationDetailsById = appRepository.getPlantationDetailsFromLocalDbByIdAndStatus(id, "false");
         } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
+
     //for lab adpt
     public void getPlantationDetailsFromLocalDbBymId(String id) {
         try {
@@ -728,6 +663,7 @@ public class AppViewModel extends ViewModel {
 
     //Labour by fid
     private LiveData<List<PlantationLabourSurvey>> labourSurveyDetailsByFId;
+
     public void getPlantationLabourSurveyDetailsFromLocalDbById(String id) {
         try {
             labourSurveyDetailsByFId = appRepository.getPlantationLabourSurveyDetailsFromLocalDbById(id);
@@ -740,8 +676,6 @@ public class AppViewModel extends ViewModel {
     public LiveData<List<PlantationLabourSurvey>> getPlantationLabourSurveyDetailsByIdLiveData() {
         return labourSurveyDetailsByFId;
     }
-
-
 
 
     //Farmer Main
@@ -778,13 +712,14 @@ public class AppViewModel extends ViewModel {
 
     //Farmer Main
     private LiveData<String> farmerLiveData;
+
     public LiveData<String> getFarmerLiveData() {
         return farmerLiveData;
     }
 
     public void syncFarmerDetailsDataToServer(FarmersTable farmerTable) {
         try {
-                farmerLiveData = appRepository.syncFarmerDetailsDataToServer(farmerTable);
+            farmerLiveData = appRepository.syncFarmerDetailsDataToServer(farmerTable);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -793,6 +728,7 @@ public class AppViewModel extends ViewModel {
 
     //Plantation to server Main
     private LiveData<String> plantationsLiveData;
+
     public LiveData<String> getPlantationLiveData() {
         return plantationsLiveData;
     }
@@ -804,14 +740,16 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     private LiveData<String> stringLiveData;
+
     public LiveData<String> getStringLiveData() {
         return stringLiveData;
     }
 
-    public void syncGeoBoundariesDetailsSubmitTableDataToServer(PlantationGeoBoundaries geoBoundariesTable,int index) {
+    public void syncGeoBoundariesDetailsSubmitTableDataToServer(PlantationGeoBoundaries geoBoundariesTable, int index) {
         try {
-            stringLiveData = appRepository.syncGeoBoundariesDetailsDataToServer(geoBoundariesTable,index);
+            stringLiveData = appRepository.syncGeoBoundariesDetailsDataToServer(geoBoundariesTable, index);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -841,9 +779,9 @@ public class AppViewModel extends ViewModel {
     }
 
     //Doc by fid
-    public void getLocalDocIdentificationFromLocalDBByFidandDtype(String fid,String dty) {
+    public void getLocalDocIdentificationFromLocalDBByFidandDtype(String fid, String dty) {
         try {
-            docIdentificationDetailsSubmitTableLiveData = appRepository.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid,dty);
+            docIdentificationDetailsSubmitTableLiveData = appRepository.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid, dty);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -875,19 +813,9 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-
-    //Todo : Sync Geo Main
-//    public void syncGeoBoundariesDetailsSubmitTableDataToServer(GeoBoundariesTable geoBoundariesTable,int index) {
-//        try {
-//            farmerLiveData = appRepository.syncGeoBoundariesDetailsDataToServer(geoBoundariesTable,index);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//    }
-
-
     //Get Farmer
     private LiveData<List<FarmersTable>> farmerListFromLocalDBLiveData;
+
     public LiveData<List<FarmersTable>> getFarmerDetailsListLiveData() {
         return farmerListFromLocalDBLiveData;
     }
@@ -899,40 +827,39 @@ public class AppViewModel extends ViewModel {
             ex.printStackTrace();
         }
     }
+
     //updatePlotDetailListTableSyncAndPlotArea1
-    public void updatePlotDetailListTableSyncAndPlotArea1(boolean mSync,String sSync,double area,String id){
+    public void updatePlotDetailListTableSyncAndPlotArea1(boolean mSync, String sSync, double area, String id) {
         try {
-            plantationLiveData=appRepository.updatePlotDetailListTableSyncAndPlotArea1(mSync,sSync,area,id);
-        }catch (Exception ex){
+            plantationLiveData = appRepository.updatePlotDetailListTableSyncAndPlotArea1(mSync, sSync, area, id);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-
 
 
     private LiveData<FarmersTable> farmersTableLiveDataUpdate;
 
-    public void updateVillageIdInFarmerTable(String strAddress,String strVillageId,String strFarmerCode){
+    public void updateVillageIdInFarmerTable(String strAddress, String strVillageId, String strFarmerCode) {
         try {
-            farmersTableLiveDataUpdate=appRepository.updateVillageIDForFarmerTable(strAddress,strVillageId,strFarmerCode);
-        }catch (Exception ex){
+            farmersTableLiveDataUpdate = appRepository.updateVillageIDForFarmerTable(strAddress, strVillageId, strFarmerCode);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
-    public LiveData<FarmersTable> getFarmersTableLiveDataForUpdateVillageId() {
-        return farmersTableLiveDataUpdate;
-    }
+
     //updatePlatDetailListTableForLabStatus
-    public void updatePlatDetailListTableForLabStatus(String serSync,boolean sync,String labStatus,String upDate,String upId,String pid){
+    public void updatePlatDetailListTableForLabStatus(String serSync, boolean sync, String labStatus, String upDate, String upId, String pid) {
         try {
-            plantationLiveData=appRepository.updatePlatDetailListTableForLabStatus(serSync,sync,labStatus,upDate,upId,pid);
-        }catch (Exception ex){
+            plantationLiveData = appRepository.updatePlatDetailListTableForLabStatus(serSync, sync, labStatus, upDate, upId, pid);
+        } catch (Exception ex) {
             ex.printStackTrace();
         }
     }
 
     //Plant Doc
     private LiveData<String> docLiveData;
+
     public LiveData<String> getDocLiveData() {
         return docLiveData;
     }
@@ -945,19 +872,15 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-
     //Parent survey
     private LiveData<FarmerHouseholdParentSurvey> farmerHouseholdParentSurveyDataLocalDB;
+
     public void insertFarmerHouseholdParentSurveyDataLocalDB(FarmerHouseholdParentSurvey farmerHouseholdParentSurvey) {
         try {
             farmerHouseholdParentSurveyDataLocalDB = appRepository.insertFarmerHouseholdParentSurveyIntoLocalDB(farmerHouseholdParentSurvey);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<FarmerHouseholdParentSurvey> getFarmerHouseholdParentSurveyDataLocalDBTableLiveDataFromLocalDB() {
-        return farmerHouseholdParentSurveyDataLocalDB;
     }
 
     //parent count
@@ -1000,28 +923,15 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
     //Child survey
     private LiveData<FarmerHouseholdChildrenSurvey> farmerHouseholdChildrenSurveyDataLocalDB;
+
     public void insertFarmerHouseholdChildrenSurveyDataLocalDB(FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey) {
         try {
             farmerHouseholdChildrenSurveyDataLocalDB = appRepository.insertFarmerHouseholdChildrenSurveyIntoLocalDB(farmerHouseholdChildrenSurvey);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<FarmerHouseholdChildrenSurvey> getFarmerHouseholdChildrenSurveyDataLocalDBTableLiveDataFromLocalDB() {
-        return farmerHouseholdChildrenSurveyDataLocalDB;
     }
 
 
@@ -1031,17 +941,8 @@ public class AppViewModel extends ViewModel {
 
     }
 
-
     //getting list
     private LiveData<List<FarmerHouseholdChildrenSurvey>> farmerHouseholdChildrenSurveyDetailsById;
-
-    public void getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(String id) {
-        try {
-            farmerHouseholdChildrenSurveyDetailsById = appRepository.getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(id);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public LiveData<List<FarmerHouseholdChildrenSurvey>> getFarmerHouseholdChildrenSurveyDetailsByIdLiveData() {
         return farmerHouseholdChildrenSurveyDetailsById;
@@ -1068,6 +969,7 @@ public class AppViewModel extends ViewModel {
 
     //Risk
     private LiveData<RiskAssessment> riskAssessmentDataLocalDB;
+
     public void insertRiskAssessmentDataLocalDB(RiskAssessment riskAssessment) {
         try {
             riskAssessmentDataLocalDB = appRepository.insertRiskAssessmentIntoLocalDB(riskAssessment);
@@ -1076,9 +978,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<RiskAssessment> getRiskAssessmentDataLocalDBTableLiveDataFromLocalDB() {
-        return riskAssessmentDataLocalDB;
-    }
 
     //Risk count
     public LiveData<Integer> getNotSyncRiskCountDataFromLocalDB() {
@@ -1088,6 +987,7 @@ public class AppViewModel extends ViewModel {
 
     //Risk list
     private LiveData<List<RiskAssessment>> riskAssessmentDetailsById;
+
     //Not sync list
     public void getRiskListFromLocalDBNotSync() {
         try {
@@ -1112,9 +1012,11 @@ public class AppViewModel extends ViewModel {
 
     //String live data sync
     private LiveData<String> riskLiveData;
+
     public LiveData<String> getRiskLiveDataLiveData() {
         return riskLiveData;
     }
+
     public void syncRiskDetailsDataToServer(RiskAssessment riskAssessment) {
         try {
             riskLiveData = appRepository.syncRiskDetailsDataToServer(riskAssessment);
@@ -1126,6 +1028,7 @@ public class AppViewModel extends ViewModel {
 
     //Manfacturer Farmer
     private LiveData<ManfacturerFarmer> manfacturerFarmerDataLocalDB;
+
     public void insertManfacturerFarmerDataLocalDB(ManfacturerFarmer manfacturerFarmer) {
         try {
             manfacturerFarmerDataLocalDB = appRepository.insertManfacturerFarmerIntoLocalDB(manfacturerFarmer);
@@ -1134,9 +1037,6 @@ public class AppViewModel extends ViewModel {
         }
     }
 
-    public LiveData<ManfacturerFarmer> getManfacturerFarmerDataLocalDBTableLiveDataFromLocalDB() {
-        return manfacturerFarmerDataLocalDB;
-    }
 
     //manu count
     public LiveData<Integer> getNotSyncManufacturerCountDataFromLocalDB() {
@@ -1171,9 +1071,11 @@ public class AppViewModel extends ViewModel {
 
     //String live data sync
     private LiveData<String> manuLiveData;
+
     public LiveData<String> getManufacturerLiveDataLiveData() {
         return manuLiveData;
     }
+
     public void syncManufacturerDetailsDataToServer(ManfacturerFarmer manfacturerFarmer) {
         try {
             manuLiveData = appRepository.syncManufacturerDetailsDataToServer(manfacturerFarmer);
@@ -1185,16 +1087,13 @@ public class AppViewModel extends ViewModel {
 
     //Dealer Farmer
     private LiveData<DealerFarmer> dealerFarmerDataLocalDB;
+
     public void insertDealerFarmerDataLocalDB(DealerFarmer dealerFarmer) {
         try {
             dealerFarmerDataLocalDB = appRepository.insertDealerFarmerIntoLocalDB(dealerFarmer);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-    }
-
-    public LiveData<DealerFarmer> getDealerFarmerDataLocalDBTableLiveDataFromLocalDB() {
-        return dealerFarmerDataLocalDB;
     }
 
     //dealer count
@@ -1229,9 +1128,11 @@ public class AppViewModel extends ViewModel {
 
     //String live data sync
     private LiveData<String> dealerLiveData;
+
     public LiveData<String> getDealerLiveDataLiveData() {
         return dealerLiveData;
     }
+
     public void syncDealerDetailsDataToServer(DealerFarmer dealerFarmer) {
         try {
             dealerLiveData = appRepository.syncDealerDetailsDataToServer(dealerFarmer);

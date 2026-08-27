@@ -83,7 +83,7 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
     TextView txt_gps;
     TextView txtSaveAddPlant;
 
-    String strFarmerCode = "", strFarmerSubDistricId = "", strFarmerVillageID = "";
+    String strFarmerCode = "";
 
     EditText etPlantNo, etFarmerCode, etSize, etAddress;
 
@@ -100,7 +100,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
     String[] ownerArr = new String[]{"select", "Owned", "Leased"};
 
-    Integer gpsCat = 0;
     String mArea, areaGeo;
 
 
@@ -114,34 +113,24 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
     ProgressDialog progressDialog;
 
     LocationCallback locationCallback = new LocationCallback() {
+        @SuppressLint("SetTextI18n")
         @Override
         public void onLocationResult(@NonNull LocationResult locationResult) {
             super.onLocationResult(locationResult);
 
-            if (locationResult != null) {
+            //initialise latlang
 
-                //initialise latlang
-                LatLng latLng = new LatLng(locationResult.getLocations().get(0).getLatitude(), locationResult.getLocations().get(0).getLongitude());
+            crLat = String.valueOf(locationResult.getLocations().get(0).getLatitude());
+            crLong = String.valueOf(locationResult.getLocations().get(0).getLongitude());
+            txtGpsPlant.setText(crLat + "," + crLong);
 
-                crLat = String.valueOf(locationResult.getLocations().get(0).getLatitude());
-                crLong = String.valueOf(locationResult.getLocations().get(0).getLongitude());
-                Log.e("AccLatLong", crLat + "," + crLong);
-                txtGpsPlant.setText(crLat + "," + crLong);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        stopLocationUpdate();
-                        Log.e("AccLatLongStop", "stop for loc");
-
-                    }
-                }, 1 * 200);//ch1
-
-
-            } else {
-                Log.e("AccLatLong", "Loc Null");
-            }
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    stopLocationUpdate();
+                    Log.e("AccLatLongStop", "stop for loc");
+                }
+            }, 1 * 200);//ch1
         }
     };
 
@@ -151,8 +140,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
         setContentView(R.layout.activity_plantation);
 
         strFarmerCode = getIntent().getStringExtra("mFarmerCode");
-//        getAreaValue();
-        Log.e(TAG, strFarmerCode);
 
         initializeUI();
         configureDagger();
@@ -217,15 +204,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
     private String getSelectedLanguage() {
         return preferences.getString("selected_language", "English");
     }
-//    private void getAreaValue() {
-//        if (areaGeo!=null) {
-//            areaGeo = getIntent().getStringExtra("areaGeo");
-//            txtGeoBoundPlant.setText(areaGeo);
-//        }
-//        else {
-//            areaGeo="0";
-//        }
-//    }
 
     private void initializeUI() {
         etPlantNo = findViewById(R.id.et_plot_no_add);
@@ -248,7 +226,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
         txt_plot_address = findViewById(R.id.txt_plot_address);
         txt_plot_village = findViewById(R.id.txt_plot_village);
         txt_gps = findViewById(R.id.txt_gps);
-//        txtSaveAddPlant = findViewById(R.id.txtSaveAddPlant);
     }
 
     private void initializeValues() {
@@ -260,9 +237,7 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
             android.icu.text.SimpleDateFormat sdf = new android.icu.text.SimpleDateFormat(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
             Date date = sdf.parse(myDate);
             millis = date.getTime();
-//            Toast.makeText(AddFarmerActivity.this, millis+"", Toast.LENGTH_SHORT).show();
         } catch (Exception exception) {
-//            Toast.makeText(AddFarmerActivity.this, exception.getMessage()+"", Toast.LENGTH_SHORT).show();
             exception.printStackTrace();
         }
         strPlantNo = "P_" + millis + "_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "");
@@ -297,14 +272,8 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
         spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                VillageTable data = (VillageTable) parent.getItemAtPosition(position);
-//                strVillage = String.valueOf(data.getId());
                 strVillageName = villageNamesList.get(position);
                 strVillage = villageListIDs.get(position);
-                Log.d(TAG, "onItemSelected: strvillage" + strVillage + "village name" + strVillageName);
-                //   Log.d(TAG, "onItemSelected: villageName" + villageNamesList);
-                //     strVillageName
-                // etPincode.setText(data.getPinCode());
             }
 
             @Override
@@ -313,15 +282,8 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
             }
         });
 
-        //Geo boundaries
-//        txtGeoBoundPlant.setText(areaGeo);
-//        txtGeoBoundPlant.setOnClickListener(view->{
-//            getGeoBoundariesArea();
-//        });
-
 
         txtSaveAddPlant.setOnClickListener(view -> {
-
             if (strPlotOwner.equals("select")) {
                 Toast.makeText(this, "Please select plot owner ship", Toast.LENGTH_SHORT).show();
             } else if (etSize.getText().toString().isEmpty()) {
@@ -349,7 +311,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
                 plantation.setLongitude(Double.valueOf(crLong));
                 plantation.setAddress(strAddress);
                 plantation.setVillageId(strVillage);
-                Log.d(TAG, "initializeValues: strvillage" + strVillage);
                 plantation.setLabourStatus("false");
 
                 plantation.setIsActive("true");
@@ -376,25 +337,7 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
     private void successfulSaved() {
         Toast.makeText(this, "Successful!!", Toast.LENGTH_SHORT).show();
-//        Intent intent= new Intent(PlantationActivity.this,PlantationHomeActivity.class);
-//        intent.putExtra("mFarmerCode",strFarmerCode);
-//        startActivity(intent);
         finish();
-    }
-
-    private void getGeoBoundariesArea() {
-        mArea = etSize.getText().toString();
-        if (!mArea.isEmpty()) {
-//            Intent intent = new Intent(PlantationActivity.this, MapsActivity.class);
-//            intent.putExtra("PlotId", strPlantNo);
-//            intent.putExtra("gpsCat", gpsCat);
-//            intent.putExtra("FarmerCode", strFarmerCode);
-//            intent.putExtra("ProvideSize",mArea);
-//            intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-//            startActivityForResult(intent,RESULT_OK);
-        } else {
-            Toast.makeText(this, "Please enter Area!!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void getGpsCoordinates() {
@@ -404,57 +347,19 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
         builder1.setPositiveButton(
                 "Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-//                        getLocationDetails();
-                        checkSettingsAndStartLocationUpdates();
-                        progressDialog.show();
-                        Toast.makeText(PlantationActivity.this, "Coordinates collected!!", Toast.LENGTH_SHORT).show();
-                        dialog.cancel();
-
-
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                            }
-//                        },2000);
-                    }
+                (dialog, id) -> {
+                    checkSettingsAndStartLocationUpdates();
+                    progressDialog.show();
+                    Toast.makeText(PlantationActivity.this, "Coordinates collected!!", Toast.LENGTH_SHORT).show();
+                    dialog.cancel();
                 });
 
         builder1.setNegativeButton(
                 "No",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                (dialog, id) -> dialog.cancel());
 
         AlertDialog alert11 = builder1.create();
         alert11.show();
-    }
-
-    private void getLocationDetails() {
-        try {
-            // appHelper.getDialogHelper().getLoadingDialog().showGIFLoading();
-            BoundLocationManager.getInstance(PlantationActivity.this).observe(this, new Observer<Location>() {
-                @Override
-                public void onChanged(@Nullable Location location) {
-                    if (location != null) {
-                        //  appHelper.getDialogHelper().getLoadingDialog().closeDialog();
-                        crLat = String.valueOf(location.getLatitude());
-                        crLong = String.valueOf(location.getLongitude());
-//                        Log.e("Ashraf ", location.getLatitude() + "longitude" + location.getLongitude());
-                        txtGpsPlant.setText(crLat + "," + crLong);
-
-                    } else {
-                        Toast.makeText(PlantationActivity.this, "Location is null", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            //appHelper.getDialogHelper().getLoadingDialog().closeDialog();
-        }
     }
 
     private void configureDagger() {
@@ -463,9 +368,7 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
     private void configureViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
-
         getFramerDetailsByFarmerCodeFromLocalDb();
-        //getVillageData();
     }
 
 
@@ -478,12 +381,9 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
                     public void onChanged(@Nullable Object o) {
                         FarmersTable farmersTables = (FarmersTable) o;
                         viewModel.getFarmersTableByFarmerCodeLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + farmersTables);
                         if (farmersTables != null) {
                             String strFarmerVillageID = farmersTables.getVillageId();
-                            Log.d(TAG, "onChanged: village" + strFarmerVillageID);
                             getDisIDFromVillageIdFromLocalDb(strFarmerVillageID);
-                            //getVillageListFromLocalDbById(strFarmerVillageID);
 
                         } else {
                             Toast.makeText(PlantationActivity.this, "data is empty", Toast.LENGTH_SHORT).show();
@@ -506,10 +406,8 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
                     public void onChanged(@Nullable Object o) {
                         VillageTable villageTable = (VillageTable) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + villageTable);
                         if (villageTable != null) {
                             String strSubDisId = villageTable.getSubDistrictId();
-                            Log.d(TAG, "onChanged: strSubDisId" + strSubDisId);
                             getVillageListFromLocalDbById(strSubDisId);
 
                         } else {
@@ -544,82 +442,12 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
                                 villageNamesList.add(villageTableList.get(i).getName());
                                 villageListIDs.add(villageTableList.get(i).getId());
                                 villageListCode.add(villageTableList.get(i).getCode());
-                                //strStateID = stateListResponseDTOList.get(i).getStateId();
-                                Log.e(":dsvbjl_id_viilage", villageTableList.get(i).getId());
-                                Log.e(":dsvbjl_id_viilageName", villageTableList.get(i).getName());
-                                Log.e(":dsvbjl_id_viilageCode", villageTableList.get(i).getCode());
-                                Log.e(":dsvbjl_id_Mandal", villageTableList.get(i).getCode());
                             }
                             ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(PlantationActivity.this,
                                     android.R.layout.simple_spinner_item, villageNamesList);
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             dataAdapter.notifyDataSetChanged();
                             spVillage.setAdapter(dataAdapter);
-
-                        } else {
-                            List<String> emptyList = new ArrayList<>();
-                            emptyList.add("No data Exist");
-                            ArrayAdapter<String> dataAdapter = new ArrayAdapter<>(PlantationActivity.this,
-                                    android.R.layout.simple_spinner_item, emptyList);
-                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                            spVillage.setAdapter(dataAdapter);
-                            dataAdapter.notifyDataSetChanged();
-                            strVillage = "No data Exist";
-                            spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    strVillage = "No data Exist";
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
-                            });
-
-                        }
-                    }
-                };
-                viewModel.getvillageDetailsByPincodeLiveData().observe(this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-//            Log.e("Villagelist","Null catch");
-        }
-    }
-
-
-    private void getVillageData() {
-        try {
-            viewModel.getAllVillageDetailsListFromLocalDB();
-            if (viewModel.getvillageDetailsByPincodeLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<VillageTable> villageTableList = (List<VillageTable>) o;
-                        viewModel.getvillageDetailsByPincodeLiveData().removeObserver(this);
-                        if (villageTableList != null && villageTableList.size() > 0) {
-
-
-                            ArrayAdapter<VillageTable> dataAdapter = new ArrayAdapter<>(PlantationActivity.this,
-                                    android.R.layout.simple_spinner_item, villageTableList);
-                            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-                            dataAdapter.notifyDataSetChanged();
-                            spVillage.setAdapter(dataAdapter);
-
-                            spVillage.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    VillageTable data = (VillageTable) parent.getItemAtPosition(position);
-                                    strVillage = String.valueOf(data.getVillageId());
-
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                }
-                            });
 
                         } else {
                             List<String> emptyList = new ArrayList<>();
@@ -661,14 +489,12 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
     @Override
     protected void onResume() {
         super.onResume();
-//        getAreaValue();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_OK && resultCode == RESULT_OK) {
-//            getAreaValue();
             areaGeo = getIntent().getStringExtra("areaGeo");
 
             Log.e("Res", areaGeo);
@@ -685,23 +511,15 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
 
         Task<LocationSettingsResponse> locationSettingsResponseTask = settingsClient.checkLocationSettings(request);
-        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                startLocationUpdate();
-            }
-        });
+        locationSettingsResponseTask.addOnSuccessListener(locationSettingsResponse -> startLocationUpdate());
 
-        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                    try {
-                        resolvableApiException.startResolutionForResult(PlantationActivity.this, 2000001);
-                    } catch (IntentSender.SendIntentException ex) {
-                        throw new RuntimeException(ex);
-                    }
+        locationSettingsResponseTask.addOnFailureListener(e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                try {
+                    resolvableApiException.startResolutionForResult(PlantationActivity.this, 2000001);
+                } catch (IntentSender.SendIntentException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -709,13 +527,6 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
     private void startLocationUpdate() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
@@ -727,6 +538,7 @@ public class PlantationActivity extends BaseActivity implements HasSupportFragme
 
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         super.onBackPressed();

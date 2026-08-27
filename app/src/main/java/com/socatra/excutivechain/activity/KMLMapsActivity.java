@@ -94,7 +94,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
     private CardView chooseFileButton,saveButtonKml;
 
     TextView txtGPSArea;
-    //    private ListView latLngListView;
     private RecyclerView latLngListView;
 
     CoordinatesKmlAdapter adapter;
@@ -103,7 +102,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
     List<LatLng> GetlatLngList;
     String strDistanceArea ;
     Integer gpsCat = 0;
-    double area=0.0;
 
     String PlotId = "",farmerCode="",id="";
     double totalSize;// for size
@@ -183,9 +181,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
 
     private void saveLatLngToDb(List<LatLng> latLngLists) {
         for (int i=0;i<latLngLists.size()-1;i++){
-            Log.e(mTag,"Save LatLng:"+String.valueOf(latLngLists.get(i).latitude)
-                    +","+String.valueOf(latLngLists.get(i).longitude));
-
             String dateTime = getCurrentDateTime(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
 
 
@@ -217,7 +212,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
                     @Override
                     public void run() {
                         Intent intent = new Intent();
-                       // intent.putExtra("areaGeo",area);
                         setResult(RESULT_OK, intent);
                         finish();
                     }
@@ -296,7 +290,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
             if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 openFilePicker();
             } else {
-//                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 openFilePicker();
             }
         }
@@ -310,8 +303,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("*/*");  //Allow all file types
-//        String[] mimeTypes = {"application/vnd.google-earth.kml+xml", "application/x-esri-shape", "application/geo+json", "application/json","application/shp"};
-//        intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);  // Specify allowed MIME types
         startActivityForResult(intent, PICK_FILE);
 
     }
@@ -521,75 +512,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
         //todo: need to add
     }
 
-
-
-//    private File saveShapefileToLocal(Uri uri) {
-//        try {
-//            InputStream inputStream = getContentResolver().openInputStream(uri);
-//            File tempFile = File.createTempFile("temp_shapefile", ".shp", getCacheDir());
-//            FileOutputStream outputStream = new FileOutputStream(tempFile);
-//            byte[] buffer = new byte[1024];
-//            int bytesRead;
-//            while ((bytesRead = inputStream.read(buffer)) != -1) {
-//                outputStream.write(buffer, 0, bytesRead);
-//            }
-//            inputStream.close();
-//            outputStream.close();
-//            return tempFile;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return null;
-//        }
-//    }
-//    private void readSHPFile(Uri uri) {
-//        File shapefile = saveShapefileToLocal(uri);
-//        if (shapefile != null) {
-//            try {
-//                SimpleFeatureCollection featureCollection = readShapefile(shapefile.getAbsolutePath());
-//                // Now you have the featureCollection to work with
-//                drawPolygonOnMap(featureCollection);
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
-//
-//    public SimpleFeatureCollection readShapefile(String shapefilePath) throws Exception {
-//        File shapefile = new File(shapefilePath);
-//
-//        ShapefileDataStore dataStore = new ShapefileDataStore(shapefile.toURI().toURL());
-//        SimpleFeatureSource featureSource = dataStore.getFeatureSource();
-//
-//        return featureSource.getFeatures();
-//    }
-//
-//    private void drawPolygonOnMap(SimpleFeatureCollection featureCollection) {
-//        FeatureIterator<SimpleFeature> features = featureCollection.features();
-//        while (features.hasNext()) {
-//            SimpleFeature feature = features.next();
-//            GeometryAttribute geomAttribute = feature.getDefaultGeometryProperty();
-//
-//            if (geomAttribute != null) {
-//                Geometry geometry = (Geometry) geomAttribute.getValue();
-//                if (geometry instanceof Polygon) {
-//                    Polygon polygon = (Polygon) geometry;
-//                    List<LatLng> coordinates = new ArrayList<>();
-//
-//                    Coordinate[] coords = polygon.getCoordinates();
-//                    for (Coordinate coord : coords) {
-//                        coordinates.add(new LatLng(coord.y, coord.x)); // Assuming y is latitude and x is longitude
-//                    }
-//
-//                    // Draw the polygon on the map
-//                    mMap.addPolygon(new PolygonOptions()
-//                            .addAll(coordinates)
-//                            .strokeColor(Color.RED)
-//                            .fillColor(Color.BLUE));
-//                }
-//            }
-//        }
-//    }
-
     private void readKMLFile(Uri uri) {
         latLngList.clear();
         GetlatLngList.clear();
@@ -764,24 +686,11 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
         progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDialog.show();
 
-        Log.d(mTag, "upload shpe file to server : " + uploadFile.getAbsolutePath());
-
-        MultipartBody.Part file_pathDB = null;
-        File file = new File(uploadFile.getAbsolutePath());
-
         // Parsing any Media type file
         RequestBody requestBody = RequestBody.create(MediaType.parse(getMimeType(String.valueOf(uploadFile))), uploadFile);
         MultipartBody.Part fileToUpload = MultipartBody.Part.createFormData("file", uploadFile.getName(), requestBody);
-        Log.d("Filepath", ">>>>>>>>>>" + fileToUpload);
-        RequestBody r_acces_token = RequestBody.create(MediaType.parse("multipart/form-data"),
-                appHelper.getSharedPrefObj().getString(accessToken, ""));
-
-        RequestBody r_userID = RequestBody.create(MediaType.parse("multipart/form-data"),
-                appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-
         RequestBody r_plotCode = RequestBody.create(MediaType.parse("multipart/form-data"),
                 PlotId);
-        Log.d(mTag, "plotCode: " + r_plotCode);
         final AppAPI service = Retrofit_funtion_class.getClient().create(AppAPI.class);
         Call<ResponseBody> callRetrofit = null;
         callRetrofit = service.uploadShapeFileToserver(r_plotCode, fileToUpload);
@@ -791,21 +700,9 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
                 try {
                     progressDialog.dismiss();
                     String strResponse = response.body().string();
-                    Log.d(mTag, "onResponse: SHAPE DATA : " + response);
                     JSONObject json_object = new JSONObject(strResponse);
-//                    String message = "", status = "";
-                    Log.e(mTag, "onResponse: data json" + json_object.getJSONArray("data").getJSONObject(0).getJSONArray("arraylist"));
-
                     JSONArray array=json_object.getJSONArray("data").getJSONObject(0).getJSONArray("arraylist");
-                    Log.e(mTag, String.valueOf(array));
-//                    for (int i=0;i<array.length();i++){
-//                        JSONArray coordinates = array.getJSONArray(i);
-//                        String lat = coordinates.getJSONObject(i).getString("lat");
-//                        String lon = coordinates.getJSONObject(i).getString("long");
-//
-//
-//                        latLngList.add(lat+","+lon);
-//                    }
+
                     for (int i = 0; i < array.length(); i++) {
                         JSONArray coordinates = array.getJSONArray(i);
 
@@ -814,9 +711,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
                             String lat = coordinates.getJSONObject(j).getString("lat");
                             String  lon = coordinates.getJSONObject(j).getString("long");
                             latLngList.add(lat+","+lon);
-                            // Print each set of coordinates
-//                            System.out.println("Latitude: " + lat);
-//                            System.out.println("Longitude: " + lon);
                             LatLng latLng=new LatLng(Double.parseDouble(lat),Double.parseDouble(lon));
                             GetlatLngList.add(latLng);
                             extraLatLon=lat+","+lon;
@@ -826,8 +720,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
                     latLngList.add(extraLatLon);
                     GetlatLngList.add(new LatLng(0.0,0.0));
 
-
-                    Log.e(mTag,"onResponse: List:"+latLngList.toString());
                     Set<String> uniqueSet = new HashSet<>(latLngList);
 
                     // Convert the Set back to a List (removes duplicates)
@@ -836,21 +728,6 @@ public class KMLMapsActivity extends FragmentActivity implements OnMapReadyCallb
                     adapter=new CoordinatesKmlAdapter(KMLMapsActivity.this,uniqueList);
                     latLngListView.setAdapter(adapter);
                     plotCoordinatesOnMap(latLngList);
-
-                    Log.e(mTag, String.valueOf(latLngList.size()));
-                    Log.e(mTag, String.valueOf(GetlatLngList.size()));
-
-
-
-//                    message = json_object.getString("message");
-//                    status = json_object.getString("status");
-//                    Log.d(TAG, "status " + status);
-//                    if (status.equals("1")) {
-//                        Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
-//                    } else if (status.equals("0")) {
-//                        Toast.makeText(SyncActivity.this, message, Toast.LENGTH_SHORT).show();
-//                    }
-
 
                 } catch (Exception ex) {
                     ex.printStackTrace();

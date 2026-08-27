@@ -36,20 +36,8 @@ public class CoordinatesKmlAdapter   extends RecyclerView.Adapter<CoordinatesKml
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int i) {
         try {
-//            if (coordinatesLists.size()>0) {
-            //       holder.txtCoordinates.setText(coordinatesLists.get(coordinatesLists.size() - 1).toString());
-
-//                for (i=0;i<=coordinatesLists.size()-1; i++){
-
-          //  if (coordinatesLists.get(0).toString() .equals(coordinatesLists.size()))
             holder.txtCoordinates.setText(coordinatesLists.get(i).toString());
-            holder.txtCoord.setText(String.valueOf(i+1)+".Coordinates");
-
-//                }
-//                holder.txtCoordinates.setText(coordinatesLists.get(coordinatesLists.size()-1));
-//            }else {
-//                Toast.makeText(context, "Please add coordinates from map", Toast.LENGTH_SHORT).show();
-//            }
+            holder.txtCoord.setText(i + 1 +".Coordinates");
         } catch (Exception ex) {
             ex.printStackTrace();
         }

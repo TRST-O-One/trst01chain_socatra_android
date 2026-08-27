@@ -53,35 +53,35 @@
     <TextView
         android:id="@+id/txtAddFarmer"
         android:layout_width="125dp"
-        android:padding="5dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/svFarmer"
         android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginTop="8dp"
-        android:textSize="16sp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_ui_light_orange_box_dark"
         android:gravity="center"
+        android:padding="5dp"
         android:text="ADD"
         android:textColor="@color/white"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtRefList"
         android:layout_width="125dp"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:layout_below="@id/svFarmer"
         android:layout_alignParentStart="true"
         android:layout_gravity="center"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/bg_ui_light_orange_box_dark"
         android:drawableEnd="@drawable/baseline_refresh"
         android:gravity="center"
+        android:padding="5dp"
         android:text="Refresh"
         android:textColor="@color/white"
         android:textStyle="bold" />
@@ -93,10 +93,10 @@
         android:layout_below="@id/txtAddFarmer"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:scrollbars="vertical"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp">
+        android:layout_marginBottom="5dp"
+        android:scrollbars="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
 
     </androidx.recyclerview.widget.RecyclerView>
 

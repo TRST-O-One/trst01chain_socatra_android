@@ -28,7 +28,6 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
     AppViewModel viewModel;
     List<Plantation> plantations;
     Context context;
-    Dialog dialog;
 
     SyncPlantationCallbackInterface syncPlantationCallbackInterface;
 
@@ -57,17 +56,14 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
         if (plantations.get(position).getGeoboundariesArea()==0.0){
             holder.txtGeoAreaPlotInd.setText("n.a");
         } else {
-//            holder.txtGeoAreaPlotInd.setText(plantations.get(position).getGeoboundariesArea().toString());
             double totalArea=plantations.get(position).getGeoboundariesArea();
             String decimalForm = String.format("%.5f", totalArea);
             decimalForm = decimalForm.replace(",", ".");
             holder.txtGeoAreaPlotInd.setText(decimalForm);
         }
-//        Log.e("onBindViewHolder:vilageId ",plantations.get(position).getVillageId());
 
         String id=plantations.get(position).getVillageId();
 
-//        Log.e( "villageId: " , id);
         //Todo:Village details based on Village Id
         try {
             viewModel.getVillageDetailsListFromLocalDBbyId(id);
@@ -93,32 +89,6 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        //syncPlantationCallbackInterface.getVillageNameCallback(plantations.get(position).getVillageId(),holder.txtVillagePlantInd);
-
-
-//        try {
-//            viewModel.getVillageDetailsListFromLocalDB(plantations.get(position).getVillageId());
-//            if (viewModel.getvillageDetailsByPincodeLiveData() != null) {
-//                Observer getLeadRawDataObserver = new Observer() {
-//                    @Override
-//                    public void onChanged(@Nullable Object o) {
-//                        List<VillageTable> villageTableList = (List<VillageTable>) o;
-//                        viewModel.getvillageDetailsByPincodeLiveData().removeObserver(this);
-//                        if (villageTableList != null && villageTableList.size() > 0) {
-//
-//                            holder.txtVillagePlantInd.setText(villageTableList.get(0).getName());
-//
-//                        } else {
-//
-//                        }
-//                    }
-//                };
-//                viewModel.getvillageDetailsByPincodeLiveData().observe((LifecycleOwner) context, getLeadRawDataObserver);
-//            }
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-////            Log.e("Villagelist","Null catch");
-//        }
 
         holder.cardPlantHone.setOnClickListener(view->{
             syncPlantationCallbackInterface.addPlantDetailsCallback(position,plantations.get(position),plantations.get(position).getFarmerCode(),plantations.get(position).getPlotCode());
@@ -152,11 +122,7 @@ public class PlantationAdapter extends RecyclerView.Adapter<PlantationAdapter.Pl
 
 
     public interface SyncPlantationCallbackInterface {
-//        void openScreenCallback(int position, FarmersTable farmerTable, List<FarmersTable> farmer, String applicationType);
-//
-//        void updateItemCallback(int position, FarmersTable applicationStatusTable, String strFarmerID);
         void addPlantDetailsCallback(int position, Plantation applicationStatusTable, String strFarmercode, String mPlotCode);
-
         void getVillageNameCallback(String villageId,TextView txtVillageName);
     }
 }

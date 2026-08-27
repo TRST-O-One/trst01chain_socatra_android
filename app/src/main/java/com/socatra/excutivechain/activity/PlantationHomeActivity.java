@@ -43,14 +43,14 @@ import dagger.android.support.HasSupportFragmentInjector;
 
 public class PlantationHomeActivity extends BaseActivity implements HasSupportFragmentInjector, PlantationAdapter.SyncPlantationCallbackInterface {
 
-    String TAG="PlantationHomeActivity";
+    String TAG = "PlantationHomeActivity";
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
     public AppViewModel viewModel;
     private SharedPreferences preferences;
-    TextView txtAddPlantation,txtShowPlotsLimit;
+    TextView txtAddPlantation, txtShowPlotsLimit;
     TextView plantationhome1;
-    String strGetFarmerCode="";
+    String strGetFarmerCode = "";
 
     ImageView imgBack;
     RecyclerView recyclerView;
@@ -59,16 +59,14 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
 
     Dialog dialog;
 
-    String plotCode="";
+    String plotCode = "";
 
-    int gpsCat=0;
+    int gpsCat = 0;
 
-    double geoArea=0.0;
-
-    Integer intTotalPlotsNotSyncCount,intNumberOfPlotsForFarmer;
+    Integer intTotalPlotsNotSyncCount, intNumberOfPlotsForFarmer;
     private static final int FILE_SELECT_CODE = 0;
 
-    String strPlotCode,strFarmerSendCode,strSendArea;
+    String strPlotCode, strFarmerSendCode, strSendArea;
 
 
     @Override
@@ -76,8 +74,7 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plantation_home);
 
-        strGetFarmerCode=getIntent().getStringExtra("mFarmerCode");
-      //  KmlLayer layer = new KmlLayer(map, R.raw.geojson_file, context);
+        strGetFarmerCode = getIntent().getStringExtra("mFarmerCode");
         initializeUI();
         configureDagger();
         configureViewModel();
@@ -87,59 +84,32 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         updateTextLabels();
 
     }
+
     @SuppressLint("SetTextI18n")
     private void updateTextLabels() {
         String selectedLanguage = getSelectedLanguage();
 
-        String hdAdd=getResources().getString(R.string.add);
-        String hdPlantationHome=getResources().getString(R.string.plantationhome1);
+        String hdAdd = getResources().getString(R.string.add);
+        String hdPlantationHome = getResources().getString(R.string.plantationhome1);
 
         if (selectedLanguage.equals("English")) {
             txtAddPlantation.setText(hdAdd);
             plantationhome1.setText(hdPlantationHome);
         } else {
-            txtAddPlantation.setText(getLanguageFromLocalDb(selectedLanguage,hdAdd)+ "/" + hdAdd);
-            plantationhome1.setText(getLanguageFromLocalDb(selectedLanguage,hdPlantationHome)+ "/" +hdPlantationHome);
+            txtAddPlantation.setText(getLanguageFromLocalDb(selectedLanguage, hdAdd) + "/" + hdAdd);
+            plantationhome1.setText(getLanguageFromLocalDb(selectedLanguage, hdPlantationHome) + "/" + hdPlantationHome);
         }
-
-//        switch (selectedLanguage) {
-//            case "English":
-//
-//                break;
-//            case "Hindi":
-//                txtAddPlantation.setText(getString(R.string.add_H) + " / " + getString(R.string.add));
-//                plantationhome1.setText(getString(R.string.plantationhome_H) + " / " + getString(R.string.plantationhome1));
-//                break;
-//            case "Vietnamese":
-//                txtAddPlantation.setText(getString(R.string.add_V) + " / " + getString(R.string.add));
-//                plantationhome1.setText(getString(R.string.plantationhome_V) + " / " + getString(R.string.plantationhome1));
-//                break;
-//            case "Malay":
-//                txtAddPlantation.setText(getString(R.string.add_M) + " / " + getString(R.string.add));
-//                plantationhome1.setText(getString(R.string.plantationhome_M) + " / " + getString(R.string.plantationhome1));
-//                break;
-//            case "Indonesian":
-//                txtAddPlantation.setText(getString(R.string.add_I) + " / " + getString(R.string.add));
-//                plantationhome1.setText(getString(R.string.plantationhome_I) + " / " + getString(R.string.plantationhome1));
-//                break;
-//            case "Thai":
-//                txtAddPlantation.setText(getString(R.string.add_T) + " / " + getString(R.string.add));
-//                plantationhome1.setText(getString(R.string.plantationhome_T) + " / " + getString(R.string.plantationhome1));
-//                break;
-//
-//
-//
-//        }
-
     }
+
     private String getSelectedLanguage() {
         return preferences.getString("selected_language", "English");
     }
+
     private void initializeUI() {
-        txtAddPlantation=findViewById(R.id.txtAddPlantation);
+        txtAddPlantation = findViewById(R.id.txtAddPlantation);
         txtShowPlotsLimit = findViewById(R.id.txt_plot_Error);
-        imgBack=findViewById(R.id.imgBackPlantHome);
-        recyclerView=findViewById(R.id.recyclerViewPlant);
+        imgBack = findViewById(R.id.imgBackPlantHome);
+        recyclerView = findViewById(R.id.recyclerViewPlant);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.hasFixedSize();
         //Labels
@@ -148,13 +118,13 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
     }
 
     private void initializeValues() {
-        txtAddPlantation.setOnClickListener(view->{
-            Intent intent=new Intent(PlantationHomeActivity.this,PlantationActivity.class);
-            intent.putExtra("mFarmerCode",strGetFarmerCode);
+        txtAddPlantation.setOnClickListener(view -> {
+            Intent intent = new Intent(PlantationHomeActivity.this, PlantationActivity.class);
+            intent.putExtra("mFarmerCode", strGetFarmerCode);
             startActivity(intent);
         });
 
-        imgBack.setOnClickListener(view->{
+        imgBack.setOnClickListener(view -> {
             finish();
         });
     }
@@ -165,7 +135,6 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
 
     private void configureViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
-//        getPlantationData(farmerCode);
     }
 
     private void getPlantationData(String mFarmerCode) {
@@ -178,8 +147,8 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
                         List<Plantation> plantations = (List<Plantation>) o;
                         viewModel.getPlantationDetailsByIdLiveData().removeObserver(this);
                         if (plantations != null && plantations.size() > 0) {
-                            plantationAdapter=new PlantationAdapter(appHelper,viewModel,plantations,PlantationHomeActivity.this);
-                           recyclerView.setAdapter(plantationAdapter);
+                            plantationAdapter = new PlantationAdapter(appHelper, viewModel, plantations, PlantationHomeActivity.this);
+                            recyclerView.setAdapter(plantationAdapter);
                         } else {
                             Toast.makeText(PlantationHomeActivity.this, "No data!!", Toast.LENGTH_SHORT).show();
                         }
@@ -195,21 +164,7 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
 
     public void getCountForPlotsListByFarmerCode() {
         try {
-            viewModel.getPlotListCountWhichNotSyncByStrFarmerCode(strGetFarmerCode).observe(this, new Observer<Integer>() {
-                @Override
-                public void onChanged(@Nullable Integer integer) {
-                    intTotalPlotsNotSyncCount = integer;
-                    // appHelper.getDialogHelper().getLoadingDialog().closeDialog();
-                    Log.d(TAG, "onChanged: CountValue" + intTotalPlotsNotSyncCount);
-                    // formatted = String.format("%03d", Integer.parseInt(appHelper.getSharedPrefObj().getString(DeviceUserID, "")));
-//                    String updated_logbooknumber =  logbookno.replaceAll("[\\s\\_()]", "");
-//                    CommonConstants.LOGBOOK_CODE = CommonUtils.getGeneratedFertilizerId(strLogBookNum, countValueLogBook);
-//                    //etPlotNo.setText(CommonConstants.LOGBOOK_CODE);
-//                    str_harvestdetails_sequence_no = CommonConstants.LOGBOOK_CODE;
-//                    System.out.println("str_waterReasonpreseason_sequence_no >>> "+ str_harvestdetails_sequence_no);
-
-                }
-            });
+            viewModel.getPlotListCountWhichNotSyncByStrFarmerCode(strGetFarmerCode).observe(this, integer -> intTotalPlotsNotSyncCount = integer);
         } catch (Exception ex) {
             ex.printStackTrace();
 
@@ -225,25 +180,18 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
                     public void onChanged(@Nullable Object o) {
                         FarmersTable farmersTables = (FarmersTable) o;
                         viewModel.getFarmersTableByFarmerCodeLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + farmersTables);
-                        if (farmersTables != null ) {
-                            String strFarmerVillageID = farmersTables.getVillageId();
+                        if (farmersTables != null) {
                             intNumberOfPlotsForFarmer = Integer.valueOf(farmersTables.getNoOfPlots());
-                            Log.d(TAG, "onChanged: village" + strFarmerVillageID);
 
-                            if (intNumberOfPlotsForFarmer.equals(intTotalPlotsNotSyncCount))
-                            {
+                            if (intNumberOfPlotsForFarmer.equals(intTotalPlotsNotSyncCount)) {
                                 txtShowPlotsLimit.setVisibility(View.VISIBLE);
                                 txtAddPlantation.setVisibility(View.GONE);
-                            }else {
+                            } else {
                                 txtShowPlotsLimit.setVisibility(View.GONE);
                                 txtAddPlantation.setVisibility(View.VISIBLE);
                             }
-                            //getDisIDFromVillageIdFromLocalDb(strFarmerVillageID);
-                            //getVillageListFromLocalDbById(strFarmerVillageID);
-
                         } else {
-                            Toast.makeText(PlantationHomeActivity.this,"data is empty",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlantationHomeActivity.this, "data is empty", Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
@@ -253,6 +201,7 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
             ex.printStackTrace();
         }
     }
+
     @Override
     public AndroidInjector<Fragment> supportFragmentInjector() {
         return null;
@@ -277,9 +226,9 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
                         List<PlantationGeoBoundaries> geoBoundariesList = (List<PlantationGeoBoundaries>) o;
                         viewModel.getGeoBoundariesFromLocalLiveData().removeObserver(this);
                         if (geoBoundariesList != null && geoBoundariesList.size() > 0) {
-                            gpsCat=geoBoundariesList.get(0).getPlotCount();
+                            gpsCat = geoBoundariesList.get(0).getPlotCount();
                         } else {
-                            gpsCat=0;
+                            gpsCat = 0;
                         }
                     }
                 };
@@ -293,9 +242,9 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
 
     @Override
     public void addPlantDetailsCallback(int position, Plantation applicationStatusTable, String strFarmercode, String mPlotCode) {
-        Log.e(TAG,"testPlt"+applicationStatusTable.getPlotCode());
-        Log.e(TAG,"testPlt:"+applicationStatusTable.getGeoboundariesArea());
-        if (applicationStatusTable.getGeoboundariesArea().equals(0.0)){
+        Log.e(TAG, "testPlt" + applicationStatusTable.getPlotCode());
+        Log.e(TAG, "testPlt:" + applicationStatusTable.getGeoboundariesArea());
+        if (applicationStatusTable.getGeoboundariesArea().equals(0.0)) {
             dialogForGeoBoundaries(applicationStatusTable);
         } else {
             Toast.makeText(this, "Geo-boundaries already submitted!!", Toast.LENGTH_SHORT).show();
@@ -304,10 +253,10 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
 
     @Override
     public void getVillageNameCallback(String villageId, TextView txtVillageName) {
-        getVillageDetailsFromLocalDb(villageId,txtVillageName);
+        getVillageDetailsFromLocalDb(villageId, txtVillageName);
     }
 
-    public void getVillageDetailsFromLocalDb(String strvillageId,TextView txtVilageName) {
+    public void getVillageDetailsFromLocalDb(String strvillageId, TextView txtVilageName) {
         try {
             viewModel.getDistricIDFromVillageTableDetailsByVillageId(strvillageId);
             if (viewModel.getDissIdFromVillageTableLiveData() != null) {
@@ -316,13 +265,11 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
                     public void onChanged(@Nullable Object o) {
                         VillageTable villageTable = (VillageTable) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + villageTable);
-                        if (villageTable != null ) {
+                        if (villageTable != null) {
                             String strvillageName = villageTable.getName();
-                            Log.d(TAG, "onChanged: strSubDisId" + strvillageName);
 
                         } else {
-                            Toast.makeText(PlantationHomeActivity.this,"data is empty",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PlantationHomeActivity.this, "data is empty", Toast.LENGTH_SHORT).show();
                         }
                     }
                 };
@@ -332,6 +279,7 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
             ex.printStackTrace();
         }
     }
+
     private void dialogForGeoBoundaries(Plantation applicationStatusTable1) {
         dialog = new Dialog(this, R.style.MyAlertDialogThemeNew);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -343,10 +291,10 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
         LinearLayout byWalk = dialog.findViewById(R.id.ll_walk);
         LinearLayout byMap = dialog.findViewById(R.id.ll_map);
         LinearLayout upLoadKMl = dialog.findViewById(R.id.ll_kml_reader);
-        TextView selectedPlotGeo=dialog.findViewById(R.id.selectedPlotGeo);
-        LinearLayout byWalkSmap=dialog.findViewById(R.id.ll_sec_map);
+        TextView selectedPlotGeo = dialog.findViewById(R.id.selectedPlotGeo);
+        LinearLayout byWalkSmap = dialog.findViewById(R.id.ll_sec_map);
 
-        selectedPlotGeo.setText("Plot Code : "+applicationStatusTable1.getPlotCode());
+        selectedPlotGeo.setText("Plot Code : " + applicationStatusTable1.getPlotCode());
 
         upLoadKMl.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -362,104 +310,72 @@ public class PlantationHomeActivity extends BaseActivity implements HasSupportFr
                     intent.putExtra("ProvideSize", String.valueOf(applicationStatusTable1.getAreaInHectors()));
                     intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
                     startActivityForResult(intent, RESULT_OK);
-                }else {
+                } else {
                     dialog.dismiss();
-                    Toast.makeText(PlantationHomeActivity.this,"please check your internet connection ",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PlantationHomeActivity.this, "please check your internet connection ", Toast.LENGTH_SHORT).show();
                 }
-//                strPlotCode = applicationStatusTable1.getPlotCode();
-//                strFarmerSendCode = applicationStatusTable1.getFarmerCode();
-//                strSendArea = String.valueOf(applicationStatusTable1.getAreaInHectors());
-              //  openFilePicker(applicationStatusTable1.getPlotCode(),applicationStatusTable1.getFarmerCode(),applicationStatusTable1.getAreaInHectors());
-//                Intent intent = new Intent(Intent.ACTION_VIEW);
-//                intent.setDataAndType(
-//                        Uri.parse("file:///sdcard/example.kml"),
-//                        "application/kml");
-//                startActivity(intent);
             }
         });
-        byWalk.setOnClickListener(view->{
+        byWalk.setOnClickListener(view -> {
             dialog.dismiss();
 //            Toast.makeText(this, "Coming Soon!!", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(PlantationHomeActivity.this, FieldCalculatorActivity.class);
             intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
-            intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
+            intent.putExtra("ProvideSize", String.valueOf(applicationStatusTable1.getAreaInHectors()));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);
+            startActivityForResult(intent, RESULT_OK);
         });
 
         byWalkSmap.setOnClickListener(v -> {
             dialog.dismiss();
             //Todo : Map 2 test
-            /*Intent intent = new Intent(PlantationHomeActivity.this, SecondMap.class);
-            startActivity(intent);*/
-
-            Intent intent = new Intent(PlantationHomeActivity.this,SecondMap.class);
+            Intent intent = new Intent(PlantationHomeActivity.this, SecondMap.class);
             intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
-            intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
+            intent.putExtra("ProvideSize", String.valueOf(applicationStatusTable1.getAreaInHectors()));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);
+            startActivityForResult(intent, RESULT_OK);
         });
 
-        byMap.setOnClickListener(view->{
+        byMap.setOnClickListener(view -> {
             dialog.dismiss();
             Intent intent = new Intent(PlantationHomeActivity.this, MapsActivity.class);
             intent.putExtra("PlotId", applicationStatusTable1.getPlotCode());
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("FarmerCode", applicationStatusTable1.getFarmerCode());
-            intent.putExtra("ProvideSize",String.valueOf(applicationStatusTable1.getAreaInHectors()));
+            intent.putExtra("ProvideSize", String.valueOf(applicationStatusTable1.getAreaInHectors()));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);
+            startActivityForResult(intent, RESULT_OK);
         });
 
         dialog.show();
     }
-    private void openFilePicker(String plotCode, String farmerCode, Double areaInHectors) {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-   //     intent.setType("*/*"); // You can specify the MIME type here
-        intent.setType("application/vnd.google-earth.kml+xml");
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        try {
-            startActivityForResult(Intent.createChooser(intent, "Select a KML file"), FILE_SELECT_CODE);
-        } catch (android.content.ActivityNotFoundException ex) {
-            // Handle errors
-        }
-    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FILE_SELECT_CODE && resultCode == RESULT_OK) {
             Uri uri = data.getData();
-            Log.d(TAG, "onActivityResult: kml file" + uri);
-//            Intent intent = new Intent(PlantationHomeActivity.this, SecondMAp.class);
-//            intent.putExtra("selected_uri", uri.toString());
-//            startActivityForResult(intent,RESULT_OK);
             Intent intent = new Intent(PlantationHomeActivity.this, KMLMapsActivity.class);
             intent.putExtra("PlotId", strPlotCode);
             intent.putExtra("gpsCat", gpsCat);
             intent.putExtra("selected_uri", uri.toString());
-            intent.putExtra("FarmerCode",strFarmerSendCode);
-            intent.putExtra("ProvideSize",String.valueOf(strSendArea));
+            intent.putExtra("FarmerCode", strFarmerSendCode);
+            intent.putExtra("ProvideSize", String.valueOf(strSendArea));
             intent.putExtra("id", appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-            startActivityForResult(intent,RESULT_OK);
-
-          //  startActivity(intent);
-            // Now, you have the URI of the selected file
-            // Parse and display the KML data from this URI
-            // You can use the KmlLayer class as mentioned in the previous response to display it on the map
+            startActivityForResult(intent, RESULT_OK);
         }
     }
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
 
         try {
-            if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
+            if (viewModel.getLanguageDataVM(stLanguage, stWord) != null) {
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
-            } else{
+            } else {
                 return stWord;
             }
 

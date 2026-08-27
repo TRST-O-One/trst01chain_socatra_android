@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 public class BaseActivity extends AppCompatActivity {
-
-    
     public AppHelper appHelper;
 
     @Override
@@ -17,14 +15,4 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         appHelper=new AppHelper(this);
     }
-
-//    @Override
-//    public void onBackPressed() {
-//        appHelper.getDialogHelper().getConfirmationDialog().showTwoButtons("Do you want to leave from this screen ? ", new ConfirmationDialog.ActionCallback() {
-//            @Override
-//            public void onAction() {
-//                finish();
-//            }
-//        });
-//    }
 }

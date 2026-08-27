@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -72,9 +73,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     private LinkedHashMap<String, String> latLongMap = new LinkedHashMap<>();
     private Button recordBtn;
     private RecyclerView recordsList;
-
-//    List<LatLng> latLngs;//Todo test
-
     int saveCount=0;
 
     //Todo test New
@@ -127,8 +125,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             id = getIntent().getStringExtra("id");
             totalSize = Double.parseDouble(getIntent().getStringExtra("ProvideSize"));
             gpsCat = getIntent().getIntExtra("gpsCat", 0);
-
-            Log.e("fieldLog", plotId + "," + farmerCode + "," + id + "," + gpsCat);
         }
 
         LocalBroadcastManager.getInstance(this).registerReceiver(locationReceiver, new IntentFilter("location_receiver"));
@@ -139,14 +135,12 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     public void initViews() {
 
         setContentView(R.layout.activity_field_calculator);
-        // Typeface myFont = Typeface.createFromAsset(getAssets(), "fonts/OpenSans-Bold.ttf");
         totalBoundries.clear();
         recordedBoundries.clear();
         firstFourCoordinates.clear();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         recordBtn = findViewById(R.id.recordBtn);
-        // recordBtn.setTypeface(myFont);
         saveBtn = findViewById(R.id.saveBtn);
         resetBtn = findViewById(R.id.reset);
         recordsList = findViewById(R.id.gpsRecords);
@@ -158,31 +152,21 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             if (measureView.isRunning()) {
 
                 GPSCoordinate pointsToRecord;
-//                LatLng latLng;//Todo test
                 try {
                     if (null != recordedBoundries && recordedBoundries.size() > 0) {
                         double distance = CommonUtils.distance(recordedBoundries.get(recordedBoundries.size() - 1).latitude,
                                 recordedBoundries.get(recordedBoundries.size() - 1).longitude, AreaView.latitude, AreaView.longitude, 'M');
-//                        Log.e("testDist","distance"+distance);
                         DecimalFormatSymbols symbols = new DecimalFormatSymbols();
                         symbols.setDecimalSeparator('.');
                         DecimalFormat df_obj = new DecimalFormat("#.###", symbols);
                         double dis = Double.parseDouble(df_obj.format(distance));
-//                        Log.e("testDist","dis"+dis);
                         pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, dis);
-//                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
-//                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
                     } else {
                         pointsToRecord = new GPSCoordinate(AreaView.latitude, AreaView.longitude, 0.0);
-//                     latLng=new LatLng(pointsToRecord.latitude,pointsToRecord.longitude);//Todo test
-//                    latLngs.add(new LatLng(pointsToRecord.latitude,pointsToRecord.longitude));//Todo test
                     }
-//                latLngs.add(latLng);//Todo test
                     recordedBoundries.add(pointsToRecord);
                     recordsList.setAdapter(new RecordedCoordinatesAdapter(FieldCalculatorActivity.this, recordedBoundries));
-//                    throw new Exception("Error runtime");
                 } catch (Exception e) {
-//                    appHelper.getErrorDialog(FieldCalculatorActivity.this,e);
                     e.printStackTrace();
                 }
             }
@@ -214,9 +198,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             } else {
                 Toast.makeText(FieldCalculatorActivity.this, "Area is not measured", Toast.LENGTH_SHORT).show();
             }
-
-
-            //    saveLatLongData();
         });
 
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
@@ -226,8 +207,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
         measureView = (AreaView) findViewById(R.id.measureView);
         measureView.setLengthUnits(AreaView.LENGTH_UNITS_KILOMETER);
         measureView.setAreaUnits(AreaView.AREA_UNITS_HECTARE);
-        //  measureView.setLoggingMode(AreaView.LOGGING_MODE_MANUAL);
-        //  measureView.setPolygon();
         startStopButton = (Button) findViewById(R.id.startBtn);
         startStopButton.setOnClickListener(view -> {
 
@@ -277,38 +256,18 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                     if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                         displayGpsDialog();
                     }
-
-                } else {
-
                 }
                 break;
         }
     }
 
     private void displayGpsDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("GPS is turned off ,Please Enable GPS").setCancelable(false)
-                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(settingsIntent);
-                    }
+                .setPositiveButton("OK", (dialog, id) -> {
+                    Intent settingsIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                    startActivity(settingsIntent);
                 });
-        builder.show();
-
-    }
-
-    private void displayAreaDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        double measuredArea = Math.round(100 * measureView.getArea()) / (double) 100;
-        builder.setMessage("Total field area is : " + measuredArea + " " + measureView.getAreaUnit()).setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-                saveLatLongData();
-            }
-        });
         builder.show();
 
     }
@@ -317,7 +276,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     private void displayAreaAreaDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         double measuredArea = Math.round(100 * measureView.getArea()) / (double) 100;
-//        double diffPercentage = CommonUtils.getPercentage(measuredArea, ConversionLandDetailsFragment.plotEnteredArea);
         double diffPercentage = 0;
         double roundedValue = 0.0;
 
@@ -340,14 +298,12 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             message = message + "\n Variation between Plot area and Gps area is " + roundedValue + " %";
         }
         builder.setMessage(message).setCancelable(false);
-        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-                if (saveCount==0){
-                    saveLatLongData();
-                } else {
-                    Log.e(TAG,String.valueOf(saveCount));
-                }
+        builder.setPositiveButton("OK", (dialog, id) -> {
+            dialog.dismiss();
+            if (saveCount==0){
+                saveLatLongData();
+            } else {
+                Log.e(TAG,String.valueOf(saveCount));
             }
         });
         builder.show();
@@ -355,7 +311,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
     }
 
     public void saveLatLongData() {
-//        ProgressBar.showProgressBar(FieldCalculatorActivity.this, "Saving Gps data");
         saveCount++;
         try {
 
@@ -367,9 +322,7 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
             double measuredArea = Math.round(100 * measureView.getArea()) / (double) 100;
 
             if (measuredArea <= totalSize) {
-                //if(Double.parseDouble(dist)<=remArea){
                 if (recordedBoundries.size() > 2) {
-//                    txtFrstLatLong.setText(latLngList.get(0).toString());
                     for (int i = 0; i < recordedBoundries.size(); i++) {
 
 
@@ -398,8 +351,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                         viewModel.updatePlotDetailListTableSyncAndPlotArea1(false, "0", measuredArea, plotId);
                         if (i == recordedBoundries.size() - 1) {
                             Toast.makeText(FieldCalculatorActivity.this, "Geobounds details are saved successfully", Toast.LENGTH_SHORT).show();
-//                                Toast.makeText(MapsActivity.this, "Area " + dist, Toast.LENGTH_SHORT).show();
-
 
                             new Handler().postDelayed(new Runnable() {
 
@@ -412,8 +363,6 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
                                 }
 
                             }, 1 * 500);
-
-//                            finish();
                         }
 
                     }
@@ -430,16 +379,12 @@ public class FieldCalculatorActivity extends BaseActivity implements HasSupportF
 
     }
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         totalBoundries.clear();
         recordedBoundries.clear();
         firstFourCoordinates.clear();
-//        measureView.stop();
-//        Intent intent = new Intent();
-//        intent.putExtra("area", 0.0);
-//        setResult(RESULT_OK, intent);
-//        finish();
         Intent intent = new Intent();
         intent.putExtra("geo_value", "error");
         setResult(2, intent);

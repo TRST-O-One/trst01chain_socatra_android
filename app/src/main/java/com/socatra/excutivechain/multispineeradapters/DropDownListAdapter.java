@@ -111,7 +111,7 @@ public class DropDownListAdapter extends BaseAdapter {
 			mSelectedItems.setText(R.string.select_string);
 		} else if (selectedCount == 1) {
 			for (int i = 0; i < RiskAssessmentActivity.checkSelected.length; i++) {
-				if (RiskAssessmentActivity.checkSelected[i] == true) {
+				if (RiskAssessmentActivity.checkSelected[i]) {
 					firstSelected = mListItems.get(i);
 					break;
 				}
@@ -134,37 +134,6 @@ public class DropDownListAdapter extends BaseAdapter {
 
 			mSelectedItems.setText(selectedItemsText.toString());
 			setSelected(selectedItemsText.toString());
-//			for (int i = 0; i < RiskAssessmentActivity.checkSelected.length; i++) {
-//				if (RiskAssessmentActivity.checkSelected[i] == true) {
-//					firstSelected = mListItems.get(i);
-//
-//					break;
-//				}
-//			}
-//		    mSelectedItems.setText(firstSelected + " & "+ (selectedCount - 1) + " more");
-//			setSelected(firstSelected + " & "+ (selectedCount - 1) + " more");
-
-
-//			List<StateVO> selectedItems = myAdapter.getSelectedItems();
-//			StringBuilder selectedText = new StringBuilder();
-//			selectedText.append(mListItems.get(position1)).append(", ");
-//			for (int i=position1 ; i<mListItems.size();i++)
-//			{
-//				selectedText.append(mListItems.get(position1)).append(", ");
-//			}
-
-
-		//	Log.d(TAG, "onItemSelected: selectItems" + selectedText);
-			// Remove trailing comma and space
-//			if (selectedText.length() > 2) {
-//				selectedText.setLength(selectedText.length() - 2);
-//				mSelectedItems.setText(selectedText.toString());
-//			//	Log.d(TAG, "onItemSelected: select" + selectedText);
-//			}
-
-
-			//     spActivities.set
-			// (  (TextView) findViewById(R.id.txt_data)).setText(selectedText.toString());
 		}
 	}
 

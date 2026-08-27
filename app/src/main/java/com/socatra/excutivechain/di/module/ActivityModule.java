@@ -109,22 +109,4 @@ public abstract class ActivityModule {
 
     @ContributesAndroidInjector(modules = FragmentModule.class)
     abstract KMLMapsActivity ContributeKMLMapsActivity();
-
-    //For Water cycle Nav
-//    @ContributesAndroidInjector(modules = FragmentModule.class)
-//    abstract FarmerConsentActivity ContributesFarmerConsentActivity();
-//
-//    //WaterCycle1
-//    @ContributesAndroidInjector(modules = FragmentModule.class)
-//    abstract WaterCycleActivity1 WaterCycleActivity1();
-//
-//    //WaterCycle2
-//    @ContributesAndroidInjector(modules = FragmentModule.class)
-//    abstract WaterCycleActivity2 WaterCycleActivity2();
-//
-//    //WaterCycle3
-//    @ContributesAndroidInjector(modules = FragmentModule.class)
-//    abstract WaterCycleActivity3 WaterCycleActivity3();
-
-
 }

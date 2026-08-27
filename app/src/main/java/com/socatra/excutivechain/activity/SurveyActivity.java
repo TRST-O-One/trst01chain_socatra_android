@@ -53,9 +53,9 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
 
     FarmersTable farmersTable;
 
-    String farmerSurveyStatus="0";
+    String farmerSurveyStatus = "0";
 
-    String riskSurveyStatus="0";
+    String riskSurveyStatus = "0";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +63,7 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
         setContentView(R.layout.activity_survey);
 
         farmerCode = getIntent().getStringExtra("mFarmerCode");
-        farmersTable=(FarmersTable) getIntent().getSerializableExtra("mFarmerObj");
+        farmersTable = (FarmersTable) getIntent().getSerializableExtra("mFarmerObj");
         Log.e(TAG, farmerCode);
 
         initializeUI();
@@ -80,10 +80,10 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
     private void updateTextLabels() {
         String selectedLanguage = getSelectedLanguage();
 
-        String hdSurveyHead=getResources().getString(R.string.surveyselection1);
-        String hdLabour=getResources().getString(R.string.laboursurvey1);
-        String hdFarmer=getResources().getString(R.string.farmersurvey1);
-        String hdRisk=getResources().getString(R.string.risksurvey1);
+        String hdSurveyHead = getResources().getString(R.string.surveyselection1);
+        String hdLabour = getResources().getString(R.string.laboursurvey1);
+        String hdFarmer = getResources().getString(R.string.farmersurvey1);
+        String hdRisk = getResources().getString(R.string.risksurvey1);
 
         if (selectedLanguage.equals("English")) {
             surveyselection1.setText(hdSurveyHead);
@@ -91,25 +91,25 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
             farmersurvey1.setText(hdFarmer);
             risksurvey1.setText(hdRisk);
         } else {
-            surveyselection1.setText(getLanguageFromLocalDb(selectedLanguage,hdSurveyHead)+ "/" + hdSurveyHead);
-            laboursurvey1.setText(getLanguageFromLocalDb(selectedLanguage,hdLabour)+ "/" + hdLabour);
-            farmersurvey1.setText(getLanguageFromLocalDb(selectedLanguage,hdFarmer)+ "/" + hdFarmer);
-            risksurvey1.setText(getLanguageFromLocalDb(selectedLanguage,hdRisk)+ "/" + hdRisk);
+            surveyselection1.setText(getLanguageFromLocalDb(selectedLanguage, hdSurveyHead) + "/" + hdSurveyHead);
+            laboursurvey1.setText(getLanguageFromLocalDb(selectedLanguage, hdLabour) + "/" + hdLabour);
+            farmersurvey1.setText(getLanguageFromLocalDb(selectedLanguage, hdFarmer) + "/" + hdFarmer);
+            risksurvey1.setText(getLanguageFromLocalDb(selectedLanguage, hdRisk) + "/" + hdRisk);
         }
 
-}
-
+    }
 
 
     private String getSelectedLanguage() {
         return preferences.getString("selected_language", "English");
     }
+
     private void initializeUI() {
-        imgBack=findViewById(R.id.imgBackAddSurveyHome);
-        txtFarmerCode=findViewById(R.id.txtFarmerCodeSurvey);
-        cardLabourSurvey=findViewById(R.id.cardLabourSurvey);
-        cardFarmerSurvey=findViewById(R.id.cardFarmerSurvey);
-        cardRiskSurvey=findViewById(R.id.cardRiskSurvey);
+        imgBack = findViewById(R.id.imgBackAddSurveyHome);
+        txtFarmerCode = findViewById(R.id.txtFarmerCodeSurvey);
+        cardLabourSurvey = findViewById(R.id.cardLabourSurvey);
+        cardFarmerSurvey = findViewById(R.id.cardFarmerSurvey);
+        cardRiskSurvey = findViewById(R.id.cardRiskSurvey);
 
         //Labels
         surveyselection1 = findViewById(R.id.surveyselection1);
@@ -122,42 +122,30 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
 
     private void initializeValues() {
 
-        txtFarmerCode.setText("Farmer Code:"+farmerCode);
+        txtFarmerCode.setText("Farmer Code:" + farmerCode);
 
-        imgBack.setOnClickListener(view->{
+        imgBack.setOnClickListener(view -> {
             finish();
         });
 
-        cardLabourSurvey.setOnClickListener(view->{
+        cardLabourSurvey.setOnClickListener(view -> {
             Toast.makeText(this, "Not applicable!!", Toast.LENGTH_SHORT).show();
-
-//            Intent intent=new Intent(this,LabourSurveyHomeActivity.class);
-//            intent.putExtra("mFarmerCode",farmerCode);
-//            startActivity(intent);
         });
 
 
-        cardFarmerSurvey.setOnClickListener(view->{
+        cardFarmerSurvey.setOnClickListener(view -> {
             Toast.makeText(this, "Not applicable!!", Toast.LENGTH_SHORT).show();
-//            if (farmerSurveyStatus=="0") {
-//                Intent intent = new Intent(this, FarmerSurveyActivity.class);
-//                intent.putExtra("mFarmerCode", farmerCode);
-//                intent.putExtra("mFarmerObj", farmersTable);
-//                startActivity(intent);
-//            } else {
-//                Toast.makeText(SurveyActivity.this, "Already submitted!!", Toast.LENGTH_SHORT).show();
-//            }
         });
 
-        cardRiskSurvey.setOnClickListener(view->{
-            if (riskSurveyStatus=="0") {
+        cardRiskSurvey.setOnClickListener(view -> {
+            if (riskSurveyStatus == "0") {
                 Intent intent = new Intent(this, RiskAssessmentActivity.class);
                 intent.putExtra("mFarmerCode", farmerCode);
                 intent.putExtra("mFarmerObj", farmersTable);
                 startActivity(intent);
 
-            }else {
-            Toast.makeText(SurveyActivity.this, "Already submitted!!!!", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(SurveyActivity.this, "Already submitted!!!!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -183,7 +171,7 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
         getRiskSurveyStatus(farmerCode);
     }
 
-    public void getFarmerParentSurveyStatus(String fid){
+    public void getFarmerParentSurveyStatus(String fid) {
         try {
             viewModel.getFarmerHouseholdParentSurveyDetailsFromLocalDbById(fid);
             if (viewModel.getFarmerHouseholdParentSurveyDetailsByIdLiveData() != null) {
@@ -193,9 +181,9 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
                         List<FarmerHouseholdParentSurvey> farmerParentSurveys = (List<FarmerHouseholdParentSurvey>) o;
                         viewModel.getFarmerHouseholdParentSurveyDetailsByIdLiveData().removeObserver(this);
                         if (farmerParentSurveys != null && farmerParentSurveys.size() > 0) {
-                            farmerSurveyStatus="1";
+                            farmerSurveyStatus = "1";
                         } else {
-                            farmerSurveyStatus="0";
+                            farmerSurveyStatus = "0";
                         }
                     }
                 };
@@ -207,7 +195,7 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
     }
 
 
-    public void getRiskSurveyStatus(String fid){
+    public void getRiskSurveyStatus(String fid) {
         try {
             viewModel.getRiskDetailsFromLocalDbById(fid);
             if (viewModel.getRiskAssessmentDetailsByIdLiveData() != null) {
@@ -217,9 +205,9 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
                         List<RiskAssessment> riskAssessments = (List<RiskAssessment>) o;
                         viewModel.getRiskAssessmentDetailsByIdLiveData().removeObserver(this);
                         if (riskAssessments != null && riskAssessments.size() > 0) {
-                            riskSurveyStatus="1";
+                            riskSurveyStatus = "1";
                         } else {
-                            riskSurveyStatus="0";
+                            riskSurveyStatus = "0";
                         }
                     }
                 };
@@ -233,9 +221,9 @@ public class SurveyActivity extends BaseActivity implements HasSupportFragmentIn
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
 
         try {
-            if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
+            if (viewModel.getLanguageDataVM(stLanguage, stWord) != null) {
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
-            } else{
+            } else {
                 return stWord;
             }
 

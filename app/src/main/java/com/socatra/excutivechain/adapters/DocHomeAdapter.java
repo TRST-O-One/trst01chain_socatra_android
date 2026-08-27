@@ -123,9 +123,6 @@ public class DocHomeAdapter extends RecyclerView.Adapter<DocHomeAdapter.DocViewH
 
 
     public interface SyncDocCallbackInterface {
-//        void openScreenCallback(int position, FarmersTable farmerTable, List<FarmersTable> farmer, String applicationType);
-//
-//        void updateItemCallback(int position, FarmersTable applicationStatusTable, String strFarmerID);
         void addDocDetailsCallback(int position, PlantationDocuments applicationStatusTable, String strFarmerCode, String mDocId);
     }
 }

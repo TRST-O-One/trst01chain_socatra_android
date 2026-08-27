@@ -57,7 +57,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class EditPersonalDetailsActivity extends BaseActivity implements HasSupportFragmentInjector {
-
     String TAG = "EditPersonalDetailsActivity";
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
@@ -129,9 +128,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
 
     AutoCompleteTextView at_cmpt_txt_sp;
 
-    ArrayList<String> array_countryList = new ArrayList<>();
-    ArrayList<Integer> array_countryIds = new ArrayList<>();
-
     TextView txtTitle;
 
     Spinner spSelectSubDistrict, spSelectDistrict, spSelectState, spSelectCountry, spSelectVillageName;
@@ -141,9 +137,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
     String strStaticKeyForEditAdd;
     ImageView imgSaveAddBt, imgEditBt, imgCancelEditBt;
     Dialog dialog, imagePreviewDialog;
-
-    String test1 = "";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,23 +166,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
 
     private void saveData() {
         txtSaveButton.setOnClickListener(view -> {
-
-            //if (spTitle.getSelectedItemPosition() == 0) {
-            //                Toast.makeText(this, "Select Title!!", Toast.LENGTH_SHORT).show();
-            //            } else
-
-//            if (TextUtils.isEmpty(etFirstName.getText().toString().trim())) {
-//                etFirstName.setError(ERROR_MESSAGE_ENTER_FIRSTNAME);
-//            } else if (TextUtils.isEmpty(etLastName.getText().toString().trim())) {
-//                etLastName.setError(ERROR_MESSAGE_ENTER_LASTNAME);
-//            } else if (TextUtils.isEmpty(etFatherName.getText().toString().trim())) {
-//                etFatherName.setError(ERROR_MESSAGE_ENTER_FATHERNAME);
-//            } else
-
-
-//                else if (spGender.getSelectedItemPosition() == 0) {
-//                Toast.makeText(this, "Select Gender!!", Toast.LENGTH_SHORT).show();
-//            }
             if (TextUtils.isEmpty(etAge.getText().toString().trim())) {
                 etAge.setError("Enter Age");
             } else if (TextUtils.isEmpty(etPincode.getText().toString().trim())) {
@@ -211,16 +187,7 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                 strNoOfPlots = etNoOfPlot.getText().toString().trim();
                 strAddress = etAddress.getText().toString().trim();
                 strAge = etAge.getText().toString().trim();
-                //  strVillageId = strVillage;
-                //strVillageId = strVillage
                 strNationalIdentityCode = etNationalIdentityCode.getText().toString().trim();
-
-//                String strPinCode = etPincode.getText().toString().trim();
-//                String strSubDistrict = spSelectSubDistrict.getText().toString().trim();
-//                String strDistrict = spSelectDistrict.getText().toString().trim();
-//                String strState = spSelectState.getText().toString().trim();
-//                String strCountry = etCountry.getText().toString().trim();
-
                 if (!strStaticKeyForEditAdd.equalsIgnoreCase("save")) {
                     strSaveVID = strGetVillageId;
                 }
@@ -236,8 +203,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                 farmersTable.setAddress(strAddress);
                 farmersTable.setAge(strAge);
                 farmersTable.setGender(edtGender.getText().toString());
-//                farmersTable.setDistricId(strSelectDistricId);
-//                farmersTable.setSubDistricId(strSubDistricId);
                 farmersTable.setVillageId(strSaveVID);
                 farmersTable.setNationalIdentityCode(strNationalIdentityCode);
                 //image
@@ -256,10 +221,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                 viewModel.insertFarmerDetailListTableLocal(farmersTable);
                 successfulBack();
             }
-
-            //else if (strLocalFarmerImagePath.equals("null")) {
-            //                appHelper.getDialogHelper().getConfirmationDialog().show(ConfirmationDialog.ALERT, "select farmer picture");
-            //            }
         });
     }
 
@@ -472,7 +433,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
         etAge.setText(farmersTable.getAge());
         edtGender.setText(farmersTable.getGender());
 
-//        spSelectVillageName. = farmersTable.getVillageId();
         etNationalIdentityCode.setText(farmersTable.getNationalIdentityCode());
 
 
@@ -504,7 +464,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
         spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                strFarmerGender = parent.getItemAtPosition(position).toString().trim();
                 String st = (String) parent.getItemAtPosition(position);
                 strFarmerGender = st;
             }
@@ -524,24 +483,7 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                 try {
                     openChoiceDialogue();
                 } catch (Exception ex) {
-                    // Toast.makeText(LoginActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-                //strStaticKeyForEditAdd = "";
-                // TODO: 9/18/2023 spinner data
-//                spSelectCountry.setVisibility(View.VISIBLE);
-//                spSelectState.setVisibility(View.VISIBLE);
-//                spSelectDistrict.setVisibility(View.VISIBLE);
-//                spSelectSubDistrict.setVisibility(View.VISIBLE);
-//                spSelectVillageName.setVisibility(View.VISIBLE);
-//
-//                // TODO: 9/18/2023 edit text data
-//                edtCountryName.setVisibility(View.GONE);
-//                edtStateName.setVisibility(View.GONE);
-//                edtDistricName.setVisibility(View.GONE);
-//                edtSubDistricName.setVisibility(View.GONE);
-//                edtVillageName.setVisibility(View.GONE);
-//                etAddress.setEnabled(true);
-
             }
         });
 
@@ -550,24 +492,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
             @Override
             public void onClick(View v) {
                 openSaveDialogue();
-//                strStaticKeyForEditAdd = "save";
-//                // TODO: 9/18/2023 spinner data
-//                spSelectCountry.setVisibility(View.GONE);
-//                spSelectState.setVisibility(View.GONE);
-//                spSelectDistrict.setVisibility(View.GONE);
-//                spSelectSubDistrict.setVisibility(View.GONE);
-//                spSelectVillageName.setVisibility(View.GONE);
-//
-//                // TODO: 9/18/2023 edit text data
-//                edtCountryName.setVisibility(View.VISIBLE);
-//                edtStateName.setVisibility(View.VISIBLE);
-//                edtDistricName.setVisibility(View.VISIBLE);
-//                edtSubDistricName.setVisibility(View.VISIBLE);
-//                edtVillageName.setVisibility(View.VISIBLE);
-//                etAddress.setEnabled(false);
-//                viewModel.updateVillageIdInFarmerTable(etAddress.getText().toString(),strSaveVID,strFarmerCode);
-//                getSubDisIDFromVillageIdFromLocalDb(strSaveVID);
-                // saveAddress();
 
             }
         });
@@ -597,23 +521,13 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
 
             }
         });
-
-
-        //Country spinner
-//        getCountryListFromLocalDb();
-
-
-        //Save button
-
-
     }
 
 
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-//        Intent intent = new Intent(EditPersonalDetailsActivity.this, DashBoardFarmerListActivity.class);
-//        startActivity(intent);
         finish();
     }
 
@@ -659,8 +573,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                imgSaveAddBt.setClickable(false);
-//                imgEditBt.setClickable(true);
             }
         });
 
@@ -712,10 +624,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
             @Override
             public void onClick(View view) {
                 dialog.dismiss();
-//                imgSaveAddBt.setVisibility(View.GONE);
-//                imgEditBt.setVisibility(View.VISIBLE);
-                //imgEditBt.setClickable(false);
-
             }
         });
 
@@ -735,18 +643,11 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                         viewModel.getCountryDetailsByIdLiveData().removeObserver(this);
                         if (countryList != null && countryList.size() > 0) {
 
-//                            for (int i = 0; i < countryList.size(); i++)
-//                            {
-//                                array_countryList.add(countryList.get(i).getName());
-//                                array_countryIds.add(countryList.get(i).getId());
-//                            }
                             ArrayAdapter<Country> dataAdapterCont = new ArrayAdapter<>(EditPersonalDetailsActivity.this,
                                     android.R.layout.simple_spinner_item, countryList);
                             dataAdapterCont.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             dataAdapterCont.notifyDataSetChanged();
                             spSelectCountry.setAdapter(dataAdapterCont);
-                            // at_cmpt_txt_sp.setAdapter(dataAdapterCont);
-                            //   spSelectCountry.setSelection();
                             spSelectCountry.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -760,26 +661,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
 
                                 }
                             });
-                            Log.d(TAG, "onChanged: valueLatest" + at_cmpt_txt_sp.getText().toString() + strGetCountryName);
-
-
-//                            int position = 0;
-//                            for(int i = 0 ; i<countryList.size();i++)
-//                            {
-//                                int pos = countryList.get(i).getId();
-//                                int cId = countryList.get(i).getCountryId();
-//                                if (strGetCountryPosId.equals(pos))
-//                                {
-//                                    position = countryList.get(i).getCountryId();
-//                                }
-//
-//                            }
-//                            if (strGetCountryPosId!=null)
-//                            {
-//                                etCountry.setSelection(position);
-//                            }
-
-
                         } else {
                             Log.e(TAG, "no data");
                             List<Country> emptyList = new ArrayList<>();
@@ -809,13 +690,11 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                     public void onChanged(@Nullable Object o) {
                         VillageTable villageTable = (VillageTable) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + villageTable);
                         if (villageTable != null) {
                             strGetVillageIdPos = Integer.valueOf(villageTable.getId());
                             edtVillageName.setText(villageTable.getName());
                             etPincode.setText(villageTable.getPinCode());
                             String strSubDisId = villageTable.getSubDistrictId();
-                            Log.d(TAG, "onChanged: strSubDisId" + strSubDisId);
                             getDisIDFromSubDistricIdFromLocalDb(strSubDisId);
 
                         } else {
@@ -839,12 +718,10 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                     public void onChanged(@Nullable Object o) {
                         SubDistrict subDistrict = (SubDistrict) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + subDistrict);
                         if (subDistrict != null) {
                             strGetSubDistricIdPos = subDistrict.getId();
                             edtSubDistricName.setText(subDistrict.getName());
                             int strDisId = subDistrict.getDistrictId();
-                            Log.d(TAG, "onChanged: strDistID" + strDisId);
                             getDistricTableFromLocalDb(strDisId);
 
                         } else {
@@ -868,12 +745,10 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                     public void onChanged(@Nullable Object o) {
                         DistrictorRegency districtorRegency = (DistrictorRegency) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + districtorRegency);
                         if (districtorRegency != null) {
                             strGetDistricIdPos = districtorRegency.getId();
                             edtDistricName.setText(districtorRegency.getName());
                             int strStateId = districtorRegency.getStateId();
-                            Log.d(TAG, "onChanged: strStateID" + strStateId);
                             getStateDetailsDistricTableFromLocalDb(strStateId);
 
                         } else {
@@ -897,13 +772,10 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                     public void onChanged(@Nullable Object o) {
                         StateorProvince stateorProvince = (StateorProvince) o;
                         viewModel.getStateorProvinceLiveDataLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + stateorProvince);
                         if (stateorProvince != null) {
                             strGetRegionPosId = stateorProvince.getId();
                             edtStateName.setText(stateorProvince.getName());
-                            //   edtDistricName.setText(districtorRegency.getName());
                             int strCuntryId = stateorProvince.getCountryId();
-                            Log.d(TAG, "onChanged: strCountryId" + strCuntryId);
                             getCountryDetailsFromLocalDb(strCuntryId);
 
                         } else {
@@ -928,17 +800,10 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                     public void onChanged(@Nullable Object o) {
                         Country country = (Country) o;
                         viewModel.getCountryRegencyLiveDataLiveData().removeObserver(this);
-                        Log.e(TAG, "onChanged: data" + country);
                         if (country != null) {
                             strGetCountryPosId = country.getId();
                             strGetCountryName = country.getName();
                             edtCountryName.setText(strGetCountryName);
-                            Log.d(TAG, "onChanged: countryIData" + strGetCountryPosId + strGetCountryName);
-                            //   edtDistricName.setText(districtorRegency.getName());
-                            //    int strCuntryId = country.getCountryId();
-                            //  Log.d(TAG, "onChanged: strSubDisId" + strCuntryId);
-                            //getVillageListFromLocalDbById(strSubDisId);
-
                         } else {
                             Toast.makeText(EditPersonalDetailsActivity.this, "data is empty", Toast.LENGTH_SHORT).show();
                         }
@@ -975,12 +840,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                             dataAdapter.notifyDataSetChanged();
 
                             spSelectVillageName.setAdapter(dataAdapter);
-
-//                            if (strGetVillageIdPos!=null)
-//                            {
-//                                spSelectVillageName.setSelection(strGetVillageIdPos);
-//                            }
-
 
                             spSelectVillageName.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
@@ -1034,10 +893,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                             dataAdapterCont.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             dataAdapterCont.notifyDataSetChanged();
                             spSelectSubDistrict.setAdapter(dataAdapterCont);
-//                            if (strGetSubDistricIdPos!=null)
-//                            {
-//                                etSubDistrict.setSelection(strGetSubDistricIdPos);
-//                            }
 
                             spSelectSubDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
@@ -1087,12 +942,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             dataAdapter.notifyDataSetChanged();
                             spSelectDistrict.setAdapter(dataAdapter);
-//                            if (strGetDistricIdPos!=null)
-//                            {
-//                                spSelectDistrict.setSelection(strGetDistricIdPos);
-//                            }
-
-
                             spSelectDistrict.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1141,12 +990,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                             dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
                             dataAdapter.notifyDataSetChanged();
                             spSelectState.setAdapter(dataAdapter);
-//                            if (strGetRegionPosId!=null)
-//                            {
-//                                etState.setSelection(strGetRegionPosId);
-//                            }
-
-
                             spSelectState.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -1205,9 +1048,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                         List<PlantationDocuments> odVisitSurveyTableList = (List<PlantationDocuments>) o;
                         viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-
-
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
                             stImgFar = odVisitSurveyTableList.get(0).getDocURL();
 
                             if (odVisitSurveyTableList.get(0).getDocURL().contains("https://")) {
@@ -1217,7 +1057,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                                         .placeholder(R.drawable.baseline_downloading_24)
                                         .error(R.drawable.ic_baseline_agriculture_24)
                                         .into(imgFarmer);
-//                                imgStatus1 = odVisitSurveyTableList.get(0).getDocUrl();
 
                             } else if (odVisitSurveyTableList.get(0).getDocURL().contains("/storage/emulated/")) {
                                 File imgFile = new File(odVisitSurveyTableList.get(0).getDocURL());
@@ -1230,16 +1069,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                                             .into(imgFarmer);
                                 }
                             }
-//                            else if(odVisitSurveyTableList.get(0).getDocLocal()!=null) {
-//                                File imgFile = new  File(odVisitSurveyTableList.get(0).getDocLocal());
-//                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                                waterImg1.setImageBitmap(myBitmap);
-//                                imgStatus1=odVisitSurveyTableList.get(0).getDocLocal();
-//                            }
-
-
-                        } else {
-//                            Log.e(mTag,"No data for farmerCode Img 1");
                         }
                     }
                 };
@@ -1261,9 +1090,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                         List<PlantationDocuments> odVisitSurveyTableList = (List<PlantationDocuments>) o;
                         viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-
-
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
                             stImgNat = odVisitSurveyTableList.get(0).getDocURL();
 
                             if (odVisitSurveyTableList.get(0).getDocURL().contains("https://")) {
@@ -1273,7 +1099,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                                         .placeholder(R.drawable.baseline_downloading_24)
                                         .error(R.drawable.ic_baseline_agriculture_24)
                                         .into(imgNationalIdentity);
-//                                imgStatus1 = odVisitSurveyTableList.get(0).getDocUrl();
 
                             } else if (odVisitSurveyTableList.get(0).getDocURL().contains("/storage/emulated/")) {
                                 File imgFile = new File(odVisitSurveyTableList.get(0).getDocURL());
@@ -1286,16 +1111,7 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
                                             .into(imgNationalIdentity);
                                 }
                             }
-//                            else if(odVisitSurveyTableList.get(0).getDocLocal()!=null) {
-//                                File imgFile = new  File(odVisitSurveyTableList.get(0).getDocLocal());
-//                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-//                                waterImg1.setImageBitmap(myBitmap);
-//                                imgStatus1=odVisitSurveyTableList.get(0).getDocLocal();
-//                            }
 
-
-                        } else {
-//                            Log.e(mTag,"No data for farmerCode Img 1");
                         }
                     }
                 };
@@ -1319,13 +1135,6 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
         TextView backPreview = imagePreviewDialog.findViewById(R.id.backPreview);
         ImageView imagePreview = imagePreviewDialog.findViewById(R.id.imagePreview);
 
-        Log.e(TAG, "preview Img str:" + stImg);
-
-//        Picasso.get()
-//                .load(stImg)
-//                .error(R.drawable.baseline_broken_image_24)
-//                .into(imagePreview);
-
         Glide.with(this).load(stImg)
                 .error(R.drawable.baseline_broken_image_24)
                 .into(imagePreview);
@@ -1339,17 +1148,7 @@ public class EditPersonalDetailsActivity extends BaseActivity implements HasSupp
 
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
-
         try {
-//            viewModel.getLanguageDataViewModel(stLanguage,stWord);
-//            viewModel.getLanguageLiveData().observe(this, new Observer<String>() {
-//                @Override
-//                public void onChanged(String s) {
-//                    if (listener != null) {
-//                        listener.onLanguageFetched(s);
-//                    }
-//                }
-//            });
             if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
             } else{

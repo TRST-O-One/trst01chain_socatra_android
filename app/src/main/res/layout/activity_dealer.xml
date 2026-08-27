@@ -46,34 +46,35 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imgBackDMap"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="8dp"
-            android:src="@drawable/back"
-            app:tint="@color/Orange" />
+            <ImageView
+                android:id="@+id/imgBackDMap"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/back"
+                app:tint="@color/Orange" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/dealerMapHd"
-            style="@style/CustomTextViewPadding5dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_medium"
-            android:gravity="right"
-            android:text="@string/dealer_mapping"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14ssp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/dealerMapHd"
+                style="@style/CustomTextViewPadding5dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_medium"
+                android:gravity="right"
+                android:text="@string/dealer_mapping"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
 
@@ -87,8 +88,8 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:elevation="2dp">
 
             <TextView
                 android:id="@+id/txtManufacturerFMap"
@@ -103,14 +104,14 @@
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/Light_Orange_shade"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/Light_Orange_shade">
 
             <TextView
-                android:elevation="3dp"
                 android:id="@+id/txtDealerFMap"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="3dp"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center"
                 android:text="Dealer"
@@ -188,8 +189,8 @@
                 android:visibility="visible">
 
                 <TextView
-                    style="@style/CustomTextViewPadding5dp"
                     android:id="@+id/Dealern"
+                    style="@style/CustomTextViewPadding5dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -324,7 +325,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal"></LinearLayout>
+                android:orientation="horizontal" />
 
 
             <androidx.cardview.widget.CardView

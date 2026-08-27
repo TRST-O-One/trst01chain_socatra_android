@@ -47,8 +47,6 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
     ImageView imgBack;
     TextView txtDealer,txtManufacturer,txtFarmerCode;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,8 +54,6 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
 
         farmerCode=getIntent().getStringExtra("mFarmerCode");
         farmersTable=(FarmersTable) getIntent().getSerializableExtra("mFarmerObj");
-
-        Log.e(TAG,farmerCode);
 
         initializeUI();
         initializeValues();
@@ -141,8 +137,6 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
 
     private void configureViewModel() {
         viewModel = new ViewModelProvider(this, viewModelFactory).get(AppViewModel.class);
-//        getFarmerDealerStatus(farmerCode);
-//        getFarmerManufacturerStatus(farmerCode);
     }
 
     @Override
@@ -150,63 +144,7 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
         return null;
     }
 
-    //Manufacturer
-    private void getFarmerManufacturerStatus(String fid) {
-        try {
-            viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getManfacturerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<ManfacturerFarmer> manfacturerFarmers = (List<ManfacturerFarmer>) o;
-                        viewModel.getManfacturerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (manfacturerFarmers != null && manfacturerFarmers.size() > 0) {
-//                            farmerManufacturerStatus =1;
-//                            Log.e("dashListStat",manfacturerFarmers.toString());
-                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-//                            farmerManufacturerStatus=0;
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                };
-                viewModel.getManfacturerFarmerDetailsByIdLiveData().observe(this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
-
-    //Dealer
-    private void getFarmerDealerStatus(String fid) {
-        try {
-            viewModel.getDealerFarmerDetailsFromLocalDbByFId(fid);
-            if (viewModel.getDealerFarmerDetailsByIdLiveData() != null) {
-                Observer getLeadRawDataObserver = new Observer() {
-                    @Override
-                    public void onChanged(@Nullable Object o) {
-                        List<DealerFarmer> dealerFarmers = (List<DealerFarmer>) o;
-                        viewModel.getDealerFarmerDetailsByIdLiveData().removeObserver(this);
-                        if (dealerFarmers != null && dealerFarmers.size() > 0) {
-//                            farmerDealerStatus =1;
-//                            Log.e("dashListStat",dealerFarmers.toString());
-                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        } else {
-//                            Toast.makeText(FarmerMappingActivity.this, "Mapping already done!!", Toast.LENGTH_SHORT).show();
-//                            farmerDealerStatus=0;
-                        }
-                    }
-                };
-                viewModel.getDealerFarmerDetailsByIdLiveData().observe(this, getLeadRawDataObserver);
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
+    @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -214,7 +152,6 @@ public class FarmerMappingActivity extends BaseActivity implements HasSupportFra
     }
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
-
         try {
             if (viewModel.getLanguageDataVM(stLanguage, stWord)!=null){
                 return viewModel.getLanguageDataVM(stLanguage, stWord);

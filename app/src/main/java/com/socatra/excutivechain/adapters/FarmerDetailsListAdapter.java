@@ -74,13 +74,12 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
             if (rawDataTableListFiltered != null && rawDataTableListFiltered.size() > 0) {
                 FarmersTable farmerTable = rawDataTableListFiltered.get(i);
 
-                loanTypeViewHolder.txtFarmerName.setText(farmerTable.getFirstName()+" "+farmerTable.getLastName());
+                loanTypeViewHolder.txtFarmerName.setText(farmerTable.getFirstName() + " " + farmerTable.getLastName());
                 loanTypeViewHolder.txtFatherName.setText(farmerTable.getFatherName());
                 loanTypeViewHolder.txtMobileNo.setText(farmerTable.getPrimaryContactNo());
                 loanTypeViewHolder.txtFarmerCode.setText(farmerTable.getFarmerCode());
 
-//                String pin=farmerTable.getPinCode();
-                String id=farmerTable.getVillageId();
+                String id = farmerTable.getVillageId();
 
                 //Todo:Village details based on Village Id
                 try {
@@ -94,12 +93,9 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
                                 if (villageTableList != null && villageTableList.size() > 0) {
                                     loanTypeViewHolder.txtVillage.setText(villageTableList.get(0).getName());
-                                }
-                                else {
+                                } else {
                                     loanTypeViewHolder.txtVillage.setText("");
                                 }
-
-
                             }
                         };
                         viewModel.getvillageDetailsByPincodeLiveData().observe((LifecycleOwner) context, getLeadRawDataObserver);
@@ -111,7 +107,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
                 //Todo:Farmer Image
                 try {
-                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(),"farmer image");
+                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(), "farmer image");
                     if (viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData() != null) {
                         Observer getLeadRawDataObserver = new Observer() {
                             @Override
@@ -119,19 +115,15 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 List<PlantationDocuments> odVisitSurveyTableList = (List<PlantationDocuments>) o;
                                 viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                                 if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
+                                    if (odVisitSurveyTableList.get(0).getDocURL() != null) {
 
-
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
-
-                                    if (odVisitSurveyTableList.get(0).getDocURL()!=null){
-
-                                        if (odVisitSurveyTableList.get(0).getDocURL().contains("https://")){
+                                        if (odVisitSurveyTableList.get(0).getDocURL().contains("https://")) {
                                             Picasso.get()
                                                     .load(odVisitSurveyTableList.get(0).getDocURL())
                                                     .placeholder(R.drawable.baseline_downloading_24)
                                                     .error(R.drawable.ic_baseline_agriculture_24)
                                                     .into(loanTypeViewHolder.imgFarmer);
-                                        }else if (odVisitSurveyTableList.get(0).getDocURL().contains("/storage/emulated/")){
+                                        } else if (odVisitSurveyTableList.get(0).getDocURL().contains("/storage/emulated/")) {
                                             File imgFile = new File(odVisitSurveyTableList.get(0).getDocURL());
                                             if (imgFile.exists()) {
                                                 Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
@@ -140,11 +132,10 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                                 // Handle the case where the image file doesn't exist
                                                 Picasso.get()
                                                         .load(R.drawable.baseline_broken_image_24)
-                                                                .into(loanTypeViewHolder.imgFarmer);
+                                                        .into(loanTypeViewHolder.imgFarmer);
                                             }
                                         }
                                     }
-                                } else {
                                 }
                             }
                         };
@@ -157,7 +148,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
 
                 //Todo:GeoBoundaries Status
-                loanTypeViewHolder.txtNoOfPlots.setText("No. of plots : (" + "0" +"/"+farmerTable.getNoOfPlots()+")");
+                loanTypeViewHolder.txtNoOfPlots.setText("No. of plots : (" + "0" + "/" + farmerTable.getNoOfPlots() + ")");
                 try {
                     viewModel.getPlantationGeoDetailsStatusFromLocalDbByFId(farmerTable.getFarmerCode());
                     if (viewModel.getPlantationDetailsByIdLiveData() != null) {
@@ -167,8 +158,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 List<Plantation> plantations = (List<Plantation>) o;
                                 viewModel.getPlantationDetailsByIdLiveData().removeObserver(this);
                                 if (plantations != null && plantations.size() > 0) {
-                                    loanTypeViewHolder.txtNoOfPlots.setText("No. of plots : (" + String.valueOf(plantations.size()) +"/"+farmerTable.getNoOfPlots()+")");
-                                } else {
+                                    loanTypeViewHolder.txtNoOfPlots.setText("No. of plots : (" + String.valueOf(plantations.size()) + "/" + farmerTable.getNoOfPlots() + ")");
                                 }
                             }
                         };
@@ -180,7 +170,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
                 //Todo:Legal Doc Status
                 try {
-                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(),"Legal Document");
+                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(), "Legal Document");
                     if (viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData() != null) {
                         Observer getLeadRawDataObserver = new Observer() {
                             @Override
@@ -189,7 +179,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                                 if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
                                     loanTypeViewHolder.txtLegalDocStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.status_completed_circle, 0);
-                                } else {
                                 }
                             }
                         };
@@ -201,7 +190,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
                 //Todo:Consent Doc Status
                 try {
-                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(),"Consent Document");
+                    viewModel.getLocalDocIdentificationFromLocalDBByFidandDtype(farmerTable.getFarmerCode(), "Consent Document");
                     if (viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData() != null) {
                         Observer getLeadRawDataObserver = new Observer() {
                             @Override
@@ -210,7 +199,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                                 if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
                                     loanTypeViewHolder.txtConsentDocStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.status_completed_circle, 0);
-                                } else {
                                 }
                             }
                         };
@@ -231,7 +219,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 viewModel.getRiskAssessmentDetailsByIdLiveData().removeObserver(this);
                                 if (riskAssessments != null && riskAssessments.size() > 0) {
                                     loanTypeViewHolder.txtRiskStatus.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.status_completed_circle, 0);
-                                } else {
                                 }
                             }
                         };
@@ -254,7 +241,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                 if (dealerFarmers != null && dealerFarmers.size() > 0) {
                                     loanTypeViewHolder.txtMapping.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.status_completed_circle, 0);
                                 } else {
-                                    //Processor
                                     try {
                                         viewModel.getManfacturerFarmerDetailsFromLocalDbByFId(farmerTable.getFarmerCode());
                                         if (viewModel.getManfacturerFarmerDetailsByIdLiveData() != null) {
@@ -265,8 +251,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                                                     viewModel.getManfacturerFarmerDetailsByIdLiveData().removeObserver(this);
                                                     if (manfacturerFarmers != null && manfacturerFarmers.size() > 0) {
                                                         loanTypeViewHolder.txtMapping.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.status_completed_circle, 0);
-                                                    } else {
-
                                                     }
                                                 }
                                             };
@@ -288,56 +272,17 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                 loanTypeViewHolder.imgFarmer.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        syncCallbackInterface.addPlotDetailsCallback(i, farmerTable, farmerTable.getFarmerCode(),loanTypeViewHolder.imgFarmer);
+                        syncCallbackInterface.addPlotDetailsCallback(i, farmerTable, farmerTable.getFarmerCode(), loanTypeViewHolder.imgFarmer);
                     }
                 });
 
                 loanTypeViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        syncCallbackInterface.addPlotDetailsCallback(i, farmerTable, farmerTable.getFarmerCode(),loanTypeViewHolder.imgFarmer);
+                        syncCallbackInterface.addPlotDetailsCallback(i, farmerTable, farmerTable.getFarmerCode(), loanTypeViewHolder.imgFarmer);
                     }
                 });
-
-
-//                String imagePathCheck = "";
-//
-//                try{
-//                    imagePathCheck = farmerTable.getImage().substring(0, 4);
-//                } catch (Exception exception){
-//                    imagePathCheck = "";
-//                }
-//
-//                if (imagePathCheck.equalsIgnoreCase("http")) {
-////                    loanTypeViewHolder.farmer_image_new.setVisibility(View.GONE);
-//                    Picasso.get()
-//                            .load(farmerTable.getImage())
-//                            .error(R.drawable.ic_baseline_agriculture_24)
-////                            .error(R.drawable.placeholder_image)
-////                            .placeholder(R.drawable.loading_icon)
-////                            .placeholder(android.R.drawable.progress_indeterminate_horizontal)
-//                            .placeholder(R.drawable.ic_baseline_agriculture_24)
-//                            .into(loanTypeViewHolder.imgFarmer);
-//                } else {
-//                    Uri uri = null;
-//                    File imgFile = new File(farmerTable.getImage());
-//                    if (imgFile.exists()) {
-//                        uri = Uri.fromFile(imgFile);
-////                        loanTypeViewHolder.imgFarmer.setVisibility(View.GONE);
-//                        Picasso.get()
-//                                .load(uri)
-////                                .error(R.drawable.round_image_shape)
-//                                .error(R.drawable.ic_baseline_agriculture_24)
-////                                .placeholder(R.drawable.round_image_shape)
-//                                .placeholder(R.drawable.ic_baseline_agriculture_24)
-//                                .into(loanTypeViewHolder.imgFarmer);
-//                    }
-//
-//                }
-
             }
-
-
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -376,7 +321,7 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
                 } else {
                     List<FarmersTable> filteredList = new ArrayList<>();
                     for (FarmersTable row : rawDataTableList) {
-                        if (row.getFirstName().toLowerCase().contains(charString.toLowerCase())||row.getLastName().toLowerCase().contains(charString.toLowerCase())||row.getFarmerCode().toLowerCase().contains(charString.toLowerCase())) {
+                        if (row.getFirstName().toLowerCase().contains(charString.toLowerCase()) || row.getLastName().toLowerCase().contains(charString.toLowerCase()) || row.getFarmerCode().toLowerCase().contains(charString.toLowerCase())) {
                             filteredList.add(row);
                         }
                     }
@@ -400,10 +345,10 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
     public class LoanTypeViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtFarmerCode,txtFarmerName,txtMobileNo,txtFatherName,txtVillage;
+        TextView txtFarmerCode, txtFarmerName, txtMobileNo, txtFatherName, txtVillage;
         ImageView imgFarmer;
 
-        TextView txtNoOfPlots,txtBoundStatus,txtLegalDocStatus,txtConsentDocStatus,txtRiskStatus,txtMapping;
+        TextView txtNoOfPlots, txtBoundStatus, txtLegalDocStatus, txtConsentDocStatus, txtRiskStatus, txtMapping;
 
 
         public LoanTypeViewHolder(@NonNull View itemView) {
@@ -426,8 +371,6 @@ public class FarmerDetailsListAdapter extends RecyclerView.Adapter<FarmerDetails
 
         }
     }
-
-
 
 
     public interface SyncCallbackInterface {

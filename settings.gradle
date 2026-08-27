@@ -10,10 +10,6 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-//        maven {
-//            url "https://repo.osgeo.org/repository/release/"
-//        }
-//        jcenter()
     }
 }
 rootProject.name = "Socatra Excutive Chain"

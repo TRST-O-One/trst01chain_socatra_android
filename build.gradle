@@ -1,32 +1,13 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
-//plugins {
-//    id 'com.android.application' version '8.1.0' apply false
-//    id 'com.android.library' version '8.1.0' apply false
-//    //Map
-//    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin' version '2.0.1' apply false
-//    id 'com.google.gms.google-services' version '4.3.14' apply true
-//    id 'org.jetbrains.kotlin.android' version '1.9.0' apply false // Add Kotlin plugin
-//
-//
-//}
-//
-//task clean(type: Delete) {
-//    delete rootProject.buildDir
-//}
 buildscript {
     ext.kotlin_version = "1.9.0"
     repositories {
         google()
         mavenCentral()
-//        maven {
-//            url  "https://phonepe.mycloudrepo.io/public/repositories/phonepe-intentsdk-android"
-//        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:8.9.1"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.gms:google-services:4.3.14'
-        //c//lasspath 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin:2.0.1'
     }
 }
 

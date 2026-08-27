@@ -64,16 +64,11 @@ public class LabourSurveyActivity extends BaseActivity implements HasSupportFrag
 
     TextView txtSave;
 
-    String pltPos = "0";
-
-    int pltId = 0;
-
     String strPlantCode = "Select plot";
 
     ImageView imgBack;
 
     List<String> plotListCode = new ArrayList<>();
-    List<String> plotListIds = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +76,6 @@ public class LabourSurveyActivity extends BaseActivity implements HasSupportFrag
         setContentView(R.layout.activity_labour_survey);
 
         farmerCode = getIntent().getStringExtra("mFarmerCode");
-//        getAreaValue();
-        Log.e(TAG, farmerCode);
 
         initializeUI();
         configureDagger();
@@ -179,23 +172,16 @@ public class LabourSurveyActivity extends BaseActivity implements HasSupportFrag
         spPlot.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Plantation plantation= (Plantation) parent.getItemAtPosition(position);
-//                pltId=plantation.getId();
-//                strPlantCode=plantation.getPlotCode();
                 strPlantCode = plotListCode.get(position);
-                //Log.e("lbsa",String.valueOf(pltId));
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                //pltId=0;
-                // Log.e("lbsa",String.valueOf(pltId));
             }
         });
 
         //Save btn
         txtSave.setOnClickListener(v -> {
-
             if (strPlantCode.equals("Select plot")) {
                 Toast.makeText(this, "Please select plot!!", Toast.LENGTH_SHORT).show();
             } else if (TextUtils.isEmpty(etNoOfFieldWorker.getText().toString().trim())) {
@@ -276,12 +262,6 @@ public class LabourSurveyActivity extends BaseActivity implements HasSupportFrag
                         } else {
                             Log.e(TAG, "no data");
                             Toast.makeText(LabourSurveyActivity.this, "no plot data exist", Toast.LENGTH_SHORT).show();
-//                            List<Plantation> emptyList=new ArrayList<>();
-//                            ArrayAdapter<Plantation> dataAdapterCont1 = new ArrayAdapter<>(LabourSurveyActivity.this,
-//                                    android.R.layout.simple_spinner_item, emptyList);
-//                            dataAdapterCont1.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//                            spPlot.setAdapter(dataAdapterCont1);
-//                            dataAdapterCont1.notifyDataSetChanged();
                         }
                     }
                 };

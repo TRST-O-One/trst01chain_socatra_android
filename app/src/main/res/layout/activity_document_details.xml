@@ -305,9 +305,9 @@
                     android:layout_marginStart="@dimen/_3sdp"
                     android:layout_weight="1"
                     android:background="@drawable/rectangular_box"
+                    android:drawableEnd="@drawable/baseline_file_upload"
                     android:fontFamily="@font/montserrat_regular"
                     android:paddingStart="@dimen/_6ssp"
-                    android:drawableEnd="@drawable/baseline_file_upload"
                     android:textColor="@color/enabled_color"
                     android:textCursorDrawable="@null"
                     android:textSize="@dimen/_12ssp"
@@ -650,16 +650,6 @@
                                 android:text="@string/consent_sign"
                                 android:textSize="@dimen/_12sdp" />
 
-                            <!--<com.github.gcacace.signaturepad.views.SignaturePad
-                                android:id="@+id/signaturePad"
-                                android:layout_width="match_parent"
-                                android:layout_height="150dp"
-                                android:layout_marginLeft="@dimen/_8sdp"
-                                android:layout_marginRight="@dimen/_8sdp"
-                                android:background="#dfdfdfdf"
-                                android:visibility="visible"
-                                app:penColor="@android:color/black" />-->
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -667,21 +657,6 @@
                                 android:layout_marginBottom="10dp"
                                 android:orientation="horizontal"
                                 android:weightSum="2">
-
-                                <!-- <TextView
-                                     android:id="@+id/txtClearSign"
-                                     android:layout_width="match_parent"
-                                     android:layout_height="50dp"
-                                     android:layout_marginLeft="@dimen/_8sdp"
-                                     android:layout_marginRight="@dimen/_4sdp"
-                                     android:layout_weight="1"
-                                     android:background="@drawable/btn_bg_corner_orange"
-                                     android:fontFamily="@font/montserrat_medium"
-                                     android:gravity="center"
-                                     android:text="@string/clear"
-                                     android:textAllCaps="false"
-                                     android:textColor="#FFFFFF"
-                                     android:textSize="@dimen/_12ssp" />-->
 
                                 <TextView
                                     android:id="@+id/txtSavePreview"

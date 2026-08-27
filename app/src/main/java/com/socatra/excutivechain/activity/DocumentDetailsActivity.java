@@ -109,7 +109,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
     TextView txtIdTypeName;
     TextView docphoto1;
 
-
     ImageView imgBack, imgDocUpload;
 
     TextView txtFarmerCode, txtSave;
@@ -181,8 +180,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
     TextView signConsent, bodyConsent, headingConsent, txtSavePreview;//txtClearSign
 
-//    SignaturePad signaturePad;
-
     Bitmap bitmapSign = null;
 
     int count = 0;
@@ -231,27 +228,18 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         public void onLocationResult(@NonNull LocationResult locationResult) {
             super.onLocationResult(locationResult);
 
-            if (locationResult != null) {
+            //initialise latlang
+            crLatTxt = String.valueOf(locationResult.getLocations().get(0).getLatitude());
+            crLongTxt = String.valueOf(locationResult.getLocations().get(0).getLongitude());
 
-                //initialise latlang
-                LatLng latLng = new LatLng(locationResult.getLocations().get(0).getLatitude(), locationResult.getLocations().get(0).getLongitude());
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    stopLocationUpdate();
+                    Log.e("AccLatLongStop", "stop for loc");
+                }
+            }, 1 * 200);
 
-                crLatTxt = String.valueOf(locationResult.getLocations().get(0).getLatitude());
-                crLongTxt = String.valueOf(locationResult.getLocations().get(0).getLongitude());
-                Log.e("AccLatLong", crLatTxt + "," + crLongTxt);
-
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        stopLocationUpdate();
-                        Log.e("AccLatLongStop", "stop for loc");
-                    }
-                }, 1 * 200);
-
-
-            } else {
-                Log.e("AccLatLong", "Loc Null");
-            }
 
         }
     };
@@ -295,7 +283,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             villageNameHd.setText(hdVillageName);
             districtHd.setText(hdDistrict);
             stateHd.setText(hdState);
-//            txtClearSign.setText(hdClear);
             txtSavePreview.setText(hdPrevSave);
         } else {
             txtHdPdf.setText(getLanguageFromLocalDb(selectedLanguage, hdpdf) + "/" + hdpdf);
@@ -314,7 +301,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             villageNameHd.setText(getLanguageFromLocalDb(selectedLanguage, hdVillageName) + "/" + hdVillageName);
             districtHd.setText(getLanguageFromLocalDb(selectedLanguage, hdDistrict) + "/" + hdDistrict);
             stateHd.setText(getLanguageFromLocalDb(selectedLanguage, hdState) + "/" + hdState);
-//            txtClearSign.setText(getLanguageFromLocalDb(selectedLanguage, hdClear) + "/" + hdClear);
             txtSavePreview.setText(getLanguageFromLocalDb(selectedLanguage, hdPrevSave) + "/" + hdPrevSave);
         }
 
@@ -334,7 +320,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         txtUploadPdf=findViewById(R.id.txt_pdf_uri);
         txtHdPdf=findViewById(R.id.txt_head_pdf_upload);
         uploadPdfLL=findViewById(R.id.uploadPdfLL);
-//        signaturePad = findViewById(R.id.signaturePad);
         //label
         docphoto1 = findViewById(R.id.docphoto1);
 
@@ -347,7 +332,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         headingConsent = findViewById(R.id.headingConsent);
         bodyConsent = findViewById(R.id.bodyConsent);
         signConsent = findViewById(R.id.signConsent);
-//        txtClearSign = findViewById(R.id.txtClearSign);
 
         etNameConsent = findViewById(R.id.etNameConsent);
         etVillageConsent = findViewById(R.id.etVillageConsent);
@@ -367,28 +351,7 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         villageNameHd = findViewById(R.id.villageNameHd);
         districtHd = findViewById(R.id.districtHd);
         stateHd = findViewById(R.id.stateHd);
-
-
     }
-
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        if (bitmapSign==null){
-//            signaturePad.clear();
-//            bitmapSign=null;
-//        }
-//    }
-//
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        if (bitmapSign==null){
-//            signaturePad.clear();
-//            bitmapSign=null;
-//        }
-//
-//    }
 
     private void initializeValues() {
 
@@ -407,8 +370,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                 Toast.makeText(this, "Already added!!", Toast.LENGTH_SHORT).show();
             }
         });
-        //Todo Pdf view Visibility
-//        uploadPdfLL.setVisibility(View.GONE);
 
 
         txtSavePreview.setOnClickListener(v -> {
@@ -429,7 +390,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         spDocType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                strFarmerGender = parent.getItemAtPosition(position).toString().trim();
                 if (position == 0) {
                     strDocType = "0";
                 } else {
@@ -458,16 +418,13 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             if (strDocumentImageLocalImagePath.length()<10){
                 if (imageTaken == 0) {
                     checkSettingsAndStartLocationUpdates();
-//                openCameraPermission(true,0);
                     pickImageDialog(0);
                 } else if (imageTaken == 1) {
                     previewImageDialog(strDocumentImageLocalImagePath);
-//                Log.e(TAG, "for preview");
                 }
             } else {
                 if (imageTaken == 1) {
                     previewImageDialog(strDocumentImageLocalImagePath);
-//                Log.e(TAG, "for preview");
                 }
                 Toast.makeText(this, "Already added!!", Toast.LENGTH_SHORT).show();
             }
@@ -552,8 +509,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         }
 
         //Todo SignaturePad
-//        bitmapSign=Bitmap.createBitmap(100,100,Bitmap.Config.ARGB_8888);
-
         signaturePad.setOnSignedListener(new SignaturePad.OnSignedListener() {
 
             @Override
@@ -563,24 +518,7 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
             @Override
             public void onSigned() {
-                //Event triggered when the pad is signed
-//                bitmapSign = signaturePad.getTransparentSignatureBitmap();
-//                    Bitmap bitmapSign=null;
-//                    if (bitmapSign != null) {
-//                        bitmapSign.recycle(); // Release the previous bitmap if it exists
-//                    }
-
                 bitmapSign = signaturePad.getTransparentSignatureBitmap();
-//                    signState=1;
-
-//                    Bitmap newBitmapSign = signaturePad.getTransparentSignatureBitmap();
-//                    if (newBitmapSign != null && newBitmapSign.getWidth() > 0 && newBitmapSign.getHeight() > 0) {
-//                        if (bitmapSign != null) {
-//                            bitmapSign.recycle(); // Release the previous bitmap if it exists
-//                        }
-//                        bitmapSign = newBitmapSign;
-//                        // Your other code here
-//                    }
 
             }
 
@@ -594,12 +532,10 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
         txtClearSignS.setOnClickListener(v -> {
             signaturePad.clear();
-//                bitmapSign = null;
         });
 
         savePreviewDiaS.setOnClickListener(v -> {
             if (bitmapSign != null) {
-//                openDialogPreview(headingConsent.getText().toString(),bodyConsent.getText().toString(),signConsent.getText().toString(),bitmapSign);
                 openDialogPreview(s1, s2, s3, bitmapSign);
                 dialogSign.dismiss();
             } else {
@@ -611,8 +547,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             dialogSign.dismiss();
         });
 
-
-
         dialogSign.show();
     }
 
@@ -621,20 +555,17 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             docphoto1.setVisibility(View.GONE);
             radioGroup.setVisibility(View.VISIBLE);
 
-            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(RadioGroup group, int checkedId) {
-                    RadioButton selectedRadioButton = findViewById(checkedId);
-                    if (selectedRadioButton != null) {
-                        if (selectedRadioButton == r1) {
-                            imgDocUpload.setVisibility(View.VISIBLE);
-                            formLayout.setVisibility(View.GONE);
-                        } else {
+            radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+                RadioButton selectedRadioButton = findViewById(checkedId);
+                if (selectedRadioButton != null) {
+                    if (selectedRadioButton == r1) {
+                        imgDocUpload.setVisibility(View.VISIBLE);
+                        formLayout.setVisibility(View.GONE);
+                    } else {
 
-                            imgDocUpload.setVisibility(View.GONE);
-                            formLayout.setVisibility(View.VISIBLE);
+                        imgDocUpload.setVisibility(View.GONE);
+                        formLayout.setVisibility(View.VISIBLE);
 
-                        }
                     }
                 }
             });
@@ -656,13 +587,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
         TextView backPreview = imagePreviewDialog.findViewById(R.id.backPreview);
         ImageView imagePreview = imagePreviewDialog.findViewById(R.id.imagePreview);
-
-        Log.e(TAG, "preview Img str:" + stImg);
-
-//        Picasso.get()
-//                .load(stImg)
-//                .error(R.drawable.baseline_broken_image_24)
-//                .into(imagePreview);
 
         Glide.with(this).load(stImg)
                 .error(R.drawable.baseline_broken_image_24)
@@ -740,10 +664,7 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                     REQUEST_CAM_PERMISSIONS
             );
         } else {
-
             firstDispatchTakePictureIntent(CAMERA_REQUEST, land);
-
-
         }
     }
 
@@ -771,10 +692,7 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                         f = null;
                         strDocumentImageLocalImagePath = null;
                     }
-                } else {
-
                 }
-
                 break;
 
             default:
@@ -825,16 +743,12 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
             case CAMERA_REQUEST:
                 if (resultCode == RESULT_OK) {
                     try {
-//                        imgDocUpload.setClickable(false);
                         pickHandle1 = 1;
                         imageTaken = 1;
                         handleBigCameraPhoto();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-//                    strImageOnePath = null;
-//                    strImageOnePath = null;
                 }
                 break;
 
@@ -842,13 +756,8 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                 if (resultCode == RESULT_OK) {
                     try {
                         if (testPictureCount == 0) {//for strWaterCycleLocalPath
-//                            imgFarmer.setClickable(false);
                             imageTaken = 1;
                             Uri uri = data.getData();
-//                            String realUriSt = getRealPathFromUri(uri);
-//                            strFarmerImageLocalImagePath = realUriSt;//String.valueOf(uri);
-//                            strFarmerRUri=realUriSt;
-//                            handleBigCameraPhoto();
                             File IMAGE_COPY_PATH = createImageFileFirst();
                             try {
                                 InputStream inputStream = getContentResolver().openInputStream(uri);//Uri.parse(realUriSt)
@@ -861,8 +770,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -875,12 +782,8 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                     try {
                         Uri uri=data.getData();
                         txtUploadPdf.setText(uri.toString());
-                        Log.e(TAG,"uriPdf:"+uri.toString());
-//                        strDocumentImageLocalImagePath=appHelper.convertUriToFile(this,uri);
                         File f=appHelper.convertUriToFile1(this,uri);
                         strDocumentImageLocalImagePath=f.getAbsolutePath();//uri.toString();//todo pdf //uri.getPath()
-//                        getAcPath(uri.getPath());
-                        Log.e(TAG,"uriPdfPath:"+strDocumentImageLocalImagePath);
                     } catch (Exception e){
                         e.printStackTrace();
                     }
@@ -888,77 +791,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                 break;
 
         } // switch need to add
-    }
-
-    private String getFilePathFromContentUri(Uri contentUri) {
-        String filePath = null;
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(contentUri, projection, null, null, null);
-        if (cursor != null) {
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                filePath = cursor.getString(columnIndex);
-            }
-            cursor.close();
-        }
-        return filePath;
-    }
-
-
-    public void getAcPath(String uri1){
-        String filePath = null;
-        Uri uri = Uri.parse(uri1); // Your content URI here
-
-        String[] projection = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-
-        if (cursor != null && cursor.moveToFirst()) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            filePath = cursor.getString(columnIndex);
-            cursor.close();
-        }
-
-        if (filePath != null) {
-            // Now, filePath contains the actual file path
-            // You can use it as needed
-            Log.e(TAG,"uriAcFun:"+filePath.toString());
-        }
-    }
-
-    public String getRealPathFromPdfUri(Uri uri) {
-        String[] projection = {MediaStore.Files.FileColumns.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-
-        if (cursor != null) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA);
-            cursor.moveToFirst();
-            String filePath = cursor.getString(columnIndex);
-            cursor.close();
-
-            if (filePath != null) {
-                return filePath; // If the cursor returned a valid file path, use it.
-            }
-        }
-
-        // If the cursor is null or the file path is not found, try a different method for PDF Uris.
-        if ("content".equalsIgnoreCase(uri.getScheme())) {
-            String path = null;
-            try (Cursor pdfCursor = getContentResolver().query(uri, projection, null, null, null)) {
-                if (pdfCursor != null) {
-                    int columnIndex = pdfCursor.getColumnIndexOrThrow(MediaStore.Files.FileColumns.DATA);
-                    pdfCursor.moveToFirst();
-                    path = pdfCursor.getString(columnIndex);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            if (path != null) {
-                return path; // If the PDF cursor returned a valid file path, use it.
-            }
-        }
-
-        return uri.getPath(); // If no valid file path is found, fall back to the original Uri path.
     }
 
     private void copyFile(InputStream inputStream, OutputStream outputStream) throws IOException {
@@ -974,17 +806,11 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         if (testPictureCount == 0) {
             if (strDocumentImageLocalImagePath != null) {
                 setPic();
-//                galleryAddPic();
             }
         }
     }
 
     private void setPic() throws Exception {
-
-        /* There isn't enough memory to open up more than a couple camera photos */
-        /* So pre-scale the target bitmap into which the file is decoded */
-
-        /* Get the size of the ImageView */
 
         if (testPictureCount == 0) {
             int targetW = imgDocUpload.getWidth();
@@ -1038,12 +864,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                     rotatedBitmap = bitmapDocument;
             }
 
-
-//            bitmapDocument =addDateAndLocationToImage(rotatedBitmap,crLatTxt,crLongTxt);
-//            saveNewImage(bitmapDocument, strDocumentImageLocalImagePath);
-//            imgDocUpload.setImageBitmap(bitmapDocument);
-//            imgDocUpload.invalidate();
-
             if (pickHandle1 == 1) {
                 bitmapDocument = addDateAndLocationToImage(rotatedBitmap, crLatTxt, crLongTxt);
                 saveNewImage(bitmapDocument, strDocumentImageLocalImagePath);
@@ -1057,20 +877,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                 imgDocUpload.invalidate();
                 testPictureCount = 1;//increment image
             }
-
-
-            /* Decode the JPEG file into a Bitmap */
-//        bitmapLand = BitmapFactory.decodeFile(strLandImagePath, bmOptions);
-//        getBytesFromBitmap(bitmapLand);
-//        bitmapLand = ImageUtility.rotatePicture(90, bitmapLand);
-//
-
-            /* There isn't enough memory to open up more than a couple camera photos */
-            /* So pre-scale the target bitmap into which the file is decoded */
-
-            /* Get the size of the ImageView */
-
-
         }
     }
 
@@ -1081,45 +887,12 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                 matrix, true);
     }
 
-    private void galleryAddPic() {
-        if (testPictureCount == 0) {
-            Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
-            File f;
-            f = new File(strFileExtension1);
-            Uri contentUri = Uri.fromFile(f);
-            mediaScanIntent.setData(contentUri);
-            sendBroadcast(mediaScanIntent);
-        }
-    }
-
     public byte[] getBytesFromBitmap(Bitmap bitmap) throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         bytes = stream.toByteArray();
         return stream.toByteArray();
     }
 
-
-    private void getLocationDetails() {
-        try {
-            BoundLocationManager.getInstance(DocumentDetailsActivity.this).observe(this, new Observer<Location>() {
-                @Override
-                public void onChanged(@Nullable Location location) {
-                    if (location != null) {
-
-                        crLatTxt = String.valueOf(location.getLatitude());
-                        crLongTxt = String.valueOf(location.getLongitude());
-
-                    } else {
-                        Toast.makeText(DocumentDetailsActivity.this, "Location is null", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
 
 
     public Bitmap addDateAndLocationToImage(Bitmap imageBitmap, String lat, String longi) {
@@ -1141,7 +914,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         String txtLongi = "Longitude: " + longitude;
 
         String txtDate = "Date: " + currentDate;
-//                + ", Longitude: " + longitude;
 
         String txtFarmer = "Farmer Code: " + farmerCode;
 
@@ -1161,10 +933,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         canvas.drawText(txtLongi, x2, y2, paint);
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
-
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
 
         return bitmapWithDateAndLocation;
     }
@@ -1188,7 +956,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         String txtLongi = "Longitude: " + longitude;
 
         String txtDate = "Date: " + currentDate;
-//                + ", Longitude: " + longitude;
 
         String txtFarmer = "Farmer Code: " + farmerCode;
 
@@ -1208,10 +975,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         canvas.drawText(txtLongi, x2, y2, paint);
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
-
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
 
         return bitmapWithDateAndLocation;
     }
@@ -1235,7 +998,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         String txtLongi = "Longitude: " + longitude;
 
         String txtDate = "Date: " + currentDate;
-//                + ", Longitude: " + longitude;
 
         String txtFarmer = "Farmer Code: " + farmerCode;
 
@@ -1255,10 +1017,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         canvas.drawText(txtLongi, x2, y2, paint);
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
-
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
 
         return bitmapWithDateAndLocation;
     }
@@ -1281,23 +1039,15 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
 
         Task<LocationSettingsResponse> locationSettingsResponseTask = settingsClient.checkLocationSettings(request);
-        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                startLocationUpdate();
-            }
-        });
+        locationSettingsResponseTask.addOnSuccessListener(locationSettingsResponse -> startLocationUpdate());
 
-        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                    try {
-                        resolvableApiException.startResolutionForResult(DocumentDetailsActivity.this, 2000001);
-                    } catch (IntentSender.SendIntentException ex) {
-                        throw new RuntimeException(ex);
-                    }
+        locationSettingsResponseTask.addOnFailureListener(e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                try {
+                    resolvableApiException.startResolutionForResult(DocumentDetailsActivity.this, 2000001);
+                } catch (IntentSender.SendIntentException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });
@@ -1305,13 +1055,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
     private void startLocationUpdate() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
             return;
         }
         client.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
@@ -1379,8 +1122,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         stConsentSign = getResources().getString(R.string.consent_sign);
 
         if (selectedLang == null || selectedLang.equals("English")) {
-//            Log.e(TAG,"langUpd "+selectedLang);
-
             headingConsent.setText(stConsentHead);
 
             if (count == 0) {
@@ -1400,14 +1141,10 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
             signConsent.setText(stConsentSign);
         } else {
-
-//            Log.e(TAG,"langUpdOt"+selectedLang);
             headingConsent.setText(getLanguageFromLocalDb(selectedLang, stConsentHead));
 
             String temp = getLanguageFromLocalDb(selectedLang, stConsentBody);
-//            Log.e(TAG,"textHindi"+"temp:"+temp);
             String filledText = String.format(temp, stFarmerName, stVillage, stDistrict, stProvince);
-//            Log.e(TAG,"textHindi"+filledText);
             bodyConsent.setText(filledText);
 
             signConsent.setText(getLanguageFromLocalDb(selectedLang, stConsentSign));
@@ -1421,8 +1158,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
     }
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {
-//        Log.e(TAG,"wordRec"+stLanguage+"::"+stWord);
-
         try {
             if (viewModel.getLanguageDataVM(stLanguage, stWord) != null) {
                 return viewModel.getLanguageDataVM(stLanguage, stWord);
@@ -1450,7 +1185,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                         if (villageTable != null) {
 
                             stVillage = villageTable.getName().toString();
-//                            Log.e(TAG, "vSubid" + villageTable.getSubDistrictId());
                             etVillageConsent.setText(stVillage);
                             getDisIDFromSubDistricIdFromLocalDb(villageTable.getSubDistrictId().toString());
 
@@ -1474,9 +1208,7 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                     public void onChanged(@Nullable Object o) {
                         SubDistrict subDistrict = (SubDistrict) o;
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
-//                        Log.e(TAG, "onChanged: data" + subDistrict);
                         if (subDistrict != null) {
-//                            Log.e(TAG, "vSubid" + subDistrict.getSubDistrictId());
                             getDistrictTableFromLocalDb(subDistrict.getDistrictId());
                         }
                     }
@@ -1500,7 +1232,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
                         viewModel.getDissIdFromVillageTableLiveData().removeObserver(this);
                         if (districtorRegency != null) {
                             stDistrict = districtorRegency.getName().trim();
-//                            Log.e(TAG, "sDistid" + stDistrict);
                             etDistrictConsent.setText(districtorRegency.getName());
                             getStateDetailsDistricTableFromLocalDb(districtorRegency.getStateId());
                         }
@@ -1526,7 +1257,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
                         if (stateorProvince != null) {
                             stProvince = stateorProvince.getName();
-//                            Log.e(TAG, "dStateId" + stProvince);
                             etProvinceConsent.setText(stateorProvince.getName());
                         }
                     }
@@ -1547,8 +1277,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         dialog.setCanceledOnTouchOutside(false);
         dialog.setCancelable(true);
 
-//        Log.e(TAG,"Dial data:"+stConsentHead1+" "+stConsentBody1+" "+stConsentSign1+" "+String.valueOf(bitmapSign1));
-
         LinearLayout previewLL = dialog.findViewById(R.id.previewConsentll);
 
         TextView headingConsentDia = dialog.findViewById(R.id.headingConsentDia);
@@ -1557,17 +1285,11 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
 
         TextView savePreviewDia = dialog.findViewById(R.id.savePreviewDia);
 
-//        TextView addDialogPrev = dialog.findViewById(R.id.addDialogPrev);
-
         ImageView imageViewPreview = dialog.findViewById(R.id.imageViewPreviewDia);
 
         headingConsentDia.setText(stConsentHead1);
         bodyConsentDia.setText("  " + stConsentBody1);
         signConsentDia.setText(stConsentSign1);
-
-//        addDialogPrev.setOnClickListener(v -> {
-//
-//        });
 
         Glide.with(this).load(bitmapSign1).into(imageViewPreview);
 
@@ -1611,7 +1333,6 @@ public class DocumentDetailsActivity extends BaseActivity implements HasSupportF
         formLayout.setVisibility(View.GONE);
         bitmapDocument = addDateAndLocationToImageConsent(bitmap, crLatTxt, crLongTxt);
         saveNewImage(bitmapDocument, strDocumentImageLocalImagePath);
-//        bitmapDocument=bitmap;
         imageTaken = 1;
         Glide.with(this).load(strDocumentImageLocalImagePath).into(imgDocUpload);
     }

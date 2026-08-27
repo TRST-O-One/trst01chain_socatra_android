@@ -26,14 +26,15 @@
                 android:layout_weight="0.3"
                 android:src="@drawable/back"
                 app:tint="@color/white" />
+
             <TextView
                 style="@style/CustomTextViewPadding5dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_10ssp"
                 android:layout_weight="0.7"
                 android:fontFamily="@font/montserrat_medium"
                 android:gravity="right"
-                android:layout_marginEnd="@dimen/_10ssp"
                 android:text="@string/map_preview"
                 android:textColor="@color/white"
                 android:textSize="@dimen/_14ssp"
@@ -92,8 +93,8 @@
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                tools:layout="@layout/map_placeholder"
-                tools:context=".activity.MapsActivity" />
+                tools:context=".activity.MapsActivity"
+                tools:layout="@layout/map_placeholder" />
 
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -145,11 +146,11 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvImport"
-                    android:layout_weight="1"
-                    android:layout_marginRight="2dp"
-                    android:layout_marginLeft="2dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30ssp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/Orange"
                     app:cardCornerRadius="8dp">
 
@@ -166,12 +167,12 @@
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cvSave"
-                    android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="2dp"
                     android:layout_height="@dimen/_30ssp"
                     android:layout_centerInParent="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/Orange"
                     android:visibility="visible"
                     app:cardCornerRadius="8dp">
@@ -186,9 +187,6 @@
                         android:textSize="@dimen/_12ssp" />
 
                 </androidx.cardview.widget.CardView>
-
-
-
 
 
                 <LinearLayout
@@ -302,6 +300,4 @@
 
     </ScrollView>
 
-
-    <!--    xmlns:map="http://schemas.android.com/apk/res-auto"-->
 </RelativeLayout>

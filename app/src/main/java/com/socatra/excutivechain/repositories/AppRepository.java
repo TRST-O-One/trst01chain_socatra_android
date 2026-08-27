@@ -54,11 +54,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-//import okhttp3.ResponseBody;
-//import retrofit2.Call;
-//import retrofit2.Callback;
-//import retrofit2.Response;
-
 @Singleton
 public class AppRepository {
 
@@ -86,42 +81,13 @@ public class AppRepository {
 
                 if (appHelper.isNetworkAvailable()) { // TODO: Checking internet connection
                     AppWebService.createService(AppAPI.class).getlogInService(userId)
-                            .enqueue(new Callback<LoginResponseDTO>() {
+                            .enqueue(new Callback<>() {
                                 @Override
                                 public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
-                                    Log.e("TAG", "Login LIST REFRESHED FROM NETWORK");
                                     executor.execute(() -> {
-//                                        LoginResponseDTO loginResponseDTOList = ;
-//                                        if (loginResponseDTOList != null && loginResponseDTOList.size() > 0) {
-//                                            // TODO: Delete & Insert Stage List
-//                                            for (LoginResponseDTO loginResponseDTO : loginResponseDTOList) {
-//
-//                                                // if (cropDetailsTable != null && !TextUtils.isEmpty(cropDetailsTable.getId())) {
-//                                                LoginResponseDTO loginResponseDTO1 = new LoginResponseDTO();
-//                                                Log.d("deviceId", loginResponseDTO.getData().get(0).getId().toString());
-//                                                loginResponseDTO1.getData().get(0).setId(loginResponseDTO.getData().get(0).getId());
-//                                                loginResponseDTO1.getData().get(0).setUserName(loginResponseDTO.getUserName());
-//                                                loginResponseDTO1.getData().get(0).setPassword(loginResponseDTO.getPassword());
-//                                                loginResponseDTO1.getData().get(0).setAccessToken(loginResponseDTO.getAccessToken());
-////                                                loginResponseDTO1.setDeviceUserID(loginResponseDTO.getDeviceUserID());
-////                                                loginResponseDTO1.setDeviceUserID(loginResponseDTO.getDeviceUserID());
-////
-//                                            }
-//
-//                                            // TODO: Sending Final Result
-//                                            data.postValue(loginResponseDTOList);
-//                                        } else {
-//                                            // TODO: Sending Final Result
-//                                            LoginResponseDTO emptyStageList = new LoginResponseDTO();
-//                                            data.postValue(emptyStageList);
-//                                        }
-//                                        List<Datum> datumList=new ArrayList<>();
-                                        if (response.body() != null){
-//                                            datumList.add(loginResponseDTOList.getData().get(0));
+                                        if (response.body() != null) {
                                             data.postValue(response.body());
                                         }
-
-
                                     });
                                 }
 
@@ -132,7 +98,6 @@ public class AppRepository {
                                             // TODO: Sending Final Result
                                             LoginResponseDTO emptyStageList = new LoginResponseDTO();
                                             data.postValue(emptyStageList);
-
                                         });
 
                                     } catch (Exception ex) {
@@ -140,7 +105,6 @@ public class AppRepository {
                                     }
                                 }
                             });
-
                 }
             });
         } catch (Exception ex) {
@@ -173,7 +137,6 @@ public class AppRepository {
     public LiveData<RefreshTableDateCheck> getAddRefreshTableDateCheckTableDate(String deviceID, String currentDate) {
         final MutableLiveData<RefreshTableDateCheck> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "deviceID" + deviceID + "date" + currentDate);
             data.postValue(appDAO.getRefreshTableDateCheckDetailsFromLocalDB(deviceID, currentDate));
 
         });
@@ -233,9 +196,7 @@ public class AppRepository {
     public LiveData<VillageTable> insertVillageListDataIntoLocalDBRepository(VillageTable villageTable) {
         final MutableLiveData<VillageTable> data = new MutableLiveData<>();
         executor.execute(() -> {
-            // FarmerDetailListTable topFarmerDetailListTableTableData = appDAO.getTopFarmerDetailListTableTableData(farmerDetailListTable.getFirstName(), farmerDetailListTable.getFarmerCode());
             appDAO.insertMasterSyncvillageListIntoLocalDB(villageTable);
-            //data.postValue(appDAO.getTopMasterSyncVillageTablDataLocalDBQuery(villageTable.getCode()));
         });
         return data;
     }
@@ -244,9 +205,7 @@ public class AppRepository {
     public LiveData<RiskAssessmentQuestion> insertRiskAssessmentQuestionListDataIntoLocalDBRepository(RiskAssessmentQuestion riskAssessmentQuestion) {
         final MutableLiveData<RiskAssessmentQuestion> data = new MutableLiveData<>();
         executor.execute(() -> {
-            // FarmerDetailListTable topFarmerDetailListTableTableData = appDAO.getTopFarmerDetailListTableTableData(farmerDetailListTable.getFirstName(), farmerDetailListTable.getFarmerCode());
             appDAO.insertMasterSyncRiskAssessmentQuestionListIntoLocalDB(riskAssessmentQuestion);
-            //data.postValue(appDAO.getTopMasterSyncVillageTablDataLocalDBQuery(villageTable.getCode()));
         });
         return data;
     }
@@ -255,9 +214,7 @@ public class AppRepository {
     public LiveData<ManufacturerMaster> insertManufacturerMasterDataIntoLocalDBRepository(ManufacturerMaster manufacturerMaster) {
         final MutableLiveData<ManufacturerMaster> data = new MutableLiveData<>();
         executor.execute(() -> {
-            // FarmerDetailListTable topFarmerDetailListTableTableData = appDAO.getTopFarmerDetailListTableTableData(farmerDetailListTable.getFirstName(), farmerDetailListTable.getFarmerCode());
             appDAO.insertMasterSyncManufacturerMasterListIntoLocalDB(manufacturerMaster);
-            //data.postValue(appDAO.getTopMasterSyncVillageTablDataLocalDBQuery(villageTable.getCode()));
         });
         return data;
     }
@@ -266,9 +223,7 @@ public class AppRepository {
     public LiveData<DealerMaster> insertDealerMasterDataIntoLocalDBRepository(DealerMaster dealerMaster) {
         final MutableLiveData<DealerMaster> data = new MutableLiveData<>();
         executor.execute(() -> {
-            // FarmerDetailListTable topFarmerDetailListTableTableData = appDAO.getTopFarmerDetailListTableTableData(farmerDetailListTable.getFirstName(), farmerDetailListTable.getFarmerCode());
             appDAO.insertMasterSyncDealerMasterListIntoLocalDB(dealerMaster);
-            //data.postValue(appDAO.getTopMasterSyncVillageTablDataLocalDBQuery(villageTable.getCode()));
         });
         return data;
     }
@@ -290,7 +245,6 @@ public class AppRepository {
         });
         return data;
     }
-
 
 
     public LiveData<FarmersTable> insertFarmerDetailListTableTable(FarmersTable farmerTable) {
@@ -321,22 +275,7 @@ public class AppRepository {
         return data;
     }
 
-    //App Language
-    public LiveData<String> getLanguageDataRepository(String stLang,String stWord) {
-        final MutableLiveData<String > data = new MutableLiveData<>();
-        executor.execute(() -> {
-            // TODO: Sending result
-            data.postValue(appDAO.getLanguageData(stLang,stWord));
-        });
-        return data;
-    }
-
     public String getLanguageDataRepo(String stLang, String stWord) {
-//        String data;
-//        executor.execute(() -> {
-//            // TODO: Sending result
-//            data=appDAO.getLanguageData(stLang,stWord);
-//        });
         return appDAO.getLanguageData(stLang, stWord);
     }
 
@@ -370,6 +309,7 @@ public class AppRepository {
         });
         return data;
     }
+
     public LiveData<Country> getCountryDetailsByIdFromLocalDb(Integer countryId) {
         final MutableLiveData<Country> data = new MutableLiveData<>();
         executor.execute(() -> {
@@ -378,6 +318,7 @@ public class AppRepository {
         });
         return data;
     }
+
     //Plantation
     public LiveData<Plantation> insertPlantationDetailListTableTable(Plantation plantation) {
         final MutableLiveData<Plantation> data = new MutableLiveData<>();
@@ -413,7 +354,6 @@ public class AppRepository {
         final MutableLiveData<PlantationLabourSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertPlantationLabourSurveyListTableLocalDB(plantationLabourSurvey);
-//            data.postValue(appDAO.getInsertPlantGeoDetailListTableData(plantationLabourSurvey.getFarmerCode()));
         });
         return data;
     }
@@ -423,7 +363,6 @@ public class AppRepository {
         final MutableLiveData<FarmerHouseholdParentSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertFarmerHouseholdParentSurveyListTableLocalDB(farmerHouseholdParentSurvey);
-//            data.postValue(appDAO.getInsertPlantGeoDetailListTableData(farmerHouseholdParentSurvey.getFarmerCode()));
         });
         return data;
     }
@@ -433,7 +372,6 @@ public class AppRepository {
         final MutableLiveData<FarmerHouseholdChildrenSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertFarmerHouseholdChildrenSurveyListTableLocalDB(farmerHouseholdChildrenSurvey);
-//            data.postValue(appDAO.getInsertPlantGeoDetailListTableData(farmerHouseholdParentSurvey.getFarmerCode()));
         });
         return data;
     }
@@ -451,19 +389,6 @@ public class AppRepository {
         final MutableLiveData<PlantationDocuments> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertDocDetailListTable(docIdentiFicationDeatilsTable);
-
-//            FarmerDetailListTable topFarmerDetailListTableTableData = appDAO.getTopFarmerDetailListTableTableData(farmerDetailListTable.getFirstName(), farmerDetailListTable.getFarmerCode());
-//            if (topFarmerDetailListTableTableData != null) {
-//                topFarmerDetailListTableTableData.setFarmerId(farmerDetailListTable.getFarmerId());
-//                appDAO.insertFarmerDetailListTable(farmerDetailListTable);
-//            } else {
-//
-//            }
-//            CurrentVisitFarmerTables currentVisitFarmerTables = appDAO.getTopCurrentVisitFarmerTablesData( appHelper.getSharedPrefObj().getString(DeviceUserID, ""));
-//            if (currentVisitFarmerTables != null) {
-//                currentVisitFarmerTables.setDocumentsVisit(false);
-//                appDAO.insertCurrentVisitFarmerTable(currentVisitFarmerTables);
-//            }
             // TODO: Sending result
             data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
@@ -476,7 +401,6 @@ public class AppRepository {
         final MutableLiveData<PlantationLabourSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertPlantationLabourSurveyDetailListTable(plantationLabourSurvey);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -509,7 +433,6 @@ public class AppRepository {
     public LiveData<List<VillageTable>> getVillageTableDetailsFromLocalDbByPincode(String pincode) {
         final MutableLiveData<List<VillageTable>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "pincode" + pincode);
             boolean dataExist = (appDAO.getVillageDetailsFromLocalDbBySubDist(pincode) != null);
             if (dataExist) {
                 data.postValue(appDAO.getVillageDetailsFromLocalDbBySubDist(pincode));
@@ -517,7 +440,6 @@ public class AppRepository {
         });
         return data;
     }
-
 
 
     public LiveData<List<VillageTable>> getAllVillageTableDetailsFromLocalDbByPincode() {
@@ -535,7 +457,6 @@ public class AppRepository {
     public LiveData<List<SubDistrict>> getSubDistrictTableDetailsFromLocalDbById(String id) {
         final MutableLiveData<List<SubDistrict>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "SubDistrictId" + id);
             boolean dataExist = (appDAO.getSubDistrictDetailsFromLocalDbByDistrictId(id) != null);
             if (dataExist) {
                 data.postValue(appDAO.getSubDistrictDetailsFromLocalDbByDistrictId(id));
@@ -548,7 +469,6 @@ public class AppRepository {
     public LiveData<List<DistrictorRegency>> getDistrictTableDetailsFromLocalDbById(int id) {
         final MutableLiveData<List<DistrictorRegency>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "DistrictId" + id);
             boolean dataExist = (appDAO.getDistrictDetailsFromLocalDbByStateId(id) != null);
             if (dataExist) {
                 data.postValue(appDAO.getDistrictDetailsFromLocalDbByStateId(id));
@@ -561,7 +481,6 @@ public class AppRepository {
     public LiveData<List<StateorProvince>> getStateTableDetailsFromLocalDbById(int id) {
         final MutableLiveData<List<StateorProvince>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "State" + id);
             boolean dataExist = (appDAO.getStateDetailsFromLocalDbByCountryId(id) != null);
             if (dataExist) {
                 data.postValue(appDAO.getStateDetailsFromLocalDbByCountryId(id));
@@ -624,7 +543,6 @@ public class AppRepository {
     public LiveData<List<VillageTable>> getVillageTableDetailsFromLocalDbById(String id) {
         final MutableLiveData<List<VillageTable>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "Id" + id);
             boolean dataExist = (appDAO.getVillageDetailsFromLocalDbById(id) != null);
             if (dataExist) {
                 data.postValue(appDAO.getVillageDetailsFromLocalDbById(id));
@@ -637,7 +555,6 @@ public class AppRepository {
     public LiveData<List<Plantation>> getPlantationDetailsFromLocalDbById(String strFarmercode) {
         final MutableLiveData<List<Plantation>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + strFarmercode);
             boolean dataExist = (appDAO.getPlantationDetailsFromLocalDbById(strFarmercode) != null);
             if (dataExist) {
                 data.postValue(appDAO.getPlantationDetailsFromLocalDbById(strFarmercode));
@@ -650,7 +567,6 @@ public class AppRepository {
     public LiveData<List<Plantation>> getPlantationGeoDetailsStatusFromLocalDbByFId(String strFarmercode) {
         final MutableLiveData<List<Plantation>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + strFarmercode);
             boolean dataExist = (appDAO.getPlantationGeoDetailsStatusFromLocalDbByFId(strFarmercode) != null);
             if (dataExist) {
                 data.postValue(appDAO.getPlantationGeoDetailsStatusFromLocalDbByFId(strFarmercode));
@@ -664,7 +580,6 @@ public class AppRepository {
     public LiveData<List<PlantationLabourSurvey>> getPlantationLabourSurveyDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<PlantationLabourSurvey>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getPlantationLabourSurveyDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getPlantationLabourSurveyDetailsFromLocalDbById(fid));
@@ -677,7 +592,6 @@ public class AppRepository {
     public LiveData<List<Plantation>> getPlantationDetailsFromLocalDbBymId(String fid) {
         final MutableLiveData<List<Plantation>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getPlantationDetailsFromLocalDbBymId(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getPlantationDetailsFromLocalDbBymId(fid));
@@ -687,13 +601,12 @@ public class AppRepository {
     }
 
     //
-    public LiveData<List<Plantation>> getPlantationDetailsFromLocalDbByIdAndStatus(String fcode,String lStat) {
+    public LiveData<List<Plantation>> getPlantationDetailsFromLocalDbByIdAndStatus(String fcode, String lStat) {
         final MutableLiveData<List<Plantation>> data = new MutableLiveData<>();
         executor.execute(() -> {
-//            Log.d(TAG, "FId" + fid);
-            boolean dataExist = (appDAO.getPlantationDetailsFromLocalDbByIdAndStatus(fcode,lStat) != null);
+            boolean dataExist = (appDAO.getPlantationDetailsFromLocalDbByIdAndStatus(fcode, lStat) != null);
             if (dataExist) {
-                data.postValue(appDAO.getPlantationDetailsFromLocalDbByIdAndStatus(fcode,lStat));
+                data.postValue(appDAO.getPlantationDetailsFromLocalDbByIdAndStatus(fcode, lStat));
             }
         });
         return data;
@@ -855,7 +768,6 @@ public class AppRepository {
             }
 
 
-
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.Farmer> spNameFarmerPersonalDetailsClasses = new ArrayList<SyncPersonalLandAllDetailsRequestDTO.Farmer>();
             spNameFarmerPersonalDetailsClasses.add(spNameFarmerPersonalDetailsClass);
             syncPersonalLandAllDetailsRequestDTO.setFarmer(spNameFarmerPersonalDetailsClasses);
@@ -864,7 +776,7 @@ public class AppRepository {
             AppWebService.createService(AppAPI.class).syncFarmerDetailsDataToServer(syncPersonalLandAllDetailsRequestDTO,
 
                             appHelper.getSharedPrefObj().getString(accessToken, "")).
-                    enqueue(new Callback<ResponseBody>() {
+                    enqueue(new Callback<>() {
                         @Override
                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                             executor.execute(() -> {
@@ -895,8 +807,6 @@ public class AppRepository {
                                     ex.printStackTrace();
                                     data.postValue(FAILURE_RESPONSE_MESSAGE);
                                 }
-
-
                             });
                         }
 
@@ -948,7 +858,6 @@ public class AppRepository {
             }
 
             if (!TextUtils.isEmpty(String.valueOf(plantation.getGeoboundariesArea()))) {
-//                spNamePlantationDetailsClass.setGeoboundariesArea(String.valueOf(plantation.getGeoboundariesArea()));
                 String decimalForm = String.format("%.5f", plantation.getGeoboundariesArea());
                 decimalForm = decimalForm.replace(",", ".");
                 spNamePlantationDetailsClass.setGeoboundariesArea(decimalForm);
@@ -981,9 +890,9 @@ public class AppRepository {
             }
 
             if (!TextUtils.isEmpty(plantation.getLabourStatus())) {
-                if (plantation.getLabourStatus().trim().equals("false")){
+                if (plantation.getLabourStatus().trim().equals("false")) {
                     spNamePlantationDetailsClass.setLabourStatus(0);
-                } else if (plantation.getLabourStatus().trim().equals("true")){
+                } else if (plantation.getLabourStatus().trim().equals("true")) {
                     spNamePlantationDetailsClass.setLabourStatus(1);
                 }
             } else {
@@ -1020,7 +929,6 @@ public class AppRepository {
             } else {
                 spNamePlantationDetailsClass.setCreatedDate("");
             }
-
 
 
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.Plantation> spNameFarmerPersonalDetailsClasses = new ArrayList<SyncPersonalLandAllDetailsRequestDTO.Plantation>();
@@ -1093,12 +1001,6 @@ public class AppRepository {
             } else {
                 spNameFarmerPersonalDetailsClass.setFarmerCode("");
             }
-
-//            if (!TextUtils.isEmpty(String.valueOf(plantationLabourSurvey.getPlantationId()))) {
-//                spNameFarmerPersonalDetailsClass.setPlantationId(plantationLabourSurvey.getPlantationId());
-//            } else {
-//                spNameFarmerPersonalDetailsClass.setPlantationId(0);
-//            }
 
             if (!TextUtils.isEmpty(plantationLabourSurvey.getPlantationCode())) {
                 spNameFarmerPersonalDetailsClass.setPlantationCode(plantationLabourSurvey.getPlantationCode());
@@ -1174,7 +1076,6 @@ public class AppRepository {
             }
 
 
-
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.PlantationLabourSurvey> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
             spNameFarmerPersonalDetailsClasses.add(spNameFarmerPersonalDetailsClass);
             syncPersonalLandAllDetailsRequestDTO.setPlantationLabourSurvey(spNameFarmerPersonalDetailsClasses);
@@ -1246,19 +1147,19 @@ public class AppRepository {
 
 
     //Doc by fid
-    public LiveData<List<PlantationDocuments>> getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(String fid,String dty) {
+    public LiveData<List<PlantationDocuments>> getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(String fid, String dty) {
         final MutableLiveData<List<PlantationDocuments>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            boolean dataExist = (appDAO.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid,dty) != null);
+            boolean dataExist = (appDAO.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid, dty) != null);
             if (dataExist) {
-                data.postValue(appDAO.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid,dty));
+                data.postValue(appDAO.getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(fid, dty));
             }
         });
         return data;
     }
 
 
-//    Todo:Sync Plantation Doc
+    //    Todo:Sync Plantation Doc
     public LiveData<String> syncDocIdentificationDetailsDataToServer(PlantationDocuments docIdentiFicationDeatilsTable) {
         final MutableLiveData<String> data = new MutableLiveData<>();
         AppWebService.changeApiBaseUrl(RAW_DATA_URL);
@@ -1344,7 +1245,7 @@ public class AppRepository {
                 spNameLandDetailsClass.setCreatedDate("");
             }
 
-            if (!TextUtils.isEmpty(docIdentiFicationDeatilsTable.getFarmerCode())){
+            if (!TextUtils.isEmpty(docIdentiFicationDeatilsTable.getFarmerCode())) {
                 spNameLandDetailsClass.setFarmerCode(docIdentiFicationDeatilsTable.getFarmerCode());
             } else {
                 spNameLandDetailsClass.setFarmerCode("");
@@ -1374,7 +1275,7 @@ public class AppRepository {
                                     message = json_object.getString("messgae");
                                     status = json_object.getInt("status");
                                     Log.d(TAG, "status " + String.valueOf(status));
-                                    if (status==201) {
+                                    if (status == 201) {
                                         PlantationDocuments businessReviewSurveyTableFromDB = appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode());
                                         if (businessReviewSurveyTableFromDB != null) {
                                             businessReviewSurveyTableFromDB.setID(businessReviewSurveyTableFromDB.getID());
@@ -1383,7 +1284,7 @@ public class AppRepository {
                                             appDAO.insertDocDetailListTable(docIdentiFicationDeatilsTable);
                                         }
                                         data.postValue(SUCCESS_RESPONSE_MESSAGE);
-                                    } else if (status==500) {
+                                    } else if (status == 500) {
                                         data.postValue(message);
                                     }
 
@@ -1423,20 +1324,8 @@ public class AppRepository {
         return data;
     }
 
-    //PlantationGeoBoundaries
-    public LiveData<List<PlantationGeoBoundaries>> getGeoBoundariesTableListPlot(String plot) {
-        final MutableLiveData<List<PlantationGeoBoundaries>> data = new MutableLiveData<>();
-        executor.execute(() -> {
-            boolean dataExist = (appDAO.getGeoBoundariesTableTablePlot(plot) != null);
-            if (dataExist) {
-                data.postValue(appDAO.getGeoBoundariesTableTablePlot(plot));
-            }
-        });
-        return data;
-    }
-
     //Todo : Sync Plantation Geo Main
-    public LiveData<String> syncGeoBoundariesDetailsDataToServer(PlantationGeoBoundaries geoBoundariesTable,int index) {
+    public LiveData<String> syncGeoBoundariesDetailsDataToServer(PlantationGeoBoundaries geoBoundariesTable, int index) {
         final MutableLiveData<String> data = new MutableLiveData<>();
         AppWebService.changeApiBaseUrl(RAW_DATA_URL);
         executor.execute(() -> {
@@ -1456,8 +1345,7 @@ public class AppRepository {
             }
 
 
-            if (!TextUtils.isEmpty(String.valueOf(geoBoundariesTable.getLatitude())))
-            {
+            if (!TextUtils.isEmpty(String.valueOf(geoBoundariesTable.getLatitude()))) {
                 spNameGPSDetailsClass.setLatitude(geoBoundariesTable.getLatitude());
             } else {
                 spNameGPSDetailsClass.setLatitude(0.0);
@@ -1575,11 +1463,6 @@ public class AppRepository {
         return data;
     }
 
-    public void updateFarmerImage(String docUrl,String code) {
-        executor.execute(() -> {
-//            appDAO.updateFarmerImage(docUrl,code);
-        });
-    }
 
     //Get Farmer
     public LiveData<List<FarmersTable>> getFarmerDetailslistFromLocalDB() {
@@ -1597,7 +1480,6 @@ public class AppRepository {
     public LiveData<List<PlantationGeoBoundaries>> getPlantationGeoFromLocalDb(String plotCode) {
         final MutableLiveData<List<PlantationGeoBoundaries>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "plotCode" + plotCode);
             boolean dataExist = (appDAO.getPlantGeoFromLocalDbBySubDist(plotCode) != null);
             if (dataExist) {
                 data.postValue(appDAO.getPlantGeoFromLocalDbBySubDist(plotCode));
@@ -1607,33 +1489,31 @@ public class AppRepository {
     }
 
     //updatePlotDetailListTableSyncAndPlotArea1
-    public LiveData<Plantation> updatePlotDetailListTableSyncAndPlotArea1(boolean mSync,String sSync,double area,String pid){
+    public LiveData<Plantation> updatePlotDetailListTableSyncAndPlotArea1(boolean mSync, String sSync, double area, String pid) {
         final MutableLiveData<Plantation> data = new MutableLiveData<>();
 
-        executor.execute(()->{
-            appDAO.updatePlotDetailListTableSyncAndPlotArea1(mSync,sSync,area,pid);
-//            data.postValue();
+        executor.execute(() -> {
+            appDAO.updatePlotDetailListTableSyncAndPlotArea1(mSync, sSync, area, pid);
         });
 
         return data;
     }
 
-    public LiveData<FarmersTable> updateVillageIDForFarmerTable(String strAdd,String strVillageId,String strFarmerCode){
+    public LiveData<FarmersTable> updateVillageIDForFarmerTable(String strAdd, String strVillageId, String strFarmerCode) {
         final MutableLiveData<FarmersTable> data = new MutableLiveData<>();
 
-        executor.execute(()->{
-            appDAO.updateVillageIdFarmerTable(strAdd,strVillageId,strFarmerCode);
-//            data.postValue();
+        executor.execute(() -> {
+            appDAO.updateVillageIdFarmerTable(strAdd, strVillageId, strFarmerCode);
         });
         return data;
     }
+
     //updatePlotDetailListTableSyncAndPlotArea1
-    public LiveData<Plantation> updatePlatDetailListTableForLabStatus(String serSync,boolean sync,String labStatus,String upDate,String upId,String pid){
+    public LiveData<Plantation> updatePlatDetailListTableForLabStatus(String serSync, boolean sync, String labStatus, String upDate, String upId, String pid) {
         final MutableLiveData<Plantation> data = new MutableLiveData<>();
 
-        executor.execute(()->{
-            appDAO.updatePlatDetailListTableForLabStatus(serSync,sync,labStatus,upDate,upId,pid);
-//            data.postValue();
+        executor.execute(() -> {
+            appDAO.updatePlatDetailListTableForLabStatus(serSync, sync, labStatus, upDate, upId, pid);
         });
 
         return data;
@@ -1644,7 +1524,6 @@ public class AppRepository {
         final MutableLiveData<FarmerHouseholdParentSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertFarmerHouseholdParentSurveyDetailListTable(farmerHouseholdParentSurvey);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -1657,7 +1536,6 @@ public class AppRepository {
     public LiveData<List<FarmerHouseholdParentSurvey>> getFarmerHouseholdParentSurveyDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<FarmerHouseholdParentSurvey>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getFarmerHouseholdParentSurveyDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getFarmerHouseholdParentSurveyDetailsFromLocalDbById(fid));
@@ -1773,7 +1651,6 @@ public class AppRepository {
             }
 
 
-
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.FarmerHouseholdParentSurvey> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
             spNameFarmerPersonalDetailsClasses.add(spNameFarmerPersonalDetailsClass);
             syncPersonalLandAllDetailsRequestDTO.setFarmerHouseholdParentSurvey(spNameFarmerPersonalDetailsClasses);
@@ -1832,16 +1709,11 @@ public class AppRepository {
     }
 
 
-
-
-
-
     //FarmerHouseholdChildrenSurvey
     public LiveData<FarmerHouseholdChildrenSurvey> insertFarmerHouseholdChildrenSurveyIntoLocalDB(FarmerHouseholdChildrenSurvey farmerHouseholdChildrenSurvey) {
         final MutableLiveData<FarmerHouseholdChildrenSurvey> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertFarmerHouseholdChildrenSurveyDetailListTable(farmerHouseholdChildrenSurvey);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -1856,7 +1728,6 @@ public class AppRepository {
     public LiveData<List<FarmerHouseholdChildrenSurvey>> getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<FarmerHouseholdChildrenSurvey>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(fid));
@@ -1962,7 +1833,6 @@ public class AppRepository {
             }
 
 
-
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.FarmerHouseholdChildrenSurvey> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
             spNameFarmerPersonalDetailsClasses.add(spNameFarmerPersonalDetailsClass);
             syncPersonalLandAllDetailsRequestDTO.setFarmerHouseholdChildrenSurvey(spNameFarmerPersonalDetailsClasses);
@@ -2025,7 +1895,6 @@ public class AppRepository {
         final MutableLiveData<RiskAssessment> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertRiskAssessmentDetailListTable(riskAssessment);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -2100,7 +1969,6 @@ public class AppRepository {
             }
 
 
-
             if (!TextUtils.isEmpty(String.valueOf(riskAssessment.getIsActive()))) {
                 spNameFarmerPersonalDetailsClass.setIsActive(riskAssessment.getIsActive());
             } else {
@@ -2131,7 +1999,6 @@ public class AppRepository {
             } else {
                 spNameFarmerPersonalDetailsClass.setCreatedDate("");
             }
-
 
 
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.RiskAssessment> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
@@ -2195,7 +2062,6 @@ public class AppRepository {
     public LiveData<List<RiskAssessment>> getRiskAssessmentDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<RiskAssessment>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getRiskAssessmentDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getRiskAssessmentDetailsFromLocalDbById(fid));
@@ -2210,7 +2076,6 @@ public class AppRepository {
         final MutableLiveData<ManfacturerFarmer> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertManfacturerFarmerDetailListTable(manfacturerFarmer);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -2224,7 +2089,6 @@ public class AppRepository {
     public LiveData<List<ManfacturerFarmer>> getManfacturerFarmerDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<ManfacturerFarmer>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getManfacturerFarmerDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getManfacturerFarmerDetailsFromLocalDbById(fid));
@@ -2239,7 +2103,6 @@ public class AppRepository {
         final MutableLiveData<DealerFarmer> data = new MutableLiveData<>();
         executor.execute(() -> {
             appDAO.insertDealerFarmerDetailListTable(dealerFarmer);
-//            data.postValue(appDAO.getTopDocListTableDataFromLocal(docIdentiFicationDeatilsTable.getFarmerCode()));
         });
         return data;
     }
@@ -2253,7 +2116,6 @@ public class AppRepository {
     public LiveData<List<DealerFarmer>> getDealerFarmerDetailsFromLocalDbById(String fid) {
         final MutableLiveData<List<DealerFarmer>> data = new MutableLiveData<>();
         executor.execute(() -> {
-            Log.d(TAG, "FId" + fid);
             boolean dataExist = (appDAO.getDealerFarmerDetailsFromLocalDbById(fid) != null);
             if (dataExist) {
                 data.postValue(appDAO.getDealerFarmerDetailsFromLocalDbById(fid));
@@ -2313,7 +2175,6 @@ public class AppRepository {
             } else {
                 spNameFarmerPersonalDetailsClass.setCreatedDate("");
             }
-
 
 
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.ProcessorFarmer> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
@@ -2426,7 +2287,6 @@ public class AppRepository {
             }
 
 
-
             ArrayList<SyncPersonalLandAllDetailsRequestDTO.DealerFarmer> spNameFarmerPersonalDetailsClasses = new ArrayList<>();
             spNameFarmerPersonalDetailsClasses.add(spNameFarmerPersonalDetailsClass);
             syncPersonalLandAllDetailsRequestDTO.setDealerFarmer(spNameFarmerPersonalDetailsClasses);
@@ -2486,7 +2346,6 @@ public class AppRepository {
 
 
     public LiveData<Integer> getPlotsCountWhichAreNotSyncByFarmercode(String strFarmerCode) {
-    //    Log.d(TAG, "getFerlizerDataCount: " + logBookNum);
         return appDAO.getPlantationCountForFarmerBasedOnFarmerCode(strFarmerCode);
     }
 }

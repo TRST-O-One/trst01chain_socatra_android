@@ -69,8 +69,6 @@ public class ManufacturerActivity extends BaseActivity implements HasSupportFrag
         farmerCode = getIntent().getStringExtra("mFarmerCode");
         farmersTable = (FarmersTable) getIntent().getSerializableExtra("mFarmerObj");
 
-        Log.e(TAG, farmerCode);
-
         initializeUI();
         configureDagger();
         configureViewModel();

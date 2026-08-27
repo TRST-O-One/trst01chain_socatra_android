@@ -165,13 +165,11 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
     };
     public static final int REQUEST_CAM_PERMISSIONS = 1;//cam
     private static final int CAMERA_REQUEST = 1888;//cam
-//    private static final int SECOND_CAMERA_REQUEST = 1889;//cam
 
     static File f = null;//cam
 
     private String strFarmerImageLocalImagePath = "";
 
-    private String strFarmerRUri = "";
     private String strNationalIdLocalImagePath = "";
 
     String strFileExtension1 = null;//cam
@@ -229,27 +227,19 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         public void onLocationResult(@NonNull LocationResult locationResult) {
             super.onLocationResult(locationResult);
 
-            if (locationResult != null) {
+            //initialise latlang
 
-                //initialise latlang
-                LatLng latLng = new LatLng(locationResult.getLocations().get(0).getLatitude(), locationResult.getLocations().get(0).getLongitude());
+            crLatTxt = String.valueOf(locationResult.getLocations().get(0).getLatitude());
+            crLongTxt = String.valueOf(locationResult.getLocations().get(0).getLongitude());
 
-                crLatTxt = String.valueOf(locationResult.getLocations().get(0).getLatitude());
-                crLongTxt = String.valueOf(locationResult.getLocations().get(0).getLongitude());
-                Log.e("AccLatLong", crLatTxt + "," + crLongTxt);
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    stopLocationUpdate();
+                    Log.e("AccLatLongStop", "stop for loc");
+                }
+            }, 1 * 200);
 
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        stopLocationUpdate();
-                        Log.e("AccLatLongStop", "stop for loc");
-                    }
-                }, 1 * 200);
-
-
-            } else {
-                Log.e("AccLatLong", "Loc Null");
-            }
 
         }
     };
@@ -411,9 +401,7 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
             android.icu.text.SimpleDateFormat sdf = new android.icu.text.SimpleDateFormat(AppConstant.DATE_FORMAT_YYYY_MM_DD_HH_MM_SS);
             Date date = sdf.parse(myDate);
             millis = date.getTime();
-//            Toast.makeText(AddFarmerActivity.this, millis+"", Toast.LENGTH_SHORT).show();
         } catch (Exception exception) {
-//            Toast.makeText(AddFarmerActivity.this, exception.getMessage()+"", Toast.LENGTH_SHORT).show();
             exception.printStackTrace();
         }
         strFarmerCode = "F_" + millis + "_" + appHelper.getSharedPrefObj().getString(DeviceUserID, "");
@@ -437,24 +425,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
             }
         });
 
-        //Category
-//        ArrayAdapter<String> dataAdapter3 = new ArrayAdapter<String>(PersonalRegistrationActivity.this,
-//                android.R.layout.simple_spinner_item, categArr);
-//        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_item);
-//        spCateg.setAdapter(dataAdapter3);
-//        spCateg.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-////                strFarmerTitle = parent.getItemAtPosition(position).toString().trim();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
-
-
         //For Gender
         ArrayAdapter<String> dataAdapter1 = new ArrayAdapter<String>(PersonalRegistrationActivity.this,
                 android.R.layout.simple_spinner_item, genderArr);
@@ -463,7 +433,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         spGender.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                strFarmerGender = parent.getItemAtPosition(position).toString().trim();
                 String st = (String) parent.getItemAtPosition(position);
                 strFarmerGender = st;
             }
@@ -473,9 +442,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
 
             }
         });
-
-        //Country spinner
-//        getCountryListFromLocalDb();
         try {
             viewModel.getCountryDetailsListFromLocalDB();
             if (viewModel.getCountryDetailsByIdLiveData() != null) {
@@ -527,11 +493,9 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         imgFarmer.setOnClickListener(view -> {
             if (imageTakenFar == 0) {
                 checkSettingsAndStartLocationUpdates();
-//                openCameraPermission(true,0);
                 pickImageDialog(0);
             } else if (imageTakenFar == 1) {
                 previewImageDialog(strFarmerImageLocalImagePath);
-//                Log.e(TAG, "for preview");
             }
         });
 
@@ -544,7 +508,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 if (imageTakenDoc == 0) {
                     checkSettingsAndStartLocationUpdates();
                     pickImageDialog(1);
-//                    openCameraPermission(true,1);
                 } else if (imageTakenDoc==1){
                     previewImageDialog(strNationalIdLocalImagePath);
                     Log.e(TAG, "for preview 2");
@@ -592,12 +555,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 String strAge = etAge.getText().toString().trim();
                 String strVillageId = strVillage;
                 String strNationalIdentityCode = etNationalIdentityCode.getText().toString().trim();
-//                String strPinCode = etPincode.getText().toString().trim();
-//                String strSubDistrict = etSubDistrict.getText().toString().trim();
-//                String strDistrict = etDistrict.getText().toString().trim();
-//                String strState = etState.getText().toString().trim();
-//                String strCountry = etCountry.getText().toString().trim();
-
                 FarmersTable farmersTable = new FarmersTable();
                 farmersTable.setFarmerCode(strMFarmerCode);
                 farmersTable.setFirstName(strFirstName);
@@ -674,13 +631,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
 
         TextView backPreview = imagePreviewDialog.findViewById(R.id.backPreview);
         ImageView imagePreview = imagePreviewDialog.findViewById(R.id.imagePreview);
-
-        Log.e(TAG,"preview Img str:"+stImg);
-
-//        Picasso.get()
-//                .load(stImg)
-//                .error(R.drawable.baseline_broken_image_24)
-//                .into(imagePreview);
 
         Glide.with(this).load(stImg)
                         .error(R.drawable.baseline_broken_image_24)
@@ -799,7 +749,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     SubDistrict data = (SubDistrict) parent.getItemAtPosition(position);
-                                    Log.e(TAG, String.valueOf(data.getId()));
                                     getVillageListFromLocalDbById(String.valueOf(data.getId()));
                                 }
 
@@ -847,7 +796,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     DistrictorRegency data = (DistrictorRegency) parent.getItemAtPosition(position);
-                                    Log.e(TAG, String.valueOf(data.getId()));
                                     getSubDistrictListFromLocalDbById(String.valueOf(data.getId()));
                                 }
 
@@ -895,7 +843,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                                 @Override
                                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                     StateorProvince data = (StateorProvince) parent.getItemAtPosition(position);
-                                    Log.e(TAG, String.valueOf(data.getStateId()));
                                     getDistrictListFromLocalDbById(data.getId());
                                 }
 
@@ -1051,7 +998,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 if (resultCode == RESULT_OK) {
                     try {
                         if (testPictureCount == 0) {//for strWaterCycleLocalPath
-//                            imgFarmer.setClickable(false);
                             imgStatus1 = "1";//for second img
                             imageTakenFar = 1;//Taken status
                             pickHandle1 = 1; //by camera
@@ -1059,15 +1005,11 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                         } else if (testPictureCount == 1) {
                             imageTakenDoc = 1;//Taken status
                             pickHandle2 = 1;//by camera
-//                            imgNationalIdentity.setClickable(false);
                             handleBigCameraPhoto();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                } else {
-//                    strImageOnePath = null;
-//                    strImageOnePath = null;
                 }
                 break;
 
@@ -1075,14 +1017,9 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 if (resultCode == RESULT_OK) {
                     try {
                         if (testPictureCount == 0) {//for strWaterCycleLocalPath
-//                            imgFarmer.setClickable(false);
                             imageTakenFar = 1;
                             imgStatus1 = "1";
                             Uri uri = data.getData();
-//                            String realUriSt = getRealPathFromUri(uri);
-//                            strFarmerImageLocalImagePath = realUriSt;//String.valueOf(uri);
-//                            strFarmerRUri=realUriSt;
-//                            handleBigCameraPhoto();
                             File IMAGE_COPY_PATH=createImageFileFirst();
                             try {
                                 InputStream inputStream = getContentResolver().openInputStream(uri);//Uri.parse(realUriSt)
@@ -1092,20 +1029,14 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                                 inputStream.close();
                                 outputStream.close();
                                 handleBigCameraPhoto();
-//                                Toast.makeText(this, "Image copied successfully", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 e.printStackTrace();
-//                                Toast.makeText(this, "Error copying image", Toast.LENGTH_SHORT).show();
                             }
 
 
                         } else if (testPictureCount == 1) {
-//                            imgNationalIdentity.setClickable(false);
                             imageTakenDoc = 1;//Taken status
                             Uri uri = data.getData();
-//                            String realUriSt = getRealPathFromUri(uri);
-//                            strNationalIdLocalImagePath = realUriSt;
-//                            handleBigCameraPhoto();
                             File IMAGE_COPY_PATH=createImageFileFirst();
                             try {
                                 InputStream inputStream = getContentResolver().openInputStream(uri);//Uri.parse(realUriSt)
@@ -1115,10 +1046,8 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                                 inputStream.close();
                                 outputStream.close();
                                 handleBigCameraPhoto();
-//                                Toast.makeText(this, "Image copied successfully", Toast.LENGTH_SHORT).show();
                             } catch (IOException e) {
                                 e.printStackTrace();
-//                                Toast.makeText(this, "Error copying image", Toast.LENGTH_SHORT).show();
                             }
                         }
                     } catch (Exception e) {
@@ -1144,19 +1073,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         startActivityForResult(intent, FILE_SELECT_CODE);
     }
 
-    public String getRealPathFromUri(Uri uri) {
-        String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-            cursor.moveToFirst();
-            String filePath = cursor.getString(columnIndex);
-            cursor.close();
-            return filePath;
-        }
-        return uri.getPath(); // If cursor is null, fall back to the original Uri path
-    }
-
 
     private void handleBigCameraPhoto() throws Exception {
 
@@ -1164,23 +1080,16 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
 
             if (strFarmerImageLocalImagePath != null) {
                 setPic();
-//                galleryAddPic();
             }
         } else if (testPictureCount == 1) {
 
             if (strNationalIdLocalImagePath != null) {
                 setPic();
-//                galleryAddPic();
             }
         }
     }
 
     private void setPic() throws Exception {
-
-        /* There isn't enough memory to open up more than a couple camera photos */
-        /* So pre-scale the target bitmap into which the file is decoded */
-
-        /* Get the size of the ImageView */
 
         if (testPictureCount == 0) {
             int targetW = imgFarmer.getWidth();
@@ -1242,22 +1151,11 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 testPictureCount = 1;//increment image
             } else if (pickHandle1 == 0) {//picker
                 bitmapFarmer = addDateAndLocationToImage1(rotatedBitmap, crLatTxt, crLongTxt);
-//                saveCopyOfImage(bitmapFarmer,strFarmerRUri);
                 saveNewImage(bitmapFarmer, strFarmerImageLocalImagePath);
                 imgFarmer.setImageBitmap(bitmapFarmer);
                 imgFarmer.invalidate();
                 testPictureCount = 1;//increment image
             }
-            /* Decode the JPEG file into a Bitmap */
-//        bitmapLand = BitmapFactory.decodeFile(strLandImagePath, bmOptions);
-//        getBytesFromBitmap(bitmapLand);
-//        bitmapLand = ImageUtility.rotatePicture(90, bitmapLand);
-//
-
-            /* There isn't enough memory to open up more than a couple camera photos */
-            /* So pre-scale the target bitmap into which the file is decoded */
-
-            /* Get the size of the ImageView */
         } else if (testPictureCount == 1) {
             int targetW = imgNationalIdentity.getWidth();
             int targetH = imgNationalIdentity.getHeight();
@@ -1319,17 +1217,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 imgNationalIdentity.setImageBitmap(bitmapNationalId);
                 imgNationalIdentity.invalidate();
             }
-
-            /* Decode the JPEG file into a Bitmap */
-//        bitmapLand = BitmapFactory.decodeFile(strLandImagePath, bmOptions);
-//        getBytesFromBitmap(bitmapLand);
-//        bitmapLand = ImageUtility.rotatePicture(90, bitmapLand);
-//
-
-            /* There isn't enough memory to open up more than a couple camera photos */
-            /* So pre-scale the target bitmap into which the file is decoded */
-
-            /* Get the size of the ImageView */
         }
     }
 
@@ -1340,52 +1227,11 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
                 matrix, true);
     }
 
-    private void galleryAddPic() {
-        if (testPictureCount == 0) {
-            Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
-            File f;
-            f = new File(strFileExtension1);
-            Uri contentUri = Uri.fromFile(f);
-            mediaScanIntent.setData(contentUri);
-            sendBroadcast(mediaScanIntent);
-        } else if (testPictureCount == 1) {
-            Intent mediaScanIntent = new Intent("android.intent.action.MEDIA_SCANNER_SCAN_FILE");
-            File f;
-            f = new File(strNationalIdLocalImagePath);
-            Uri contentUri = Uri.fromFile(f);
-            mediaScanIntent.setData(contentUri);
-            sendBroadcast(mediaScanIntent);
-        }
-    }
-
     public byte[] getBytesFromBitmap(Bitmap bitmap) throws Exception {
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-//        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
         bytes = stream.toByteArray();
         return stream.toByteArray();
     }
-
-    private void getLocationDetails() {
-        try {
-            BoundLocationManager.getInstance(PersonalRegistrationActivity.this).observe(this, new Observer<Location>() {
-                @Override
-                public void onChanged(@Nullable Location location) {
-                    if (location != null) {
-
-                        crLatTxt = String.valueOf(location.getLatitude());
-                        crLongTxt = String.valueOf(location.getLongitude());
-
-                    } else {
-                        Toast.makeText(PersonalRegistrationActivity.this, "Location is null", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-    }
-
 
     //National Id
     public Bitmap addDateAndLocationToImage(Bitmap imageBitmap, String lat, String longi) {
@@ -1427,10 +1273,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         canvas.drawText(txtLongi, x2, y2, paint);
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
-
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
 
         return bitmapWithDateAndLocation;
     }
@@ -1475,10 +1317,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
 
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
-
         return bitmapWithDateAndLocation;
     }
 
@@ -1522,10 +1360,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         canvas.drawText(txtDate, x3, y3, paint);
         canvas.drawText(txtFarmer, x4, y4, paint);
 
-//        Bitmap overlayBitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.sow);//145
-//        Bitmap resizedBitmap=Bitmap.createScaledBitmap(overlayBitmap,50,50,true);
-//        canvas.drawBitmap(resizedBitmap, x3, y3, null);
-
         return bitmapWithDateAndLocation;
     }
 
@@ -1553,60 +1387,6 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         }
     }
 
-//    private void saveCopyOfImage(Bitmap existingBitmap, String originalImagePath) {
-//        try {
-//            // Extract the file extension from the original image path (e.g., ".jpg")
-//            String fileExtension = originalImagePath.substring(originalImagePath.lastIndexOf("."));
-//
-//            // Generate a unique identifier (e.g., timestamp)
-//            String uniqueIdentifier = String.valueOf(System.currentTimeMillis());
-//
-//            // Create a new filename by combining the original filename, unique identifier, and file extension
-//            String newImagePath = originalImagePath.replace(fileExtension, "_" + uniqueIdentifier + fileExtension);
-//
-//            // Create a new file with the generated filename
-//            FileOutputStream outputStream = new FileOutputStream(newImagePath);
-//
-
-//            strFarmerImageLocalImagePath=newImagePath;//Todo test
-//
-//            // Compress and save the bitmap to the new file
-//            existingBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-//            outputStream.flush();
-//            outputStream.close();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-    //New
-    private void saveCopyOfImage(Bitmap existingBitmap, String existingImagePath) {
-        try {
-            // Extract the file name and extension from the existingImagePath
-            File existingFile = new File(existingImagePath);
-            String fileNameWithExtension = existingFile.getName();
-            String fileName = fileNameWithExtension.substring(0, fileNameWithExtension.lastIndexOf("."));
-            String fileExtension = fileNameWithExtension.substring(fileNameWithExtension.lastIndexOf("."));
-
-            // Create a new file name for the copy
-            String copyFileName = fileName + "_copy" + fileExtension;
-
-            // Construct the path for the copy
-            String copyImagePath = existingFile.getParent() + File.separator + copyFileName;
-
-            strFarmerImageLocalImagePath=copyImagePath;//todo test
-            Log.e(TAG,"copy"+copyImagePath.toString()+" "+strFarmerImageLocalImagePath);
-
-            FileOutputStream outputStream = new FileOutputStream(copyImagePath);
-            existingBitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
-            outputStream.flush();
-            outputStream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-
     //Current loc
     private void checkSettingsAndStartLocationUpdates() {
         LocationSettingsRequest request = new LocationSettingsRequest.Builder()
@@ -1614,23 +1394,15 @@ public class PersonalRegistrationActivity extends BaseActivity implements HasSup
         SettingsClient settingsClient = LocationServices.getSettingsClient(this);
 
         Task<LocationSettingsResponse> locationSettingsResponseTask = settingsClient.checkLocationSettings(request);
-        locationSettingsResponseTask.addOnSuccessListener(new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                startLocationUpdate();
-            }
-        });
+        locationSettingsResponseTask.addOnSuccessListener(locationSettingsResponse -> startLocationUpdate());
 
-        locationSettingsResponseTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                    try {
-                        resolvableApiException.startResolutionForResult(PersonalRegistrationActivity.this, 2000001);
-                    } catch (IntentSender.SendIntentException ex) {
-                        throw new RuntimeException(ex);
-                    }
+        locationSettingsResponseTask.addOnFailureListener(e -> {
+            if (e instanceof ResolvableApiException) {
+                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                try {
+                    resolvableApiException.startResolutionForResult(PersonalRegistrationActivity.this, 2000001);
+                } catch (IntentSender.SendIntentException ex) {
+                    throw new RuntimeException(ex);
                 }
             }
         });

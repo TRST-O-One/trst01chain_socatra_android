@@ -34,53 +34,48 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
     LanguageCallbackInterface languageCallbackInterface;
 
     public LanguageAdapter(List<AppLanguageHDRTable> languageList, SharedPreferences sharedPreferences,
-                           String selectedLanguage,Dialog dialog,LanguageCallbackInterface languageCallbackInterface) {
+                           String selectedLanguage, Dialog dialog, LanguageCallbackInterface languageCallbackInterface) {
         this.languageList = languageList;
         this.sharedPreferences = sharedPreferences;
         this.selectedLanguage = selectedLanguage;
-        this.dialog=dialog;
-        this.languageCallbackInterface=languageCallbackInterface;
+        this.dialog = dialog;
+        this.languageCallbackInterface = languageCallbackInterface;
     }
 
     @NonNull
     @Override
     public LanguageViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        context= parent.getContext();
-        return new LanguageViewHolder(LayoutInflater.from(context).inflate(R.layout.dialog_language_selection_individual,parent,false));
+        context = parent.getContext();
+        return new LanguageViewHolder(LayoutInflater.from(context).inflate(R.layout.dialog_language_selection_individual, parent, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull LanguageViewHolder holder, int position) {
         holder.txtLang.setText(languageList.get(position).getLanguageName());
-        String temp=getLanguageCap(languageList.get(position).getLanguageName().trim());
-        Log.e("LangAdpt",temp);
+        String temp = getLanguageCap(languageList.get(position).getLanguageName().trim());
 
-        if (Objects.equals(selectedLanguage, getLanguageCap(languageList.get(position).getLanguageName().trim()))){
-            Log.e("LangAdpt",selectedLanguage);
+        if (Objects.equals(selectedLanguage, getLanguageCap(languageList.get(position).getLanguageName().trim()))) {
             holder.layoutMain.setBackgroundResource(R.drawable.bg_ui_light_orange_box_border);
-            Log.e("LangAdpt","1st if here");
-        } else if (selectedLanguage==null){
-            if (getLanguageCap(languageList.get(position).getLanguageName().trim())=="English"){
+        } else if (selectedLanguage == null) {
+            if (getLanguageCap(languageList.get(position).getLanguageName().trim()) == "English") {
                 holder.layoutMain.setBackgroundResource(R.drawable.bg_ui_light_orange_box_border);
-                Log.e("LangAdpt","2nd if here");
             }
         } else {
-            Log.e("LangAdpt",selectedLanguage);
-            Log.e("LangAdpt","else here");
+            Log.e("LangAdpt", selectedLanguage);
         }
         holder.layoutMain.setOnClickListener(v -> {
-            language=getLanguageCap(languageList.get(position).getLanguageName());
+            language = getLanguageCap(languageList.get(position).getLanguageName());
             sharedPreferences.edit().putString("selected_language", language).apply();
-            Toast.makeText(context,language+" Saved!!", Toast.LENGTH_SHORT).show();
-            languageCallbackInterface.languageCallback(position,languageList.get(position));
+            Toast.makeText(context, language + " Saved!!", Toast.LENGTH_SHORT).show();
+            languageCallbackInterface.languageCallback(position, languageList.get(position));
             dialog.dismiss();
         });
 
     }
 
     private String getLanguageCap(String word) {
-        word=word.toLowerCase().trim();
-        word=Character.toUpperCase(word.charAt(0)) + word.substring(1);
+        word = word.toLowerCase().trim();
+        word = Character.toUpperCase(word.charAt(0)) + word.substring(1);
         return word;
     }
 
@@ -93,11 +88,12 @@ public class LanguageAdapter extends RecyclerView.Adapter<LanguageAdapter.Langua
 
         LinearLayout layoutMain;
         TextView txtLang;
+
         public LanguageViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            layoutMain=itemView.findViewById(R.id.laySelectLang);
-            txtLang=itemView.findViewById(R.id.txtSelectLangInd);
+            layoutMain = itemView.findViewById(R.id.laySelectLang);
+            txtLang = itemView.findViewById(R.id.txtSelectLangInd);
         }
     }
 

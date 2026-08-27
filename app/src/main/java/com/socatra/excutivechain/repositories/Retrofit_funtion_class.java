@@ -24,7 +24,6 @@ public class Retrofit_funtion_class {
             .readTimeout(360, TimeUnit.SECONDS)
             .connectTimeout(360, TimeUnit.SECONDS)
             .addInterceptor(new LoggingInterceptor())
-//            .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .build();
 
     public static Retrofit getClient() {

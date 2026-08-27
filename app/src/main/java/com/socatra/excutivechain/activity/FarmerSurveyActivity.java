@@ -94,9 +94,7 @@ public class FarmerSurveyActivity extends BaseActivity implements HasSupportFrag
 
         farmerCode = getIntent().getStringExtra("mFarmerCode");
         farmersTable = (FarmersTable) getIntent().getSerializableExtra("mFarmerObj");
-//        getAreaValue();
-        Log.e(TAG, farmerCode);
-        Log.e(TAG, farmersTable.toString());
+
 
         initializeUI();
         configureDagger();
@@ -256,11 +254,6 @@ public class FarmerSurveyActivity extends BaseActivity implements HasSupportFrag
                 Toast.makeText(this, "Add children details!!", Toast.LENGTH_SHORT).show();
             } else {
                 stOccupation = etOccupation.getText().toString().trim();
-//                if (etNoOfChildren.getText().toString().trim().isEmpty()){
-//                    stNoOfChildren=0;
-//                } else {
-//                    stNoOfChildren=Integer.parseInt(etNoOfChildren.getText().toString().trim());
-//                }
                 stFamilyCount = etFamilyCount.getText().toString().trim();
                 stSpouseName = etSpouseName.getText().toString().trim();
 
@@ -474,15 +467,6 @@ public class FarmerSurveyActivity extends BaseActivity implements HasSupportFrag
     @Override
     protected void onResume() {
         super.onResume();
-//        try {
-//            adapter.notifyDataSetChanged();
-////            recycleChild.setAdapter(adapter);
-//            Log.e(TAG,"on Resume Called");
-//            Log.e(TAG,farmerHouseholdChildrenSurveyArrayList.toString());
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        setMyChildAdapter();
     }
 
     public String getLanguageFromLocalDb(String stLanguage, String stWord) {

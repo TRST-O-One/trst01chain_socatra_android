@@ -20,12 +20,11 @@ public class CoordinatesAdapter extends RecyclerView.Adapter<CoordinatesAdapter.
     private Context context;
     private LayoutInflater layoutInflater;
     List<LatLng> coordinatesLists;
-    int lastCheckedPosition = -1;
 
     public CoordinatesAdapter(Context context, List<LatLng> coordinatesLists) {
         this.layoutInflater = LayoutInflater.from(context);
         this.coordinatesLists = coordinatesLists;
-        this.context =context;
+        this.context = context;
     }
 
     @NonNull
@@ -38,17 +37,8 @@ public class CoordinatesAdapter extends RecyclerView.Adapter<CoordinatesAdapter.
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int i) {
         try {
-//            if (coordinatesLists.size()>0) {
-         //       holder.txtCoordinates.setText(coordinatesLists.get(coordinatesLists.size() - 1).toString());
-
-//                for (i=0;i<=coordinatesLists.size()-1; i++){
-                    holder.txtCoordinates.setText(coordinatesLists.get(i).toString());
-                    holder.txtC.setText("coordinatesLists" + i);
-//                }
-//                holder.txtCoordinates.setText(coordinatesLists.get(coordinatesLists.size()-1));
-//            }else {
-//                Toast.makeText(context, "Please add coordinates from map", Toast.LENGTH_SHORT).show();
-//            }
+            holder.txtCoordinates.setText(coordinatesLists.get(i).toString());
+            holder.txtC.setText("coordinatesLists" + i);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -56,16 +46,11 @@ public class CoordinatesAdapter extends RecyclerView.Adapter<CoordinatesAdapter.
 
     @Override
     public int getItemCount() {
-//        return 6;
-//        System.out.println(coordinatesLists.size());
         return coordinatesLists.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView txtCoordinates,txtC;
-        ImageView imgNotification;
-
+        TextView txtCoordinates, txtC;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 

@@ -32,9 +32,6 @@ import dagger.android.AndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 
 public class DocumentHomeActivity extends BaseActivity implements HasSupportFragmentInjector, DocHomeAdapter.SyncDocCallbackInterface {
-
-    String TAG = "DocumentHomeActivityTAG";
-
     @Inject
     public ViewModelProvider.Factory viewModelFactory;
     public AppViewModel viewModel;
@@ -88,33 +85,6 @@ public class DocumentHomeActivity extends BaseActivity implements HasSupportFrag
             txtAddDoc.setText(getLanguageFromLocalDb(selectedLanguage,hdAdd)+ "/" + hdAdd);
             documentationdetails1.setText(getLanguageFromLocalDb(selectedLanguage,hdDocDetails)+ "/" + hdDocDetails);
         }
-
-//        switch (selectedLanguage) {
-//            case "English":
-//                txtAddDoc.setText(R.string.add);
-//                documentationdetails1.setText(R.string.document_details);
-//                break;
-//            case "Hindi":
-//                txtAddDoc.setText(getString(R.string.add_H) + " / " + getString(R.string.add));
-//                documentationdetails1.setText(getString(R.string.document_details_H) + " / " + getString(R.string.document_details));
-//                break;
-//            case "Vietnamese":
-//                txtAddDoc.setText(getString(R.string.add_V) + " / " + getString(R.string.add));
-//                documentationdetails1.setText(getString(R.string.document_details_V) + " / " + getString(R.string.document_details));
-//                break;
-//            case "Thai":
-//                txtAddDoc.setText(getString(R.string.add_T) + " / " + getString(R.string.add));
-//                documentationdetails1.setText(getString(R.string.document_details_T) + " / " + getString(R.string.document_details));
-//                break;
-//            case "Malay":
-//                txtAddDoc.setText(getString(R.string.add_M) + " / " + getString(R.string.add));
-//                documentationdetails1.setText(getString(R.string.document_details_M) + " / " + getString(R.string.document_details));
-//                break;
-//            case "Indonesian":
-//                txtAddDoc.setText(getString(R.string.add_I) + " / " + getString(R.string.add));
-//                documentationdetails1.setText(getString(R.string.document_details_I) + " / " + getString(R.string.document_details));
-//                break;
-//    }
 
 }
     private String getSelectedLanguage() {
@@ -183,16 +153,9 @@ public class DocumentHomeActivity extends BaseActivity implements HasSupportFrag
                         List<PlantationDocuments> odVisitSurveyTableList = (List<PlantationDocuments>) o;
                         viewModel.getDocIdentiFicationDeatilsTableFromLocalLiveData().removeObserver(this);
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
-//                            for (int i=0;i<odVisitSurveyTableList.size();i++){
-//
-//                            }
                             plantationDocuments.addAll(odVisitSurveyTableList);
                             homeAdapter.notifyDataSetChanged();
 
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
-                        } else {
-//                            Toast.makeText(DocumentHomeActivity.this, "No data!!", Toast.LENGTH_SHORT).show();
-//                            Log.e(mTag,"No data for farmerCode Img 1");
                         }
                     }
                 };
@@ -215,11 +178,6 @@ public class DocumentHomeActivity extends BaseActivity implements HasSupportFrag
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
                             plantationDocuments.addAll(odVisitSurveyTableList);
                             homeAdapter.notifyDataSetChanged();
-//                            recyclerView.setAdapter(homeAdapter);
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
-                        } else {
-//                            Toast.makeText(DocumentHomeActivity.this, "No data!!", Toast.LENGTH_SHORT).show();
-//                            Log.e(mTag,"No data for farmerCode Img 1");
                         }
                     }
                 };
@@ -242,11 +200,6 @@ public class DocumentHomeActivity extends BaseActivity implements HasSupportFrag
                         if (odVisitSurveyTableList != null && odVisitSurveyTableList.size() > 0) {
                             plantationDocuments.addAll(odVisitSurveyTableList);
                             homeAdapter.notifyDataSetChanged();
-//                            recyclerView.setAdapter(homeAdapter);
-//                            Log.e(mTag,odVisitSurveyTableList.toString());
-                        } else {
-//                            Toast.makeText(DocumentHomeActivity.this, "No data!!", Toast.LENGTH_SHORT).show();
-//                            Log.e(mTag,"No data for farmerCode Img 1");
                         }
                     }
                 };

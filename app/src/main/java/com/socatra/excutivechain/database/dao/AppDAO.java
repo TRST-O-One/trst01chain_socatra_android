@@ -33,7 +33,6 @@ import java.util.List;
 
 @Dao
 public abstract class AppDAO {
-
     @Query("select *  from RefreshTableDateCheck where  DeviceID=:deviceID and Date=:date order by RefreshID asc")
     public abstract RefreshTableDateCheck getRefreshTableDateCheckDetailsFromLocalDB(String deviceID, String date);
 
@@ -42,7 +41,6 @@ public abstract class AppDAO {
 
     @Query("select *  from RefreshTableDateCheck where  DeviceID=:deviceID ORDER BY RefreshID asc LIMIT 1")
     public abstract RefreshTableDateCheck getTopRefreshTableDateCheckData(String deviceID);
-
 
     //Country
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -330,10 +328,6 @@ public abstract class AppDAO {
     @Query("SELECT COUNT(*) FROM PlantationGeoBoundaries where ServerSync=:notSyncValue")
     public abstract LiveData<Integer> getGeoNotSyncCountFromLocalDB(String notSyncValue);
 
-    //Village by pin-code
-    @Query("SELECT * FROM VillageTable where PinCode=:pincode order by villageId asc")
-    public abstract List<VillageTable> getVillageDetailsFromLocalDbByPincode(String pincode);
-
     //Village by sub dist
     @Query("SELECT * FROM VillageTable where SubDistrictId=:pincode order by villageId asc")
     public abstract List<VillageTable> getVillageDetailsFromLocalDbBySubDist(String pincode);
@@ -345,33 +339,17 @@ public abstract class AppDAO {
     @Query("SELECT * FROM VillageTable where Id=:id order by villageId asc")
     public abstract List<VillageTable> getVillageDetailsFromLocalDbById(String id);
 
-    //SubDistrict by id
-    @Query("SELECT * FROM SubDistrict where Id=:id order by SubDistrictId asc")
-    public abstract List<SubDistrict> getSubDistrictDetailsFromLocalDbById(String id);
-
     //SubDistrict by District id
     @Query("SELECT * FROM SubDistrict where DistrictId=:id order by SubDistrictId asc")
     public abstract List<SubDistrict> getSubDistrictDetailsFromLocalDbByDistrictId(String id);
-
-    //DistrictorRegency by id
-    @Query("SELECT * FROM DistrictorRegency where Id=:id order by DistrictId asc")
-    public abstract List<DistrictorRegency> getDistrictDetailsFromLocalDbById(int id);
 
     //DistrictorRegency by stateid
     @Query("SELECT * FROM DistrictorRegency where StateId=:id order by DistrictId asc")
     public abstract List<DistrictorRegency> getDistrictDetailsFromLocalDbByStateId(int id);
 
     //StateorProvince by id
-    @Query("SELECT * FROM StateorProvince where Id=:id order by StateId asc")
-    public abstract List<StateorProvince> getStateDetailsFromLocalDbById(int id);
-
-    //StateorProvince by id
     @Query("SELECT * FROM StateorProvince where CountryId=:id order by StateId asc")
     public abstract List<StateorProvince> getStateDetailsFromLocalDbByCountryId(int id);
-
-    //Country by id
-    @Query("SELECT * FROM Country where Id=:id order by CountryId asc")
-    public abstract List<Country> getCountryDetailsFromLocalDbById(int id);
 
     @Query("SELECT * FROM Country order by CountryId asc")
     public abstract List<Country> getAllCountryDetailsFromLocalDbById();
@@ -439,10 +417,6 @@ public abstract class AppDAO {
 
     @Query("SELECT * FROM PlantationDocuments where FarmerCode =:value and DocType=:dty order by ID desc")
     public abstract List<PlantationDocuments> getDocIdentiFicationDeatilsTableFromLocalDbByFidWDoc(String value,String dty);
-
-    @Query("SELECT * FROM PlantationGeoBoundaries where PlotCode =:value order by ID DESC LIMIT 1")
-    public abstract List<PlantationGeoBoundaries> getGeoBoundariesTableTablePlot(String value);
-
 
     //PlantationGeoBoundaries
     @Query("SELECT * FROM PlantationGeoBoundaries where ServerSync =:value order by ID asc")
@@ -518,19 +492,9 @@ public abstract class AppDAO {
     public abstract LiveData<Integer> getRiskNotSyncCountFromLocalDB(String notSyncValue);
 
 
-    @Query("SELECT COUNT(*) FROM Plantation where FarmerCode=:strfarmerCode And ServerSync=:strNotSyncValue order by PlotId asc")
-    public abstract LiveData<Integer> getPlantationCountForFarmerBasedOnFarmerCodeData(String strfarmerCode,String strNotSyncValue);
-
-
     @Query("SELECT COUNT(*) FROM Plantation where FarmerCode=:strfarmerCode order by PlotId asc")
     public abstract LiveData<Integer> getPlantationCountForFarmerBasedOnFarmerCode(String strfarmerCode);
 
-//    @Query("SELECT COUNT(*) FROM FarmersTable where FarmerCode=:strfarmerCode order by FarmerCode asc")
-//    public abstract LiveData<Integer> getNumberOFPlotsValues(String strfarmerCode);
-
-
-    //    @Query("SELECT COUNT(*) FROM AddHarvestDetailsTable where LogBookNo =:logBookNumber  order by HarvestID desc")
-//    public abstract LiveData<Integer> getHarvestDetailsDataCount(String logBookNumber)
     //Child list by farmer code
     @Query("SELECT * FROM FarmerHouseholdChildrenSurvey where FarmerCode=:fcode order by Id desc")
     public abstract List<FarmerHouseholdChildrenSurvey> getFarmerHouseholdChildrenSurveyDetailsFromLocalDbById(String fcode);
